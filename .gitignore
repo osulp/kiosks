@@ -26,3 +26,4 @@
 *.log
 /coverage
 .idea/
+/webpack_dist

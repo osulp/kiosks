@@ -2,6 +2,9 @@
   "name": "kiosks",
   "version": "0.0.1",
   "main": "index.js",
+  "scripts": {
+    "start": "webpack-dev-server --hot --inline"
+  },
   "repository": "https://github.com/osulp/kiosks.git",
   "author": "Josh Gum <josh.gum@oregonstate.edu>",
   "license": "MIT",
