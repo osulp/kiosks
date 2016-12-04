@@ -8,6 +8,7 @@
 (function() {
   this.App || (this.App = {});
 
+  // TODO: pass in Rails.application.config.action_cable.url to createConsumer?
   App.cable = ActionCable.createConsumer();
 
 }).call(this);
