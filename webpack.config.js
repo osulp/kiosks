@@ -18,11 +18,15 @@ module.exports = {
 
   devtool: "source-map",
   module: {
+    // js? files run through babel to support jsx and es2015 minimum
     loaders: [
       {
-        test: /\.js$/,
+        test: /\.js?$/,
         exclude: /node_modules/,
-        loaders: ["react-hot", "babel-loader?sourceMap"],
+        loader: "babel",
+        query: {
+          presets: ['es2015', 'react'],
+        },
       },
       {
         test: /\.html$/,
