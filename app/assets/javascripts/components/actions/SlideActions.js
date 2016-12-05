@@ -10,6 +10,6 @@ export function setSlides(slides) {
   };
 }
 
-export function refreshSlides(){
+export function refreshSlides() {
   // TODO: Ajax call to query the current set of slides?
 }

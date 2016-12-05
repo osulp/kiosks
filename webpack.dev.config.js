@@ -3,13 +3,17 @@ var neat = require('node-neat').includePaths;
 bourbon = bourbon.concat(neat);
 
 module.exports = {
-  context: __dirname + "/app/assets/javascripts/components",
+  context: __dirname + "/webpack_dev",
 
-  entry: './main.js',
+  entry: {
+    javascript: "./app.js",
+    html: "./index.html"
+  },
 
   output: {
-    filename: "dist-app.js",
-    path: __dirname + "/app/assets/javascripts",
+    filename: "app.js",
+    path: __dirname + "/webpack_dist",
+    publicPath: "/"
   },
 
   devtool: "source-map",

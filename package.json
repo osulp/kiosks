@@ -3,7 +3,9 @@
   "version": "0.0.1",
   "main": "index.js",
   "scripts": {
-    "start": "webpack-dev-server --hot --inline"
+    "dev": "webpack-dev-server --hot --inline --config webpack.dev.config.js",
+    "prod": "webpack --progress --watch",
+    "compile": "webpack"
   },
   "repository": "https://github.com/osulp/kiosks.git",
   "author": "Josh Gum <josh.gum@oregonstate.edu>",

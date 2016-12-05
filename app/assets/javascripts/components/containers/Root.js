@@ -13,6 +13,8 @@ export default class Root extends Component {
   componentWillMount() {
 
     // TODO: Redux dispatch an action to set the app in motion
+    // TODO: Depending on props set by the view rendering the app, dispatch actions that start a particular
+    // type of kiosk. For instance, this.props.type could be "donor", "touch", etc.
     store.dispatch(setSlides(this.props.slides));
 
     if (typeof App !== 'undefined') {
