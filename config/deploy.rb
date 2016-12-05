@@ -16,6 +16,8 @@ set :deploy_to, config['deploy_to']
 # Default value for :scm is :git
 set :scm, :git
 
+set :rbenv_ruby, '2.3.3'
+
 # Default value for :format is :airbrussh.
 # set :format, :airbrussh
 
