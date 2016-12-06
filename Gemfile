@@ -37,6 +37,7 @@ gem 'capistrano', '~> 3.6'
 gem 'capistrano-passenger'
 gem 'capistrano-rails'
 gem 'capistrano-rbenv'
+gem 'capistrano-nvm'
 
 gem 'react-rails'
 

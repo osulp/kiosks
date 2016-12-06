@@ -1,9 +1,12 @@
-SSHKIT.config.command_map[:nvm] = "#{ENV['NVM_DIR']}/nvm-exec"
-
+# Yarn is mapped to use nvm-exec by way of capistrano-nvm (nvm-exec). See deploy.rb
 namespace :webpack do
   task :precompile do
     on roles(:web) do
-      execute fetch(:nvm), 'yarn run compile'
+      within "#{release_path}" do
+        # make sure the packages are installed and up to date, then compile the app. See package.json scripts.
+        execute :yarn, "install"
+        execute :yarn, "run compile"
+      end
     end
   end
 end
