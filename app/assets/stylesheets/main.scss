@@ -1,7 +1,4 @@
-@import 'vendor/foundation';
-@import 'bourbon';
-@import 'base/base';
-@import 'neat';
-@import 'base/ui';
-@import 'base/buttons';
+@import "bootstrap-sprockets";
+@import "bootstrap";
 @import 'layouts/main';
+

@@ -10,9 +10,8 @@ gem 'puma', '~> 3.0'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
 
-#Sass toolset : https://github.com/thoughtbot/bourbon
-gem 'bourbon'
-gem 'neat'
+# Adds Bootstrap to rails
+gem 'bootstrap-sass', '~> 3.3.6'
 
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'

@@ -23,16 +23,25 @@ class SlideList extends Component {
     };
 
     return (
-      <div>
-        <ul>
-          {slides.map((s) => {
-            return <li key={`slide.${s.id}`}>{s.content}</li>;
-          })
-          }
-        </ul>
-        <form onSubmit={handleSubmit}>
-          <input type="text" onKeyUp={handleKeyUp}/>
-        </form>
+      <div className="container" role="main">
+        <div className="row">
+          <div className="col-md-6">
+            <div className="panel panel-primary">
+              <div className="panel-heading">
+                <h3 className="panel-title">Panel title</h3>
+              </div>
+              <ul className="panel-body">
+                {slides.map((s) => {
+                  return <li key={`slide.${s.id}`}>{s.content}</li>;
+                })
+                }
+              </ul>
+              <form onSubmit={handleSubmit}>
+                <input type="text" onKeyUp={handleKeyUp}/>
+              </form>
+            </div>
+          </div>
+        </div>
       </div>
     );
   }
