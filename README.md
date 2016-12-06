@@ -1,3 +1,6 @@
+[![CircleCI](https://circleci.com/gh/osulp/kiosks.svg?style=svg)](https://circleci.com/gh/osulp/kiosks)
+[![Coverage Status](https://coveralls.io/repos/github/osulp/kiosks/badge.svg?branch=master)](https://coveralls.io/github/osulp/kiosks?branch=master)
+
 The application is built as a combination of traditional Ruby on Rails for the backend and frontend administration interfaces along with a React app for the kiosk displays.
 
 # Dependencies

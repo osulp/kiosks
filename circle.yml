@@ -1,0 +1,28 @@
+machine:
+  environment:
+    YARN_VERSION: 0.17.10
+    PATH: "${PATH}:${HOME}/.yarn/bin"
+
+dependencies:
+  pre:
+    - cp config/application_config.example.yml.erb config/application_config.yml.erb
+    - |
+      if [[ ! -e ~/.yarn/bin/yarn || $(yarn --version) != "${YARN_VERSION}" ]]; then
+        echo "Download and install Yarn."
+        curl -o- -L https://yarnpkg.com/install.sh | bash -s -- --version $YARN_VERSION
+      else
+        echo "The correct version of Yarn is already installed."
+      fi
+    - gem install bundler
+  override:
+    - yarn install
+    - bundle install:
+        timeout: 180
+  cache_directories:
+    - ~/.yarn
+    - ~/.yarn-cache
+    - ~/.rvm/rubies
+
+test:
+  override:
+    - yarn test
