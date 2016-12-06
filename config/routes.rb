@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  devise_for :users
   resources :kiosk, only: [:index, :show]
 
   root to: 'kiosk#index'
