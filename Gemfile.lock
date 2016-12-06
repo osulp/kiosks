@@ -41,13 +41,15 @@ GEM
     airbrussh (1.1.1)
       sshkit (>= 1.6.1, != 1.7.0)
     arel (7.1.4)
+    autoprefixer-rails (6.5.3.1)
+      execjs
     babel-source (5.8.35)
     babel-transpiler (0.7.0)
       babel-source (>= 4.0, < 6)
       execjs (~> 2.0)
-    bourbon (4.2.7)
-      sass (~> 3.4)
-      thor (~> 0.19)
+    bootstrap-sass (3.3.7)
+      autoprefixer-rails (>= 5.2.1)
+      sass (>= 3.3.4)
     builder (3.2.2)
     byebug (9.0.6)
     capistrano (3.6.1)
@@ -116,9 +118,6 @@ GEM
     mini_portile2 (2.1.0)
     minitest (5.10.1)
     multi_json (1.12.1)
-    neat (1.8.0)
-      sass (>= 3.3)
-      thor (~> 0.19)
     net-scp (1.2.1)
       net-ssh (>= 2.6.5)
     net-ssh (3.2.0)
@@ -235,7 +234,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  bourbon
+  bootstrap-sass (~> 3.3.6)
   byebug
   capistrano (~> 3.6)
   capistrano-nvm
@@ -247,7 +246,6 @@ DEPENDENCIES
   jbuilder (~> 2.5)
   jquery-rails
   listen (~> 3.0.5)
-  neat
   puma (~> 3.0)
   rails (~> 5.0.0, >= 5.0.0.1)
   react-rails

@@ -1,7 +1,3 @@
-var bourbon = require('node-bourbon').includePaths;
-var neat = require('node-neat').includePaths;
-bourbon = bourbon.concat(neat);
-
 module.exports = {
   context: __dirname + "/app/assets/javascripts/components",
 
@@ -30,7 +26,7 @@ module.exports = {
       },
       {
         test: /\.scss$/,
-        loaders: ["style", "css?sourceMap", "sass?sourceMap&includePaths[]=" + bourbon + neat[0] + '&includePaths[]=' + neat[1]]
+        loaders: ["style","css?sourceMap"]
       }
     ],
   }
