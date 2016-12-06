@@ -16,7 +16,14 @@ set :deploy_to, config['deploy_to']
 # Default value for :scm is :git
 set :scm, :git
 
+# The server must have rbenv installed and the version of ruby specified here.
 set :rbenv_ruby, '2.3.3'
+
+# The server must have nvm installed at the user level, and to have yarn installed globally as an npm package
+# for the node version specified here.
+set :nvm_type, :user
+set :nvm_node, 'v6.9.1'
+set :nvm_map_bins, %w{node npm yarn}
 
 # Default value for :format is :airbrussh.
 # set :format, :airbrussh
