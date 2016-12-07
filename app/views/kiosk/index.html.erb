@@ -1,4 +1,6 @@
-<div id="application_root" class="row"></div>
-<script type="text/javascript">
-  var KIOSK_TYPE="default";
-</script>
+<div id="application_root"
+     class="row"
+     data-kiosk-type="<%= @kiosk_type %>"
+     data-slides='<%= raw(JSON.dump @slides) %>'
+     data-kiosk-url="<%= kiosk_url id: @kiosk_type %>"
+></div>

@@ -1,21 +1,21 @@
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-import SlideList from '../components/SlideList';
+import Error from './presentational/shared/Error';
 import * as actions from '../actions';
 
 // Top level mapping of the application state to properties of component that is being
 // connected.
-function mapStateToProps(state) {
+const mapStateToProps = (state) => {
   return {
-    slides: state.slides
+    errors: state.kiosk.errors
   }
-}
+};
 
 // Map the actions to the dispatcher
-function mapDispatchToProps(dispatch) {
+const mapDispatchToProps = (dispatch) => {
   return bindActionCreators(actions, dispatch);
-}
+};
 
-// Connect the mappings (state -> properties, and actions -> dispatch) to the application component
-export default connect(mapStateToProps, mapDispatchToProps)(SlideList);
+// Connect the mappings (state -> properties, and actions -> dispatch) to the component
+export default connect(mapStateToProps, mapDispatchToProps)(Error);

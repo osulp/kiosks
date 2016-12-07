@@ -1,0 +1,10 @@
+json.slides @slides do |slide|
+  json.id slide[:id]
+  json.original slide[:image_url]
+  json.thumbnail slide[:image_url]
+  json.expires_at slide[:expires_at]
+  json.title slide[:title]
+  json.caption slide[:caption]
+  json.slide_type @slide_type
+  json.kiosk @kiosk_type
+end
