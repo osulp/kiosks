@@ -4,7 +4,7 @@
 The application is built as a combination of traditional Ruby on Rails for the backend and frontend administration interfaces along with a React app for the kiosk displays.
 
 # Dependencies
-- Ruby 2.3.2
+- Ruby 2.3.3
 - Yarn >= 0.17.10 (https://yarnpkg.com/en/docs/install)
 
 # Application build notes
@@ -13,11 +13,11 @@ The application is built as a combination of traditional Ruby on Rails for the b
 - Webpack is configured to build the `dist-app.js` and place it in the assets directory for Rails Sprockets to include the app in the regular Rails asset pipeline. This decision was made to get a benefit from balancing the benefits of the Rails asset pipeline and using a better build tool (Webpack) for compiling a modern javascript app (React).
 
 # Development workflow
-Scripts found in `package.json` are designed to aid in typical development needs. All of the React app code is found in `app/assets/javascripts/components`.
-
-- `$yarn run dev` : Used for active development of the React app, with an inline express webserver running with hot module reloading on `http://localhost:8080` using `webpack_dev/app.js` and `webpack_dev/index.html` to get the app running.
-- `$yarn run prod` : Used for active development of the React app in conjuction with an operational Rails backend (`$rails s`). Webpack is watching for code changes and recompiling the `dist-app.js` found in `app/assets/javascripts`.
-- `$yarn run compile` : Production application deployment asset compilation. This should be run before Rails assets:compile in the deployment process.
+Scripts found in `package.json` are designed to aid in typical development needs. All of the React app code is found in `app/assets/javascripts/components`. 
+- **Install `node_modules`** : Run `yarn install` in the application root directory to install dependencies.
+- `yarn run dev` : Used for active development of the React app, with an inline express webserver running with hot module reloading on `http://localhost:8080` using `webpack_dev/app.js` and `webpack_dev/index.html` to get the app running.
+- `yarn run prod` : Used for active development of the React app in conjuction with an operational Rails backend (`rails s`). Webpack is watching for code changes and recompiling the `dist-app.js` found in `app/assets/javascripts`.
+- `yarn run compile` : Production application deployment asset compilation. This should be run before Rails assets:compile in the deployment process.
 
 # React app structure
 App code is found in `app/assets/javascripts/components`.
