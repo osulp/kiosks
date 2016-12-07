@@ -4,7 +4,7 @@ import {Provider} from 'react-redux';
 import configureStore from '../store/configureStore';
 
 import App from './App';
-import {setSlides} from '../actions/SlideActions';
+import {setSlides} from '../actions/slideActions';
 
 const store = configureStore();
 

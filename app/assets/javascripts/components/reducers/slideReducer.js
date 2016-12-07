@@ -1,6 +1,6 @@
-import { SET_SLIDES, REFRESH_SLIDES } from '../actions/SlideActions';
+import { SET_SLIDES, REFRESH_SLIDES } from '../actions/slideActions';
 
-const slidesReducer = (state = {}, action) => {
+const slideReducer = (state = {}, action) => {
    switch (action.type) {
     case REFRESH_SLIDES:
       return Object.assign({}, action.slides);
@@ -11,4 +11,4 @@ const slidesReducer = (state = {}, action) => {
   }
 }
 
-export default slidesReducer;
+export default slideReducer;

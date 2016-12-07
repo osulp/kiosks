@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux';
-import slidesReducer from './slidesReducer';
+import slideReducer from './slideReducer';
 
 const rootReducer = combineReducers({
-  slides: slidesReducer
+  slides: slideReducer
 });
 
 export default rootReducer;
