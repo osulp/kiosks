@@ -21,8 +21,9 @@ dependencies:
   cache_directories:
     - ~/.yarn
     - ~/.yarn-cache
-    - ~/.rvm/rubies
+    - /opt/circleci/.rvm/rubies
 
 test:
   override:
+    - bundle exec rspec
     - yarn test
