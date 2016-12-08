@@ -1,0 +1,1 @@
+json.array! @touch_slides, partial: 'touch_slides/touch_slide', as: :touch_slide

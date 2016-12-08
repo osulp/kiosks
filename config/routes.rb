@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  resources :touch_slides
   devise_for :users
   resources :kiosk, only: [:index, :show]
 

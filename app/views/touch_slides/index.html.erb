@@ -1,0 +1,31 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Touch Slides</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Slide</th>
+      <th>Caption</th>
+      <th>Expiration date</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @touch_slides.each do |touch_slide| %>
+      <tr>
+        <td><%= image_tag touch_slide.image.url(:thumb) %></td>
+        <td><%= touch_slide.caption %></td>
+        <td><%= touch_slide.expiration_date %></td>
+        <td><%= link_to 'Show', touch_slide %></td>
+        <td><%= link_to 'Edit', edit_touch_slide_path(touch_slide) %></td>
+        <td><%= link_to 'Destroy', touch_slide, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Touch Slide', new_touch_slide_path %>

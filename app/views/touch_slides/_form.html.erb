@@ -1,0 +1,32 @@
+<%= form_for touch_slide, html: { multipart: true } do |f| %>
+  <% if touch_slide.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(touch_slide.errors.count, "error") %> prohibited this touch_slide from being saved:</h2>
+
+      <ul>
+      <% touch_slide.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :image %>
+    <%= f.file_field :image %>
+  </div>
+
+  <div class="field">
+    <%= f.label :caption %>
+    <%= f.text_area :caption %>
+  </div>
+
+  <div class="field">
+    <%= f.label :expiration_date %>
+    <%= f.date_select :expiration_date %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

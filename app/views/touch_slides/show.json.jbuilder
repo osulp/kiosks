@@ -1,0 +1,1 @@
+json.partial! "touch_slides/touch_slide", touch_slide: @touch_slide

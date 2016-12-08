@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Caption:</strong>
+  <%= @touch_slide.caption %>
+</p>
+
+<p>
+  <strong>Expiration date:</strong>
+  <%= @touch_slide.expiration_date %>
+</p>
+
+<%= link_to 'Edit', edit_touch_slide_path(@touch_slide) %> |
+<%= link_to 'Back', touch_slides_path %>
