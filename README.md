@@ -7,6 +7,15 @@ The application is built as a combination of traditional Ruby on Rails for the b
 - Ruby 2.3.3
 - Yarn >= 0.17.10 (https://yarnpkg.com/en/docs/install)
 
+# Server setup notes
+- ** See example files located in `config/**/*` for the type of configurations needed on the server **
+- `shared/config` : Contains server configuration files not appropriate for the repository, symlinked by the deploy process.
+- `shared/config/application_config.yml.erb` : Application specific configuration, such as Google Analytics ID.
+- `shared/config/config.yml` : Application deployment configurations for server, path, and user detail.
+- `shared/config/god.conf` : Start, stop and restart behaviors for God process management.
+- `shared/config/puma/*.rb` : Environment specific configurations for the Puma web server.
+- `shared/config/secrets.yml` : Secrets.
+
 # Application build notes
 - Yarn is used in place of npm for its improved handling of node module dependencies. 
 - Webpack is used for compiling the React app during development and deploying the app to production. 

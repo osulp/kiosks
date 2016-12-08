@@ -10,12 +10,6 @@
   "repository": "https://github.com/osulp/kiosks.git",
   "author": "Josh Gum <josh.gum@oregonstate.edu>",
   "license": "MIT",
-  "babel": {
-    "presets": [
-      "es2015",
-      "react"
-    ]
-  },
   "dependencies": {
     "babel-core": "^6.18.2",
     "babel-preset-es2015": "^6.18.0",
