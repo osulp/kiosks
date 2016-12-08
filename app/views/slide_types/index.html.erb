@@ -1,0 +1,26 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Slide Types</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @slide_types.each do |slide_type| %>
+      <tr>
+        <td><%= slide_type.name %></td>
+        <td><%= link_to 'Show', slide_type %></td>
+        <td><%= link_to 'Edit', edit_slide_type_path(slide_type) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Slide Type', new_slide_type_path %>

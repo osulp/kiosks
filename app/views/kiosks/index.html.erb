@@ -1,0 +1,26 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Kiosks</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @kiosks.each do |kiosk| %>
+      <tr>
+        <td><%= kiosk.name %></td>
+        <td><%= link_to 'Show', kiosk %></td>
+        <td><%= link_to 'Edit', edit_kiosk_path(kiosk) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Kiosk', new_kiosk_path %>
