@@ -1,0 +1,17 @@
+deployment:
+  repository: git@github.com:osulp/kiosks.git
+  branch: master
+  deploy_to: /full_path/to/application
+  stages:
+    - staging
+    - production
+  staging:
+    user: server-user
+    branch: master
+    deploy_to: /full_path/to/application
+    host: server_fqdn.l.o.e
+  production:
+    user: server-user
+    branch: master
+    deploy_to: /full_path/to/application
+    host: server_fqdn.l.o.e
