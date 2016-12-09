@@ -31,3 +31,6 @@
 /config/config.yml
 
 /app/assets/javascripts/dist-app*
+/public/uploads/*
+!/public/uploads/.keep
+!/public/uploads/default_slide*.png

@@ -1,3 +1,2 @@
-daemonize true
-bind "unix:///path/to/application_root/tmp/sockets/application_name.sock"
+daemonize false
 pidfile "tmp/development.pid"
