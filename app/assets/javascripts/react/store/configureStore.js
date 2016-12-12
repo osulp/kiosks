@@ -7,6 +7,8 @@ const createStoreWithMiddleware = compose(
   window.devToolsExtension ? window.devToolsExtension() : f => f
 )(createStore);
 
-export default function configureStore(initialState) {
+const configureStore = (initialState) => {
   return createStoreWithMiddleware(rootReducer, initialState);
-}
+};
+
+export default configureStore;

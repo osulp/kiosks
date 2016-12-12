@@ -1,5 +1,5 @@
 module.exports = {
-  context: __dirname + "/app/assets/javascripts/components",
+  context: __dirname + "/app/assets/javascripts/react",
 
   entry: './main.js',
 

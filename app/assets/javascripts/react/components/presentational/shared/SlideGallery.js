@@ -1,0 +1,65 @@
+import {connect} from 'react-redux';
+import React, {Component, PropTypes} from 'react';
+import ImageGallery from 'react-image-gallery';
+
+class SlideGallery extends Component {
+  onSlide() {
+  }
+
+  onClick(e) {
+    console.log("onClick", e.target.src);
+  }
+
+  onImageError(e) {
+    let error_message = `Unable to load: ${e.target.src}`;
+    console.log(error_message);
+    this.props.addError(error_message);
+  }
+
+  onImageLoad(e) {
+    console.log(`Image Loaded:${e.target.src})`);
+  }
+
+  _renderItem(item) {
+    const onImageError = this.onImageError;
+    const onImageLoad = this.onImageLoad;
+
+    return (
+      <div className='image-gallery-image'>
+        <img src={item.original}
+             alt={item.originalAlt}
+             srcSet={item.srcSet}
+             sizes={item.sizes}
+             onLoad={onImageError.bind(this)}
+             //onLoad={onImageLoad.bind(this)}
+             onError={onImageError.bind(this)}/>
+      </div>
+    )
+  }
+
+  render() {
+    let slides = this.props.slides;
+    return (
+      <ImageGallery ref={i => this._imageGallery = i }
+                    items={slides}
+                    slideInterval={5000}
+                    showThumbnails={false}
+                    autoPlay={true}
+                    showFullscreenButton={false}
+                    showPlayButton={false}
+                    showBullets={true}
+                    onSlide={this.onSlide}
+                    onClick={this.onClick}
+                    onImageError={this.onImageError}
+                    onImageLoad={this.onImageLoad}
+                    renderItem={this._renderItem.bind(this)}/>
+    );
+  }
+}
+
+SlideGallery.propTypes = {
+  slides: PropTypes.array.isRequired,
+  addError: PropTypes.func.isRequired,
+};
+
+export default SlideGallery;

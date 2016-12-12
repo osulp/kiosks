@@ -1,2 +1,6 @@
-<h1>Kiosk#show</h1>
-<p>Find me in app/views/kiosk/show.html.erb</p>
+<div id="application_root"
+     class="row"
+     data-kiosk-type="<%= @kiosk_type %>"
+     data-slides='<%= raw(render(template: "kiosk/show.json", locals: { slides: @slides, kiosk_type: @kiosk_type, slide_type: @slide_type })) %>'
+     data-kiosk-url="<%= kiosk_url id: @kiosk_type %>"
+></div>
