@@ -8,7 +8,8 @@ import * as actions from '../actions';
 // connected.
 export const mapStateToProps = (state) => {
   return {
-    slides: state.kiosk.slides
+    slides: state.kiosk.slides,
+    starting_slide_index: state.kiosk.starting_slide_index
   }
 };
 

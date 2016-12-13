@@ -1,7 +1,15 @@
 import React, {Component, PropTypes} from 'react';
-import TouchButtonList from '../../TouchButtonList';
+import Hours from './Hours';
 
 class Header extends Component {
+  refreshClicked() {
+    this.props.fetchSlides(this.props.url);
+    this.props.scrollToSlide(0);
+  }
+  hoursClicked(){
+    this.props.setModalVisibility(true);
+    this.props.setModalRootComponent(<Hours hours={[{day: "Monday", from:"7am", to: "12pm"}]} />);
+  }
   render() {
     return (
       <div className="navbar-wrapper">
@@ -19,10 +27,10 @@ class Header extends Component {
               </div>
               <div id="navbar" className="navbar-collapse collapse">
                 <ul className="nav navbar-nav">
-                  <li className="active"><a>Home</a></li>
-                  <li><a>About</a></li>
-                  <li><a>Contact</a></li>
-                  <TouchButtonList className="dropdown" />
+                  <li className="show-hours" onClick={this.hoursClicked.bind(this)}><a>Hours</a></li>
+                </ul>
+                <ul className="nav navbar-nav navbar-right">
+                  <li className="refresh-slides" onClick={this.refreshClicked.bind(this)}><a><span className={`glyphicon glyphicon-repeat ${this.props.is_fetching ? "is_fetching" : ""}`} aria-hidden="true">&nbsp;</span></a></li>
                 </ul>
               </div>
             </div>
@@ -32,5 +40,14 @@ class Header extends Component {
     );
   }
 }
+
+Header.PropTypes = {
+  url: PropTypes.string.isRequired,
+  is_fetching: PropTypes.bool.isRequired,
+  fetchSlides: PropTypes.func.isRequired,
+  setModalVisibility: PropTypes.func.isRequired,
+  setModalRootComponent: PropTypes.func.isRequired,
+  scrollToSlide: PropTypes.func.isRequired,
+};
 
 export default Header;

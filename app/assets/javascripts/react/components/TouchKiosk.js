@@ -8,7 +8,9 @@ import * as actions from '../actions';
 // connected.
 const mapStateToProps = (state) => {
   return {
-    slides: state.kiosk.slides
+    slides: state.kiosk.slides,
+    url: state.kiosk.url,
+    is_fetching: state.touch.is_fetching
   }
 };
 
