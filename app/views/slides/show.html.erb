@@ -1,0 +1,41 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Caption:</strong>
+  <%= @slide.caption %>
+</p>
+
+<p>
+  <strong>Expires at:</strong>
+  <%= @slide.expires_at %>
+</p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @slide.title %>
+</p>
+
+<p>
+  <strong>Slide type:</strong>
+  <%= @slide.slide_type.name %>
+</p>
+
+<p>
+  <strong>Kiosk:</strong>
+  <%= @slide.kiosk.name %>
+</p>
+
+<p>
+<strong>Image:</strong><br>
+  <%= image_tag @slide.image.url(:large) %>
+</p>
+
+<p>
+<%= link_to "x-large", @slide.image.url(:xlarge, false) %> | 
+<%= link_to "large", @slide.image.url(:large, false) %> | 
+<%= link_to "medium", @slide.image.url(:medium, false) %> | 
+<%= link_to "original", @slide.image.url(:original, false) %>
+</p>
+
+<%= link_to 'Edit', edit_slide_path(@slide) %> |
+<%= link_to 'Back', slides_path %>

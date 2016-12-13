@@ -1,0 +1,22 @@
+<%= form_for(kiosk) do |f| %>
+  <% if kiosk.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(kiosk.errors.count, "error") %> prohibited this kiosk from being saved:</h2>
+
+      <ul>
+      <% kiosk.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
