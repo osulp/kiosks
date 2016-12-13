@@ -89,6 +89,37 @@ body {
   margin-right: 20px;
 }
 
+.navbar-wrapper .refresh-slides > a {
+  padding: 0;
+  padding-top: 11px;
+  padding-right: 11px;
+}
+
+.navbar-wrapper .refresh-slides > a > .glyphicon {
+  font-size: 25px;
+  width: 25px;
+  height: 25px;
+}
+
+.navbar-wrapper .refresh-slides > a > .glyphicon.is_fetching {
+  -webkit-animation: spin 400ms infinite linear;
+  -moz-animation: spin 400ms infinite linear;
+  -ms-animation: spin 400ms infinite linear;
+}
+
+@-moz-keyframes spin {
+  from { -moz-transform: rotate(0deg); }
+  to { -moz-transform: rotate(360deg); }
+}
+@-webkit-keyframes spin {
+  from { -webkit-transform: rotate(0deg); }
+  to { -webkit-transform: rotate(360deg); }
+}
+@keyframes spin {
+  from {transform:rotate(0deg);}
+  to {transform:rotate(360deg);}
+}
+
 /* RESPONSIVE CSS
 -------------------------------------------------- */
 

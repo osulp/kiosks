@@ -27,13 +27,17 @@ class SlideGallery extends Component {
     return (
       <div className='image-gallery-image'>
         <img src={item.original}
-             alt={item.originalAlt}
+             alt={`Image:${item.id} : ${item.original}`}
              srcSet={item.srcSet}
              sizes={item.sizes}
              onLoad={onImageLoad.bind(this)}
              onError={onImageError.bind(this)}/>
       </div>
     )
+  }
+
+  componentDidUpdate() {
+    this._imageGallery.slideToIndex(this.props.starting_slide_index);
   }
 
   render() {
@@ -51,12 +55,14 @@ class SlideGallery extends Component {
                     onClick={this.onClick}
                     onImageError={this.onImageError}
                     onImageLoad={this.onImageLoad}
-                    renderItem={this._renderItem.bind(this)}/>
+                    renderItem={this._renderItem.bind(this)}
+                    startIndex={this.props.starting_slide_index}/>
     );
   }
 }
 
 SlideGallery.propTypes = {
+  starting_slide_index: PropTypes.number.isRequired,
   slides: PropTypes.array.isRequired,
   addError: PropTypes.func.isRequired,
 };

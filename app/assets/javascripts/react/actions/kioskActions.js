@@ -16,6 +16,14 @@ export const setSlides = (slides) => {
   };
 };
 
+export const SCROLL_TO_SLIDE = "SCROLL_TO_SLIDE";
+export const scrollToSlide = (index) => {
+  return {
+    type: SCROLL_TO_SLIDE,
+    index
+  }
+};
+
 export const ADD_ERROR = 'ADD_ERROR';
 export const addError = (error) => {
   return {
