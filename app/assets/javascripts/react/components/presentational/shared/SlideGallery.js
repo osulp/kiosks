@@ -30,8 +30,7 @@ class SlideGallery extends Component {
              alt={item.originalAlt}
              srcSet={item.srcSet}
              sizes={item.sizes}
-             onLoad={onImageError.bind(this)}
-             //onLoad={onImageLoad.bind(this)}
+             onLoad={onImageLoad.bind(this)}
              onError={onImageError.bind(this)}/>
       </div>
     )

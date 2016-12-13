@@ -1,18 +1,20 @@
+import {connect} from 'react-redux';
 import React, {Component, PropTypes} from 'react';
-import ButtonListItem from './ButtonListItem';
 
-class ButtonList extends Component {
+export class ButtonList extends Component {
+  refreshClicked() {
+    this.props.fetchSlides(this.props.url);
+  }
   render() {
     return (
       <li>
         <a href="#" className="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
            aria-expanded="false">Dropdown <span className="caret"></span></a>
         <ul className="dropdown-menu">
-          <ButtonListItem text="Refresh Slides" onButtonClick={this.props.fetchSlides(this.props.url)} />
-          <ButtonListItem text="Action" className="divider" role="separator" />
-          <ButtonListItem text="" className="dropdown-header" />
-          <ButtonListItem text="Separated link" />
-          <ButtonListItem text="One more separate link" />
+          <li className="refresh-slides" onClick={this.refreshClicked.bind(this)}><a>Refresh Slides</a></li>
+          <li className="divider" role="separator"><a>Action</a></li>
+          <li><a>Separated Link</a></li>
+          <li><a>Another Link</a></li>
         </ul>
       </li>
     );
@@ -21,7 +23,8 @@ class ButtonList extends Component {
 
 ButtonList.propTypes = {
   url: PropTypes.string.isRequired,
-  fetchSlides: PropTypes.func.isRequired,
+  fetchSlides: PropTypes.func,
 };
 
 export default ButtonList;
+
