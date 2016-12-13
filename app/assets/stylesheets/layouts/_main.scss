@@ -9,7 +9,7 @@
   display: none;
 }
 
-#modal > * {
+#modal > *:not(.glyphicon) {
   max-width: 90%;
   max-height: 90%;
   overflow-y: scroll;
@@ -18,4 +18,13 @@
   padding: 10px;
   border-radius: 10px;
   color: #212121;
+}
+
+#modal > .glyphicon {
+  right: 15px;
+  top: 15px;
+  position: absolute;
+  font-size: 40px;
+  color: #d01f1f;
+  text-shadow: 0 0 4px #1b1b1b;
 }
