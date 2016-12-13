@@ -34,3 +34,4 @@
 /public/uploads/*
 !/public/uploads/.keep
 !/public/uploads/default_slide*.png
+/public/system*
