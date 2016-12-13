@@ -3,6 +3,8 @@ Object {
   "addError": [Function],
   "fetchSlides": [Function],
   "setKiosk": [Function],
+  "setModalRootComponent": [Function],
+  "setModalVisibility": [Function],
   "setSlides": [Function],
 }
 `;
