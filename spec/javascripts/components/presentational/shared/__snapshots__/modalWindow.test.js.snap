@@ -1,0 +1,23 @@
+exports[`Snapshot should log an error when visible with no root_component 1`] = `
+<div
+  id="modal"
+  style={
+    Object {
+      "display": "block",
+    }
+  } />
+`;
+
+exports[`Snapshot should match the cached snapshot 1`] = `
+<div
+  id="modal"
+  style={
+    Object {
+      "display": "block",
+    }
+  }>
+  <H1>
+    test
+  </H1>
+</div>
+`;
