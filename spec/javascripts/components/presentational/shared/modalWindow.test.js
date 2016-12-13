@@ -9,6 +9,8 @@ const setup = (args) => {
   const props = {
     visible: args.visible,
     root_component: args.element,
+    setModalVisibility: jest.fn(),
+    setModalRootComponent: jest.fn()
   };
 
   const component = renderer.create(
@@ -19,18 +21,30 @@ const setup = (args) => {
 };
 
 describe('Snapshot', () => {
-  it('should match the cached snapshot', () => {
-    let { component } = setup({visible: true, element: React.createElement("H1", {}, "test")});
+  it('matches the cached snapshot', () => {
+    let {component} = setup({visible: true, element: React.createElement("H1", {}, "test")});
     let tree = component.toJSON();
     expect(tree).toMatchSnapshot();
   });
-  it('should log an error when visible with no root_component', () => {
+});
+describe('Shared::ModalWindow', () => {
+  it('logs a console.error when visible with no root_component', () => {
     global.console = jest.fn();
     global.console.error = jest.fn();
     let { component } = setup({visible: true, element: undefined });
     let tree = component.toJSON();
     expect(tree).toMatchSnapshot();
     expect(global.console.error.mock.calls.length).toEqual(1);
+  });
+  it('can be closed', () => {
+    let {component, props} = setup({visible: true, element: React.createElement("H1", {}, "test")});
+    let tree = component.toJSON();
+    expect(tree).toMatchSnapshot();
+    tree.props.onClick({target: {id: "modal"}});
+    tree = component.toJSON();
+    expect(tree).toMatchSnapshot();
+    expect(props.setModalRootComponent.mock.calls.length).toEqual(1);
+    expect(props.setModalVisibility.mock.calls.length).toEqual(1);
   });
 });
 

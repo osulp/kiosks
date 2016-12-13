@@ -1,6 +1,49 @@
-exports[`Snapshot should log an error when visible with no root_component 1`] = `
+exports[`Shared::ModalWindow can be closed 1`] = `
 <div
   id="modal"
+  onClick={[Function]}
+  style={
+    Object {
+      "display": "block",
+    }
+  }>
+  <SPAN
+    className="glyphicon glyphicon-remove-circle"
+    id="modal_close"
+    onClick={[Function]}>
+    
+  </SPAN>
+  <H1>
+    test
+  </H1>
+</div>
+`;
+
+exports[`Shared::ModalWindow can be closed 2`] = `
+<div
+  id="modal"
+  onClick={[Function]}
+  style={
+    Object {
+      "display": "block",
+    }
+  }>
+  <SPAN
+    className="glyphicon glyphicon-remove-circle"
+    id="modal_close"
+    onClick={[Function]}>
+    
+  </SPAN>
+  <H1>
+    test
+  </H1>
+</div>
+`;
+
+exports[`Shared::ModalWindow logs a console.error when visible with no root_component 1`] = `
+<div
+  id="modal"
+  onClick={[Function]}
   style={
     Object {
       "display": "block",
@@ -8,14 +51,21 @@ exports[`Snapshot should log an error when visible with no root_component 1`] = 
   } />
 `;
 
-exports[`Snapshot should match the cached snapshot 1`] = `
+exports[`Snapshot matches the cached snapshot 1`] = `
 <div
   id="modal"
+  onClick={[Function]}
   style={
     Object {
       "display": "block",
     }
   }>
+  <SPAN
+    className="glyphicon glyphicon-remove-circle"
+    id="modal_close"
+    onClick={[Function]}>
+    
+  </SPAN>
   <H1>
     test
   </H1>
