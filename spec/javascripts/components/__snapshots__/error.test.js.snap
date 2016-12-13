@@ -1,0 +1,19 @@
+exports[`Error maps dispatch to props 1`] = `
+Object {
+  "addError": [Function],
+  "fetchSlides": [Function],
+  "setKiosk": [Function],
+  "setSlides": [Function],
+}
+`;
+
+exports[`Error maps state to props 1`] = `
+Object {
+  "errors": Array [
+    Object {
+      "code": "500",
+      "message": "Error",
+    },
+  ],
+}
+`;

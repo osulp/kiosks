@@ -1,0 +1,14 @@
+exports[`TouchButtonList maps dispatch to props 1`] = `
+Object {
+  "addError": [Function],
+  "fetchSlides": [Function],
+  "setKiosk": [Function],
+  "setSlides": [Function],
+}
+`;
+
+exports[`TouchButtonList maps state to props 1`] = `
+Object {
+  "url": "test",
+}
+`;

@@ -1,21 +1,17 @@
 import React from 'react';
 import Kiosk from '../../../../../app/assets/javascripts/react/components/presentational/Touch/Kiosk';
 import * as factories from '../../../.factories';
-import renderer from 'react-test-renderer';
 import { shallow } from 'enzyme';
 
-describe('Snapshot', () => {
+const setup = () => {
+  const props = { slides: factories.slides };
+  const enzyme_wrapper = shallow(<Kiosk {...props}/>);
+  return { props, enzyme_wrapper };
+};
 
-  const props = {
-    slides: factories.slides
-  };
-
-  const component = renderer.create(
-    <Kiosk {...props} />
-  );
-
-  it('should match the cached snapshot', () => {
-    let tree = component.toJSON();
-    expect(tree).toMatchSnapshot();
+describe('Touch::Kiosk', () => {
+  it('has a valid id', () => {
+    const { enzyme_wrapper } = setup();
+    expect(enzyme_wrapper.prop('id')).toEqual('touch_kiosk');
   });
 });

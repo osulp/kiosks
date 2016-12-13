@@ -7,7 +7,8 @@ import { shallow } from 'enzyme';
 describe('Snapshot', () => {
 
   const props = {
-    errors: [factories.error]
+    errors: [factories.error],
+    fetchSlides: jest.fn()
   };
 
   const component = renderer.create(

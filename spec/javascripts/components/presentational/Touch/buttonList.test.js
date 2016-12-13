@@ -1,28 +1,26 @@
 import React from 'react';
-import ButtonList from '../../../../../app/assets/javascripts/react/components/presentational/Touch/ButtonList';
-import { ButtonListItem } from '../../../../../app/assets/javascripts/react/components/presentational/Touch/ButtonListItem';
-import renderer from 'react-test-renderer';
+import { ButtonList } from '../../../../../app/assets/javascripts/react/components/presentational/Touch/ButtonList';
 import { shallow } from 'enzyme';
 
-describe('Snapshot ', () => {
-
+const setup = () => {
   const props = {
     url: "/bogus/url",
     fetchSlides: jest.fn()
   };
-
-  const component = renderer.create( <ButtonList {...props} /> );
   const enzyme_wrapper = shallow(<ButtonList {...props}/>);
 
-  it('matches the cached snapshot', () => {
-    let tree = component.toJSON();
-    expect(tree).toMatchSnapshot();
-  });
+  return { props, enzyme_wrapper };
+};
 
+describe('Touch::ButtonList', () => {
   it('has a refresh slides button', () => {
-    let list_items = enzyme_wrapper.find(ButtonListItem);
-    console.log(list_items);
-    let list_item = list_items.findWhere(li => li.prop('text') == "Refresh Slides");
-    expect(list_item.length).toEqual(1);
+    let { enzyme_wrapper, props } = setup();
+    expect(enzyme_wrapper.find("li.refresh-slides").text()).toEqual("Refresh Slides");
+  });
+  it('has an onClick action', () => {
+    let { enzyme_wrapper, props } = setup();
+    let li = enzyme_wrapper.find('li.refresh-slides');
+    li.simulate('click');
+    expect(props.fetchSlides.mock.calls.length).toEqual(1);
   });
 });

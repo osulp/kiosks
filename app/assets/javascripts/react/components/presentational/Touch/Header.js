@@ -1,6 +1,5 @@
 import React, {Component, PropTypes} from 'react';
-import ButtonList from './ButtonList';
-import ButtonListItem  from './ButtonListItem';
+import TouchButtonList from '../../TouchButtonList';
 
 class Header extends Component {
   render() {
@@ -16,14 +15,14 @@ class Header extends Component {
                   <span className="icon-bar"></span>
                   <span className="icon-bar"></span>
                 </button>
-                <img src="/images/beaverlogo.png"/>
+                <img className="logo" src="/images/beaverlogo.png"/>
               </div>
               <div id="navbar" className="navbar-collapse collapse">
                 <ul className="nav navbar-nav">
-                  <ButtonListItem className="active" text="Home" />
-                  <ButtonListItem text="About" />
-                  <ButtonListItem text="Contact" />
-                  <ButtonList className="dropdown" fetchSlides={this.props.fetchSlides} />
+                  <li className="active"><a>Home</a></li>
+                  <li><a>About</a></li>
+                  <li><a>Contact</a></li>
+                  <TouchButtonList className="dropdown" />
                 </ul>
               </div>
             </div>
@@ -33,9 +32,5 @@ class Header extends Component {
     );
   }
 }
-
-Header.propTypes = {
-  fetchSlides: PropTypes.func.isRequired,
-};
 
 export default Header;
