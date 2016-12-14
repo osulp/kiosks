@@ -5,6 +5,7 @@ import configureStore from '../store/configureStore';
 
 import App from './App';
 import TouchKiosk from './TouchKiosk';
+import DonorKiosk from './DonorKiosk';
 import {setKiosk, setSlides} from '../actions/kioskActions';
 
 const store = configureStore();
@@ -40,6 +41,8 @@ export default class Root extends Component {
     switch(kiosk_type) {
       case 'touch':
         return (<TouchKiosk />);
+      case 'donor':
+        return (<DonorKiosk />);
       default:
         return (<App />);
     }

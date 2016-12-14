@@ -19,27 +19,30 @@ class KioskController < ApplicationController
     @kiosk_type ||= params[:id]
     @slide_type = "bogus"
     # TODO: replace this with current slides for a specific kiosk type
-    @slides = [{
-      id: 1,
-      image_url: "/images/default_slide_1.png",
-      expires_at: "2020-12-31T23:59:59Z",
-      created_at: "2000-12-31T11:59:59Z",
-      updated_at: "2000-12-31T23:59:59Z",
-      title: "Slide.title",
-      caption: "Slide.caption",
-      slide_type: "touch",
-      kiosk: "Kiosk.name"
-    },{
-      id: 2,
-      image_url: "/images/default_slide_2.png",
-      expires_at: "2010-11-11T13:00:00Z",
-      created_at: "2000-11-11T11:00:00Z",
-      updated_at: "2000-11-11T13:00:00Z",
-      title: "Slide.title:2",
-      caption: "Slide.caption:2",
-      slide_type: "touch",
-      kiosk: "Kiosk.name:2"
-    }]
+    @slides = [
+        {
+            id: 1,
+            image_url: "/images/default_slide_1.png",
+            expires_at: "2020-12-31T23:59:59Z",
+            created_at: "2000-12-31T11:59:59Z",
+            updated_at: "2000-12-31T23:59:59Z",
+            title: "Slide.title",
+            caption: "Slide.caption:0",
+            slide_type: "touch",
+            kiosk: "Kiosk.name"
+        },{
+            id: 2,
+            image_url: "/images/default_slide_2.png",
+            expires_at: "2020-12-31T23:59:59Z",
+            created_at: "2000-12-31T11:59:59Z",
+            updated_at: "2000-12-31T23:59:59Z",
+            title: "Slide.title",
+            caption: "Slide.caption:1",
+            slide_type: "touch",
+            kiosk: "Kiosk.name"
+        }
+    ]
 
+    end
   end
 end

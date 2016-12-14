@@ -5,13 +5,13 @@ import Root from "./components/Root";
 require("../../stylesheets/application.scss");
 let root_dom_element = document.getElementById('application_root');
 
-if(root_dom_element) {
+if (root_dom_element) {
   let slides = root_dom_element.getAttribute('data-slides');
   let kiosk_type = root_dom_element.getAttribute('data-kiosk-type');
   let kiosk_url = root_dom_element.getAttribute('data-kiosk-url');
 
   // slides are stringified JSON set by the view that is rendering the app
-  if(slides){
+  if (slides) {
     slides = JSON.parse(slides).slides;
   } else {
     // an empty set of slides, could allow for the app to query the server async
