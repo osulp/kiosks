@@ -1,6 +1,26 @@
-<div id="application_root"
-     class="row"
-     data-kiosk-type="<%= @kiosk_type %>"
-     data-slides='<%= raw(JSON.dump @slides) %>'
-     data-kiosk-url="<%= kiosk_url id: @kiosk_type %>"
-></div>
+<h1>Kiosks</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @kiosks.each do |kiosk| %>
+      <tr>
+        <td><%= kiosk.name %></td>
+        <td><%= link_to 'Show', kiosk_show_path(id: kiosk.name) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<% unless current_user %>
+  <%= render 'login_form' %>
+<% end %>
+
