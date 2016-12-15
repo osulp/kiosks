@@ -1,26 +1,18 @@
-# Login for /admin interface
-admin:
-  username: <%= ENV['KIOSK_ADMIN_USERNAME'] || 'admin' %>
-  password: <%= ENV['KIOSK_ADMIN_PASSWORD'] || 'd0n0r-k10sk' %>
-
-# Select list for CellTypes on /admin, and for main interface buttons.
-# views/layouts/application.html.erb has downcase & dasherized category strings that should match to these as well.
-# ie. 'Some Cell Type' would become 'some-cell-type' for the clickable button the application.html.erb layout
-cell_types:
-  - 'Some Cell Type'
-  - 'Another Cell Type'
-  - 'A Third Cell Type'
-
 ga_id: UA-35760875-18
 
-# Configurations for image file uploads
-file_upload:
-  # Sub-directory that is http enabled, typically beneath /public for this app
-  storage_directory: 'uploaded'
-  # Megabyte size limit for image files uploaded
-  size_limit_mb: 1
-  # HTML form posted file content-types allowed for upload
-  allowed_content_types:
-    - "image/png"
-    - "image/jpeg"
-    - "image/gif"
+api:
+  # API version which is expired, intended to be at least 2 versions older than the current.
+  # default:0 = All versions are supported
+  last_expired_version: 0
+  # API version which is warned, intended to be at least 1 version older than the current.
+  # default:0 = All versions are supported
+  last_warned_version: 0
+  database:
+    drupal:
+      # Table 'hours.loc' value.
+      hours:
+        table_name: "hours"
+        loc: "Test Location"
+  drupal_hour:
+    hours_for_dates:
+      string_date_format: "%a, %b %e, %Y"

@@ -1,5 +1,14 @@
 Rails.application.routes.draw do
 
+  # Api namespaced routes and modules
+  # ie: /api/v1/hours => Api::V1::HoursController#show
+  namespace :api, defaults: { format: :json }  do
+    namespace :v1, constraints: Api::V1::Constraints.new(version: 1,
+                                                   default: true) do
+      post    'hours'       => 'hours#show'
+    end
+  end
+
   resources :slides
   resources :slide_types
   resources :kiosks

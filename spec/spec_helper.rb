@@ -96,4 +96,16 @@ RSpec.configure do |config|
   # as the one that triggered the failure.
   Kernel.srand config.seed
 =end
+
+  original_stderr = $stderr
+  original_stdout = $stdout
+  config.before(:all) do
+    # silence stdout and stderr
+    $stderr = File.open(File::NULL, "w")
+    $stdout = File.open(File::NULL, "w")
+  end
+  config.after(:all) do
+    $stderr = original_stderr
+    $stdout = original_stdout
+  end
 end
