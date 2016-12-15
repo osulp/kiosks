@@ -22,7 +22,12 @@ dependencies:
     - ~/.yarn
     - ~/.yarn-cache
     - /opt/circleci/.rvm/rubies
-
+database:
+  override:
+    # default behavior from Circle, won't include the custom drupal test db
+    #- mv config/database.ci.yml config/database.yml
+    - bundle exec rake db:create db:schema:load --trace
+    - bundle exec rake test_drupal_database:setup
 test:
   override:
     - bundle exec rspec

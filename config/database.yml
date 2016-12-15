@@ -23,7 +23,32 @@ test:
 staging:
   <<: *default
   database: db/staging.sqlite3
-  
+
 production:
   <<: *default
   database: db/production.sqlite3
+
+drupal_default: &drupal_default
+  adapter: mysql2
+  database: drupal_cms
+  username: <%= ENV['KIOSKS_DRUPAL_USERNAME'] || 'root' %>
+  password: <%= ENV['KIOSKS_DRUPAL_PASSWORD'] || 'vagrant' %>
+  host: <%= ENV['KIOSKS_DRUPAL_HOST'] || 'localhost' %>
+
+drupal_development:
+  adapter: sqlite3
+  pool: 5
+  timeout: 5000
+  database: db/drupal_development.sqlite3
+
+drupal_test:
+  adapter: sqlite3
+  pool: 5
+  timeout: 5000
+  database: db/drupal_test.sqlite3
+
+drupal_staging:
+  <<: *drupal_default
+
+drupal_production:
+  <<: *drupal_default
