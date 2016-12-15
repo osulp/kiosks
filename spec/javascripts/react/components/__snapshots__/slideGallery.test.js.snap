@@ -2,6 +2,9 @@ exports[`SlideGallery maps dispatch to props 1`] = `
 Object {
   "addError": [Function],
   "fetchSlides": [Function],
+  "fetchedSlides": [Function],
+  "fetchingSlides": [Function],
+  "scrollToSlide": [Function],
   "setKiosk": [Function],
   "setModalRootComponent": [Function],
   "setModalVisibility": [Function],
@@ -35,5 +38,6 @@ Object {
       "updated_at": "2000-11-11T13:00:00Z",
     },
   ],
+  "starting_slide_index": undefined,
 }
 `;

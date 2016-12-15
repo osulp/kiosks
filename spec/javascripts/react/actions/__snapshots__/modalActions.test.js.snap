@@ -1,0 +1,15 @@
+exports[`Action::Modal #setModalRootComponent() matches the snapshot 1`] = `
+Object {
+  "root_component": <H1>
+    test
+</H1>,
+  "type": "SET_MODAL_ROOT_COMPONENT",
+}
+`;
+
+exports[`Action::Modal #setModalVisibility() matches the snapshot 1`] = `
+Object {
+  "type": "SET_MODAL_VISIBILITY",
+  "visible": true,
+}
+`;

@@ -18,7 +18,7 @@
       "!**/vendor/**"
     ],
     "setupFiles": [
-      "spec/javascripts/.setup.js"
+      "spec/javascripts/react/.setup.js"
     ]
   },
   "repository": "https://github.com/osulp/kiosks.git",
