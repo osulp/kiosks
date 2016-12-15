@@ -27,13 +27,32 @@ Scripts found in `package.json` are designed to aid in typical development needs
 - `yarn run prod` : Used for active development of the React app in conjunction with an operational Rails backend (`rails s`). Webpack is watching for code changes and recompiling the `dist-app.js` found in `app/assets/javascripts`.
 - `yarn run compile` : Production application deployment asset compilation. This should be run before Rails assets:compile in the deployment process.
 
-# React app structure
-App code is found in `app/assets/javascripts/components`.
+# React app directory structure
+App code is found in `app/assets/javascripts/react`.
+Tests are run using [Jest](https://facebook.github.io/jest/) and are found in `spec/javascripts/react` with a directory
+structure to match the app code.
 
 - `main.js` : The primary entry point for the application.
 - `actions/*` : Redux actions.
-- `components/*` : React components. 
-- `containers/Root.js` : The React application root container that ties the Redux store to the component tree.
-- `containers/*` : Container components for different types of Kiosks.
+- `components/presentational/**/*` : Simple presentational components.
+- `components/Root.js` : The React application root container that ties the Redux store to the component tree.
+- `components/*` : Components which use Redux `connect` to connect the dispatch and state to props.
 - `reducers/*` : Redux reducers.
 - `store/configureStore.js` : Redux store creation with middleware.
+
+# Rails API notes
+- The API has versioning with the ability to `warn` and `expire` versions based on a configuration change in `app/config/application_config.yml.erb`.
+- `app/controllers/api/v#` : Controllers and concerns.
+- `app/models/api/v#` : Models.
+- `config/initializers/api.rb` : Require all of the code in `lib/api/**/*`.
+- `config/initializers/db_config.rb` : Load and parse the `config/database.yml`.
+- `config/locales/en.yml` : Localized strings for api related messages.
+- `config/routes.rb` : Contains namespaced routes and configuration for the api routes.
+- `lib/api/v#` : API related code by version.
+- `lib/tasks/api/v#` : Rake task(s), such as `test_drupal_database:setup`.
+- Specs are located in similarly named paths related to the API and version directories.
+
+## Making HTTP calls to the API
+The API routes are protected by constraints described in `lib/api/v#/constraints.rb` which enforce the existence and setting
+of the `ACCEPT` header on each request. An example of a valid HTTP ACCEPT header for version 1:
+> `ACCEPT=application/vnd.kiosks.v1`
