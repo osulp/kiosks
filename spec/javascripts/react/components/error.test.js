@@ -1,4 +1,4 @@
-import { mapStateToProps, mapDispatchToProps } from '../../../app/assets/javascripts/react/components/Error';
+import { mapStateToProps, mapDispatchToProps } from '../../../../app/assets/javascripts/react/components/Error';
 import * as factories from '../.factories';
 
 describe('Error', () => {

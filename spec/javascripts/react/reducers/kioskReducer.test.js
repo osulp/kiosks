@@ -1,7 +1,5 @@
-import { ADD_ERROR, SET_KIOSK, SET_SLIDES } from '../../../app/assets/javascripts/react/actions/kioskActions';
-
-// setup
-import kioskReducer from '../../../app/assets/javascripts/react/reducers/kioskReducer';
+import { ADD_ERROR, SET_KIOSK, SET_SLIDES } from '../../../../app/assets/javascripts/react/actions/kioskActions';
+import kioskReducer from '../../../../app/assets/javascripts/react/reducers/kioskReducer';
 import * as factories from '../.factories';
 
 describe('Reducers::Kiosk', () => {

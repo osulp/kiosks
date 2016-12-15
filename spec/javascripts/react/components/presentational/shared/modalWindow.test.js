@@ -1,6 +1,5 @@
 import React from 'react';
-import ModalWindow from '../../../../../app/assets/javascripts/react/components/presentational/shared/ModalWindow';
-import * as factories from '../../../.factories';
+import ModalWindow from '../../../../../../app/assets/javascripts/react/components/presentational/shared/ModalWindow';
 import renderer from 'react-test-renderer';
 import { shallow } from 'enzyme';
 

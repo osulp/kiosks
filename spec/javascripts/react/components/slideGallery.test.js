@@ -1,4 +1,4 @@
-import { mapStateToProps, mapDispatchToProps } from '../../../app/assets/javascripts/react/components/SlideGallery';
+import { mapStateToProps, mapDispatchToProps } from '../../../../app/assets/javascripts/react/components/SlideGallery';
 import * as factories from '../.factories';
 
 describe('SlideGallery', () => {

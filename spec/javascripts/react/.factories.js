@@ -1,4 +1,4 @@
-export {initial_state} from '../../app/assets/javascripts/react/reducers/kioskReducer';
+export {initial_state} from '../../../app/assets/javascripts/react/reducers/kioskReducer';
 
 export const slide = {
   id: 1,

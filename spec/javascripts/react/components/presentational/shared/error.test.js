@@ -1,5 +1,5 @@
 import React from 'react';
-import Error from '../../../../../app/assets/javascripts/react/components/presentational/shared/Error';
+import Error from '../../../../../../app/assets/javascripts/react/components/presentational/shared/Error';
 import * as factories from '../../../.factories';
 import renderer from 'react-test-renderer';
 import { shallow } from 'enzyme';

@@ -1,5 +1,5 @@
 import React from 'react';
-import Header from '../../../../../app/assets/javascripts/react/components/presentational/Touch/Header';
+import Header from '../../../../../../app/assets/javascripts/react/components/presentational/Touch/Header';
 import { shallow } from 'enzyme';
 
 const setup = () => {

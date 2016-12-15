@@ -2,6 +2,9 @@ exports[`Error maps dispatch to props 1`] = `
 Object {
   "addError": [Function],
   "fetchSlides": [Function],
+  "fetchedSlides": [Function],
+  "fetchingSlides": [Function],
+  "scrollToSlide": [Function],
   "setKiosk": [Function],
   "setModalRootComponent": [Function],
   "setModalVisibility": [Function],
