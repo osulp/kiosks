@@ -1,144 +1,219 @@
 @import "../../../node_modules/react-image-gallery/styles/scss/image-gallery.scss";
-
-$osu_orange: #C34500;
-$not_quite_black: #101010;
-
-/* GLOBAL STYLES
--------------------------------------------------- */
+@import "../../../node_modules/rc-calendar/assets/index";
 
 /* Set container elements to 100% height. */
-html, body, #application_root, #touch_kiosk, #slide_gallery,
-.image-gallery { height: 100%; }
-
-/* Padding below the footer and lighter body text */
-
-body {
-  /*padding-bottom: 40px;*/
-  color: #5a5a5a;
-  background-color: $not_quite_black;
+#touch_kiosk, #slide_gallery, .image-gallery {
+  height: 100%;
 }
 
-/* CUSTOMIZE GALLERY
---------------------------------------------------------*/
-.image-gallery-bullet {
-  background-color: rgba(255, 255, 255, 0.54) !important;
-  border-color: rgba(255,255,255, 0.90) !important;
-  -webkit-box-shadow: none !important;
-  -moz-box-shadow: none !important;
-  box-shadow: none !important;
-  padding: 7px;
-}
-
-.image-gallery-bullet.active {
-  background-color: $osu_orange !important;
-  border-color: $not_quite_black !important;
-  border-width: 2px;
-  padding: 10px;
-}
-
-.image-gallery-left-nav {
-  left: 10px;
-}
-
-.image-gallery-right-nav {
-  right: 10px;
-}
-
-.image-gallery-fullscreen-button,
-.image-gallery-play-button,
-.image-gallery-left-nav,
-.image-gallery-right-nav {
-  &::before {
-    color: $osu_orange;
-    text-shadow: 0 2px 3px lighten($not_quite_black, 10%);
+#touch_kiosk {
+  /* CUSTOMIZE GALLERY
+  --------------------------------------------------------*/
+  .image-gallery-bullet {
+    background-color: rgba(255, 255, 255, 0.54) !important;
+    border-color: rgba(255, 255, 255, 0.90) !important;
+    -webkit-box-shadow: none !important;
+    -moz-box-shadow: none !important;
+    box-shadow: none !important;
+    padding: 7px;
   }
 
-  &:hover::before {
-    color: #fff;
+  .image-gallery-bullet.active {
+    background-color: $osu_orange !important;
+    border-color: $not_quite_black !important;
+    border-width: 2px;
+    padding: 10px;
   }
-}
 
-/* CUSTOMIZE THE NAVBAR
--------------------------------------------------- */
+  .image-gallery-left-nav {
+    left: 10px;
+  }
 
-/* Special class on .container surrounding .navbar, used for positioning it into place. */
-.navbar-wrapper {
-  position: absolute;
-  top: 0;
-  right: 0;
-  left: 0;
-  z-index: 20;
-}
+  .image-gallery-right-nav {
+    right: 10px;
+  }
 
-/* Flip around the padding for proper display in narrow viewports */
-.navbar-wrapper > .container {
-  padding-right: 0;
-  padding-left: 0;
-}
-.navbar-wrapper .navbar {
-  padding-right: 15px;
-  padding-left: 15px;
-}
-.navbar-wrapper .navbar .container {
-  width: auto;
-}
+  .image-gallery-fullscreen-button,
+  .image-gallery-play-button,
+  .image-gallery-left-nav,
+  .image-gallery-right-nav {
+    &::before {
+      color: $osu_orange;
+      text-shadow: 0 2px 3px lighten($not_quite_black, 10%);
+    }
 
-.navbar-header img {
-  height: 30px;
-  margin-top: 10px;
-  margin-right: 20px;
-}
+    &:hover::before {
+      color: #fff;
+    }
+  }
 
-.navbar-wrapper .refresh-slides > a {
-  padding: 0;
-  padding-top: 11px;
-  padding-right: 11px;
-}
+  /* CUSTOMIZE THE NAVBAR
+  -------------------------------------------------- */
 
-.navbar-wrapper .refresh-slides > a > .glyphicon {
-  font-size: 25px;
-  width: 25px;
-  height: 25px;
-}
-
-.navbar-wrapper .refresh-slides > a > .glyphicon.is_fetching {
-  -webkit-animation: spin 400ms infinite linear;
-  -moz-animation: spin 400ms infinite linear;
-  -ms-animation: spin 400ms infinite linear;
-}
-
-@-moz-keyframes spin {
-  from { -moz-transform: rotate(0deg); }
-  to { -moz-transform: rotate(360deg); }
-}
-@-webkit-keyframes spin {
-  from { -webkit-transform: rotate(0deg); }
-  to { -webkit-transform: rotate(360deg); }
-}
-@keyframes spin {
-  from {transform:rotate(0deg);}
-  to {transform:rotate(360deg);}
-}
-
-/* RESPONSIVE CSS
--------------------------------------------------- */
-
-@media (min-width: 768px) {
-  /* Navbar positioning foo */
+  /* Special class on .container surrounding .navbar, used for positioning it into place. */
   .navbar-wrapper {
-    margin-top: 10px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    z-index: 20;
   }
-  .navbar-wrapper .container {
-    padding-right: 15px;
-    padding-left: 15px;
-  }
-  .navbar-wrapper .navbar {
+
+  /* Flip around the padding for proper display in narrow viewports */
+  .navbar-wrapper > .container {
     padding-right: 0;
     padding-left: 0;
   }
 
-  /* The navbar becomes detached from the top, so we round the corners */
   .navbar-wrapper .navbar {
-    border-radius: 4px;
+    padding-right: 15px;
+    padding-left: 15px;
+  }
+
+  .navbar-wrapper .navbar .container {
+    width: auto;
+  }
+
+  .navbar-header img {
+    height: 30px;
+    margin-top: 10px;
+    margin-right: 20px;
+  }
+
+  .navbar-wrapper .refresh-slides > a {
+    padding: 0;
+    padding-top: 11px;
+    padding-right: 11px;
+  }
+
+  .navbar-wrapper .refresh-slides > a > .glyphicon {
+    font-size: 25px;
+    width: 25px;
+    height: 25px;
+  }
+
+  .nav.navbar-nav li a.btn {
+    background-color: $osu_orange;
+    border-color: darken($osu_orange, 10%);
+    padding: 10px;
+    margin-top: 4px;
+    font-size: 14px;
+    color: #eee;
+  }
+  .nav.navbar-nav li a.btn:hover {
+    background-color: lighten($osu_orange, 5%);
+    border-color: $osu_orange;
+  }
+
+  /* Hours component styles
+  ---------------------------------------------------------*/
+  #hours {
+    padding: 0;
+
+    .panel-title {
+      font-size: 30px;
+    }
+    .panel-heading .glyphicon {
+      color: $shaded_grey;
+      width: 20px;
+      height: 20px;
+      font-size: 20px;
+      float: right;
+      display: none;
+      margin-top: 10px;
+    }
+    .glyphicon.is_fetching {
+      display: inline-block;
+    }
+    table.hours-container {
+      margin-top: 15px;
+      > tbody > tr > td {
+        border: none;
+      }
+      > tbody > tr > td:first-child {
+        width: 45%;
+        padding-right: 20px;
+      }
+      .rc-calendar {
+        width: 100%;
+        height: 100%;
+        font-size: 20px;
+      }
+      .rc-calendar-body {
+        height: 100%;
+      }
+      .rc-calendar-cell {
+        padding: 3px 0;
+        .rc-calendar-date {
+          line-height: 35px;
+          height: 35px;
+          width: 35px;
+
+        }
+      }
+      /*.rc-calendar-today > .rc-calendar-date {
+        background-color: lighten($osu_orange, 55%);
+        border-color: lighten($osu_orange, 55%);
+      }
+      .rc-calendar-date:hover {
+        background-color: lighten($osu_orange, 50%);
+      }
+      .rc-calendar-selected-date > .rc-calendar-date {
+        background: transparent !important;
+        background-color: $osu_orange;
+      }*/
+    }
+    table.hours-table {
+      width: 400px;
+      margin: 0 auto;
+
+      thead tr th:first-child,
+      tbody tr td:first-child {
+        text-align: right;
+        padding-right: 25px;
+      }
+      tbody {
+        font-size: 20px;
+      }
+    }
+
+    .hours-table-error {
+      text-align: center;
+      padding: 20px 0 0 0;
+    }
+    .hours-table-error > span {
+      color: $bright-red;
+      display: inline-block;
+      padding-right: 5px;
+      font-size: 20px;
+      vertical-align: bottom;
+    }
+    .hours-table-error > .glyphicon {
+      font-size:30px;
+    }
+  }
+
+  /* RESPONSIVE CSS
+  -------------------------------------------------- */
+
+  @media (min-width: 768px) {
+    /* Navbar positioning foo */
+    .navbar-wrapper {
+      margin-top: 10px;
+    }
+    .navbar-wrapper .container {
+      padding-right: 15px;
+      padding-left: 15px;
+    }
+    .navbar-wrapper .navbar {
+      padding-right: 0;
+      padding-left: 0;
+    }
+
+    /* The navbar becomes detached from the top, so we round the corners */
+    .navbar-wrapper .navbar {
+      border-radius: 4px;
+    }
   }
 }
+

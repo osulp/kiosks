@@ -1,3 +1,27 @@
+$dark-red: #d01f1f;
+$bright-red: #f00;
+$not_quite_black: #101010;
+$osu_orange: #C34500;
+$shaded_grey: #7b7b7b;
+
+/* GLOBAL STYLES
+-------------------------------------------------- */
+
+/* Set container elements to 100% height. */
+html, body, #application_root {
+  height: 100%;
+}
+
+/* Padding below the footer and lighter body text */
+
+body {
+  color: #060606;
+}
+
+body > #application_root {
+  background-color: $not_quite_black;
+}
+
 #modal {
   position: absolute;
   top: 0;
@@ -25,6 +49,45 @@
   top: 15px;
   position: absolute;
   font-size: 40px;
-  color: #d01f1f;
+  color: $osu_orange;
   text-shadow: 0 0 4px #1b1b1b;
+}
+
+#modal > .glyphicon:hover {
+  color: lighten($osu_orange, 5%);
+}
+
+/* Animated glyphicon, 360 rotation when .is_fetching
+-----------------------------------------------------------------------*/
+.glyphicon.is_fetching {
+  -webkit-animation: spin 400ms infinite linear;
+  -moz-animation: spin 400ms infinite linear;
+  -ms-animation: spin 400ms infinite linear;
+}
+
+@-moz-keyframes spin {
+  from {
+    -moz-transform: rotate(0deg);
+  }
+  to {
+    -moz-transform: rotate(360deg);
+  }
+}
+
+@-webkit-keyframes spin {
+  from {
+    -webkit-transform: rotate(0deg);
+  }
+  to {
+    -webkit-transform: rotate(360deg);
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }

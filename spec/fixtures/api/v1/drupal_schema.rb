@@ -1,5 +1,7 @@
+raise StandardError.new("Only development and test environments are allowed for this.") unless Rails.env.development? || Rails.env.test?
+
 # Force the connection to use the drupal_test configuration from database.yml
-ActiveRecord::Base.establish_connection DB_CONFIG["drupal_test"]
+ActiveRecord::Base.establish_connection DB_CONFIG["drupal_#{Rails.env.downcase}"]
 
 # Manually created a schema to match the table(s) that are queried by the Api
 ActiveRecord::Schema.define(version: 0) do

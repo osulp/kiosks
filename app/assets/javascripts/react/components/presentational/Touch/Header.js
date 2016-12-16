@@ -1,5 +1,5 @@
 import React, {Component, PropTypes} from 'react';
-import Hours from './Hours';
+import TouchHours from '../../TouchHours';
 
 class Header extends Component {
   refreshClicked() {
@@ -8,7 +8,7 @@ class Header extends Component {
   }
   hoursClicked(){
     this.props.setModalVisibility(true);
-    this.props.setModalRootComponent(<Hours hours={[{day: "Monday", from:"7am", to: "12pm"}]} />);
+    this.props.setModalRootComponent(<TouchHours />);
   }
   render() {
     return (
@@ -27,10 +27,14 @@ class Header extends Component {
               </div>
               <div id="navbar" className="navbar-collapse collapse">
                 <ul className="nav navbar-nav">
-                  <li className="show-hours" onClick={this.hoursClicked.bind(this)}><a>Hours</a></li>
+                  <li className="show-hours" onClick={this.hoursClicked.bind(this)}><a className="btn btn-navbar btn-default">Hours</a></li>
                 </ul>
                 <ul className="nav navbar-nav navbar-right">
-                  <li className="refresh-slides" onClick={this.refreshClicked.bind(this)}><a><span className={`glyphicon glyphicon-repeat ${this.props.is_fetching ? "is_fetching" : ""}`} aria-hidden="true">&nbsp;</span></a></li>
+                  <li className="refresh-slides" onClick={this.refreshClicked.bind(this)}>
+                    <a>
+                      <span className={`glyphicon glyphicon-repeat ${this.props.is_fetching_slides ? "is_fetching" : ""}`} aria-hidden="true">&nbsp;</span>
+                    </a>
+                  </li>
                 </ul>
               </div>
             </div>
@@ -43,7 +47,7 @@ class Header extends Component {
 
 Header.PropTypes = {
   url: PropTypes.string.isRequired,
-  is_fetching: PropTypes.bool.isRequired,
+  is_fetching_slides: PropTypes.bool.isRequired,
   fetchSlides: PropTypes.func.isRequired,
   setModalVisibility: PropTypes.func.isRequired,
   setModalRootComponent: PropTypes.func.isRequired,

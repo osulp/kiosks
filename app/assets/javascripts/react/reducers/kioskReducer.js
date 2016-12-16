@@ -3,6 +3,9 @@ import {SCROLL_TO_SLIDE, SET_SLIDES, SET_KIOSK, ADD_ERROR} from '../actions/kios
 export const initial_state = {
   type: "touch",
   url: "kiosk/touch",
+  api: {
+    hours: "/api/v1/hours"
+  },
   slides: [],
   starting_slide_index: 0,
   errors: []
