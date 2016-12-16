@@ -8,7 +8,7 @@ const setup = () => {
     factories.initial_state,
     {
       slides: factories.slides,
-      is_fetching: false,
+      is_fetching_slides: false,
       fetchSlides: jest.fn(),
       setModalVisibility: jest.fn(),
       setModalRootComponent: jest.fn(),

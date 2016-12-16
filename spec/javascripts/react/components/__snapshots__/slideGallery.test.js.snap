@@ -1,10 +1,14 @@
 exports[`SlideGallery maps dispatch to props 1`] = `
 Object {
   "addError": [Function],
+  "fetchHours": [Function],
   "fetchSlides": [Function],
+  "fetchedHours": [Function],
   "fetchedSlides": [Function],
+  "fetchingHours": [Function],
   "fetchingSlides": [Function],
   "scrollToSlide": [Function],
+  "setHours": [Function],
   "setKiosk": [Function],
   "setModalRootComponent": [Function],
   "setModalVisibility": [Function],

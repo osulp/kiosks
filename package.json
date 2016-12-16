@@ -33,6 +33,8 @@
     "browserify": "^13.1.1",
     "browserify-incremental": "^3.1.1",
     "isomorphic-fetch": "^2.2.1",
+    "moment": "^2.17.1",
+    "rc-calendar": "^7.5.2",
     "react": "^15.4.1",
     "react-addons-css-transition-group": "^15.4.1",
     "react-dom": "^15.4.1",
