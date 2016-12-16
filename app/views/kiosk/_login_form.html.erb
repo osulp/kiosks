@@ -1,0 +1,19 @@
+<h2>Log in</h2>
+<%= form_tag session_path(:user) do %>
+  <div>
+    <%= label_tag 'user_email', 'Email' %><br>
+    <%= text_field_tag 'user[email]' %>
+  </div>
+  <div>
+    <%= label_tag 'user_password', 'Password' %><br>
+    <%= password_field_tag 'user[password]' %>
+  </div>
+  <div>
+    <%= check_box_tag 'user[remember_me]' %>
+    <%= label_tag 'user[remember_me]', 'Remember me' %>
+  </div>
+  <div>
+    <%= button_tag "Sign in" %>
+  </div>
+  <%= link_to "Forgot your password?", new_password_path(:user) %>
+<% end %>

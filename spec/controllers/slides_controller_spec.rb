@@ -83,7 +83,7 @@ RSpec.describe SlidesController, type: :controller do
       end
       it "should redirect" do
         get :new, params: {}
-        expect(response).to redirect_to kiosks_path
+        expect(response).to redirect_to root_path
       end
     end
     context "When logged in as an admin" do

@@ -1,8 +1,8 @@
 class SlidesController < ApplicationController
   before_action :set_slide, only: [:show, :edit, :update, :destroy]
   before_action :set_options, only: [:new, :show, :edit, :update, :destroy]
-  before_action :authenticate_user!, except: [:index]
-  before_action :authorize, except: [:index]
+  before_action :authenticate_user!
+  before_action :authorize
 
   # GET /slides
   # GET /slides.json
@@ -83,7 +83,7 @@ class SlidesController < ApplicationController
     def authorize
       unless current_user && current_user.admin?
         flash[:alert] = "You do not have sufficient permissions to view this page"
-        redirect_to kiosks_path
+        redirect_to root_path
       end
     end
 
