@@ -11,6 +11,15 @@ describe('Action::Kiosk', () => {
     })
   });
 
+  describe('#scrollToSlide()', () => {
+    it('matches the snapshot', () => {
+      // execute
+      let action = actionCreator.scrollToSlide(1);
+      // verify
+      expect(action).toMatchSnapshot();
+    })
+  });
+
   describe('#setSlides()', () => {
     it('matches the snapshot', () => {
       // execute
