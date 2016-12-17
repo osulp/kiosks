@@ -1,0 +1,54 @@
+exports[`Reducer::Touch default action matches the snapshot 1`] = `
+Object {
+  "hours": Object {},
+  "is_fetching_hours": false,
+  "is_fetching_slides": false,
+}
+`;
+
+exports[`Reducer::Touch fetchedHours action matches the snapshot 1`] = `
+Object {
+  "hours": Object {},
+  "is_fetching_hours": false,
+  "is_fetching_slides": false,
+}
+`;
+
+exports[`Reducer::Touch fetchedSlides action matches the snapshot 1`] = `
+Object {
+  "hours": Object {},
+  "is_fetching_hours": false,
+  "is_fetching_slides": false,
+}
+`;
+
+exports[`Reducer::Touch fetchingHours action matches the snapshot 1`] = `
+Object {
+  "hours": Object {},
+  "is_fetching_hours": true,
+  "is_fetching_slides": false,
+}
+`;
+
+exports[`Reducer::Touch fetchingSlides action matches the snapshot 1`] = `
+Object {
+  "hours": Object {},
+  "is_fetching_hours": false,
+  "is_fetching_slides": true,
+}
+`;
+
+exports[`Reducer::Touch setHours action matches the snapshot 1`] = `
+Object {
+  "hours": Object {
+    "2000-01-01": Object {
+      "close": "2am",
+      "open": "1am",
+      "sortable_date": "2000-01-01",
+      "string_date": "Jan 1, 2000",
+    },
+  },
+  "is_fetching_hours": false,
+  "is_fetching_slides": false,
+}
+`;

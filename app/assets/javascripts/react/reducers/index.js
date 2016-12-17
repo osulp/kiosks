@@ -3,10 +3,10 @@ import kioskReducer from './kioskReducer';
 import modalReducer from './modalReducer';
 import touchReducer from './touchReducer';
 
-const rootReducer = combineReducers({
+export const REDUCERS_SHAPE = {
   kiosk: kioskReducer,
   modal: modalReducer,
   touch: touchReducer
-});
+};
 
-export default rootReducer;
+export default combineReducers(REDUCERS_SHAPE);

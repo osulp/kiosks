@@ -1,0 +1,18 @@
+exports[`Reducer::Root Reducers state shape matches the snapshot 1`] = `
+Object {
+  "kiosk": [Function],
+  "modal": [Function],
+  "touch": [Function],
+}
+`;
+
+exports[`Reducer::Root Redux combinedReducers matches the snapshot 1`] = `
+Object {
+  "REDUCERS_SHAPE": Object {
+    "kiosk": [Function],
+    "modal": [Function],
+    "touch": [Function],
+  },
+  "default": [Function],
+}
+`;

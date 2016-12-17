@@ -1,0 +1,20 @@
+exports[`Reducer::Modal default action matches the snapshot 1`] = `
+Object {
+  "root_component": null,
+  "visible": false,
+}
+`;
+
+exports[`Reducer::Modal setModalRootComponent action matches the snapshot 1`] = `
+Object {
+  "root_component": [Function],
+  "visible": false,
+}
+`;
+
+exports[`Reducer::Modal setModalVisibility action matches the snapshot 1`] = `
+Object {
+  "root_component": null,
+  "visible": true,
+}
+`;
