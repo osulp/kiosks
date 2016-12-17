@@ -86,7 +86,6 @@ export const fetchHours = (url, dates) => {
       body: JSON.stringify({dates:[...dates]})
     })
       .then(response => {
-        console.log(`${response} : ${response.status}`);
         switch(response.status) {
           case 200:
             return response.json();

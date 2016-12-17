@@ -10,6 +10,7 @@ $shaded_grey: #7b7b7b;
 /* Set container elements to 100% height. */
 html, body, #application_root {
   height: 100%;
+  width: 100%;
 }
 
 /* Padding below the footer and lighter body text */
@@ -49,12 +50,13 @@ body > #application_root {
   top: 15px;
   position: absolute;
   font-size: 40px;
-  color: $osu_orange;
+  color: #888;
   text-shadow: 0 0 4px #1b1b1b;
 }
 
 #modal > .glyphicon:hover {
   color: lighten($osu_orange, 5%);
+  cursor: pointer;
 }
 
 /* Animated glyphicon, 360 rotation when .is_fetching

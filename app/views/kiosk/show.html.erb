@@ -1,5 +1,4 @@
 <div id="application_root"
-     class="row"
      data-kiosk-type="<%= @kiosk.name %>"
      data-slides='<%= raw(render(template: "kiosk/show.json", locals: { slides: @slides })) %>'
      data-kiosk-url="<%= kiosk_show_url id: @kiosk.name %>"

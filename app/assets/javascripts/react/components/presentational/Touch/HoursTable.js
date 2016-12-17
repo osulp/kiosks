@@ -1,4 +1,5 @@
 import React, {Component, PropTypes} from 'react';
+import moment from 'moment';
 
 class HoursTable extends Component {
   render() {
@@ -7,7 +8,7 @@ class HoursTable extends Component {
       <table className="table hours-table">
         <thead>
         <tr>
-          <th>Day</th>
+          <th></th>
           <th>Open</th>
           <th>Close</th>
         </tr>
@@ -15,7 +16,7 @@ class HoursTable extends Component {
         <tbody>
         {Object.values(hours).map((h, i) => {
           return (
-            <tr key={`hours.${i}`}>
+            <tr key={`hours.${i}`} className={moment(h.sortable_date).isSame(this.props.selected_date, "day") ? "alert alert-info" : ""}>
               <td>{h.string_date}</td>
               <td>{h.open}</td>
               <td>{h.close}</td>
@@ -29,6 +30,7 @@ class HoursTable extends Component {
 
 HoursTable.propTypes = {
   hours: PropTypes.object.isRequired,
+  selected_date: PropTypes.object.isRequired,
 };
 
 export default HoursTable;
