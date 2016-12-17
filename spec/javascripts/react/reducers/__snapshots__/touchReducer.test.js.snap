@@ -34,7 +34,14 @@ exports[`Reducers::Touch matches the snapshot 1`] = `[Function]`;
 
 exports[`Reducers::Touch setHours action matches the snapshot 1`] = `
 Object {
-  "hours": undefined,
+  "hours": Object {
+    "2000-01-01": Object {
+      "close": "2am",
+      "open": "1am",
+      "sortable_date": "2000-01-01",
+      "string_date": "Jan 01, 2000",
+    },
+  },
   "is_fetching_hours": false,
   "is_fetching_slides": false,
 }
