@@ -4,53 +4,33 @@ import * as factories from '../.factories';
 
 const empty_state = undefined;
 
-describe('Reducer::Touch', () => {
-  describe('default action', () => {
-    it('matches the snapshot', () => {
-      // execute
-      let state = reducerCreator(empty_state, {type: "BOGUS_ACTION"});
-      // verify
-      expect(state).toMatchSnapshot();
-    })
+describe('Reducers::Touch', () => {
+  it('matches the snapshot', () => {
+    expect(reducerCreator).toMatchSnapshot();
   });
   describe('fetchingSlides action', () => {
     it('matches the snapshot', () => {
-      // execute
-      let state = reducerCreator(empty_state, actionCreator.fetchingSlides());
-      // verify
-      expect(state).toMatchSnapshot();
+      expect(reducerCreator(empty_state, actionCreator.fetchingSlides())).toMatchSnapshot();
     })
   });
   describe('fetchingHours action', () => {
     it('matches the snapshot', () => {
-      // execute
-      let state = reducerCreator(empty_state, actionCreator.fetchingHours());
-      // verify
-      expect(state).toMatchSnapshot();
+      expect(reducerCreator(empty_state, actionCreator.fetchingHours())).toMatchSnapshot();
     })
   });
   describe('fetchedSlides action', () => {
     it('matches the snapshot', () => {
-      // execute
-      let state = reducerCreator(empty_state, actionCreator.fetchedSlides());
-      // verify
-      expect(state).toMatchSnapshot();
+      expect(reducerCreator(empty_state, actionCreator.fetchedSlides())).toMatchSnapshot();
     })
   });
   describe('fetchedHours action', () => {
     it('matches the snapshot', () => {
-      // execute
-      let state = reducerCreator(empty_state, actionCreator.fetchedHours());
-      // verify
-      expect(state).toMatchSnapshot();
+      expect(reducerCreator(empty_state, actionCreator.fetchedHours())).toMatchSnapshot();
     })
   });
   describe('setHours action', () => {
     it('matches the snapshot', () => {
-      // execute
-      let state = reducerCreator(empty_state, actionCreator.setHours(factories.hours));
-      // verify
-      expect(state).toMatchSnapshot();
+      expect(reducerCreator(empty_state, actionCreator.setHours(factories.hours))).toMatchSnapshot();
     })
   });
 });

@@ -1,0 +1,11 @@
+exports[`Store::configureStore creates a store with middleware 1`] = `
+Object {
+  "dispatch": [Function],
+  "getState": [Function],
+  "replaceReducer": [Function],
+  "subscribe": [Function],
+  Symbol(Symbol.observable): [Function],
+}
+`;
+
+exports[`Store::configureStore matches the snapshot 1`] = `[Function]`;

@@ -1,4 +1,4 @@
-exports[`Reducer::Kiosk addError action matches the snapshot 1`] = `
+exports[`Reducers::Kiosk addError action matches the snapshot 1`] = `
 Object {
   "api": Object {
     "hours": "/api/v1/hours",
@@ -16,20 +16,9 @@ Object {
 }
 `;
 
-exports[`Reducer::Kiosk default action matches the snapshot 1`] = `
-Object {
-  "api": Object {
-    "hours": "/api/v1/hours",
-  },
-  "errors": Array [],
-  "slides": Array [],
-  "starting_slide_index": 0,
-  "type": "touch",
-  "url": "kiosk/touch",
-}
-`;
+exports[`Reducers::Kiosk matches the snapshot 1`] = `[Function]`;
 
-exports[`Reducer::Kiosk scrollToSlide action matches the snapshot 1`] = `
+exports[`Reducers::Kiosk scrollToSlide action matches the snapshot 1`] = `
 Object {
   "api": Object {
     "hours": "/api/v1/hours",
@@ -42,7 +31,7 @@ Object {
 }
 `;
 
-exports[`Reducer::Kiosk setKiosk action matches the snapshot 1`] = `
+exports[`Reducers::Kiosk setKiosk action matches the snapshot 1`] = `
 Object {
   "api": Object {
     "hours": "/api/v1/hours",
@@ -58,7 +47,7 @@ Object {
 }
 `;
 
-exports[`Reducer::Kiosk setSlides action matches the snapshot 1`] = `
+exports[`Reducers::Kiosk setSlides action matches the snapshot 1`] = `
 Object {
   "api": Object {
     "hours": "/api/v1/hours",

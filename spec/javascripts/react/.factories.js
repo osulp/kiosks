@@ -36,12 +36,3 @@ export const kiosk = {
   type: "touch",
   url: "/url/to/action"
 };
-
-export const hours = {
-  "2000-01-01": {
-    open: "1am",
-    close: "2am",
-    string_date: "Jan 1, 2000",
-    sortable_date: "2000-01-01"
-  }
-};

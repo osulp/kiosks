@@ -4,45 +4,28 @@ import * as factories from '../.factories';
 
 const empty_state = undefined;
 
-describe('Reducer::Kiosk', () => {
-  describe('default action', () => {
-    it('matches the snapshot', () => {
-      // execute
-      let state = reducerCreator(empty_state, {type: "BOGUS_ACTION"});
-      // verify
-      expect(state).toMatchSnapshot();
-    })
+describe('Reducers::Kiosk', () => {
+  it('matches the snapshot', () => {
+    expect(reducerCreator).toMatchSnapshot();
   });
   describe('addError action', () => {
     it('matches the snapshot', () => {
-      // execute
-      let state = reducerCreator(empty_state, actionCreator.addError(factories.error));
-      // verify
-      expect(state).toMatchSnapshot();
+      expect(reducerCreator(empty_state, actionCreator.addError(factories.error))).toMatchSnapshot();
     })
   });
   describe('setKiosk action', () => {
     it('matches the snapshot', () => {
-      // execute
-      let state = reducerCreator(empty_state, actionCreator.setKiosk(factories.kiosk));
-      // verify
-      expect(state).toMatchSnapshot();
+      expect(reducerCreator(empty_state, actionCreator.setKiosk(factories.kiosk))).toMatchSnapshot();
     })
   });
   describe('setSlides action', () => {
     it('matches the snapshot', () => {
-      // execute
-      let state = reducerCreator(empty_state, actionCreator.setSlides(factories.slides));
-      // verify
-      expect(state).toMatchSnapshot();
+      expect(reducerCreator(empty_state, actionCreator.setSlides(factories.slides))).toMatchSnapshot();
     })
   });
   describe('scrollToSlide action', () => {
     it('matches the snapshot', () => {
-      // execute
-      let state = reducerCreator(empty_state, actionCreator.scrollToSlide(1));
-      // verify
-      expect(state).toMatchSnapshot();
+      expect(reducerCreator(empty_state, actionCreator.scrollToSlide(1))).toMatchSnapshot();
     })
   });
 });
