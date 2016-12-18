@@ -131,6 +131,8 @@
     }
     .hours-table-container {
       margin-top: 15px;
+      padding-bottom: 15px;
+
       .rc-calendar {
         width: 100%;
         font-size: 20px;
@@ -148,6 +150,14 @@
 
         }
       }
+
+      .hours-table-datepicker {
+        text-align: center;
+        margin-botom: 10px;
+        label {
+          margin-right: 5px;
+        }
+      }
     }
     table.hours-table {
       margin: 0 auto;
@@ -156,9 +166,6 @@
       tbody tr td:first-child {
         text-align: right;
         padding-right: 25px;
-      }
-      tbody {
-        font-size: 16px;
       }
     }
 
@@ -170,7 +177,6 @@
       color: $bright-red;
       display: inline-block;
       padding-right: 5px;
-      font-size: 16px;
       vertical-align: bottom;
     }
     .hours-table-error > .glyphicon {
