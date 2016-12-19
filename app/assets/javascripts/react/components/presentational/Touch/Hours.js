@@ -1,6 +1,6 @@
 import React, {Component, PropTypes} from 'react';
 import Calendar from 'rc-calendar';
-import DatePicker from 'rc-calendar/lib/picker';
+import DatePicker from 'rc-calendar/lib/Picker';
 import moment from 'moment';
 import HoursTable from './HoursTable';
 import HoursError from './HoursError';
