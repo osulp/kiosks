@@ -2,7 +2,9 @@ export {initial_state} from '../../../app/assets/javascripts/react/reducers/kios
 
 export const slide = {
   id: 1,
-  image_url: "/uploads/default_slide_1.png",
+  original: "/uploads/default_slide_1.png",
+  thumbnail: "/uploads/default_slide_1.png",
+  xlarge: "/uploads/default_slide_1.png",
   expires_at: "2020-12-31T23:59:59Z",
   created_at: "2000-12-31T11:59:59Z",
   updated_at: "2000-12-31T23:59:59Z",
@@ -14,7 +16,9 @@ export const slide = {
 
 export const slide2 = {
   id: 2,
-  image_url: "/uploads/default_slide_2.png",
+  original: "/uploads/default_slide_2.png",
+  thumbnail: "/uploads/default_slide_1.png",
+  xlarge: "/uploads/default_slide_1.png",
   expires_at: "2010-11-11T13:00:00Z",
   created_at: "2000-11-11T11:00:00Z",
   updated_at: "2000-11-11T13:00:00Z",

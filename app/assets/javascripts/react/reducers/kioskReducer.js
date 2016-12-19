@@ -1,4 +1,4 @@
-import {SCROLL_TO_SLIDE, SET_SLIDES, SET_KIOSK, ADD_ERROR} from '../actions/kioskActions';
+import {SCROLL_TO_SLIDE, SET_SLIDES, SET_KIOSK, ADD_ERROR, SET_TITLE} from '../actions/kioskActions';
 
 export const initial_state = {
   type: "touch",
@@ -6,6 +6,7 @@ export const initial_state = {
   api: {
     hours: "/api/v1/hours"
   },
+  title: "Donor Impact",
   slides: [],
   starting_slide_index: 0,
   errors: []
@@ -21,6 +22,8 @@ const kioskReducer = (state = initial_state, action) => {
       return Object.assign({}, state, { slides: action.kiosk.slides });
     case SCROLL_TO_SLIDE:
       return Object.assign({}, state, { starting_slide_index: action.index });
+    case SET_TITLE:
+      return Object.assign({}, state, { title: action.title });
     default:
       return state;
   }

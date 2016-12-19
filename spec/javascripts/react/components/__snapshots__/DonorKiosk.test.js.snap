@@ -1,4 +1,4 @@
-exports[`SlideGallery maps dispatch to props 1`] = `
+exports[`Donor Kiosk maps dispatch to props 1`] = `
 Object {
   "addError": [Function],
   "fetchHours": [Function],
@@ -17,7 +17,7 @@ Object {
 }
 `;
 
-exports[`SlideGallery maps state to props 1`] = `
+exports[`Donor Kiosk maps state to props 1`] = `
 Object {
   "slides": Array [
     Object {
@@ -47,6 +47,6 @@ Object {
       "xlarge": "/uploads/default_slide_1.png",
     },
   ],
-  "starting_slide_index": undefined,
+  "title": "Slide.title",
 }
 `;

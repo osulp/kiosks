@@ -13,6 +13,7 @@ Object {
   "setModalRootComponent": [Function],
   "setModalVisibility": [Function],
   "setSlides": [Function],
+  "setTitle": [Function],
 }
 `;
 

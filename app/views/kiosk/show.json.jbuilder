@@ -2,6 +2,7 @@ json.slides @slides do |slide|
   json.id slide.id
   json.original slide.image.url
   json.thumbnail slide.image.url(:thumb)
+  json.xlarge slide.image.url(:xlarge)
   json.expires_at slide.expires_at
   json.title slide.title
   json.caption slide.caption
