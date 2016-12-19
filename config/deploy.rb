@@ -36,10 +36,23 @@ set :nvm_map_bins, %w{node npm yarn}
 set :pty, true
 
 # Default value for :linked_files is []
-append :linked_files, 'config/application_config.yml.erb', 'config/secrets.yml', 'config/god.conf', 'config/config.yml'
+append :linked_files, 'config/application_config.yml.erb',
+                      'config/secrets.yml',
+                      'config/god.conf',
+                      'config/config.yml',
+                      'db/production.sqlite',
+                      'db/staging.sqlite'
 
 # Default value for linked_dirs is []
-append :linked_dirs, 'log', 'tmp', 'pids', 'sockets', 'public/assets', 'public/system', 'public/uploaded', 'node_modules', 'config/puma'
+append :linked_dirs, 'log',
+                     'tmp',
+                     'pids',
+                     'sockets',
+                     'public/assets',
+                     'public/system',
+                     'public/uploaded',
+                     'node_modules',
+                     'config/puma'
 
 # Default value for default_env is {}
 # set :default_env, { path: "/opt/ruby/bin:$PATH" }
@@ -48,5 +61,3 @@ append :linked_dirs, 'log', 'tmp', 'pids', 'sockets', 'public/assets', 'public/s
 set :keep_releases, 5
 
 set :passenger_restart_with_touch, true
-
-set :linked_dirs, fetch(:linked_dirs, []).push('public/system')
