@@ -8,6 +8,13 @@ Object {
 }
 `;
 
+exports[`Action::Kiosk #scrollToSlide() matches the snapshot 1`] = `
+Object {
+  "index": 1,
+  "type": "SCROLL_TO_SLIDE",
+}
+`;
+
 exports[`Action::Kiosk #setKiosk() matches the snapshot 1`] = `
 Object {
   "kiosk": Object {
