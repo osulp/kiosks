@@ -4,6 +4,7 @@
 /* Set container elements to 100% height. */
 #touch_kiosk, #slide_gallery, .image-gallery {
   height: 100%;
+  width: 100%;
 }
 
 #touch_kiosk {
@@ -91,6 +92,9 @@
     width: 25px;
     height: 25px;
   }
+  .navbar-wrapper .refresh-slides > a > .glyphicon:hover {
+    cursor: pointer;
+  }
 
   .nav.navbar-nav li a.btn {
     background-color: $osu_orange;
@@ -125,19 +129,12 @@
     .glyphicon.is_fetching {
       display: inline-block;
     }
-    table.hours-container {
+    .hours-table-container {
       margin-top: 15px;
-      > tbody > tr > td {
-        border: none;
-      }
-      > tbody > tr > td:first-child {
-        width: 45%;
-        padding-right: 20px;
-      }
       .rc-calendar {
         width: 100%;
-        height: 100%;
         font-size: 20px;
+        margin: 10px;
       }
       .rc-calendar-body {
         height: 100%;
@@ -151,20 +148,8 @@
 
         }
       }
-      /*.rc-calendar-today > .rc-calendar-date {
-        background-color: lighten($osu_orange, 55%);
-        border-color: lighten($osu_orange, 55%);
-      }
-      .rc-calendar-date:hover {
-        background-color: lighten($osu_orange, 50%);
-      }
-      .rc-calendar-selected-date > .rc-calendar-date {
-        background: transparent !important;
-        background-color: $osu_orange;
-      }*/
     }
     table.hours-table {
-      width: 400px;
       margin: 0 auto;
 
       thead tr th:first-child,
@@ -173,7 +158,7 @@
         padding-right: 25px;
       }
       tbody {
-        font-size: 20px;
+        font-size: 16px;
       }
     }
 
@@ -185,7 +170,7 @@
       color: $bright-red;
       display: inline-block;
       padding-right: 5px;
-      font-size: 20px;
+      font-size: 16px;
       vertical-align: bottom;
     }
     .hours-table-error > .glyphicon {

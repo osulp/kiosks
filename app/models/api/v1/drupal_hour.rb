@@ -32,7 +32,7 @@ module Api
           result[parsed_time] = { open: open_time,
                                   close: close_time,
                                   string_date: parsed_time.strftime(APPLICATION_CONFIG['api']['drupal_hour']['hours_for_dates']['string_date_format']),
-                                  sortable_date: parsed_time.to_i }
+                                  sortable_date: parsed_time.strftime(APPLICATION_CONFIG['api']['drupal_hour']['hours_for_dates']['sortable_date_format'])}
         end
         raise Api::V1::Exceptions::RecordNotFound.new(I18n.t('api.drupal.hours_for_dates.record_not_found')) if result.empty?
         return result

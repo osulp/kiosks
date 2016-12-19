@@ -8,13 +8,16 @@ const now = moment();
 const default_calendar_value = now.clone();
 const getWeekArray = (date) => {
   return ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"].map(d => moment(date).day(d));
-}
+};
 
 class Hours extends Component {
   dateClicked(date) {
+    this.setState({selected_date: date});
     this.props.fetchHours(this.props.api.hours, getWeekArray(date));
   }
-
+  componentWillMount() {
+    this.setState({selected_date: now});
+  }
   componentDidMount() {
     this.props.fetchHours(this.props.api.hours, getWeekArray(now));
   }
@@ -27,23 +30,19 @@ class Hours extends Component {
           <span className="panel-title">Library Hours</span>
           <span className={`glyphicon glyphicon-repeat ${this.props.is_fetching_hours ? "is_fetching" : ""}`}
                 aria-hidden="true">&nbsp;</span></div>
-        <div className="hours-table-container">
-          <table className="table hours-container">
-            <tbody>
-            <tr>
-              <td>
-                {hours.error ? <HoursError error={hours.error}/> : <HoursTable hours={hours}/>}
-              </td>
-              <td>
-                <Calendar
-                  defaultValue={default_calendar_value}
-                  onSelect={this.dateClicked.bind(this)}
-                  onChange={this.dateClicked.bind(this)}
-                  showDateInput={false}/>
-              </td>
-            </tr>
-            </tbody>
-          </table>
+        <div className="container-fluid hours-table-container">
+          <div className="row">
+            <div className="col-md-5">
+              {hours.error ? <HoursError error={hours.error}/> : <HoursTable hours={hours} selected_date={this.state.selected_date} />}
+            </div>
+            <div className="col-md-7">
+              <Calendar
+                defaultValue={default_calendar_value}
+                onSelect={this.dateClicked.bind(this)}
+                onChange={this.dateClicked.bind(this)}
+                showDateInput={false}/>
+            </div>
+          </div>
         </div>
       </div>
     );
