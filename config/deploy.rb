@@ -40,8 +40,8 @@ append :linked_files, 'config/application_config.yml.erb',
                       'config/secrets.yml',
                       'config/god.conf',
                       'config/config.yml',
-                      'db/production.sqlite',
-                      'db/staging.sqlite'
+                      'db/production.sqlite3',
+                      'db/staging.sqlite3'
 
 # Default value for linked_dirs is []
 append :linked_dirs, 'log',
