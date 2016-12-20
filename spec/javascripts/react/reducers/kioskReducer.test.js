@@ -28,4 +28,9 @@ describe('Reducers::Kiosk', () => {
       expect(reducerCreator(empty_state, actionCreator.scrollToSlide(1))).toMatchSnapshot();
     })
   });
+  describe('setTitle action', () => {
+    it('matches the snapshot', () => {
+      expect(reducerCreator(empty_state, actionCreator.setTitle("MyTitle"))).toMatchSnapshot();
+    })
+  });
 });

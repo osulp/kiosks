@@ -6,14 +6,15 @@ import * as actions from '../actions';
 
 // Top level mapping of the application state to properties of component that is being
 // connected.
-const mapStateToProps = (state) => {
+export const mapStateToProps = (state) => {
   return {
-    slides: state.kiosk.slides
+    slides: state.kiosk.slides,
+    title: state.kiosk.title
   }
 };
 
 // Map the actions to the dispatcher
-const mapDispatchToProps = (dispatch) => {
+export const mapDispatchToProps = (dispatch) => {
   return bindActionCreators(actions, dispatch);
 };
 

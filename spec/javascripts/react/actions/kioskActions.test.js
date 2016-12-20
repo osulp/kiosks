@@ -29,6 +29,15 @@ describe('Action::Kiosk', () => {
     })
   });
 
+  describe('#setTitle()', () => {
+    it('matches the snapshot', () => {
+      // execute
+      let action = actionCreator.setTitle("MyTitle");
+      // verify
+      expect(action).toMatchSnapshot();
+    })
+  });
+
   describe('#setKiosk()', () => {
     it('matches the snapshot', () => {
       let expected = factories.kiosk;
