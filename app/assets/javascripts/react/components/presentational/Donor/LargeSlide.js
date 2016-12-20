@@ -2,18 +2,28 @@ import React, {Component, PropTypes} from 'react';
 
 class LargeSlide extends Component {
 
-  componentWillMount() {
-    this.setState({slideAnimationClass: 'slide-entering'});
+  constructor(props) {
+    super(props);
+    this.state = {slideAnimationClass: 'slide-entering', exitingTimeout: undefined, hideTimeout: undefined};
   }
 
   componentDidMount() {
-    setTimeout(() => {
-      this.setState({slideAnimationClass: 'slide-exiting'});
-    }, 14650);
-    setTimeout(() => {
-      this.props.setModalVisibility(false);
-      this.props.setModalRootComponent(undefined);
-    }, 15000);
+    this.setState({
+      exitingTimeout: setTimeout(() => {
+        this.setState({slideAnimationClass: 'slide-exiting'});
+      }, 14650)//This time is exactly based on the animation duration found in _donor_kiosk.scss
+    });
+    this.setState({
+      hideTimeout: setTimeout(() => {
+        this.props.setModalVisibility(false);
+        this.props.setModalRootComponent(undefined);
+      }, 15000)
+    });
+  }
+
+  componentWillUnmount() {
+    clearTimeout(this.state.hideTimeout);
+    clearTimeout(this.state.exitingTimeout);
   }
 
   render() {

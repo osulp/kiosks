@@ -75,6 +75,8 @@ html, body, #application_root, #donor_kiosk, .container-fluid {
   -ms-animation: grow 250ms forwards linear;
 }
 
+// The time 350ms is exactly related to the timeout duration found in LargeSlide (14650ms).
+// It runs infinitely but only has time to run once.
 .slide-exiting {
   -webkit-animation: grow 350ms linear infinite reverse;
   -moz-animation: grow 350ms linear infinite reverse;
