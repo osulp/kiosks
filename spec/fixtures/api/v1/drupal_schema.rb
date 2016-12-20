@@ -18,4 +18,20 @@ ActiveRecord::Schema.define(version: 0) do
     t.datetime "term_start_date", null: false
     t.datetime "term_end_date", null: false
   end
+  create_table "int_hours", force: :cascade do |t|
+    t.datetime "open_time_wk", null: false
+    t.datetime "close_time_wk", null: false
+    t.datetime "open_time_sat", null: false
+    t.datetime "close_time_sat", null: false
+    t.datetime "open_time_sun", null: false
+    t.datetime "close_time_sun", null: false
+    t.datetime "start_date", null: false
+    t.datetime "end_date", null: false
+  end
+  create_table "special_hours", force: :cascade do |t|
+    t.datetime "open_time", null: false
+    t.datetime "close_time", null: false
+    t.datetime "start_date", null: false
+    t.datetime "end_date", null: false
+  end
 end

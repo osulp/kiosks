@@ -29,6 +29,7 @@ en:
         internal_server_error: "Server Error."
         bad_request: "Bad request, check params and try again."
     drupal:
+      hours:
+        record_not_found: "hours found no valid hours for the dates provided."
       hours_for_dates:
-        record_not_found: "DrupalHour.hours_for_dates found no valid hours for the dates provided."
-        bad_request: "DrupalHour.hours_for_dates received nil or empty dates argument."
+        bad_request: "hours_for_dates received nil or empty dates argument."

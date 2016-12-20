@@ -31,4 +31,4 @@ database:
 test:
   override:
     - bundle exec rspec
-    - yarn test
+    - yarn test -- -u

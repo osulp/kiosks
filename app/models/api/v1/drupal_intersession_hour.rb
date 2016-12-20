@@ -2,10 +2,10 @@ require 'api/v1/exceptions'
 
 module Api
   module V1
-    class DrupalHour < DrupalRecord
-      self.table_name = APPLICATION_CONFIG['api']['database']['drupal']['hours']['table_name']
+    class DrupalIntersessionHour < DrupalRecord
+      self.table_name = APPLICATION_CONFIG['api']['database']['drupal']['intersession_hours']['table_name']
 
-      # Query Drupal to find the times the Library is open and closed for an array of Dates.
+      # Query Drupal to find the intersession times the Library is open and closed for an array of Dates.
       # @param dates [Array<String>] Array of string dates you want the hours for.
       # @return [Hash<Hash>] Hash where each key is the date with the hours containing a hash with details.
       #   ie. { "2016-11-25 00:00:00 UTC": {
@@ -16,18 +16,21 @@ module Api
       #         }
       #       }
       def self.hours_for_dates(dates)
-        raise Api::V1::Exceptions::BadRequest.new("DrupalHour.#{I18n.t('api.drupal.hours_for_dates.bad_request')}") if dates.nil? || dates.empty?
+        raise Api::V1::Exceptions::BadRequest.new("DrupalIntersessionHour.#{I18n.t('api.drupal.hours_for_dates.bad_request')}") if dates.nil? || dates.empty?
 
         result = {}
         all_hours = self.query
         dates.map! { |d| d.to_date }.sort.each do |date|
           next unless date.instance_of? Date
-          hours = all_hours.select { |x| x.term_start_date.to_date <= date && x.term_end_date.to_date >= date }[0]
+          hours = all_hours.select { |x| x.start_date.to_date <= date && x.end_date.to_date >= date }[0]
           next unless hours
-          week_day_index = date.wday < 5 ? 1 : date.wday
-          week_day_index = 7 if date.wday == 0
-          open_time = Time.zone.parse("#{date} #{hours["open_time_#{week_day_index}"]}")
-          close_time = Time.zone.parse("#{date} #{hours["close_time_#{week_day_index}"]}")
+          suffix = 'wk'
+          suffix = 'sat' if date.wday == 6
+          suffix = 'sun' if date.wday == 0
+          open_time = DateTime.parse(hours["open_time_#{suffix}"].to_s)
+          close_time = DateTime.parse(hours["close_time_#{suffix}"].to_s)
+          open_time = Time.zone.parse("#{date} #{open_time.hour}:#{open_time.min}:#{open_time.sec}")
+          close_time = Time.zone.parse("#{date} #{close_time.hour}:#{close_time.min}:#{close_time.sec}")
           parsed_time = Time.zone.parse(date.to_s)
           result[parsed_time] = { open: open_time.strftime(APPLICATION_CONFIG['api']['hours']['hours_for_dates']['open_close_time_format']),
                                   close: close_time.strftime(APPLICATION_CONFIG['api']['hours']['hours_for_dates']['open_close_time_format']),
@@ -39,7 +42,7 @@ module Api
 
       # Make the ActiveRecord call to get records from the Drupal database.
       def self.query
-        self.where(loc: APPLICATION_CONFIG['api']['database']['drupal']['hours']['loc'])
+        self.all
       end
     end
   end
