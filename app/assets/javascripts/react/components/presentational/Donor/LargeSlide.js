@@ -9,7 +9,7 @@ class LargeSlide extends Component {
   componentDidMount() {
     setTimeout(() => {
       this.setState({slideAnimationClass: 'slide-exiting'});
-    }, 14000);
+    }, 14650);
     setTimeout(() => {
       this.props.setModalVisibility(false);
       this.props.setModalRootComponent(undefined);
