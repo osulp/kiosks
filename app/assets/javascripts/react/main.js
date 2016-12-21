@@ -13,14 +13,24 @@ const setSlides = (slides) => {
   return json.slides ? json.slides : json;
 };
 
+const setMaps = (maps) => {
+  if(!maps) {
+    return [];
+  }
+  let json = JSON.parse(maps);
+  return json.maps ? json.maps : json;
+};
+
 if (root_dom_element) {
   let slides = setSlides(root_dom_element.getAttribute('data-slides'));
+  let maps = setMaps(root_dom_element.getAttribute('data-maps'));
   let kiosk_type = root_dom_element.getAttribute('data-kiosk-type');
   let kiosk_url = root_dom_element.getAttribute('data-kiosk-url');
 
   // render the root container with properties
   ReactDOM.render(
     <Root slides={slides}
+          maps={maps}
           kiosk_type={kiosk_type}
           kiosk_url={kiosk_url}
     />,

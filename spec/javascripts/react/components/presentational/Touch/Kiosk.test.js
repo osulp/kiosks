@@ -9,6 +9,7 @@ const setup = () => {
     {
       slides: factories.slides,
       is_fetching_slides: false,
+      maps: [],
       fetchSlides: jest.fn(),
       setModalVisibility: jest.fn(),
       setModalRootComponent: jest.fn(),

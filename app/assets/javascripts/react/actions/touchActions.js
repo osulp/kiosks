@@ -2,6 +2,14 @@ import fetch from 'isomorphic-fetch';
 import moment from 'moment';
 import {addError, setSlides} from './kioskActions';
 
+export const SET_MAPS = 'SET_MAPS';
+export const setMaps = (maps) => {
+  return {
+    type: SET_MAPS,
+    maps
+  };
+};
+
 export const FETCHING_SLIDES = 'FETCHING_SLIDES';
 export const fetchingSlides = () => {
   return {

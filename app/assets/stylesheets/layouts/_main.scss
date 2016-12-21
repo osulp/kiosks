@@ -30,7 +30,7 @@ body > #application_root {
   width: 100%;
   height: 100%;
   z-index: 1000;
-  background-color: rgba(0,0,0,0.75);
+  background-color: rgba(0, 0, 0, 0.75);
   display: none;
 }
 
@@ -40,7 +40,6 @@ body > #application_root {
   overflow-y: scroll;
   margin: 40px auto;
   background-color: #ffffff;
-  padding: 10px;
   border-radius: 10px;
   color: #212121;
 }
@@ -91,5 +90,39 @@ body > #application_root {
   }
   to {
     transform: rotate(360deg);
+  }
+}
+
+.tabbed-panel {
+  .panel-heading {
+    padding-bottom: 0;
+    button {
+      border-bottom:none;
+      -webkit-border-radius:0;
+      -moz-border-radius:0;
+      border-radius:0;
+    }
+    button:first-child:not(:last-child):not(.dropdown-toggle) {
+      border-top-left-radius: 4px;
+    }
+    button:last-child:not(:first-child):not(.dropdown-toggle) {
+      border-top-right-radius: 4px;
+    }
+  }
+  .panel-body {
+    ul {
+      list-style-type: none;
+      li {
+        display: none;
+        div {
+          background-repeat: no-repeat;
+          background-size: contain;
+          background-position: center;
+        }
+      }
+      li.selected {
+        display: block;
+      }
+    }
   }
 }

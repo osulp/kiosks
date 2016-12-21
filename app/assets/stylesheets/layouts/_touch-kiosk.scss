@@ -108,6 +108,9 @@
     background-color: lighten($osu_orange, 5%);
     border-color: $osu_orange;
   }
+  .nav > li {
+    margin-right: 20px;
+  }
 
   /* Hours component styles
   ---------------------------------------------------------*/
@@ -187,6 +190,16 @@
     }
   }
 
+  #maps_tabbed_panel {
+    height: 90%;
+    ul {
+      height: 90%;
+      li,
+      li > div {
+        height: 90%;
+      }
+    }
+  }
   /* RESPONSIVE CSS
   -------------------------------------------------- */
 

@@ -1,9 +1,10 @@
-import {FETCHED_SLIDES, FETCHING_SLIDES, FETCHED_HOURS, FETCHING_HOURS, SET_HOURS} from '../actions/touchActions';
+import {FETCHED_SLIDES, FETCHING_SLIDES, FETCHED_HOURS, FETCHING_HOURS, SET_HOURS, SET_MAPS} from '../actions/touchActions';
 
 export const initial_state = {
   is_fetching_slides: false,
   is_fetching_hours: false,
-  hours: {}
+  hours: {},
+  maps: []
 };
 
 const touchReducer = (state = initial_state, action) => {
@@ -18,6 +19,8 @@ const touchReducer = (state = initial_state, action) => {
       return Object.assign({}, state, { is_fetching_hours: true });
     case SET_HOURS:
       return Object.assign({}, state, { hours: action.hours });
+    case SET_MAPS:
+      return Object.assign({}, state, { maps: action.maps });
     default:
       return state;
   }

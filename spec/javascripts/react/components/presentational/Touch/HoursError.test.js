@@ -10,6 +10,10 @@ const setup = () => {
 };
 
 describe('HoursError', () => {
+  it('has all required props', () => {
+    const {enzyme_wrapper, props} = setup();
+    Object.keys(HoursError.propTypes).forEach(k => expect(props[k]).toBeDefined());
+  });
   it('displays an error', () => {
     let {enzyme_wrapper, props} = setup();
     expect(enzyme_wrapper.find(".glyphicon")).toHaveLength(1);

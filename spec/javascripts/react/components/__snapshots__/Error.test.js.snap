@@ -10,6 +10,7 @@ Object {
   "scrollToSlide": [Function],
   "setHours": [Function],
   "setKiosk": [Function],
+  "setMaps": [Function],
   "setModalRootComponent": [Function],
   "setModalVisibility": [Function],
   "setSlides": [Function],

@@ -18,6 +18,7 @@ class Kiosk extends Component {
 
 Kiosk.propTypes = {
   slides: PropTypes.array.isRequired,
+  maps: PropTypes.array,
   url: PropTypes.string.isRequired,
   is_fetching_slides: PropTypes.bool.isRequired,
   fetchSlides: PropTypes.func.isRequired,
