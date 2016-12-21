@@ -12,31 +12,46 @@ const getWeekArray = (date) => {
 };
 
 class Hours extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {selected_date: now};
+  }
+
+  setHideTimeout() {
+    const hide = () => {
+      this.props.setModalRootComponent(undefined);
+      this.props.setModalVisibility(false);
+    };
+    this.hide_timeout = setTimeout(hide, 20000);
+  }
+
   dateClicked(date) {
     this.setState({selected_date: date});
     this.props.fetchHours(this.props.api.hours, getWeekArray(date));
-  }
-
-  componentWillMount() {
-    this.setState({selected_date: now});
+    clearTimeout(this.hide_timeout);
+    this.setHideTimeout();
   }
 
   componentDidMount() {
     this.props.fetchHours(this.props.api.hours, getWeekArray(now));
+    this.setHideTimeout();
+  }
+
+  componentWillUnmount() {
+    clearTimeout(this.hide_timeout);
   }
 
   _hoursContent(hours) {
-    if(hours.error){
-      return (<HoursError error={hours.error} />);
+    if (hours.error) {
+      return (<HoursError error={hours.error}/>);
     } else {
-      return (<HoursTable hours={hours} selected_date={this.state.selected_date} />);
+      return (<HoursTable hours={hours} selected_date={this.state.selected_date}/>);
     }
   }
 
   render() {
     let hours = this.props.hours;
     let calendar = (<Calendar defaultValue={default_calendar_value}
-                              onSelect={this.dateClicked.bind(this)}
                               onChange={this.dateClicked.bind(this)}
                               showDateInput={false}/>);
     let is_fetching_class = this.props.is_fetching ? "is_fetching" : "";
@@ -52,7 +67,6 @@ class Hours extends Component {
               <DatePicker calendar={calendar}
                           animation="slide-down"
                           defaultValue={default_calendar_value}
-                          onSelect={this.dateClicked.bind(this)}
                           onChange={this.dateClicked.bind(this)}
                           showDateInput={false}>
                 {({value}) => {
