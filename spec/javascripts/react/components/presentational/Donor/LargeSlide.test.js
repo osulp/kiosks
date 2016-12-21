@@ -16,7 +16,10 @@ const setup = () => {
 describe('Donor::LargeSlide', () => {
   it('has a xlarge image', () => {
     const {enzyme_wrapper, props} = setup();
-    expect(enzyme_wrapper.find('img').prop('src')).toEqual(props.slide.xlarge);
+    const div = enzyme_wrapper.find('div.donor-body-large');
+    const styles = div.prop('style');
+    expect(Object.keys(styles)).toContain('backgroundImage');
+    expect(Object.values(styles)).toContain(`url("${props.slide.xlarge}")`);
   });
   it('has a title', () => {
     const {enzyme_wrapper, props} = setup();

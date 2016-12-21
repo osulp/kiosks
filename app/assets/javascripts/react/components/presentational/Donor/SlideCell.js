@@ -12,9 +12,9 @@ class SlideCell extends Component {
     let slide = this.props.slide;
     return (
       <div className="col-md-2 donor-cell-small" onClick={this.cellClicked.bind(this)}>
-        <div className="panel panel-default">
-          <div className="panel-body">
-            <img src={slide.thumbnail}/>
+        <div className="panel panel-default donor-panel-small">
+          <div className="panel-body donor-body-small"
+               style={{backgroundImage: `url("${slide.thumbnail}")`}}>
           </div>
         </div>
       </div>
