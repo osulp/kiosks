@@ -39,6 +39,7 @@ set :pty, true
 append :linked_files, 'config/application_config.yml.erb',
                       'config/secrets.yml',
                       'config/god.conf',
+                      'config/local_env.yml',
                       'config/config.yml',
                       'db/production.sqlite3',
                       'db/staging.sqlite3'
