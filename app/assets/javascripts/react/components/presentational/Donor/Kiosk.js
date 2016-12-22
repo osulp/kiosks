@@ -1,14 +1,14 @@
 import {connect} from 'react-redux';
 import React, {Component, PropTypes} from 'react';
-import SlideGrid from './SlideGrid';
 import ConnectedModalWindow from '../../ModalWindow';
+import ConnectedSlideGrid from '../../DonorSlideGrid';
 
 class Kiosk extends Component {
   render() {
     return (
       <div id="donor_kiosk">
         <ConnectedModalWindow />
-        <SlideGrid {...this.props} />
+        <ConnectedSlideGrid />
       </div>
     );
   }

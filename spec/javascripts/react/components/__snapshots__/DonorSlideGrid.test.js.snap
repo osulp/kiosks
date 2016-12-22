@@ -1,0 +1,53 @@
+exports[`Donor SlideGrid maps dispatch to props 1`] = `
+Object {
+  "addError": [Function],
+  "fetchHours": [Function],
+  "fetchSlides": [Function],
+  "fetchedHours": [Function],
+  "fetchedSlides": [Function],
+  "fetchingHours": [Function],
+  "fetchingSlides": [Function],
+  "scrollToSlide": [Function],
+  "setHours": [Function],
+  "setKiosk": [Function],
+  "setModalRootComponent": [Function],
+  "setModalVisibility": [Function],
+  "setSlides": [Function],
+  "setTitle": [Function],
+}
+`;
+
+exports[`Donor SlideGrid maps state to props 1`] = `
+Object {
+  "is_modal_visible": false,
+  "slides": Array [
+    Object {
+      "caption": "Slide.caption",
+      "created_at": "2000-12-31T11:59:59Z",
+      "expires_at": "2020-12-31T23:59:59Z",
+      "id": 1,
+      "kiosk": "Kiosk.name",
+      "original": "/uploads/default_slide_1.png",
+      "slide_type": "SlideType.name",
+      "thumbnail": "/uploads/default_slide_1.png",
+      "title": "Slide.title",
+      "updated_at": "2000-12-31T23:59:59Z",
+      "xlarge": "/uploads/default_slide_1.png",
+    },
+    Object {
+      "caption": "Slide.caption:2",
+      "created_at": "2000-11-11T11:00:00Z",
+      "expires_at": "2010-11-11T13:00:00Z",
+      "id": 2,
+      "kiosk": "Kiosk.name:2",
+      "original": "/uploads/default_slide_2.png",
+      "slide_type": "SlideType.name:2",
+      "thumbnail": "/uploads/default_slide_1.png",
+      "title": "Slide.title:2",
+      "updated_at": "2000-11-11T13:00:00Z",
+      "xlarge": "/uploads/default_slide_1.png",
+    },
+  ],
+  "title": "Slide.title",
+}
+`;

@@ -10,7 +10,8 @@ const setup = () => {
     setModalVisibility: jest.fn(),
     setModalRootComponent: jest.fn(),
     title: factories.slide.slide_type,
-    setTitle: jest.fn()
+    setTitle: jest.fn(),
+    is_modal_visible: false,
   };
   const enzyme_wrapper = shallow(<SlideGrid {...props}/>);
   return {props, enzyme_wrapper};

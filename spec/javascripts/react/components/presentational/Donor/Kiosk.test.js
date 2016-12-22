@@ -11,7 +11,8 @@ const setup = () => {
       setModalVisibility: jest.fn(),
       setModalRootComponent: jest.fn(),
       title: "Bogus actual text title",
-      setTitle: jest.fn()
+      setTitle: jest.fn(),
+      is_modal_visible: false,
     });
   const enzyme_wrapper = shallow(<Kiosk {...props}/>);
   return {props, enzyme_wrapper};
@@ -30,6 +31,6 @@ describe('Donor::Kiosk', () => {
   it('renders child components', () => {
     const{enzyme_wrapper} = setup();
     expect(enzyme_wrapper.find('Connect(ModalWindow)').length).toEqual(1);
-    expect(enzyme_wrapper.find('SlideGrid').length).toEqual(1);
+    expect(enzyme_wrapper.find('Connect(SlideGrid)').length).toEqual(1);
   });
 });
