@@ -30,12 +30,11 @@ class LargeSlide extends Component {
     let slide = this.props.slide;
     return (
       <div className={`container modal-container ${this.state.slideAnimationClass}`}>
-        <div className="row">
-          <div className="col-md-1"></div>
-          <div className="col-md-10 modal-image-col">
+        <div className="row donor-large-image-row">
+          <div className="col-md-offset-1 col-md-10 modal-image-col">
             <div className="panel panel-default modal-panel">
-              <div className="panel-body modal-panel-body">
-                <img src={slide.xlarge}/>
+              <div className="panel-body donor-body-large" style={{backgroundImage: `url("${slide.xlarge}")`}}>
+
               </div>
             </div>
           </div>
@@ -45,10 +44,10 @@ class LargeSlide extends Component {
             <div className="panel panel-default caption-panel">
               <div className="panel-body">
                 <div className="caption-container">
-                  <div className="row text-center h1">
+                  <div className="text-center h1">
                     {slide.title}
                   </div>
-                  <div className="row text-center caption-text">
+                  <div className="text-center caption-text">
                     <p>
                       {slide.caption}
                     </p>
