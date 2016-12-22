@@ -2,28 +2,35 @@ import React, {Component, PropTypes} from 'react';
 
 class LargeSlide extends Component {
 
-  constructor(props) {
+ constructor(props) {
     super(props);
-    this.state = {slideAnimationClass: 'slide-entering', exitingTimeout: undefined, hideTimeout: undefined};
+    this.state = {slideAnimationClass: 'slide-entering'};
   }
 
   componentDidMount() {
-    this.setState({
-      exitingTimeout: setTimeout(() => {
-        this.setState({slideAnimationClass: 'slide-exiting'});
-      }, 14650)//This time is exactly based on the animation duration found in _donor_kiosk.scss
-    });
-    this.setState({
-      hideTimeout: setTimeout(() => {
-        this.props.setModalVisibility(false);
-        this.props.setModalRootComponent(undefined);
-      }, 15000)
-    });
+    this.setExitingTimeout();
+    this.setHideTimeout();
+  }
+
+  setExitingTimeout() {
+    const exiting = () => {
+      this.setState({slideAnimationClass: 'slide-exiting'});
+    };
+    //This time is exactly based on the animation duration found in _donor_kiosk.scss
+    this.exiting_timeout = setTimeout(exiting, 14650);
+  }
+
+  setHideTimeout() {
+    const hide = () => {
+      this.props.setModalVisibility(false);
+      this.props.setModalRootComponent(undefined);
+    };
+    this.hide_timeout = setTimeout(hide, 15000);
   }
 
   componentWillUnmount() {
-    clearTimeout(this.state.hideTimeout);
-    clearTimeout(this.state.exitingTimeout);
+    clearTimeout(this.hide_timeout);
+    clearTimeout(this.exiting_timeout);
   }
 
   render() {
