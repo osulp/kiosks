@@ -49,3 +49,8 @@ export const hours = {
     sortable_date: '2000-01-01'
   }
 };
+
+export const map = {
+  title: "Floor 1",
+  image_url: "/assets/images/FloorMaps/floor_0.png"
+};

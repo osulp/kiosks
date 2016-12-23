@@ -7,6 +7,7 @@ import App from './App';
 import TouchKiosk from './TouchKiosk';
 import DonorKiosk from './DonorKiosk';
 import {setKiosk, setSlides} from '../actions/kioskActions';
+import {setMaps} from '../actions/touchActions';
 
 const store = configureStore();
 
@@ -18,6 +19,7 @@ export default class Root extends Component {
   componentWillMount() {
     store.dispatch(setKiosk(this.props.kiosk_type, this.props.kiosk_url));
     store.dispatch(setSlides(this.props.slides));
+    store.dispatch(setMaps(this.props.maps));
   }
 
   /**

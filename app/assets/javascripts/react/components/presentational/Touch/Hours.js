@@ -5,9 +5,9 @@ import moment from 'moment';
 import HoursTable from './HoursTable';
 import HoursError from './HoursError';
 
-const now = moment();
-const default_calendar_value = now.clone();
-const getWeekArray = (date) => {
+export const now = moment();
+export const default_calendar_value = now.clone();
+export const getWeekArray = (date) => {
   return ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"].map(d => moment(date).day(d));
 };
 
@@ -94,7 +94,7 @@ class Hours extends Component {
   }
 }
 
-Hours.PropTypes = {
+Hours.propTypes = {
   hours: PropTypes.object.isRequired,
   api: PropTypes.object.isRequired,
   is_fetching_hours: PropTypes.bool.isRequired,
