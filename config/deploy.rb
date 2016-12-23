@@ -38,7 +38,6 @@ set :pty, true
 # Default value for :linked_files is []
 append :linked_files, 'config/application_config.yml.erb',
                       'config/secrets.yml',
-                      'config/god.conf',
                       'config/local_env.yml',
                       'config/config.yml',
                       'db/production.sqlite3',
@@ -47,8 +46,6 @@ append :linked_files, 'config/application_config.yml.erb',
 # Default value for linked_dirs is []
 append :linked_dirs, 'log',
                      'tmp',
-                     'pids',
-                     'sockets',
                      'public/assets',
                      'public/system',
                      'public/uploaded',
