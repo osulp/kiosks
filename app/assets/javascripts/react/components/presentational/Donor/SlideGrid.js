@@ -1,14 +1,47 @@
 import React, {Component, PropTypes} from 'react';
 import SlideCell from './SlideCell';
+import LargeSlide from './LargeSlide';
 
 class SlideGrid extends Component {
+
+  constructor(props) {
+    super(props);
+    this.random_timer = undefined;
+  }
+
+  setRandomTimer() {
+    const randomTimer = () => {
+      let filtered_slides = this.filteredSlides();
+      let randomNumber = Math.floor((Math.random() * 1000000) % Object.keys(filtered_slides).length);
+      this.props.setModalRootComponent(<LargeSlide slide={filtered_slides[randomNumber]}
+                                                   setModalRootComponent={this.props.setModalRootComponent}
+                                                   setModalVisibility={this.props.setModalVisibility} />);
+      this.props.setModalVisibility(true);
+    };
+    this.random_timer = setTimeout(randomTimer, 15000);
+  }
+
+  componentDidMount() {
+    this.setRandomTimer();
+  }
+
+  filteredSlides() {
+    return this.props.slides.filter((slide) => slide.slide_type == this.props.title);
+  }
+
+  componentDidUpdate() {
+    if(this.props.is_modal_visible === true) {
+      clearTimeout(this.random_timer);
+    } else {
+      this.setRandomTimer();
+    }
+  }
 
   setTitle(e) {
     this.props.setTitle(e.target.dataset.slidetype);
   }
 
   render() {
-    let slides = this.props.slides;
     let title = this.props.title;
     return (
       <div className="container-fluid">
@@ -21,7 +54,7 @@ class SlideGrid extends Component {
         </div>
         <div className="row donor-grid-container ">
           <div className="scrollable">
-            {slides.filter((slide) => slide.slide_type == title).map((slide, i) => {
+            {this.filteredSlides().map((slide, i) => {
               return (
                 <SlideCell key={`cell.${i}`} slide={slide} {...this.props}/>
               )
@@ -56,6 +89,7 @@ SlideGrid.propTypes = {
   setModalVisibility: PropTypes.func.isRequired,
   setModalRootComponent: PropTypes.func.isRequired,
   setTitle: PropTypes.func.isRequired,
+  is_modal_visible: PropTypes.bool.isRequired,
 };
 
 export default SlideGrid;
