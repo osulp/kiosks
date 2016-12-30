@@ -11,7 +11,9 @@ module Kiosks
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
-    
+
+    config.time_zone = 'Pacific Time (US & Canada)'
+
     # load and inject local_env.yml key/values into ENV
     config.before_configuration do
       env_file = File.join(Rails.root, 'config', 'local_env.yml')
