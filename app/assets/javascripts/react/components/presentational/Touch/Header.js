@@ -50,7 +50,7 @@ class Header extends Component {
                   <span className="icon-bar"></span>
                   <span className="icon-bar"></span>
                 </button>
-                <img className="logo" src="/images/beaverlogo.png"/>
+                <img className="logo" src="/assets/beaverlogo.png"/>
               </div>
               <div id="navbar" className="navbar-collapse collapse">
                 <ul className="nav navbar-nav">
