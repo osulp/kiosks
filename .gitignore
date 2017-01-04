@@ -29,6 +29,7 @@
 /webpack_dist
 /config/application_config.yml.erb
 /config/config.yml
+/config/local_env.yml
 
 /app/assets/javascripts/dist-app*
 /public/uploads/*

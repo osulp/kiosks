@@ -2,10 +2,11 @@ Rails.application.routes.draw do
 
   # Api namespaced routes and modules
   # ie: /api/v1/hours => Api::V1::HoursController#show
-  namespace :api, defaults: { format: :json }  do
+  namespace :api, defaults: { format: :json } do
     namespace :v1, constraints: Api::V1::Constraints.new(version: 1,
-                                                   default: true) do
-      post    'hours'       => 'hours#show'
+                                                         default: true) do
+      post 'hours' => 'hours#show'
+      get 'rooms/available/:start_time' => 'rooms#available'
     end
   end
 
