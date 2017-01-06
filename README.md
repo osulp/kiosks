@@ -5,14 +5,15 @@ The application is built as a combination of traditional Ruby on Rails for the b
 
 # Dependencies
 - Ruby 2.3.3
+- NVM
 - Yarn >= 0.17.10 (https://yarnpkg.com/en/docs/install)
 
 # Server setup notes
 - ** See example files located in `config/**/*` for the type of configurations needed on the server **
 - `shared/config` : Contains server configuration files not appropriate for the repository, symlinked by the deploy process.
 - `shared/config/application_config.yml.erb` : Application specific configuration, such as Google Analytics ID.
+- `shared/config/local_env.yml` : Local ENV variables used in files such as database.yml.
 - `shared/config/config.yml` : Application deployment configurations for server, path, and user detail.
-- `shared/config/god.conf` : Start, stop and restart behaviors for God process management.
 - `shared/config/puma/*.rb` : Environment specific configurations for the Puma web server.
 - `shared/config/secrets.yml` : Secrets.
 
