@@ -43,6 +43,8 @@ gem 'devise'
 gem "paperclip", "~> 5.0.0"
 gem 'rails-controller-testing'
 
+gem 'nokogiri'
+
 gem 'mysql2'
 
 group :development, :test do
@@ -50,6 +52,7 @@ group :development, :test do
   gem 'byebug', platform: :mri
   gem 'rspec-rails', '~> 3.5'
   gem 'rspec-mocks', '~> 3.5'
+  gem 'webmock'
   gem 'coveralls'
   gem 'simplecov'
 end

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:edu.oregonstate.calendar="http://calendar.oregonstate.edu/">
+  <channel>
+    <title>OSU Libraries</title>
+    <link>http://calendar.oregonstate.edu/20170104/day/library/</link>
+    <description></description>
+    <language>en-us</language>
+    <pubDate>Tue, 03 Jan 2017 08:46:33 PST</pubDate>
+    <lastBuildDate>Mon, 12 Dec 2016 15:44:04 PST</lastBuildDate>
+    <item>
+      <title>Jaspersoft Training</title>
+      <link>http://calendar.oregonstate.edu/event/122043/</link>
+      <description><![CDATA[<div>Wednesday, January 4, 2017 8:30 AM - 12:00 PM<br /></div> Hands-on training for Jaspersoft.]]></description>
+      <edu.oregonstate.calendar:dtstart>Wed, 04 Jan 2017 08:30:00 PST</edu.oregonstate.calendar:dtstart>
+      <edu.oregonstate.calendar:dtend>Wed, 04 Jan 2017 12:00:00 PST</edu.oregonstate.calendar:dtend>
+      <edu.oregonstate.calendar:allday>0</edu.oregonstate.calendar:allday>
+      <edu.oregonstate.calendar:calendar shortname="lib-barnard">Library - Barnard Classroom Policies at http://osulibrary.oregonstate.edu/classrooms/barnard/</edu.oregonstate.calendar:calendar>
+      <edu.oregonstate.calendar:subtitle>Person Name</edu.oregonstate.calendar:subtitle>
+      <edu.oregonstate.calendar:datetime_description>Wednesday, January 4, 2017 8:30 AM - 12:00 PM</edu.oregonstate.calendar:datetime_description>
+      <edu.oregonstate.calendar:plain_description><![CDATA[Hands-on training for Jaspersoft.]]></edu.oregonstate.calendar:plain_description>
+      <edu.oregonstate.calendar:campus_location>Valley Library</edu.oregonstate.calendar:campus_location>
+      <edu.oregonstate.calendar:room>Barnard Classroom</edu.oregonstate.calendar:room>
+      <edu.oregonstate.calendar:address></edu.oregonstate.calendar:address>
+      <edu.oregonstate.calendar:city></edu.oregonstate.calendar:city>
+      <edu.oregonstate.calendar:state></edu.oregonstate.calendar:state>
+      <edu.oregonstate.calendar:cost></edu.oregonstate.calendar:cost>
+      <edu.oregonstate.calendar:contact>Person Name</edu.oregonstate.calendar:contact>
+      <edu.oregonstate.calendar:contact_phone>541-555-1212</edu.oregonstate.calendar:contact_phone>
+      <edu.oregonstate.calendar:contact_email>noreply@oregonstate.edu</edu.oregonstate.calendar:contact_email>
+      <edu.oregonstate.calendar:contact_department>Library</edu.oregonstate.calendar:contact_department>
+      <edu.oregonstate.calendar:StartTime>08:30 AM</edu.oregonstate.calendar:StartTime>
+      <edu.oregonstate.calendar:EndTime>12:00 PM</edu.oregonstate.calendar:EndTime>
+      <edu.oregonstate.calendar:EventDate>1/4/2017</edu.oregonstate.calendar:EventDate>
+      <edu.oregonstate.calendar:Location>Valley Library</edu.oregonstate.calendar:Location>
+    </item>
+  </channel>
+</rss>
