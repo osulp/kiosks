@@ -79,6 +79,7 @@ Kiosk.propTypes = {
   url: PropTypes.string.isRequired,
   api: PropTypes.object.isRequired,
   is_fetching_slides: PropTypes.bool.isRequired,
+  show_nav: PropTypes.bool.isRequired,
   fetchSlides: PropTypes.func.isRequired,
   setModalVisibility: PropTypes.func.isRequired,
   setModalRootComponent: PropTypes.func.isRequired,

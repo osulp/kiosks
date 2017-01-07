@@ -108,6 +108,8 @@ GEM
     erubis (2.7.0)
     execjs (2.7.0)
     ffi (1.9.14)
+    flipclockjs-rails (0.7.7)
+      jquery-rails (>= 1.0.17)
     globalid (0.3.7)
       activesupport (>= 4.1.0)
     hashdiff (0.3.2)
@@ -283,6 +285,7 @@ DEPENDENCIES
   coffee-rails (~> 4.2)
   coveralls
   devise
+  flipclockjs-rails (~> 0.7.7)
   jbuilder (~> 2.5)
   jquery-rails
   listen (~> 3.0.5)

@@ -6,6 +6,7 @@ import configureStore from '../store/configureStore';
 import App from './App';
 import TouchKiosk from './TouchKiosk';
 import DonorKiosk from './DonorKiosk';
+import CirculationKiosk from './CirculationKiosk';
 import {setKiosk, setSlides} from '../actions/kioskActions';
 import {setMaps} from '../actions/touchActions';
 
@@ -45,6 +46,8 @@ export default class Root extends Component {
         return (<TouchKiosk />);
       case 'donor':
         return (<DonorKiosk />);
+      case 'circulation':
+        return (<CirculationKiosk />);
       default:
         return (<App />);
     }
