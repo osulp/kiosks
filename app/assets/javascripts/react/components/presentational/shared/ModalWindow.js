@@ -22,9 +22,6 @@ class ModalWindow extends Component {
         id: "modal_close"
       },
       "");
-    if (!root_component && this.props.visible) {
-      console.error(`ModalWindow called to display a null root_component, unable to render.`);
-    }
     return (
       <div id="modal" style={{display: display}} onClick={this.closeModal.bind(this)}>
         {root_component ? close_icon_component : undefined }

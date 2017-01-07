@@ -40,17 +40,6 @@ exports[`Shared::ModalWindow can be closed 2`] = `
 </div>
 `;
 
-exports[`Shared::ModalWindow logs a console.error when visible with no root_component 1`] = `
-<div
-  id="modal"
-  onClick={[Function]}
-  style={
-    Object {
-      "display": "block",
-    }
-  } />
-`;
-
 exports[`Snapshot matches the cached snapshot 1`] = `
 <div
   id="modal"

@@ -1,18 +1,29 @@
 import React, {Component, PropTypes} from 'react';
 import TouchHours from '../../TouchHours';
 import ConnectedTabbedPanel from '../../TabbedPanel';
+import ConnectedClassroomSchedule from '../../TouchClassroomSchedule';
 
 class Header extends Component {
+  /**
+   * Refresh button was clicked, fire off actions to fetch the latest slides and reset
+   * the gallery scroll position
+   */
   refreshClicked() {
     this.props.fetchSlides(this.props.url);
     this.props.scrollToSlide(0);
   }
 
+  /**
+   * Hours button was clicked, set the modal to display the connected Hours component
+   */
   hoursClicked() {
     this.props.setModalVisibility(true);
     this.props.setModalRootComponent(<TouchHours />);
   }
 
+  /**
+   * Maps button was clicked, set the modal to display the connected tab panel component
+   */
   mapsClicked() {
     let tabs = this.props.maps.map((m) => {
       return {
@@ -27,6 +38,19 @@ class Header extends Component {
                                                            timeout={30000}/>);
   }
 
+  /**
+   * The classroom schedule button was clicked, set the modal to display the connected classroom schedule component
+   */
+  classroomScheduleClicked() {
+    this.props.setModalVisibility(true);
+    this.props.setModalRootComponent(<ConnectedClassroomSchedule />);
+  }
+
+  /**
+   * Generate a Maps button if there are maps to display
+   * @returns {JSX} - the LI element containing the maps button
+   * @private
+   */
   _mapsButton() {
     if (this.props.maps) {
       return (
@@ -50,7 +74,7 @@ class Header extends Component {
                   <span className="icon-bar"></span>
                   <span className="icon-bar"></span>
                 </button>
-                <img className="logo" src="/assets/beaverlogo.png"/>
+                <img className="logo" src="/images/beaverlogo.png"/>
               </div>
               <div id="navbar" className="navbar-collapse collapse">
                 <ul className="nav navbar-nav">
@@ -58,6 +82,9 @@ class Header extends Component {
                     <a className="btn btn-navbar btn-default">Hours</a>
                   </li>
                   {this._mapsButton()}
+                  <li className="show-classroom-schedule" onClick={this.classroomScheduleClicked.bind(this)}>
+                    <a className="btn btn-navbar btn-default">Classrooms Schedule</a>
+                  </li>
                 </ul>
                 <ul className="nav navbar-nav navbar-right">
                   <li className="refresh-slides" onClick={this.refreshClicked.bind(this)}>
