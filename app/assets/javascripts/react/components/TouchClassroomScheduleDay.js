@@ -1,21 +1,17 @@
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-import Kiosk from './presentational/Touch/Kiosk';
+import ClassroomScheduleDay from './presentational/Touch/ClassroomScheduleDay';
 import * as actions from '../actions';
 
 // Top level mapping of the application state to properties of component that is being
 // connected.
 const mapStateToProps = (state) => {
   return {
-    slides: state.kiosk.slides,
-    maps: state.touch.maps,
-    url: state.kiosk.url,
-    api: state.kiosk.api,
-    hours: state.touch.hours,
+    date: state.touch.date,
+    classrooms: state.touch.classrooms,
     classroom_schedule: state.touch.classroom_schedule,
-    is_fetching_slides: state.touch.is_fetching_slides,
-    is_fetching_hours: state.touch.is_fetching_hours,
+    is_fetching_classroom_schedule: state.touch.is_fetching_classroom_schedule
   }
 };
 
@@ -25,4 +21,4 @@ const mapDispatchToProps = (dispatch) => {
 };
 
 // Connect the mappings (state -> properties, and actions -> dispatch) to the application component
-export default connect(mapStateToProps, mapDispatchToProps)(Kiosk);
+export default connect(mapStateToProps, mapDispatchToProps)(ClassroomScheduleDay);

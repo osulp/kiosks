@@ -1,6 +1,8 @@
 exports[`Reducers::Kiosk addError action matches the snapshot 1`] = `
 Object {
   "api": Object {
+    "classroom_schedule": "/api/v1/classrooms/date/{date}",
+    "classrooms": "/api/v1/classrooms/rooms",
     "hours": "/api/v1/hours",
   },
   "errors": Array [
@@ -22,6 +24,8 @@ exports[`Reducers::Kiosk matches the snapshot 1`] = `[Function]`;
 exports[`Reducers::Kiosk scrollToSlide action matches the snapshot 1`] = `
 Object {
   "api": Object {
+    "classroom_schedule": "/api/v1/classrooms/date/{date}",
+    "classrooms": "/api/v1/classrooms/rooms",
     "hours": "/api/v1/hours",
   },
   "errors": Array [],
@@ -36,6 +40,8 @@ Object {
 exports[`Reducers::Kiosk setKiosk action matches the snapshot 1`] = `
 Object {
   "api": Object {
+    "classroom_schedule": "/api/v1/classrooms/date/{date}",
+    "classrooms": "/api/v1/classrooms/rooms",
     "hours": "/api/v1/hours",
   },
   "errors": Array [],
@@ -43,6 +49,15 @@ Object {
   "starting_slide_index": 0,
   "title": "Donor Impact",
   "type": Object {
+    "api": Object {
+      "classroom_schedule": "/api/v1/classrooms/date/{date}",
+      "classrooms": "/api/v1/classrooms/rooms",
+      "hours": "/api/v1/hours",
+    },
+    "errors": Array [],
+    "slides": Array [],
+    "starting_slide_index": 0,
+    "title": "",
     "type": "touch",
     "url": "/url/to/action",
   },
@@ -53,6 +68,8 @@ Object {
 exports[`Reducers::Kiosk setSlides action matches the snapshot 1`] = `
 Object {
   "api": Object {
+    "classroom_schedule": "/api/v1/classrooms/date/{date}",
+    "classrooms": "/api/v1/classrooms/rooms",
     "hours": "/api/v1/hours",
   },
   "errors": Array [],
@@ -94,6 +111,8 @@ Object {
 exports[`Reducers::Kiosk setTitle action matches the snapshot 1`] = `
 Object {
   "api": Object {
+    "classroom_schedule": "/api/v1/classrooms/date/{date}",
+    "classrooms": "/api/v1/classrooms/rooms",
     "hours": "/api/v1/hours",
   },
   "errors": Array [],

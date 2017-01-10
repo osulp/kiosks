@@ -3,20 +3,19 @@ require 'nokogiri'
 module Api
   module V1
     class ClassroomCalendar
-      attr_reader :hash
+      attr_reader :xml_doc
 
       def initialize(date)
-        xml_doc = fetch_date(date)
-        @hash = Hash.from_xml(xml_doc.to_xml)
+        @xml_doc = fetch_date(date)
       end
 
       def detail
         {
-          title: @hash['rss']['channel']['title'],
-          link: @hash['rss']['channel']['link'],
-          description: @hash['rss']['channel']['description'],
-          published_at: @hash['rss']['channel']['pubDate'],
-          events: events(@hash)
+          title: @xml_doc.at('rss/channel/title').text,
+          link: @xml_doc.at('rss/channel/link').text,
+          description: @xml_doc.at('rss/channel/description').text,
+          published_at: @xml_doc.at('rss/channel/pubDate').text,
+          events: events(@xml_doc)
         }
       end
 
@@ -27,12 +26,12 @@ module Api
 
       ##
       # Build a list of events from the rss feed
-      # @param [Hash] hash - the rss XML converted to a hash
+      # @param [Nokogiri::XML::Document] xml_doc - the xml doc
       # @return [Array<ClassroomEvent>] an array of ClassroomEvent objects
-      def events(hash)
-        return [] if hash['rss']['channel']['item'].nil?
-        return [ClassroomEvent.new(hash['rss']['channel']['item'])] if hash['rss']['channel']['item'].is_a?(Hash)
-        hash['rss']['channel']['item'].map { |i| ClassroomEvent.new(i) }
+      def events(xml_doc)
+        items = xml_doc.xpath("rss/channel/item")
+        return [] if items.empty?
+        items.map { |i| ClassroomEvent.new(i) }
       end
 
       ##

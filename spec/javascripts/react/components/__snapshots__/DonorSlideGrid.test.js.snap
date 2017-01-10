@@ -1,19 +1,28 @@
 exports[`Donor SlideGrid maps dispatch to props 1`] = `
 Object {
   "addError": [Function],
+  "fetchClassroomSchedule": [Function],
+  "fetchClassrooms": [Function],
   "fetchHours": [Function],
   "fetchSlides": [Function],
+  "fetchedClassroomSchedule": [Function],
+  "fetchedClassrooms": [Function],
   "fetchedHours": [Function],
   "fetchedSlides": [Function],
+  "fetchingClassroomSchedule": [Function],
+  "fetchingClassrooms": [Function],
   "fetchingHours": [Function],
   "fetchingSlides": [Function],
   "scrollToSlide": [Function],
+  "setClassroomSchedule": [Function],
   "setHours": [Function],
   "setKiosk": [Function],
+  "setMaps": [Function],
   "setModalRootComponent": [Function],
   "setModalVisibility": [Function],
   "setSlides": [Function],
   "setTitle": [Function],
+  "toggleClassroomSelected": [Function],
 }
 `;
 

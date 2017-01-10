@@ -4,7 +4,9 @@ export const initial_state = {
   type: "touch",
   url: "kiosk/touch",
   api: {
-    hours: "/api/v1/hours"
+    hours: "/api/v1/hours",
+    classroom_schedule: "/api/v1/classrooms/date/{date}",
+    classrooms: "/api/v1/classrooms/rooms"
   },
   title: "Donor Impact",
   slides: [],

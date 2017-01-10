@@ -1,6 +1,11 @@
 @import "../../../node_modules/react-image-gallery/styles/scss/image-gallery.scss";
 @import "../../../node_modules/rc-calendar/assets/index";
 
+$willwest: #3d5cff;
+$willeast: #ff3c5c;
+$barnard: #6eff7e;
+$autzen: #ea76ff;
+
 /* Set container elements to 100% height. */
 #touch_kiosk, #slide_gallery, .image-gallery {
   height: 100%;
@@ -186,7 +191,7 @@
       vertical-align: bottom;
     }
     .hours-table-error > .glyphicon {
-      font-size:30px;
+      font-size: 30px;
     }
   }
 
@@ -197,6 +202,149 @@
       li,
       li > div {
         height: 90%;
+      }
+    }
+  }
+
+  #classroom_schedule {
+    .panel-title {
+      font-size: 30px;
+    }
+    .panel-heading .glyphicon {
+      color: $shaded_grey;
+      width: 20px;
+      height: 20px;
+      font-size: 20px;
+      float: right;
+      display: none;
+      margin-top: 10px;
+    }
+    .glyphicon.is_fetching {
+      display: inline-block;
+    }
+    .classroom-schedule-table-container {
+
+      h2 {
+        text-align: center;
+      }
+      .classroom-filter {
+        border-bottom: solid 1px #efefef;
+        padding-bottom: 10px;
+        font-size: large;
+        ul {
+          list-style: none;
+        }
+        ul li {
+          float: left;
+          margin: 0 20px;
+        }
+        ul li:first-child {
+          text-align: right;
+          color: #cecece;
+        }
+        ul li .glyphicon {
+          margin-right: 5px;
+          width: 20px;
+          color: #adadad;
+        }
+        ul li .glyphicon.checked {
+          color: #000;
+        }
+        ul li.lib-willwest .glyphicon.checked {
+          color: $willwest;
+        }
+        ul li.lib-willeast .glyphicon.checked {
+          color: $willeast;
+        }
+        ul li.lib-barnard .glyphicon.checked {
+          color: $barnard;
+        }
+        ul li.lib-autzen .glyphicon.checked {
+          color: $autzen;
+        }
+      }
+      .classroom-schedule-table {
+        margin-top: 20px;
+        thead tr th,
+        tbody tr td {
+          border: none;
+        }
+        thead tr th,
+        tbody tr td {
+          padding: 0;
+        }
+        thead tr.event-header-row th div,
+        tbody tr.event-detail-row td div {
+          float: left;
+          width: 100%;
+        }
+        tbody tr.event-detail-row td div {
+          padding-top: 15px;
+        }
+        thead tr.event-header-row th div span {
+          font-weight: normal;
+          color: #cecece;
+          font-size: large;
+        }
+        thead tr.event-header-row th div span,
+        tbody tr.event-detail-row td div span {
+          display: inline-block;
+          width: 30%;
+          vertical-align: bottom;
+          text-align: center;
+        }
+        tbody tr.event-detail-row td div span.event-title {
+          font-size: large;
+          text-align: left;
+        }
+
+        tbody tr.event-time-row td {
+          border-top: solid 1px #ececec;
+        }
+        tbody tr.event-time-row td span {
+          width: 25%;
+          float: left;
+        }
+        tbody tr.event-time-row td span.event-hour-header {
+          width: 100%;
+          float: left;
+          font-size: 10px;
+          display: none;
+          background-color: transparent;
+        }
+        tbody tr.event-time-row td.event-hour span {
+          border-left: solid 1px #adadad;
+          background-color: #ececec;
+          line-height: 15px;
+        }
+        tbody tr.event-time-row td.event-hour span.event-hour-header {
+          display: inline-block;
+          border-left: solid 1px #adadad;
+          padding-left: 3px;
+        }
+        tbody tr.event-time-row td.event-hour span.event-time {
+          background-color: #000;
+          margin-bottom: 5px;
+          border: none;
+        }
+
+        tbody tr.lib-willwest td.event-hour span.event-time {
+          background-color: $willwest;
+          border-left: solid 1px darken($willwest, 25%);
+        }
+        tbody tr.lib-willeast td.event-hour span.event-time {
+          background-color: $willeast;
+          border-left: solid 1px darken($willeast, 25%);
+        }
+        tbody tr.lib-barnard td.event-hour span.event-time {
+          background-color: $barnard;
+          border-left: solid 1px darken($barnard, 25%);
+        }
+        tbody tr.lib-autzen td.event-hour span.event-time {
+          background-color: $autzen;
+          border-left: solid 1px darken($autzen, 25%);
+        }
+
       }
     }
   }
@@ -223,4 +371,5 @@
     }
   }
 }
+
 

@@ -27,14 +27,6 @@ describe('Snapshot', () => {
   });
 });
 describe('Shared::ModalWindow', () => {
-  it('logs a console.error when visible with no root_component', () => {
-    global.console = jest.fn();
-    global.console.error = jest.fn();
-    let { component } = setup({visible: true, element: undefined });
-    let tree = component.toJSON();
-    expect(tree).toMatchSnapshot();
-    expect(global.console.error.mock.calls.length).toEqual(1);
-  });
   it('can be closed', () => {
     let {component, props} = setup({visible: true, element: React.createElement("H1", {}, "test")});
     let tree = component.toJSON();
