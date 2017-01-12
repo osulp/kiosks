@@ -4,6 +4,20 @@ import ConnectedTabbedPanel from '../../TabbedPanel';
 import ConnectedClassroomSchedule from '../../TouchClassroomSchedule';
 
 class Header extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { taps: 0 };
+  }
+
+  _didTap() {
+    this.setState({taps: this.state.taps + 1});
+    clearTimeout(this.reset_timeout);
+    const reset = () => {
+      this.setState({taps: 0});
+    };
+    this.reset_timeout = setTimeout(reset, 2000);
+  }
+
   /**
    * Refresh button was clicked, fire off actions to fetch the latest slides and reset
    * the gallery scroll position
@@ -61,6 +75,7 @@ class Header extends Component {
   }
 
   render() {
+    let tapped_enough = this.state.taps > 20;
     return (
       <div className="navbar-wrapper">
         <div className="container">
@@ -74,7 +89,7 @@ class Header extends Component {
                   <span className="icon-bar"></span>
                   <span className="icon-bar"></span>
                 </button>
-                <img className="logo" src="/images/beaverlogo.png"/>
+                <img className={`logo ${tapped_enough ? "is_active" : ""}`} src="/images/beaverlogo.png" onClick={this._didTap.bind(this)} />
               </div>
               <div id="navbar" className="navbar-collapse collapse">
                 <ul className="nav navbar-nav">
