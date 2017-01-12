@@ -147,11 +147,9 @@ class ClassroomSchedule extends Component {
 }
 
 ClassroomSchedule.propTypes = {
-  classroom_schedule: PropTypes.object.isRequired,
   classrooms: PropTypes.object.isRequired,
   api: PropTypes.object.isRequired,
   is_fetching_classroom_schedule: PropTypes.bool.isRequired,
-  is_fetching_classrooms: PropTypes.bool.isRequired,
   fetchClassroomSchedule: PropTypes.func.isRequired,
   fetchClassrooms: PropTypes.func.isRequired,
   toggleClassroomSelected: PropTypes.func.isRequired,
