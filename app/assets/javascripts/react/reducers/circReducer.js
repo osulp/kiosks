@@ -5,7 +5,8 @@ import {
 export const initial_state = {
   is_fetching_rooms_available_count: false,
   rooms_available_count: [0],
-  date: ''
+  date: '',
+  show_nav: false
 };
 
 const circReducer = (state = initial_state, action) => {

@@ -11,8 +11,9 @@ export const mapStateToProps = (state) => {
     slides: state.kiosk.slides,
     url: state.kiosk.url,
     is_fetching_slides: state.touch.is_fetching_slides,
-    show_nav: false,
+    show_nav: state.circ.show_nav,
     rooms_available_count: state.circ.rooms_available_count,
+    api: state.kiosk.api,
   }
 };
 

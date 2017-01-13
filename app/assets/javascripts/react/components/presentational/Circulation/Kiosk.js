@@ -32,7 +32,8 @@ Kiosk.propTypes = {
   is_fetching_slides: PropTypes.bool.isRequired,
   show_nav: PropTypes.bool.isRequired,
   fetchSlides: PropTypes.func.isRequired,
-  scrollToSlide: PropTypes.func.isRequired
+  scrollToSlide: PropTypes.func.isRequired,
+  api: PropTypes.object.isRequired
 };
 
 export default Kiosk;

@@ -9,7 +9,7 @@ class Rooms extends Component {
    */
   setRefreshTimeout() {
     const refresh = () => {
-      this.props.fetchRoomsAvailableCount("/api/v1/rooms/available/{date}", now);
+      this.props.fetchRoomsAvailableCount(this.props.api.available_rooms, now);
       this.setRefreshTimeout();
       this.setFlipCounter();
     };
@@ -26,7 +26,7 @@ class Rooms extends Component {
    * After the component has mounted, fetch the rooms available given a date
    */
   componentDidMount() {
-    this.props.fetchRoomsAvailableCount("/api/v1/rooms/available/{date}", now);
+    this.props.fetchRoomsAvailableCount(this.props.api.available_rooms, now);
     this.setRefreshTimeout();
 
     let rooms_available = this.props.rooms_available_count;
@@ -59,7 +59,8 @@ class Rooms extends Component {
 Rooms.propTypes = {
   url: PropTypes.string.isRequired,
   rooms_available_count: PropTypes.array.isRequired,
-  fetchRoomsAvailableCount: PropTypes.func.isRequired
+  fetchRoomsAvailableCount: PropTypes.func.isRequired,
+  api: PropTypes.object.isRequired
 };
 
 export default Rooms;

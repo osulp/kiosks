@@ -9,7 +9,8 @@ const setup = () => {
   const props = {
     url: "test",
     rooms_available_count: factories.rooms_available_count,
-    fetchRoomsAvailableCount: jest.fn()
+    fetchRoomsAvailableCount: jest.fn(),
+    api: { available_rooms: "/some/bogus/url" }
   };
   const enzyme_wrapper = shallow(<Rooms {...props} />);
   return { props, enzyme_wrapper };
