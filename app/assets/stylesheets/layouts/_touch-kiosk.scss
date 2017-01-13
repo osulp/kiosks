@@ -15,20 +15,25 @@ $autzen: #ea76ff;
 #touch_kiosk {
   /* CUSTOMIZE GALLERY
   --------------------------------------------------------*/
+  .image-gallery-slide-wrapper {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+  }
   .image-gallery-bullet {
     background-color: rgba(255, 255, 255, 0.54) !important;
     border-color: rgba(255, 255, 255, 0.90) !important;
     -webkit-box-shadow: none !important;
     -moz-box-shadow: none !important;
     box-shadow: none !important;
-    padding: 7px;
+    padding: 15px;
   }
 
   .image-gallery-bullet.active {
     background-color: $osu_orange !important;
     border-color: $not_quite_black !important;
     border-width: 2px;
-    padding: 10px;
+    padding: 18px;
   }
 
   .image-gallery-left-nav {
@@ -80,10 +85,20 @@ $autzen: #ea76ff;
     width: auto;
   }
 
+  .navbar-wrapper .container .navbar.navbar-static-top {
+    border: solid 1px #464646;
+  }
+
   .navbar-header img {
     height: 30px;
     margin-top: 10px;
     margin-right: 20px;
+  }
+
+  .navbar-header img.is_active {
+    -webkit-animation: spin 1000ms infinite linear;
+    -moz-animation: spin 1000ms infinite linear;
+    -ms-animation: spin 1000ms infinite linear;
   }
 
   .navbar-wrapper .refresh-slides > a {
