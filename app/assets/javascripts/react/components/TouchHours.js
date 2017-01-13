@@ -10,6 +10,7 @@ const mapStateToProps = (state) => {
   return {
     api: state.kiosk.api,
     hours: state.touch.hours,
+    google_analytics: state.kiosk.google_analytics,
     is_fetching_hours: state.touch.is_fetching_hours
   }
 };

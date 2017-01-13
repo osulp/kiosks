@@ -10,6 +10,7 @@ const setup = () => {
     scrollToSlide: jest.fn(),
     setModalRootComponent: jest.fn(),
     setModalVisibility: jest.fn(),
+    google_analytics: jest.fn(),
     maps: [factories.map],
     hours: {},
     is_fetching_slides: false
