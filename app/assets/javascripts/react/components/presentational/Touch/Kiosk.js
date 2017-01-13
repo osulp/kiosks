@@ -12,7 +12,7 @@ class Kiosk extends Component {
   componentDidMount() {
     let now = moment();
     this.props.fetchHours(this.props.api.hours, [now]);
-    this.props.fetchSlides();
+    this.props.fetchSlides(this.props.url);
   }
 
   /**
