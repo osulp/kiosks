@@ -11,6 +11,7 @@ const setup = () => {
     setModalRootComponent: jest.fn(),
     setModalVisibility: jest.fn(),
     maps: [factories.map],
+    hours: {},
     is_fetching_slides: false
   };
   const enzyme_wrapper = shallow(<Header {...props}/>);
@@ -47,16 +48,5 @@ describe('Touch::Header', () => {
     button.simulate('click');
     expect(props.setModalRootComponent.mock.calls).toHaveLength(1);
     expect(props.setModalVisibility.mock.calls).toHaveLength(1);
-  });
-  it('has a refresh button', () => {
-    const {enzyme_wrapper} = setup();
-    expect(enzyme_wrapper.find('.refresh-slides')).toHaveLength(1);
-  });
-  it('responds to refresh button click', () => {
-    const {enzyme_wrapper, props} = setup();
-    let button = enzyme_wrapper.find('.refresh-slides');
-    button.simulate('click');
-    expect(props.fetchSlides.mock.calls).toHaveLength(1);
-    expect(props.scrollToSlide.mock.calls).toHaveLength(1);
   });
 });
