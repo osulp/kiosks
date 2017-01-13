@@ -9,6 +9,12 @@ class Header extends Component {
     this.state = { taps: 0 };
   }
 
+  /**
+   * Increase the state taps counter set a timer to reset it in 2 seconds unless another tap event happens. This
+   * matters to the view in so much as it's able to determine if there have been continuous taps without 2 seconds of
+   * delay in between. It's a feature..
+   * @private
+   */
   _didTap() {
     this.setState({taps: this.state.taps + 1});
     clearTimeout(this.reset_timeout);
@@ -74,8 +80,27 @@ class Header extends Component {
     }
   }
 
+  /**
+   * Format text based on the hours that were fetched for "today", defaulting to an empty string if there was an error or
+   * no hours were fetched due to issues on the servers dependency to the data source.
+   * @returns {String} - the hours detail
+   * @private
+   */
+  _hoursToday(){
+    if(this.props.hours.error || Object.values(this.props.hours).length == 0) {
+      return "";
+    } else {
+      let today = Object.values(this.props.hours)[0];
+      if(today.open.trim() == '12:00am' && today.close.trim() == '12:00am') {
+        return `Open 24 hours on ${today.string_date}`;
+      }
+      return `Open from ${today.open.trim()} to ${today.close.trim()} on ${today.string_date}`;
+    }
+  }
+
   render() {
     let tapped_enough = this.state.taps > 20;
+    let is_fetching = this.props.is_fetching_slides ? "is_fetching" : "";
     return (
       <div className="navbar-wrapper">
         <div className="container">
@@ -105,11 +130,12 @@ class Header extends Component {
                   <li className="refresh-slides" onClick={this.refreshClicked.bind(this)}>
                     <a>
                       <span
-                        className={`glyphicon glyphicon-repeat ${this.props.is_fetching_slides ? "is_fetching" : ""}`}
+                        className={`glyphicon glyphicon-repeat ${is_fetching}`}
                         aria-hidden="true">&nbsp;</span>
                     </a>
                   </li>
                 </ul>
+                <p className="hours navbar-text">{this._hoursToday()}</p>
               </div>
             </div>
           </nav>
@@ -122,6 +148,7 @@ class Header extends Component {
 Header.propTypes = {
   url: PropTypes.string.isRequired,
   maps: PropTypes.array,
+  hours: PropTypes.object.isRequired,
   is_fetching_slides: PropTypes.bool.isRequired,
   fetchSlides: PropTypes.func.isRequired,
   setModalVisibility: PropTypes.func.isRequired,

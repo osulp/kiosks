@@ -10,10 +10,13 @@ const setup = () => {
       slides: factories.slides,
       is_fetching_slides: false,
       maps: [],
+      hours: {},
+      api: {},
       fetchSlides: jest.fn(),
       setModalVisibility: jest.fn(),
       setModalRootComponent: jest.fn(),
-      scrollToSlide: jest.fn()
+      scrollToSlide: jest.fn(),
+      fetchHours: jest.fn()
     });
   const enzyme_wrapper = shallow(<Kiosk {...props}/>);
   return {props, enzyme_wrapper};

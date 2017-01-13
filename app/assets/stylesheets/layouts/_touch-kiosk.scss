@@ -89,6 +89,10 @@ $autzen: #ea76ff;
     border: solid 1px #464646;
   }
 
+  .navbar-text.hours {
+    font-size: 16px;
+  }
+
   .navbar-header img {
     height: 30px;
     margin-top: 10px;
@@ -111,6 +115,7 @@ $autzen: #ea76ff;
     font-size: 25px;
     width: 25px;
     height: 25px;
+    display: none;
   }
   .navbar-wrapper .refresh-slides > a > .glyphicon:hover {
     cursor: pointer;

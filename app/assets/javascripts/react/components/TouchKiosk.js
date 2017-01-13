@@ -10,6 +10,7 @@ const mapStateToProps = (state) => {
   return {
     slides: state.kiosk.slides,
     maps: state.touch.maps,
+    hours: state.touch.hours,
     url: state.kiosk.url,
     api: state.kiosk.api,
     hours: state.touch.hours,
