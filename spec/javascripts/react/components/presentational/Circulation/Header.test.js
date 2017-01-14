@@ -8,7 +8,8 @@ const setup = () => {
     url: "bogus",
     fetchSlides: jest.fn(),
     scrollToSlide: jest.fn(),
-    is_fetching_slides: false
+    is_fetching_slides: false,
+    hours: {},
   };
   const enzyme_wrapper = shallow(<Header {...props}/>);
   return {props, enzyme_wrapper};

@@ -12,7 +12,10 @@ const setup = () => {
       show_nav: false,
       fetchSlides: jest.fn(),
       scrollToSlide: jest.fn(),
-      rooms_available_count: jest.fn()
+      rooms_available_count: jest.fn(),
+      hours: {},
+      api: {},
+      fetchHours: jest.fn()
     });
   const enzyme_wrapper = shallow(<Kiosk {...props}/>);
   return {props, enzyme_wrapper};

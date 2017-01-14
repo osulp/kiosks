@@ -14,6 +14,8 @@ export const mapStateToProps = (state) => {
     show_nav: state.circ.show_nav,
     rooms_available_count: state.circ.rooms_available_count,
     api: state.kiosk.api,
+    hours: state.touch.hours,
+    is_fetching_hours: state.touch.is_fetching_hours
   }
 };
 
