@@ -89,3 +89,11 @@ export const classroom = {
   title: "Title",
   selected: true
 };
+
+export const room = {"id":25,"name":"6761","floor":6,"created_at":"2014-03-21T09:29:23.451-07:00","updated_at":"2014-04-09T07:24:06.852-07:00","description":"Group Study\r\nCapacity: 6","image":"pic6761.png","floor_map":"6761.png"};
+
+export const room2 = {"id":28,"name":"6763","floor":6,"created_at":"2014-03-21T09:29:23.475-07:00","updated_at":"2014-04-09T07:24:16.855-07:00","description":"Group Study\r\nCapacity: 6","image":"pic6763.png","floor_map":"6763.png"}
+
+export const rooms_available_count = [room, room2];
+
+

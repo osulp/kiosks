@@ -47,6 +47,7 @@ class SlideGallery extends Component {
                     items={slides}
                     slideInterval={5000}
                     showThumbnails={false}
+                    showNav={this.props.show_nav}
                     autoPlay={true}
                     showFullscreenButton={false}
                     showPlayButton={false}

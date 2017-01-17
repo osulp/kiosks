@@ -41,6 +41,7 @@ gem 'capistrano-nvm'
 gem 'react-rails'
 gem 'devise'
 gem "paperclip", "~> 5.0.0"
+gem 'flipclockjs-rails', '~> 0.7.7'
 gem 'rails-controller-testing'
 
 gem 'nokogiri'

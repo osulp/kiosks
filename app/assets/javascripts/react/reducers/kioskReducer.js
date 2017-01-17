@@ -6,7 +6,8 @@ export const initial_state = {
   api: {
     hours: "/api/v1/hours",
     classroom_schedule: "/api/v1/classrooms/date/{date}",
-    classrooms: "/api/v1/classrooms/rooms"
+    classrooms: "/api/v1/classrooms/rooms",
+    available_rooms: "/api/v1/rooms/available/{date}"
   },
   title: "Donor Impact",
   slides: [],

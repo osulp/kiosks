@@ -1,6 +1,7 @@
 exports[`Reducers::Kiosk addError action matches the snapshot 1`] = `
 Object {
   "api": Object {
+    "available_rooms": "/api/v1/rooms/available/{date}",
     "classroom_schedule": "/api/v1/classrooms/date/{date}",
     "classrooms": "/api/v1/classrooms/rooms",
     "hours": "/api/v1/hours",
@@ -25,6 +26,7 @@ exports[`Reducers::Kiosk matches the snapshot 1`] = `[Function]`;
 exports[`Reducers::Kiosk scrollToSlide action matches the snapshot 1`] = `
 Object {
   "api": Object {
+    "available_rooms": "/api/v1/rooms/available/{date}",
     "classroom_schedule": "/api/v1/classrooms/date/{date}",
     "classrooms": "/api/v1/classrooms/rooms",
     "hours": "/api/v1/hours",
@@ -42,6 +44,7 @@ Object {
 exports[`Reducers::Kiosk setKiosk action matches the snapshot 1`] = `
 Object {
   "api": Object {
+    "available_rooms": "/api/v1/rooms/available/{date}",
     "classroom_schedule": "/api/v1/classrooms/date/{date}",
     "classrooms": "/api/v1/classrooms/rooms",
     "hours": "/api/v1/hours",
@@ -71,6 +74,7 @@ Object {
 exports[`Reducers::Kiosk setSlides action matches the snapshot 1`] = `
 Object {
   "api": Object {
+    "available_rooms": "/api/v1/rooms/available/{date}",
     "classroom_schedule": "/api/v1/classrooms/date/{date}",
     "classrooms": "/api/v1/classrooms/rooms",
     "hours": "/api/v1/hours",
@@ -115,6 +119,7 @@ Object {
 exports[`Reducers::Kiosk setTitle action matches the snapshot 1`] = `
 Object {
   "api": Object {
+    "available_rooms": "/api/v1/rooms/available/{date}",
     "classroom_schedule": "/api/v1/classrooms/date/{date}",
     "classrooms": "/api/v1/classrooms/rooms",
     "hours": "/api/v1/hours",

@@ -1,18 +1,19 @@
 import { connect } from 'react-redux';
 import React, { Component, PropTypes } from 'react';
 import Header from './Header';
+import Rooms from './Rooms';
 import ConnectedSlideGallery from '../../SlideGallery';
-import ConnectedModalWindow from '../../ModalWindow';
-import moment from 'moment';
 
+import moment from 'moment';
 class Kiosk extends Component {
   /**
    * After the component mounts, fetch the current library hours and slides.
    */
   componentDidMount() {
+    // var test = new Date("2016/11/03 12:00:00");
+    // let now = moment(test);
     let now = moment();
     this.props.fetchHours(this.props.api.hours, [now]);
-    this.props.fetchSlides(this.props.url);
   }
 
   /**
@@ -20,7 +21,6 @@ class Kiosk extends Component {
    */
   componentDidUpdate() {
     this._fetchHoursTimeout();
-    this._fetchSlidesTimeout();
   }
 
   /**
@@ -28,7 +28,6 @@ class Kiosk extends Component {
    */
   componentWillUnmount() {
     clearTimeout(this.hours_timeout);
-    clearTimeout(this.slides_timeout);
   }
 
   /**
@@ -56,35 +55,36 @@ class Kiosk extends Component {
     this.slides_timeout = setTimeout(fetch_slides, 60*60*1000);
   }
 
-  /**
-   * Render the kiosk with a hidden modal window for popup UIs driven by buttons in the header, with a rotating
-   * slide gallery at the bottom of the view.
-   * @returns {JSX}
-   */
   render() {
     return (
-      <div id="touch_kiosk">
-        <ConnectedModalWindow />
-        <Header {...this.props} />
-        <ConnectedSlideGallery {...this.props} />
-      </div>
-    );
+          <div id="circulation_kiosk">
+            <div className="row">
+              <div className="col-md-12">
+                <Header {...this.props} />
+              </div>
+            </div>
+            <div className="row">
+              <div className="col-md-2">
+                <Rooms {...this.props} />
+              </div>
+              <div className="col-md-10">
+                <ConnectedSlideGallery {...this.props} />
+              </div>
+            </div>
+          </div>
+        );
   }
 }
 
 Kiosk.propTypes = {
   slides: PropTypes.array.isRequired,
-  maps: PropTypes.array,
-  hours: PropTypes.object.isRequired,
   url: PropTypes.string.isRequired,
-  google_analytics: PropTypes.object,
-  api: PropTypes.object.isRequired,
   is_fetching_slides: PropTypes.bool.isRequired,
   show_nav: PropTypes.bool.isRequired,
   fetchSlides: PropTypes.func.isRequired,
-  setModalVisibility: PropTypes.func.isRequired,
-  setModalRootComponent: PropTypes.func.isRequired,
   scrollToSlide: PropTypes.func.isRequired,
+  api: PropTypes.object.isRequired,
+  hours: PropTypes.object.isRequired,
   fetchHours: PropTypes.func.isRequired,
 };
 

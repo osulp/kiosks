@@ -13,7 +13,8 @@ export const initial_state = {
   classroom_schedule: {},
   classrooms: {},
   date: '',
-  maps: []
+  maps: [],
+  show_nav: true
 };
 
 const touchReducer = (state = initial_state, action) => {
