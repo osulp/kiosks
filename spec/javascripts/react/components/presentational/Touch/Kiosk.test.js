@@ -13,6 +13,7 @@ const setup = () => {
       maps: [],
       hours: {},
       api: {},
+      google_analytics: jest.fn(),
       fetchSlides: jest.fn(),
       setModalVisibility: jest.fn(),
       setModalRootComponent: jest.fn(),

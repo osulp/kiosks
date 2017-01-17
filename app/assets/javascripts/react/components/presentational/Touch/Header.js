@@ -2,6 +2,7 @@ import React, {Component, PropTypes} from 'react';
 import TouchHours from '../../TouchHours';
 import ConnectedTabbedPanel from '../../TabbedPanel';
 import ConnectedClassroomSchedule from '../../TouchClassroomSchedule';
+import {trackClicked} from '../shared/GoogleAnalytics';
 
 class Header extends Component {
   constructor(props) {
@@ -16,6 +17,7 @@ class Header extends Component {
    * @private
    */
   _didTap() {
+    trackClicked(this.props.google_analytics, 'TouchKiosk:Header:Logo');
     this.setState({taps: this.state.taps + 1});
     clearTimeout(this.reset_timeout);
     const reset = () => {
@@ -29,6 +31,7 @@ class Header extends Component {
    * the gallery scroll position
    */
   refreshClicked() {
+    trackClicked(this.props.google_analytics, 'TouchKiosk:Header:Refresh');
     this.props.fetchSlides(this.props.url);
     this.props.scrollToSlide(0);
   }
@@ -37,6 +40,7 @@ class Header extends Component {
    * Hours button was clicked, set the modal to display the connected Hours component
    */
   hoursClicked() {
+    trackClicked(this.props.google_analytics, 'TouchKiosk:Header:Hours');
     this.props.setModalVisibility(true);
     this.props.setModalRootComponent(<TouchHours />);
   }
@@ -45,6 +49,7 @@ class Header extends Component {
    * Maps button was clicked, set the modal to display the connected tab panel component
    */
   mapsClicked() {
+    trackClicked(this.props.google_analytics, 'TouchKiosk:Header:Maps');
     let tabs = this.props.maps.map((m) => {
       return {
         button_text: m.title,
@@ -62,6 +67,7 @@ class Header extends Component {
    * The classroom schedule button was clicked, set the modal to display the connected classroom schedule component
    */
   classroomScheduleClicked() {
+    trackClicked(this.props.google_analytics, 'TouchKiosk:Header:ClassroomSchedule');
     this.props.setModalVisibility(true);
     this.props.setModalRootComponent(<ConnectedClassroomSchedule />);
   }
@@ -149,6 +155,7 @@ Header.propTypes = {
   url: PropTypes.string.isRequired,
   maps: PropTypes.array,
   hours: PropTypes.object.isRequired,
+  google_analytics: PropTypes.object,
   is_fetching_slides: PropTypes.bool.isRequired,
   fetchSlides: PropTypes.func.isRequired,
   setModalVisibility: PropTypes.func.isRequired,

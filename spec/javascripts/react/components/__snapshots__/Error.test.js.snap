@@ -18,6 +18,7 @@ Object {
   "fetchingSlides": [Function],
   "scrollToSlide": [Function],
   "setClassroomSchedule": [Function],
+  "setGoogleAnalytics": [Function],
   "setHours": [Function],
   "setKiosk": [Function],
   "setMaps": [Function],

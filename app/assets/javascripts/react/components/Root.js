@@ -7,7 +7,7 @@ import App from './App';
 import TouchKiosk from './TouchKiosk';
 import DonorKiosk from './DonorKiosk';
 import CirculationKiosk from './CirculationKiosk';
-import {setKiosk, setSlides} from '../actions/kioskActions';
+import {setKiosk, setSlides, setGoogleAnalytics} from '../actions/kioskActions';
 import {setMaps} from '../actions/touchActions';
 
 const store = configureStore();
@@ -21,6 +21,9 @@ export default class Root extends Component {
     store.dispatch(setKiosk(this.props.kiosk_type, this.props.kiosk_url));
     store.dispatch(setSlides(this.props.slides));
     store.dispatch(setMaps(this.props.maps));
+    if(typeof this.props.google_analytics != 'undefined') {
+      store.dispatch(setGoogleAnalytics(this.props.google_analytics));
+    }
   }
 
   /**

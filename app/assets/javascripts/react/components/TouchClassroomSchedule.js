@@ -10,6 +10,7 @@ const mapStateToProps = (state) => {
   return {
     classrooms: state.touch.classrooms,
     is_fetching_classrooms: state.touch.is_fetching_classrooms,
+    google_analytics: state.kiosk.google_analytics,
     api: state.kiosk.api
   }
 };

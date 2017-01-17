@@ -8,6 +8,7 @@ const setup = (hours_error) => {
   const props = {
     hours: hours_error || factories.hours,
     api: { hours: "/some/bogus/url" },
+    google_analytics: jest.fn(),
     is_fetching_hours: false,
     fetchHours: jest.fn()
   };

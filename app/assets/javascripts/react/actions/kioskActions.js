@@ -39,3 +39,11 @@ export const setTitle = (title) => {
     title
   };
 };
+
+export const SET_GOOGLE_ANALYTICS = "SET_GOOGLE_ANALYTICS";
+export const setGoogleAnalytics = (google_analytics) => {
+  return {
+    type: SET_GOOGLE_ANALYTICS,
+    google_analytics
+  };
+};

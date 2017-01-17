@@ -12,7 +12,7 @@ class Kiosk extends Component {
   componentDidMount() {
     let now = moment();
     this.props.fetchHours(this.props.api.hours, [now]);
-    this.props.fetchSlides();
+    this.props.fetchSlides(this.props.url);
   }
 
   /**
@@ -77,6 +77,7 @@ Kiosk.propTypes = {
   maps: PropTypes.array,
   hours: PropTypes.object.isRequired,
   url: PropTypes.string.isRequired,
+  google_analytics: PropTypes.object,
   api: PropTypes.object.isRequired,
   is_fetching_slides: PropTypes.bool.isRequired,
   show_nav: PropTypes.bool.isRequired,

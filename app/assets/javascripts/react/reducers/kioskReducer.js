@@ -1,4 +1,4 @@
-import {SCROLL_TO_SLIDE, SET_SLIDES, SET_KIOSK, ADD_ERROR, SET_TITLE} from '../actions/kioskActions';
+import {SCROLL_TO_SLIDE, SET_SLIDES, SET_KIOSK, ADD_ERROR, SET_TITLE, SET_GOOGLE_ANALYTICS} from '../actions/kioskActions';
 
 export const initial_state = {
   type: "touch",
@@ -12,7 +12,8 @@ export const initial_state = {
   title: "Donor Impact",
   slides: [],
   starting_slide_index: 0,
-  errors: []
+  errors: [],
+  google_analytics: undefined
 };
 
 const kioskReducer = (state = initial_state, action) => {
@@ -27,6 +28,8 @@ const kioskReducer = (state = initial_state, action) => {
       return Object.assign({}, state, { starting_slide_index: action.index });
     case SET_TITLE:
       return Object.assign({}, state, { title: action.title });
+    case SET_GOOGLE_ANALYTICS:
+      return Object.assign({}, state, { google_analytics: action.google_analytics });
     default:
       return state;
   }
