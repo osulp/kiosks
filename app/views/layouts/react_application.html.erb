@@ -9,6 +9,6 @@
   <%= yield %>
 </body>
 <%# Include the javascript at the bottom to ensure it loads last when the page is ready %>
-<%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
 <%= render partial: "layouts/ga" %>
+<%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
 </html>

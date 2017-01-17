@@ -3,6 +3,7 @@ import Calendar from 'rc-calendar';
 import DatePicker from 'rc-calendar/lib/Picker';
 import moment from 'moment';
 import ConnectedClassroomScheduleDay from '../../TouchClassroomScheduleDay';
+import {trackClicked} from '../shared/GoogleAnalytics';
 
 export const now = moment();
 export const default_calendar_value = now.clone();
@@ -33,6 +34,7 @@ class ClassroomSchedule extends Component {
    * @param {Object} classroom - the classroom which was clicked
    */
   classroomClicked(classroom) {
+    trackClicked(this.props.google_analytics, 'TouchKiosk:ClassroomSchedule:Classroom');
     this.props.toggleClassroomSelected(classroom.shortname, classroom.selected);
   }
 
@@ -41,6 +43,7 @@ class ClassroomSchedule extends Component {
    * @param {Moment} date - the date clicked
    */
   dateClicked(date) {
+    trackClicked(this.props.google_analytics, 'TouchKiosk:ClassroomSchedule:Date');
     this.setState({selected_date: date});
     this.props.fetchClassroomSchedule(this.props.api.classroom_schedule, date);
     clearTimeout(this.hide_timeout);
@@ -149,6 +152,7 @@ class ClassroomSchedule extends Component {
 ClassroomSchedule.propTypes = {
   classrooms: PropTypes.object.isRequired,
   api: PropTypes.object.isRequired,
+  google_analytics: PropTypes.object,
   is_fetching_classroom_schedule: PropTypes.bool.isRequired,
   fetchClassroomSchedule: PropTypes.func.isRequired,
   fetchClassrooms: PropTypes.func.isRequired,

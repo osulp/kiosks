@@ -26,6 +26,7 @@ if (root_dom_element) {
   let maps = setMaps(root_dom_element.getAttribute('data-maps'));
   let kiosk_type = root_dom_element.getAttribute('data-kiosk-type');
   let kiosk_url = root_dom_element.getAttribute('data-kiosk-url');
+  let ga = window.ga;
 
   // render the root container with properties
   ReactDOM.render(
@@ -33,6 +34,7 @@ if (root_dom_element) {
           maps={maps}
           kiosk_type={kiosk_type}
           kiosk_url={kiosk_url}
+          google_analytics={ga}
     />,
     root_dom_element
   );

@@ -4,6 +4,7 @@ import DatePicker from 'rc-calendar/lib/Picker';
 import moment from 'moment';
 import HoursTable from './HoursTable';
 import HoursError from './HoursError';
+import {trackClicked} from '../shared/GoogleAnalytics';
 
 export const now = moment();
 export const default_calendar_value = now.clone();
@@ -37,6 +38,7 @@ class Hours extends Component {
    * @param {Moment} date - the date that was clicked
    */
   dateClicked(date) {
+    trackClicked(this.props.google_analytics, 'TouchKiosk:Hours:Date');
     this.setState({selected_date: date});
     this.props.fetchHours(this.props.api.hours, getWeekArray(date));
     clearTimeout(this.hide_timeout);
@@ -124,6 +126,7 @@ class Hours extends Component {
 Hours.propTypes = {
   hours: PropTypes.object.isRequired,
   api: PropTypes.object.isRequired,
+  google_analytics: PropTypes.object,
   is_fetching_hours: PropTypes.bool.isRequired,
   fetchHours: PropTypes.func.isRequired,
 };
