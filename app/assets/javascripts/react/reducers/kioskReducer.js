@@ -9,7 +9,7 @@ export const initial_state = {
     classrooms: "/api/v1/classrooms/rooms",
     available_rooms: "/api/v1/rooms/available/{date}"
   },
-  title: "Donor Impact",
+  title: "",
   slides: [],
   starting_slide_index: 0,
   errors: [],
