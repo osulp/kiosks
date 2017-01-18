@@ -38,6 +38,7 @@ class SlideGrid extends Component {
   }
 
   setTitle(e) {
+    clearTimeout(this.random_timer);
     this.props.setTitle(e.target.dataset.slidetype);
   }
 

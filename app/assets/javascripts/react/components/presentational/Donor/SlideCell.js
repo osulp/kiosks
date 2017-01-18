@@ -14,7 +14,7 @@ class SlideCell extends Component {
       <div className="col-md-2 donor-cell-small" onClick={this.cellClicked.bind(this)}>
         <div className="panel panel-default donor-panel-small">
           <div className="panel-body donor-body-small"
-               style={{backgroundImage: `url("${slide.thumbnail}")`}}>
+               style={{backgroundImage: `url("${slide.xlarge}")`}}>
           </div>
         </div>
       </div>
