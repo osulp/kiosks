@@ -11,6 +11,7 @@ class SlideGrid extends Component {
 
   setRandomTimer() {
     const randomTimer = () => {
+      this.props.setTitle("");
       let filtered_slides = this.filteredSlides();
       let randomNumber = Math.floor((Math.random() * 1000000) % Object.keys(filtered_slides).length);
       this.props.setModalRootComponent(<LargeSlide slide={filtered_slides[randomNumber]}
@@ -25,8 +26,12 @@ class SlideGrid extends Component {
     this.setRandomTimer();
   }
 
-  filteredSlides() {
-    return this.props.slides.filter((slide) => slide.slide_type == this.props.title);
+  filteredSlides(filter_status) {
+    if(this.props.title == ""){
+      return this.props.slides;
+    } else {
+      return this.props.slides.filter((slide) => slide.slide_type == this.props.title);
+    }
   }
 
   componentDidUpdate() {

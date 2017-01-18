@@ -49,7 +49,7 @@ class LargeSlide extends Component {
         <div className="row modal-bottom-row">
           <div className="col-md-12 modal-caption-col">
             <div className="panel panel-default caption-panel">
-              <div className="panel-body">
+              <div className="panel-body new-background">
                 <div className="caption-container">
                   <div className="text-center h1">
                     {slide.title}
