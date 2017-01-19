@@ -1,9 +1,12 @@
 #donor_kiosk {
 
   .scrollable {
-    overflow: hidden;
+    -ms-overflow-style: none;
     height: 100%;
     position: relative;
+    ::-webkit-scrollbar {
+      background: transparent;
+    }
   }
 
   .donor-grid-container {
@@ -118,12 +121,14 @@
     background-color: white;
   }
 
-  .center-block button {
-    padding: 11px 100px;
-    font-size: 22px;
-    border-radius: 8px;
+  .center-block {
     margin-top: 5px;
-  }
+    button {
+      padding: 11px 100px;
+      font-size: 30px;
+      border-radius: 8px;
+      margin-top: 5px;
+    }
 }
 
 html, body, #application_root, #donor_kiosk, .container-fluid {
