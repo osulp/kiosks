@@ -4,6 +4,7 @@
     -ms-overflow-style: none;
     height: 100%;
     position: relative;
+    overflow-y: scroll;
     ::-webkit-scrollbar {
       background: transparent;
     }
