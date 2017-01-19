@@ -33,9 +33,9 @@ production:
 drupal_default: &drupal_default
   adapter: mysql2
   database: drupal_cms
-  username: <%= ENV['KIOSKS_DRUPAL_USERNAME'] || 'root' %>
-  password: <%= ENV['KIOSKS_DRUPAL_PASSWORD'] || 'vagrant' %>
-  host: <%= ENV['KIOSKS_DRUPAL_HOST'] || 'localhost' %>
+  username: <%= ENV['KIOSKS_DRUPAL_USERNAME'] %>
+  password: <%= ENV['KIOSKS_DRUPAL_PASSWORD'] %>
+  host: <%= ENV['KIOSKS_DRUPAL_HOST'] %>
 
 drupal_development:
   adapter: sqlite3
@@ -60,10 +60,10 @@ drupal_production:
 # -----------------------------------------------------------------------
 roomres_default: &roomres_default
   adapter: mysql2
-  database: roomres
-  username: <%= ENV['KIOSKS_ROOMRES_USERNAME'] || 'root' %>
-  password: <%= ENV['KIOSKS_ROOMRES_PASSWORD'] || 'vagrant' %>
-  host: <%= ENV['KIOSKS_ROOMRES_HOST'] || 'localhost' %>
+  username: <%= ENV['KIOSKS_ROOMRES_USERNAME'] %>
+  password: <%= ENV['KIOSKS_ROOMRES_PASSWORD'] %>
+  host: <%= ENV['KIOSKS_ROOMRES_HOST'] %>
+  port: <%= ENV['KIOSKS_ROOMRES_PORT'] %>
 
 roomres_development:
   adapter: sqlite3
@@ -79,6 +79,8 @@ roomres_test:
 
 roomres_staging:
   <<: *roomres_default
+  database: roomres_staging
 
 roomres_production:
   <<: *roomres_default
+  database: roomres_production
