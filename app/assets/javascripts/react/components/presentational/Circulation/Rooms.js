@@ -1,7 +1,6 @@
 import React, {Component, PropTypes} from 'react';
 import moment from 'moment';
 
-export const now = moment();
 
 class Rooms extends Component {
   /**
@@ -9,11 +8,12 @@ class Rooms extends Component {
    */
   setRefreshTimeout() {
     const refresh = () => {
+      let now = moment();
       this.props.fetchRoomsAvailableCount(this.props.api.available_rooms, now);
       this.setRefreshTimeout();
       this.setFlipCounter();
     };
-    this.refresh_timeout = setTimeout(refresh, 10000);
+    this.refresh_timeout = setTimeout(refresh, 2*60*1000);
   }
 
   setFlipCounter() {
@@ -26,6 +26,7 @@ class Rooms extends Component {
    * After the component has mounted, fetch the rooms available given a date
    */
   componentDidMount() {
+    let now = moment();
     this.props.fetchRoomsAvailableCount(this.props.api.available_rooms, now);
     this.setRefreshTimeout();
 
