@@ -1,6 +1,7 @@
 import React, {Component, PropTypes} from 'react';
 import SlideCell from './SlideCell';
 import LargeSlide from './LargeSlide';
+import {trackClicked} from '../shared/GoogleAnalytics';
 
 class SlideGrid extends Component {
 
@@ -43,6 +44,7 @@ class SlideGrid extends Component {
   }
 
   setTitle(e) {
+    trackClicked(this.props.google_analytics, `DonorKiosk:FilterSlides:${e.target.dataset.slidetype}`);
     clearTimeout(this.random_timer);
     this.props.setTitle(e.target.dataset.slidetype);
   }
@@ -92,6 +94,7 @@ class SlideGrid extends Component {
 SlideGrid.propTypes = {
   slides: PropTypes.array.isRequired,
   title: PropTypes.string.isRequired,
+  google_analytics: PropTypes.object.isRequired,
   setModalVisibility: PropTypes.func.isRequired,
   setModalRootComponent: PropTypes.func.isRequired,
   setTitle: PropTypes.func.isRequired,

@@ -17,6 +17,7 @@ class Kiosk extends Component {
 Kiosk.propTypes = {
   slides: PropTypes.array.isRequired,
   title: PropTypes.string.isRequired,
+  google_analytics: PropTypes.object.isRequired,
   setModalVisibility: PropTypes.func.isRequired,
   setModalRootComponent: PropTypes.func.isRequired,
   setTitle: PropTypes.func.isRequired,
