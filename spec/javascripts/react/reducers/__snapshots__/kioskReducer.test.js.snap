@@ -15,7 +15,7 @@ Object {
   "google_analytics": undefined,
   "slides": Array [],
   "starting_slide_index": 0,
-  "title": "Donor Impact",
+  "title": "",
   "type": "touch",
   "url": "kiosk/touch",
 }
@@ -35,7 +35,7 @@ Object {
   "google_analytics": undefined,
   "slides": Array [],
   "starting_slide_index": 1,
-  "title": "Donor Impact",
+  "title": "",
   "type": "touch",
   "url": "kiosk/touch",
 }
@@ -53,7 +53,7 @@ Object {
   "google_analytics": undefined,
   "slides": Array [],
   "starting_slide_index": 0,
-  "title": "Donor Impact",
+  "title": "",
   "type": Object {
     "api": Object {
       "classroom_schedule": "/api/v1/classrooms/date/{date}",
@@ -110,7 +110,7 @@ Object {
     },
   ],
   "starting_slide_index": 0,
-  "title": "Donor Impact",
+  "title": "",
   "type": "touch",
   "url": "kiosk/touch",
 }

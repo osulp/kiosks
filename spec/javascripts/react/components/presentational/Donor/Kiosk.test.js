@@ -10,6 +10,7 @@ const setup = () => {
       slides: factories.slides,
       setModalVisibility: jest.fn(),
       setModalRootComponent: jest.fn(),
+      google_analytics: jest.fn(),
       title: "Bogus actual text title",
       setTitle: jest.fn(),
       is_modal_visible: false,

@@ -33,6 +33,7 @@ Object {
 
 exports[`Donor Kiosk maps state to props 1`] = `
 Object {
+  "google_analytics": undefined,
   "slides": Array [
     Object {
       "caption": "Slide.caption",

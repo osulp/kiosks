@@ -9,7 +9,8 @@ import * as actions from '../actions';
 export const mapStateToProps = (state) => {
   return {
     slides: state.kiosk.slides,
-    title: state.kiosk.title
+    title: state.kiosk.title,
+    google_analytics: state.kiosk.google_analytics
   }
 };
 

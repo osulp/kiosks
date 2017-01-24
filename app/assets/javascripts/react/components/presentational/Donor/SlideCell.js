@@ -1,9 +1,11 @@
 import React, {Component, PropTypes} from 'react';
 import LargeSlide from './LargeSlide';
+import {trackClicked} from '../shared/GoogleAnalytics';
 
 class SlideCell extends Component {
 
   cellClicked (e) {
+    trackClicked(this.props.google_analytics, 'DonorKiosk:SlideClicked');
     this.props.setModalVisibility(true);
     this.props.setModalRootComponent(<LargeSlide {...this.props} />);
   }
