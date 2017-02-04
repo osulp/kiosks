@@ -22,7 +22,7 @@ module Api
         all_hours = self.query
         dates.map! { |d| d.to_date }.sort.each do |date|
           next unless date.instance_of? Date
-          hours = all_hours.select { |x| x.start_date.to_date <= date && x.end_date.to_date >= date }[0]
+          hours = all_hours.select { |x| x.start_date.utc.to_date <= date && x.end_date.utc.to_date >= date }[0]
           next unless hours
           open_time = DateTime.parse(hours["open_time"].to_s)
           close_time = DateTime.parse(hours["close_time"].to_s)
