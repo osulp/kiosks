@@ -31,8 +31,8 @@ RSpec.describe Api::V1::HoursController, type: :controller do
       [OpenStruct.new({
          "open_time": '2000-01-01 12:00:00',
          "close_time": '2000-01-01 24:00:00',
-         "start_date": "2016-01-03",
-         "end_date": "2016-01-04"
+         "start_date": DateTime.parse("2016-01-03"),
+         "end_date": DateTime.parse("2016-01-04")
        })]
     end
   end
