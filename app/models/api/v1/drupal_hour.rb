@@ -1,5 +1,5 @@
 require 'api/v1/exceptions'
-
+require 'api/v1/custom_hours_format'
 module Api
   module V1
     class DrupalHour < DrupalRecord
@@ -29,10 +29,15 @@ module Api
           open_time = Time.zone.parse("#{date} #{hours["open_time_#{week_day_index}"]}")
           close_time = Time.zone.parse("#{date} #{hours["close_time_#{week_day_index}"]}")
           parsed_time = Time.zone.parse(date.to_s)
+          custom_format = Api::V1::CustomHoursFormat.new({open_time: open_time, close_time:close_time})
           result[parsed_time] = { open: open_time.strftime(APPLICATION_CONFIG['api']['hours']['hours_for_dates']['open_close_time_format']),
                                   close: close_time.strftime(APPLICATION_CONFIG['api']['hours']['hours_for_dates']['open_close_time_format']),
                                   string_date: parsed_time.strftime(APPLICATION_CONFIG['api']['hours']['hours_for_dates']['string_date_format']),
-                                  sortable_date: parsed_time.strftime(APPLICATION_CONFIG['api']['hours']['hours_for_dates']['sortable_date_format'])}
+                                  sortable_date: parsed_time.strftime(APPLICATION_CONFIG['api']['hours']['hours_for_dates']['sortable_date_format']),
+                                  formatted_hours: custom_format.formatted_hours,
+                                  open_all_day: custom_format.open_all_day,
+                                  closes_at_night: custom_format.closes_at_night
+          }
         end
         return result
       end
