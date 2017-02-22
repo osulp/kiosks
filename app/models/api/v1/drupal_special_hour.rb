@@ -1,5 +1,5 @@
 require 'api/v1/exceptions'
-
+require 'api/v1/custom_hours_format'
 module Api
   module V1
     class DrupalSpecialHour < DrupalRecord
@@ -32,7 +32,9 @@ module Api
           result[parsed_time] = { open: open_time.strftime(APPLICATION_CONFIG['api']['hours']['hours_for_dates']['open_close_time_format']),
                                   close: close_time.strftime(APPLICATION_CONFIG['api']['hours']['hours_for_dates']['open_close_time_format']),
                                   string_date: parsed_time.strftime(APPLICATION_CONFIG['api']['hours']['hours_for_dates']['string_date_format']),
-                                  sortable_date: parsed_time.strftime(APPLICATION_CONFIG['api']['hours']['hours_for_dates']['sortable_date_format'])}
+                                  sortable_date: parsed_time.strftime(APPLICATION_CONFIG['api']['hours']['hours_for_dates']['sortable_date_format']),
+                                  formatted_hours: Api::V1::CustomHoursFormat.new({open_time: open_time, close_time:close_time}).formatted_hours
+          }
         end
         return result
       end
