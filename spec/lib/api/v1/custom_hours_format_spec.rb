@@ -9,6 +9,8 @@ RSpec.describe Api::V1::CustomHoursFormat do
     let(:close_time) { Time.zone.parse("2017-01-17 00:15:00") }
     it "doesn't match when non-default and missing headers" do
       expect(subject.formatted_hours).to eq "7:30am - No Closing"
+      expect(subject.open_all_day).to eq false
+      expect(subject.closes_at_night).to eq false
     end
   end
 
@@ -17,6 +19,8 @@ RSpec.describe Api::V1::CustomHoursFormat do
     let(:close_time) { Time.zone.parse("2017-01-20 22:00:00") }
     it "doesn't match when non-default and missing headers" do
       expect(subject.formatted_hours).to eq "No Closing - 10:00pm"
+      expect(subject.open_all_day).to eq false
+      expect(subject.closes_at_night).to eq true
     end
   end
 
@@ -25,6 +29,8 @@ RSpec.describe Api::V1::CustomHoursFormat do
     let(:close_time) { Time.zone.parse("2017-01-18 00:00:00") }
     it "doesn't match when non-default and missing headers" do
       expect(subject.formatted_hours).to eq "Open 24 Hours"
+      expect(subject.open_all_day).to eq true
+      expect(subject.closes_at_night).to eq false
     end
   end
 end
