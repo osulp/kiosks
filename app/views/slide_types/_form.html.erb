@@ -10,13 +10,16 @@
       </ul>
     </div>
   <% end %>
+  <div class="row">
+    <div class="col-xs-6 col-md-3">
+      <div class="field">
+        <%= f.label :name %>
+        <%= f.text_field :name, class: "form-control" %>
+      </div>
 
-  <div class="field">
-    <%= f.label :name %>
-    <%= f.text_field :name %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit %>
+      <div class="actions">
+        <%= f.submit 'Create Kiosk', class: "btn btn-primary" %>
+      </div>
+    </div>
   </div>
 <% end %>

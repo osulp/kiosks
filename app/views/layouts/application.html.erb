@@ -7,8 +7,9 @@
   </head>
 
   <body>
+    <%= render partial: "layouts/nav" %>
     <div class="container" role="main">
-      <%= render partial: "layouts/user_menu" %>
+      <%= render partial: "layouts/alerts" %>
       <%= yield %>
     </div>
   </body>

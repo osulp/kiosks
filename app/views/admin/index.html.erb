@@ -1,6 +1,28 @@
 <h1>Admin Panel</h1>
-<ul>
-  <li><%= link_to "Manage Slides", slides_path %></li>
-  <li><%= link_to "Manage Slide Types", slide_types_path %></li>
-  <li><%= link_to "Manage Kiosks", kiosks_path %></li>
-</ul>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Manage Content</h3>
+  </div>
+  <div class="panel-body">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><%= link_to "Manage Slides", slides_path %></td>
+        </tr>
+        <tr>
+          <td><%= link_to "Manage Slide Types", slide_types_path %></td>
+        </tr>
+        <tr>
+          <td><%= link_to "Manage Kiosks", kiosks_path %></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+
