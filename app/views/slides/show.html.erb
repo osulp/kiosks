@@ -1,41 +1,93 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Caption:</strong>
-  <%= @slide.caption %>
-</p>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Field Name</th>
+      <th>Value</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">
+        <strong>Caption:</strong>
+      </th>
+      <td>
+        <p>
+        <%= @slide.caption %>
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <th scope="row">
+        <strong>Expires at:</strong>
+      </th>
+      <td>
+        <p>
+        <%= @slide.expires_at %>
+        </p>
+
+      </td>
+    </tr>
+    <tr>
+      <th scope="row">
+        <strong>Title:</strong>
+      </th>
+      <td>
+        <p>
+        <%= @slide.title %>
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <th scope="row">
+        <strong>Slide type:</strong>
+      </th>
+      <td>
+        <p>
+        <%= @slide.slide_type.name %>
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <th scope="row">
+        <strong>Kiosk:</strong>
+      </th>
+      <td>
+        <p>
+        <%= @slide.kiosk.name %>
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <th scope="row">
+        <strong>Image:</strong><br>
+      </th>
+      <td>
+        <p>
+        <%= image_tag @slide.image.url(:large) %>
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <th scope="row">
+        <strong>Image Sizes</strong><br>
+      </th>
+      <td>
+        <p>
+        <%= link_to "x-large", @slide.image.url(:xlarge, false) %> | 
+        <%= link_to "large", @slide.image.url(:large, false) %> | 
+        <%= link_to "medium", @slide.image.url(:medium, false) %> | 
+        <%= link_to "original", @slide.image.url(:original, false) %>
+        </p>
+      </td>
+    </tr>
+  </tbody>
+</table>
 
 <p>
-  <strong>Expires at:</strong>
-  <%= @slide.expires_at %>
+
 </p>
 
-<p>
-  <strong>Title:</strong>
-  <%= @slide.title %>
-</p>
-
-<p>
-  <strong>Slide type:</strong>
-  <%= @slide.slide_type.name %>
-</p>
-
-<p>
-  <strong>Kiosk:</strong>
-  <%= @slide.kiosk.name %>
-</p>
-
-<p>
-<strong>Image:</strong><br>
-  <%= image_tag @slide.image.url(:large) %>
-</p>
-
-<p>
-<%= link_to "x-large", @slide.image.url(:xlarge, false) %> | 
-<%= link_to "large", @slide.image.url(:large, false) %> | 
-<%= link_to "medium", @slide.image.url(:medium, false) %> | 
-<%= link_to "original", @slide.image.url(:original, false) %>
-</p>
-
-<%= link_to 'Edit', edit_slide_path(@slide) %> |
-<%= link_to 'Back', slides_path %>
+<%= link_to 'Edit', edit_slide_path(@slide), class: "btn btn-primary" %>
+<%= link_to 'Back', slides_path, class: "btn btn-default" %>

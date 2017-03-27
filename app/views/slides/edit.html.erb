@@ -2,5 +2,5 @@
 
 <%= render 'form', slide: @slide, slide_types: @slide_types, kiosks: @kiosks %>
 
-<%= link_to 'Show', @slide %> |
-<%= link_to 'Back', slides_path %>
+<%= link_to 'Show', @slide, class: "btn btn-default" %>
+<%= link_to 'Back', slides_path, class: "btn btn-default" %>
