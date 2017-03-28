@@ -1,26 +1,30 @@
 <p id="notice"><%= notice %></p>
 
-
-<table class="table table-striped">
-  <thead>
-    <tr>
-      <th>Field Name</th>
-      <th>Value</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th scope="row">
-        <strong>Name:</strong>
-      </th>
-      <td>
-        <p>
-        <%= @kiosk.name %>
-        </p>
-      </td>
-    </tr>
-  </tbody>
-</table>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h2 class="panel-title">Kiosk Info</h2>
+  </div>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Field Name</th>
+        <th>Value</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th scope="row">
+          <strong>Name:</strong>
+        </th>
+        <td>
+          <p>
+          <%= @kiosk.name %>
+          </p>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div> 
 
 <%= link_to 'Edit', edit_kiosk_path(@kiosk), class: "btn btn-primary" %>
-<%= link_to 'Back', kiosks_path, class: "btn btn-default" %>
+<%= link_to 'All Kiosks', kiosks_path, class: "btn btn-default" %>

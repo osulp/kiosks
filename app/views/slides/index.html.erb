@@ -2,36 +2,48 @@
 
 <h1>Slides</h1>
 
-<table class="table table-striped">
-  <thead>
-    <tr>
-      <th>Slide</th>
-      <th>Caption</th>
-      <th>Expires at</th>
-      <th>Title</th>
-      <th>Slide type</th>
-      <th>Kiosk</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+<div class="panel panel-primary">
+  <div class="panel-heading">
+    <h3 class="panel-title">
+      All Slides
+    </h3>
+  </div>
 
-  <tbody>
-    <% @slides.each do |slide| %>
+  <table class="table table-striped">
+    <thead>
       <tr>
-        <td><%= image_tag slide.image.url(:thumb) %></td>
-        <td><%= slide.caption %></td>
-        <td><%= slide.expires_at %></td>
-        <td><%= slide.title %></td>
-        <td><%= slide.slide_type.name if slide.slide_type %></td>
-        <td><%= slide.kiosk.name if slide.kiosk %></td>
-        <td><%= link_to 'Show', slide %></td>
-        <td><%= link_to 'Edit', edit_slide_path(slide) %></td>
-        <td><%= link_to 'Destroy', slide, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <th>Slide</th>
+        <th>Title</th>
+        <th>Caption</th>
+        <th>Collection</th>
+        <th>Expires at</th>
+        <th>Slide type</th>
+        <th>Kiosk</th>
+        <th colspan="3"></th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
+
+    <tbody>
+      <% @slides.each do |slide| %>
+        <tr>
+          <td><%= image_tag(slide.image_url(:thumb)) if slide.image_url(:thumb) %></td>
+          <td><%= link_to slide.title, slide %></td>
+          <td><%= slide.caption %></td>
+          <td><%= link_to(slide.collection.name, collection_path(slide.collection.id)) if slide && slide.collection %></td>
+          <td><%= slide.expires_at %></td>
+          <td><%= slide.slide_type.name if slide.slide_type %></td>
+          <td><%= slide.kiosk.name if slide.kiosk %></td>
+          <td><%= link_to 'View', slide %></td>
+          <td><%= link_to 'Edit', edit_slide_path(slide) %></td>
+          <td><%= link_to 'Delete', slide, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+</div>
 
 <br>
 
-<%= link_to 'New Slide', new_slide_path %>
+<%= link_to 'New Slide', new_slide_path, class: "btn btn-primary" %>
+<%= link_to 'Admin Panel', admin_index_path, class: "btn btn-default" %>

@@ -22,6 +22,7 @@ gem 'coffee-rails', '~> 4.2'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
+gem 'jquery-ui-rails'
 # Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
 gem 'turbolinks', '~> 5'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
@@ -41,6 +42,8 @@ gem 'capistrano-nvm'
 gem 'react-rails'
 gem 'devise'
 gem "paperclip", "~> 5.0.0"
+gem 'rmagick'
+gem 'carrierwave', '~> 1.0'
 gem 'flipclockjs-rails', '~> 0.7.7'
 gem 'rails-controller-testing'
 
@@ -56,6 +59,9 @@ group :development, :test do
   gem 'webmock'
   gem 'coveralls'
   gem 'simplecov'
+  gem 'pry'
+  gem 'rspec-console'
+  gem 'pry-byebug'
 end
 
 group :development do

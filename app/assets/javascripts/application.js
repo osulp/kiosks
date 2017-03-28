@@ -10,14 +10,17 @@
 // Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
 // about supported directives.
 //
+//
 //= require jquery
-//= require bootstrap
+//= require jquery-ui
 //= require jquery_ujs
+//= require bootstrap
 //= require turbolinks
 //= require react
 //= require react_ujs
 //= require cable
 //= require flipclock.min
+//= require fileupload
 // *******************************************************************************************
 // Do not require_tree, include_tree, or any other Sprockets goodness. Javascript within ./components is compiled
 // by webpack as 'dist-app' and required here.

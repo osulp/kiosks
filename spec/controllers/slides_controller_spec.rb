@@ -7,16 +7,22 @@ RSpec.describe SlidesController, type: :controller do
   # Slide. As you add validations to Slide, be sure to
   # adjust the attributes here as well.
   #
-  let(:slide_type_test) { SlideType.create(name: "test slide type") }
-  let(:kiosk_test) { Kiosk.create(name: "test kiosk") }
+  let(:slide_type_test) { SlideType.create(name: "Basic") }
+  let(:kiosk_test) { Kiosk.create(name: "touch") }
+  let(:collection_test) { Collection.create(name: "generic") }
+  let(:test_file) { Rack::Test::UploadedFile.new('spec/fixtures/Board_Game_Slide.jpg', 'image/jpg') }
   let(:valid_attributes) {
     {
       expires_at: Time.utc(2015, 1, 1, 12, 0, 0),
       caption: "test caption", title: "test title", 
       slide_type_id: slide_type_test.id,
       kiosk_id: kiosk_test.id,
-      image: Rack::Test::UploadedFile.new('spec/fixtures/Board_Game_Slide.jpg', 'image/jpg')
+      collection_id: collection_test.id,
+      image: test_file
     }
+  }
+  let(:test_files) {
+    [test_file]
   }
 
   let(:invalid_attributes) {
@@ -115,18 +121,18 @@ RSpec.describe SlidesController, type: :controller do
     context "with valid params" do
       it "creates a new Slide" do
         expect {
-          post :create, params: {slide: valid_attributes}
+          post :create, params: {slide: valid_attributes, files: test_files}
         }.to change(Slide, :count).by(1)
       end
 
       it "assigns a newly created slide as @slide" do
-        post :create, params: {slide: valid_attributes}
+        post :create, params: {slide: valid_attributes, files: test_files, :format => 'json'}
         expect(assigns(:slide)).to be_a(Slide)
         expect(assigns(:slide)).to be_persisted
       end
 
       it "redirects to the created slide" do
-        post :create, params: {slide: valid_attributes}
+        post :create, params: {slide: valid_attributes, files: test_files}
         expect(response).to redirect_to(Slide.last)
       end
     end

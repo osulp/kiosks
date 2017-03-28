@@ -7,6 +7,7 @@ RSpec.describe "slides/edit", type: :view do
       :caption => "caption test",
       :slide_type => SlideType.create(name: "test slide type"),
       :kiosk => Kiosk.create(name: "test kiosk"),
+      :collection => Collection.create(name: "generic"),
       :image => Rack::Test::UploadedFile.new('spec/fixtures/Board_Game_Slide.jpg', 'image/jpg'),
     ))
   end
@@ -14,7 +15,7 @@ RSpec.describe "slides/edit", type: :view do
   it "renders the edit slide form" do
     @slide_types = SlideType.all
     @kiosks = Kiosk.all
-
+    @collections = Collection.all
     render
     assert_select "form[action=?][method=?]", slide_path(@slide), "post" do
 

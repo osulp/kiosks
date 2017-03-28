@@ -1,0 +1,54 @@
+//= require uploader
+
+/*
+ * jQuery File Upload Plugin JS Example 6.5.1
+ * https://github.com/blueimp/jQuery-File-Upload
+ *
+ * Copyright 2010, Sebastian Tschan
+ * https://blueimp.net
+ *
+ * Licensed under the MIT license:
+ * http://www.opensource.org/licenses/MIT
+ */
+
+/*jslint nomen: true, unparam: true, regexp: true */
+/*global $, window, document */
+
+$(function () {
+
+    'use strict';
+    // Initialize the jQuery File Upload widget:
+    var options = {
+      // done: function (e, data) {
+      //   alert('hola mundo :D');
+      //   ids.push(data.result.slide_id);
+      //   $('#collections_ids').val(ids);
+      // }
+    };
+    <% if Rails.env.development? %>
+        // use sequential uploads in development to avoid database locking problems with sqlite3.
+      options.sequentialUploads = true;
+      options.limitConcurrentUploads = 1;
+    <% end %>
+
+    $('#fileupload').kiosksUploader(options);
+      // $('#fileupload').fileupload();
+  //   $('#fileupload').fileupload({
+  //     autoUpload: true,
+  //     uploadTemplate: function (o) {
+  //       var rows = $();
+  //       $.each(o.files, function (index, file) {
+  //         console.log(file);
+  //           var row = $('<li class="span3">' +
+  //               '<div class="thumbnail">' +
+  //                 '<div class="preview" style="text-align: center;"></div>' +
+  //                 '<div class="progress progress-success progress-striped active">' +
+  //                   '<div class="bar" style="width:0%;"></div>' +
+  //                 '</div>' +
+  //               '</div>');
+  //           rows = rows.add(row);
+  //       });
+  //       return rows;
+  //   },
+  // });
+});

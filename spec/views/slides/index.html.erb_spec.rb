@@ -8,6 +8,7 @@ RSpec.describe "slides/index", type: :view do
         :caption => "caption test 1",
         :slide_type => SlideType.create(name: "test slide type"),
         :kiosk => Kiosk.create(name: "test kiosk"),
+        :collection => Collection.create(name: "generic"),
         :image => Rack::Test::UploadedFile.new('spec/fixtures/Board_Game_Slide.jpg', 'image/jpg'),
       ),
       Slide.create!(
@@ -15,6 +16,7 @@ RSpec.describe "slides/index", type: :view do
         :caption => "caption test 2",
         :slide_type => SlideType.create(name: "test slide type"),
         :kiosk => Kiosk.create(name: "test kiosk"),
+        :collection => Collection.create(name: "generic"),
         :image => Rack::Test::UploadedFile.new('spec/fixtures/Board_Game_Slide.jpg', 'image/jpg'),
       )
     ])
@@ -26,5 +28,7 @@ RSpec.describe "slides/index", type: :view do
     expect(rendered).to match /caption test 2/
     expect(rendered).to match /title test 1/
     expect(rendered).to match /title test 2/
+    expect(rendered).to match /test kiosk/
+    expect(rendered).to match /generic/
   end
 end
