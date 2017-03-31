@@ -19,9 +19,8 @@ module Api
       # @param [DateTime] start_time - the start time to check, Ruby Time formatted (ie. YYYYmmddHHMMSS)
       # @return [ActiveRecord::Query] - the room ids which have an active reservation now or within 10 minutes
       def self.active_room_ids(start_time)
-        st_in_ten_min = start_time + 10.minutes
         joins(:reservations)
-          .where("(reservations.start_time <= ? AND reservations.end_time > ? AND reservations.deleted_at IS NULL) OR (reservations.start_time <= ? AND reservations.end_time > ? AND reservations.deleted_at IS NULL)", start_time, start_time, st_in_ten_min, st_in_ten_min)
+          .where("(reservations.start_time <= ? AND reservations.end_time > ? AND reservations.deleted_at IS NULL) OR (reservations.start_time <= ? AND reservations.end_time > ? AND reservations.deleted_at IS NULL)", start_time, start_time, start_time + 10.minutes, start_time + 10.minutes)
           .pluck(:id)
       end
     end

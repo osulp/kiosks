@@ -1,0 +1,98 @@
+<p id="notice"><%= notice %></p>
+<h1><%= @collection.name %></h1>
+
+<div class="panel panel-primary">
+  <div class="panel-heading">
+    <h2 class="panel-title">Slides in collection</h2>
+  </div>
+  <!-- Table -->
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Slide</th>
+        <th>Title</th>
+        <th>Caption</th>
+        <th>Expires at</th>
+        <th>Slide type</th>
+        <th>Kiosk</th>
+        <th colspan="3"></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% for slide in @collection.slides %>
+        <tr>
+          <td><%= image_tag(slide.image_url(:thumb)) if slide.image_url(:thumb) %></td>
+          <td><%= link_to slide.title, slide %></td>
+          <td><%= slide.caption %></td>
+          <td><%= slide.expires_at %></td>
+          <td><%= slide.slide_type.name if slide.slide_type %></td>
+          <td><%= slide.kiosk.name if slide.kiosk %></td>
+          <td><%= link_to 'Show', slide %></td>
+          <td><%= link_to 'Edit', edit_slide_path(slide) %></td>
+          <td><%= link_to 'Destroy', slide, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
+<%= link_to 'Edit Collection', edit_collection_path(@collection), class: "btn btn-primary" %>
+<%= link_to 'All Collections', collections_path, class: "btn btn-default" %>
+
+<%= form_for @collection, :html => { :multipart => true, :id => "fileupload"  } do |f| %>
+  <!-- <div id="fileupload"> -->
+ 
+  <!-- Redirect browsers with JavaScript disabled to the origin page -->
+  <noscript><input type="hidden" name="redirect" value="<%= main_app.root_path %>"></noscript>
+  <!-- The table listing the files available for upload/download -->
+  <table role="presentation" class="table table-striped"><tbody class="files"></tbody></table>
+
+  <h2>Local Upload</h2>
+  <!-- The fileupload-buttonbar contains buttons to add/delete files and start/cancel the upload -->
+
+    <div class="row fileupload-buttonbar">
+      <div class="col-xs-7">
+        <!-- The fileinput-button span is used to style the file input field as button -->
+        <span class="btn btn-success fileinput-button">
+          <span class="glyphicon glyphicon-plus"></span>
+          <span>Add files...</span>
+          <input type="file" name="files[]" multiple>
+        </span>
+         <button type="reset" class="btn btn-warning cancel hidden">
+          <span class="glyphicon glyphicon-ban-circle"></span>
+          <span>Cancel upload</span>
+        </button>
+
+        <div class="actions">
+          <input type="submit" name="commit" value="Upload Slides" class="btn btn-primary upload-slides hidden" data-disable-with="Update Collection">
+        </div>
+
+        <!-- The global file processing state -->
+        <span class="fileupload-process"></span>
+      </div>
+      <!-- The global progress state -->
+      <div class="col-xs-5 fileupload-progress fade">
+        <!-- The global progress bar -->
+        <div class="progress progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100">
+          <div class="progress-bar progress-bar-success" style="width:0%;"></div>
+        </div>
+        <!-- The extended global progress state -->
+        <div class="progress-extended">&nbsp;</div>
+      </div>
+    </div>
+
+  <div class="dropzone">
+
+  </div>
+<!-- </div> -->
+
+<% end %>
+<%= render partial: 'collections/js_templates', :locals => { 
+  :collection_id => @collection.id,
+  :default_kiosk_id => @default_kiosk.id,
+  :default_slide_type_id => @default_slide_type.id,
+  :kiosk_options => @kiosk_options,
+  :slide_type_options => @slide_type_options
+} %>
+

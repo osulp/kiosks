@@ -7,6 +7,7 @@ RSpec.describe Slide, type: :model do
     subject.caption = "caption test"
     subject.slide_type = SlideType.create(name: "test slide type")
     subject.kiosk = Kiosk.create(name: "test kiosk")
+    subject.collection = Collection.create(name: "generic")
     subject.image = Rack::Test::UploadedFile.new('spec/fixtures/Board_Game_Slide.jpg', 'image/jpg')
     expect(subject).to be_valid
   end

@@ -15,7 +15,7 @@
 
       <div class="field">
         <%= f.label :image %>
-        <%= f.file_field :image, required: true, class: "form-control" %>
+        <%= f.file_field :image, required: false, class: "form-control" %>
       </div>
 
       <div class="field">
@@ -34,6 +34,11 @@
       </div>
 
       <div class="field">
+        <%= f.label :collection_id %>
+        <%= f.select('collection_id', options_from_collection_for_select(@collections, :id, :name, slide.collection_id), { :include_blank => '-- Select One --' }, :required => false, class: "form-control") %>
+      </div>
+
+      <div class="field">
         <%= f.label :slide_type_id %>
         <%= f.select('slide_type_id', options_from_collection_for_select(@slide_types, :id, :name, slide.slide_type_id), { :include_blank => '-- Select One --' }, :required => true, class: "form-control") %>
       </div>
@@ -44,7 +49,7 @@
       </div>
 
       <div class="actions">
-        <%= f.submit 'Create Slide', class: "btn btn-primary" %>
+        <%= f.submit class: "btn btn-primary" %>
       </div>
 
     </div>

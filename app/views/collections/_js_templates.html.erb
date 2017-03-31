@@ -1,0 +1,153 @@
+<!-- The template to display files available for upload -->
+<script id="template-upload" type="text/x-tmpl">
+{% for (var i=0, file; file=o.files[i]; i++) { %}
+    <tr class="template-upload fade">
+        <td>
+            <span class="preview"></span>
+        </td>
+        <td>
+            <p class="name">{%=file.name%}</p>
+            <strong class="error text-danger"></strong>
+        </td>
+        <td>
+            <p class="size">Processing...</p>
+            <div class="progress progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div class="progress-bar progress-bar-success" style="width:0%;"></div></div>
+        </td>
+        <td>
+            {% if (!i && !o.options.autoUpload) { %}
+                <button class="btn btn-primary start" disabled>
+                    <i class="glyphicon glyphicon-upload"></i>
+                    <span>Start</span>
+                </button>
+            {% } %}
+            {% if (!i) { %}
+                <button class="btn btn-warning cancel">
+                    <i class="glyphicon glyphicon-ban-circle"></i>
+                    <span>Cancel</span>
+                </button>
+            {% } %}
+        </td>
+    </tr>
+{% } %}
+</script>
+
+<!-- function used by the following template -->
+<script type="text/javascript">
+  function setAllDefaultOptions(fileId,fieldName) {
+    var firstFile = $("#collection_slides_attributes_" + fileId.toString() + "_" + fieldName)[0];
+    var selected_options = [];
+    for (var i = 0; i < firstFile.length; i++) {
+      if (firstFile.options[i].selected) {
+        selected_options.push(firstFile.options[i].value);
+      }
+    }
+    $("." + fieldName + "_dropdown").each(function(index, element) {
+      for(var i=0; i< this.length; i++) {
+        this.options[i].selected =
+          $.inArray(this.options[i].value, selected_options) > -1 ? true : false;
+      }
+    });
+  }
+</script>
+
+<!-- The template to display files available for download -->
+<script id="batch-template-download" type="text/x-tmpl">
+{% for (var i=0, file; file=o.files[i]; i++) { %}
+    <tr class="template-download fade">
+        <td>
+          <div class="row">
+            <div class="col-sm-2">
+                <span class="preview">
+                    {% if (file.thumbnailUrl) { %}
+                        <a href="{%=file.url%}" title="{%=file.name%}" download="{%=file.name%}" data-gallery><img src="{%=file.thumbnailUrl%}"></a>
+                    {% } %}
+                </span>
+            </div>
+            <div class="col-sm-4 name">
+                <span>{%=file.name%}</span>
+                <input type="hidden" name="uploaded_files[]" value="{%=file.id%}">
+            </div>
+            <div class="col-sm-6">
+              {% if (file.error) { %}
+                  <div><span class="label label-danger">Error</span> {%=file.error%}</div>
+              {% } %}
+              <span class="size">{%=o.formatFileSize(file.size)%}</span>
+              <button class="btn btn-danger delete pull-right" data-type="{%=file.deleteType%}" data-url="{%=file.deleteUrl%}"{% if (file.deleteWithCredentials) { %} data-xhr-fields='{"withCredentials":true}'{% } %}>
+                  <i class="glyphicon glyphicon-trash"></i>
+                  <span>Delete</span>
+              </button>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-12 form-horizontal">
+              <div class="form-group">
+                <label for="collection_slides_attributes_{%=file.id%}_title" class="col-sm-5 control-label">Slide Title</label>
+                <div class="col-sm-7">
+                  <input type="text" class="form-control" name="collection[slides_attributes][{%=file.id%}][title]" id="collection_slides_attributes_{%=file.id%}_title" value="{%=file.title%}">
+                </div>
+                <label for="collection_slides_attributes_{%=file.id%}_caption" class="col-sm-5 control-label">Slide Caption</label>
+                <div class="col-sm-7">
+                  <input type="text" class="form-control" name="collection[slides_attributes][{%=file.id%}][caption]" id="collection_slides_attributes_{%=file.id%}_caption" value="{%=file.caption%}">
+                </div>
+                <label for="collection_slides_attributes_{%=file.id%}_slide_type_id" class="col-sm-5 control-label">Slide Type</label>
+                <div class="col-sm-7">
+                  <select class="form-control slide_type_id_dropdown" multiple="multiple" size="" name="collection[slides_attributes][{%=file.id%}][slide_type_id]" id="collection_slides_attributes_{%=file.id%}_slide_type_id" value="{%=file.slide_type%}">
+                    <%= options_for_select(slide_type_options, default_slide_type_id)  %>
+                  </select>
+                  <button class="btn pull-right slide_type_button" onClick="setAllDefaultOptions({%= file.id %}, 'slide_type_id'); return false;">Set all to this Slide Type</button>
+                </div>
+
+                <label for="collection_slides_attributes_{%=file.id%}_kiosk_id" class="col-sm-5 control-label">Kiosk</label>
+                <div class="col-sm-7">
+                  <select class="form-control kiosk_id_dropdown" multiple="multiple" size="" name="collection[slides_attributes][{%=file.id%}][kiosk_id]" id="collection_slides_attributes_{%=file.id%}_kiosk_id" value="{%=file.kiosk%}">
+                    <%= options_for_select(kiosk_options, default_kiosk_id)  %>
+                  </select>
+                  <button class="btn pull-right kiosk_button" onClick="setAllDefaultOptions({%= file.id %},'kiosk_id'); return false;">Set all to this Kiosk</button>
+                </div>
+                <input type="hidden" value="{%= file.id %}" name="collection[slides_attributes][{%= file.id %}][id]" id="collection_slides_attributes_{%= file.id %}_id">
+                <input type="hidden" <%= "value=#{collection_id}" %> name="collection[slides_attributes][{%= file.id %}][collection_id]" id="collection_slides_attributes_{%= file.id %}_collection_id">
+              </div>
+            </div>
+          </div>
+        </td>
+    </tr>
+{% } %}
+</script>
+
+<!-- Simpler display of files available for download. Originally from hyrax/base/_form_files -->
+<!-- TODO: further consolidate with template-download above -->
+<script id="template-download" type="text/x-tmpl">
+{% for (var i=0, file; file=o.files[i]; i++) { %}
+    <tr class="template-download fade">
+        <td>
+            <span class="preview">
+                {% if (file.thumbnailUrl) { %}
+                    <a href="{%=file.url%}" title="{%=file.name%}" download="{%=file.name%}" data-gallery><img src="{%=file.thumbnailUrl%}"></a>
+                {% } %}
+            </span>
+        </td>
+        <td>
+            <p class="name">
+                {% if (file.url) { %}
+                    <a href="{%=file.url%}" title="{%=file.name%}" download="{%=file.name%}" {%=file.thumbnailUrl?'data-gallery':''%}>{%=file.name%}</a>
+                {% } else { %}
+                    <span>{%=file.name%}</span>
+                {% } %}
+                <input type="hidden" name="uploaded_files[]" value="{%=file.id%}">
+            </p>
+            {% if (file.error) { %}
+                <div><span class="label label-danger">Error</span> {%=file.error%}</div>
+            {% } %}
+        </td>
+        <td>
+            <span class="size">{%=o.formatFileSize(file.size)%}</span>
+        </td>
+        <td>
+            <button class="btn btn-danger delete" data-type="{%=file.deleteType%}" data-url="{%=file.deleteUrl%}"{% if (file.deleteWithCredentials) { %} data-xhr-fields='{"withCredentials":true}'{% } %}>
+                <i class="glyphicon glyphicon-trash"></i>
+                <span>Delete</span>
+            </button>
+        </td>
+    </tr>
+{% } %}
+</script>

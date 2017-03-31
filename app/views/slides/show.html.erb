@@ -51,6 +51,16 @@
     </tr>
     <tr>
       <th scope="row">
+        <strong>Slide Collection:</strong>
+      </th>
+      <td>
+        <p>
+        <%= link_to(@slide.collection.name, collection_path(@slide.collection.id)) if @slide && @slide.collection %>
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <th scope="row">
         <strong>Kiosk:</strong>
       </th>
       <td>
@@ -65,7 +75,7 @@
       </th>
       <td>
         <p>
-        <%= image_tag @slide.image.url(:large) %>
+        <%= image_tag @slide.image_url(:large).to_s %>
         </p>
       </td>
     </tr>
@@ -75,10 +85,10 @@
       </th>
       <td>
         <p>
-        <%= link_to "x-large", @slide.image.url(:xlarge, false) %> | 
-        <%= link_to "large", @slide.image.url(:large, false) %> | 
-        <%= link_to "medium", @slide.image.url(:medium, false) %> | 
-        <%= link_to "original", @slide.image.url(:original, false) %>
+        <%= link_to "x-large", @slide.image_url(:xlarge).to_s %> | 
+        <%= link_to "large", @slide.image_url(:large).to_s %> | 
+        <%= link_to "medium", @slide.image_url(:medium).to_s %> | 
+        <%= link_to "original", @slide.image_url.to_s %>
         </p>
       </td>
     </tr>
