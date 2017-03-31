@@ -20,13 +20,14 @@
     </tr>
     <tr>
       <th scope="row">
-        <strong>Expires at:</strong>
+        <strong>Display dates:</strong>
       </th>
       <td>
-        <p>
-        <%= @slide.expires_at %>
-        </p>
-
+        <ul>
+            <% for date_range in @slide.date_ranges %>
+              <li><%= date_range.start_date %> - <%= date_range.end_date %></li>
+            <% end %>
+        </ul>
       </td>
     </tr>
     <tr>

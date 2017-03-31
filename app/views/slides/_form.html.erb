@@ -24,8 +24,12 @@
       </div>
 
       <div class="field">
-        <%= f.label :expires_at %>
-        <%= f.datetime_select :expires_at, {}, {class: 'datetime-form-control'} %>
+        <fieldset>
+          <%= f.fields_for :date_ranges do |builder| %>
+            <%= render 'date_range_fields', f: builder %>
+          <% end %>
+          <%= link_to_add_date_ranges "Add Date Range", f, :date_ranges %>
+        </fieldset>
       </div>
 
       <div class="field">

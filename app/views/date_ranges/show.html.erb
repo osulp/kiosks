@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Start date:</strong>
+  <%= @date_range.start_date %>
+</p>
+
+<p>
+  <strong>End date:</strong>
+  <%= @date_range.end_date %>
+</p>
+
+<%= link_to 'Edit', edit_date_range_path(@date_range) %> |
+<%= link_to 'Back', date_ranges_path %>

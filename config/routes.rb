@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  resources :date_ranges
   # Api namespaced routes and modules
   # ie: /api/v1/hours => Api::V1::HoursController#show
   namespace :api, defaults: { format: :json } do

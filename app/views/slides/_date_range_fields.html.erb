@@ -1,0 +1,8 @@
+<fieldset>
+  <%= f.label :start_date, "Start Date" %>
+  <%= f.datetime_select :start_date, {}, {class: 'datetime-form-control'} %><br>
+  <%= f.label :end_date, "End Date" %>
+  <%= f.datetime_select :end_date, {}, {class: 'datetime-form-control'} %>
+  <%= f.hidden_field :_destroy %>
+  <%= link_to "remove", '#', class: "remove_fields" %>
+</fieldset>
