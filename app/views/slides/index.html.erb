@@ -31,9 +31,11 @@
           <td><%= slide.caption %></td>
           <td><%= link_to(slide.collection.name, collection_path(slide.collection.id)) if slide && slide.collection %></td>
           <td>
-            <% for date_range in slide.date_ranges %>
-              <%= date_range.start_date %> - <%= date_range.end_date %>
-            <% end %>
+            <ul>
+              <% for date_range in slide.date_ranges %>
+                <li><%= date_range.start_date.strftime("%m/%d/%y") %> - <%= date_range.end_date.strftime("%m/%d/%y") %></li>
+              <% end %>
+            </ul>
           </td>
           <td><%= slide.slide_type.name if slide.slide_type %></td>
           <td><%= slide.kiosk.name if slide.kiosk %></td>

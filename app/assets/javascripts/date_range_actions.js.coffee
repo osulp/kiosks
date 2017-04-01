@@ -9,3 +9,6 @@ jQuery ->
     regexp = new RegExp($(this).data('id'), 'g')
     $(this).before($(this).data('fields').replace(regexp, time))
     event.preventDefault()
+
+  if $('ul#list-group-date-ranges li').length == 0
+    $('.add_fields').click()

@@ -25,7 +25,9 @@
       <td>
         <ul>
             <% for date_range in @slide.date_ranges %>
-              <li><%= date_range.start_date %> - <%= date_range.end_date %></li>
+              <li>
+                <%= date_range.start_date.strftime("%m/%d/%Y %I:%M:%S %p") %> - <%= date_range.end_date.strftime("%m/%d/%Y %I:%M:%S %p") %>
+              </li>
             <% end %>
         </ul>
       </td>
