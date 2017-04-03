@@ -8,7 +8,8 @@ class KioskController < ApplicationController
 
   def show
     @kiosk = Kiosk.find_by(name: params[:id])
-    @slides = @kiosk.slides
+    # get only slides that have current date ranges, given a time (i.e now, Time.zone.parse("20160503050000"), etc)
+    @slides = @kiosk.slides.joins(:date_ranges).where("date_ranges.start_date <= ? AND date_ranges.end_date >= ?",Time.zone.now,Time.zone.now)
   end
 
   private

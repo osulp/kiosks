@@ -1,57 +1,84 @@
 <%= form_for slide , html: { multipart: true } do |f| %>
+  <% if slide.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(slide.errors.count, "error") %> prohibited this slide from being saved:</h2>
+
+      <ul>
+        <% slide.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
   <div class="row">
-    <div class="col-xs-8 col-md-8">
-      <% if slide.errors.any? %>
-        <div id="error_explanation">
-          <h2><%= pluralize(slide.errors.count, "error") %> prohibited this slide from being saved:</h2>
-
-          <ul>
-            <% slide.errors.full_messages.each do |message| %>
-              <li><%= message %></li>
-            <% end %>
-          </ul>
+    <div class="col-xs-12 col-md-12">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">
+            Enter Slide Values
+          </h3>
         </div>
-      <% end %>
+        <div class="panel-body">
+          <div class="field">
+            <%= f.label :title %>
+            <%= f.text_field :title, required: true, class: "form-control" %>
+          </div>
 
-      <div class="field">
-        <%= f.label :image %>
-        <%= f.file_field :image, required: false, class: "form-control" %>
+          <div class="field">
+            <%= f.label :caption %>
+            <%= f.text_area :caption, required: true,class: "form-control" %>
+          </div>
+
+          <div class="field">
+            <%= f.label :image %>
+            <%= f.file_field :image, required: false, class: "form-control" %>
+          </div>
+
+          <div class="field">
+            <%= f.label :collection_id %>
+            <%= f.select('collection_id', options_from_collection_for_select(@collections, :id, :name, slide.collection_id), { :include_blank => '-- Select One --' }, :required => false, class: "form-control") %>
+          </div>
+
+          <div class="field">
+            <%= f.label :slide_type_id %>
+            <%= f.select('slide_type_id', options_from_collection_for_select(@slide_types, :id, :name, slide.slide_type_id), { :include_blank => '-- Select One --' }, :required => true, class: "form-control") %>
+          </div>
+
+          <div class="field">
+            <%= f.label :kiosk_id %>
+            <%= f.select('kiosk_id', options_from_collection_for_select(@kiosks, :id, :name, slide.kiosk_id), { :include_blank => '-- Select One --' }, :required => true, class: "form-control") %>
+          </div>
+
+        </div>
       </div>
-
-      <div class="field">
-        <%= f.label :caption %>
-        <%= f.text_area :caption, required: true,class: "form-control" %>
-      </div>
-
-      <div class="field">
-        <%= f.label :expires_at %>
-        <%= f.datetime_select :expires_at, {}, {class: 'datetime-form-control'} %>
-      </div>
-
-      <div class="field">
-        <%= f.label :title %>
-        <%= f.text_field :title, required: true, class: "form-control" %>
-      </div>
-
-      <div class="field">
-        <%= f.label :collection_id %>
-        <%= f.select('collection_id', options_from_collection_for_select(@collections, :id, :name, slide.collection_id), { :include_blank => '-- Select One --' }, :required => false, class: "form-control") %>
-      </div>
-
-      <div class="field">
-        <%= f.label :slide_type_id %>
-        <%= f.select('slide_type_id', options_from_collection_for_select(@slide_types, :id, :name, slide.slide_type_id), { :include_blank => '-- Select One --' }, :required => true, class: "form-control") %>
-      </div>
-
-      <div class="field">
-        <%= f.label :kiosk_id %>
-        <%= f.select('kiosk_id', options_from_collection_for_select(@kiosks, :id, :name, slide.kiosk_id), { :include_blank => '-- Select One --' }, :required => true, class: "form-control") %>
-      </div>
-
-      <div class="actions">
-        <%= f.submit class: "btn btn-primary" %>
-      </div>
-
     </div>
   </div>
+
+  <div class="row">
+    <div class="col-xs-12 col-md-12">
+      <div class="panel panel-default panel-display-dates">
+        <!-- Default panel contents -->
+        <div class="panel-heading">
+          <h3 class="panel-title">
+            <%= f.label :date_ranges, "Display dates and times" %>
+          </h3>
+        </div>
+        <!-- List group -->
+        <div class="field">
+          <ul class="list-group" id="list-group-date-ranges">
+            <%= f.fields_for :date_ranges do |builder| %>
+              <%= render 'date_range_fields', f: builder %>
+            <% end %>
+            <%= link_to_add_date_ranges "Add Date Range", f, :date_ranges %>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="actions">
+    <%= f.submit class: "btn btn-primary" %>
+  </div>
+
 <% end %>

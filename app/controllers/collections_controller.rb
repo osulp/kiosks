@@ -88,7 +88,10 @@ class CollectionsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def collection_params
-      params.require(:collection).permit(:name, slides_attributes: [:id, :caption, :expires_at, :title, :collection_id, :slide_type_id, :kiosk_id, :image, :_destroy])
+      params.require(:collection).permit(
+        :name, 
+        slides_attributes: [:id, :caption, :expires_at, :title, :collection_id, :slide_type_id, :kiosk_id, :image, :_destroy, date_ranges_attributes: [:id, :start_date, :end_date, :slide_id, :_destroy]]
+        )
     end
 
     def authorize

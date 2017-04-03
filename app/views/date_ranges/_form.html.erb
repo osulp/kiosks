@@ -1,0 +1,27 @@
+<%= form_for(date_range) do |f| %>
+  <% if date_range.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(date_range.errors.count, "error") %> prohibited this date_range from being saved:</h2>
+
+      <ul>
+      <% date_range.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :start_date %>
+    <%= f.datetime_select :start_date %>
+  </div>
+
+  <div class="field">
+    <%= f.label :end_date %>
+    <%= f.datetime_select :end_date %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
