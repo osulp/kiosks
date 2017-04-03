@@ -85,10 +85,21 @@
                 <div class="col-sm-7">
                   <input type="text" class="form-control" name="collection[slides_attributes][{%=file.id%}][title]" id="collection_slides_attributes_{%=file.id%}_title" value="{%=file.title%}">
                 </div>
+
                 <label for="collection_slides_attributes_{%=file.id%}_caption" class="col-sm-5 control-label">Slide Caption</label>
                 <div class="col-sm-7">
                   <input type="text" class="form-control" name="collection[slides_attributes][{%=file.id%}][caption]" id="collection_slides_attributes_{%=file.id%}_caption" value="{%=file.caption%}">
                 </div>
+
+                <label for="collection_slides_attributes_{%=file.id%}_date_ranges" class="col-sm-5 control-label">Display Dates and Times</label>
+                <div class="col-sm-7">
+                  <div class="slides-to-be-uploaded" id="uploaded-slide-{%=file.id%}" data-id="{%=file.id%}">
+                    <%= fields_for Slide.new do |f| %>
+                      <%= link_to_add_date_ranges_new_collection "Add Date Range", f, :date_ranges, "{%=file.id%}" %>
+                    <% end %>
+                  </div>
+                </div>
+
                 <label for="collection_slides_attributes_{%=file.id%}_slide_type_id" class="col-sm-5 control-label">Slide Type</label>
                 <div class="col-sm-7">
                   <select class="form-control slide_type_id_dropdown" multiple="multiple" size="" name="collection[slides_attributes][{%=file.id%}][slide_type_id]" id="collection_slides_attributes_{%=file.id%}_slide_type_id" value="{%=file.slide_type%}">

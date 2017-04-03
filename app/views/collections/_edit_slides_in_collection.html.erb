@@ -1,0 +1,65 @@
+<div class="panel panel-primary">
+  <div class="panel-heading">
+    <h3 class="panel-title">Edit slides in collection</h3>
+  </div>
+  <div class="panel-body">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Field Name</th>
+          <th>Value</th>
+        </tr>
+      </thead>
+      <tbody>
+        <%= f.fields_for :slides do |builder| %>
+          <tr>
+            <th scope="row">
+              <strong>Slide:</strong><br>
+              <%= image_tag(builder.object.image_url(:thumb)) if builder.object.image_url(:thumb) %>
+            </th>
+            <td>
+              <fieldset>
+                <div class="field">
+                  <%= builder.label :image %>
+                  <%= builder.file_field :image, required: false, class: "form-control" %>
+                </div>
+
+                <div class="field">
+                  <%= builder.label :caption %>
+                  <%= builder.text_area :caption, required: true,class: "form-control" %>
+                </div>
+
+                <div class="field">
+                  <%= builder.label :date_ranges, 'Display Dates' %>
+                  <ul class="list-group" id="list-group-date-ranges">
+                    <%= builder.fields_for :date_ranges do |g| %>
+                      <%= render partial: 'slides/date_range_fields', :locals => { f: g } %>
+                    <% end %>
+                    <%= link_to_add_date_ranges "Add Date Range", builder, :date_ranges %>
+                  </ul>
+                </div>
+
+                <div class="field">
+                  <%= builder.label :title %>
+                  <%= builder.text_field :title, required: true, class: "form-control" %>
+                </div>
+
+                <div class="field">
+                  <%= builder.label :slide_type_id %>
+                  <%= builder.select('slide_type_id', options_from_collection_for_select(slide_types, :id, :name, builder.object.slide_type_id), { :include_blank => '-- Select One --' }, :required => true, class: "form-control") %>
+                </div>
+
+                <div class="field">
+                  <%= builder.label :kiosk_id %>
+                  <%= builder.select('kiosk_id', options_from_collection_for_select(kiosks, :id, :name, builder.object.kiosk_id), { :include_blank => '-- Select One --' }, :required => true, class: "form-control") %>
+                </div>
+              </fieldset>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+

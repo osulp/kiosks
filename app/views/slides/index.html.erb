@@ -38,7 +38,7 @@
             </ul>
           </td>
           <td><%= slide.slide_type.name if slide.slide_type %></td>
-          <td><%= slide.kiosk.name if slide.kiosk %></td>
+          <td><%= link_to slide.kiosk.name, kiosk_show_path(id: slide.kiosk.name)  if slide.kiosk %></td>
           <td><%= link_to 'View', slide %></td>
           <td><%= link_to 'Edit', edit_slide_path(slide) %></td>
           <td><%= link_to 'Delete', slide, method: :delete, data: { confirm: 'Are you sure?' } %></td>

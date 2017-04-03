@@ -17,8 +17,8 @@
     <tbody>
       <% @kiosks.each do |kiosk| %>
         <tr>
-          <td><%= kiosk.name %></td>
-          <td><%= link_to 'Show', kiosk %></td>
+          <td><%= link_to kiosk.name, kiosk %></td>
+          <td><%= link_to 'Show', kiosk_show_path(id: kiosk.name) %></td>
           <td><%= link_to 'Edit', edit_kiosk_path(kiosk) %></td>
         </tr>
       <% end %>

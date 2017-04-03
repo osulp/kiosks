@@ -33,8 +33,8 @@
             </ul>
           </td>
           <td><%= slide.slide_type.name if slide.slide_type %></td>
-          <td><%= slide.kiosk.name if slide.kiosk %></td>
-          <td><%= link_to 'Show', slide %></td>
+          <td><%= link_to slide.kiosk.name, kiosk_show_path(id: slide.kiosk.name)  if slide.kiosk %></td>
+          <td><%= link_to 'View', slide %></td>
           <td><%= link_to 'Edit', edit_slide_path(slide) %></td>
           <td><%= link_to 'Destroy', slide, method: :delete, data: { confirm: 'Are you sure?' } %></td>
         </tr>
@@ -54,7 +54,7 @@
   <!-- The table listing the files available for upload/download -->
   <table role="presentation" class="table table-striped"><tbody class="files"></tbody></table>
 
-  <h2>Local Upload</h2>
+  <h2>Upload Local Slides</h2>
   <!-- The fileupload-buttonbar contains buttons to add/delete files and start/cancel the upload -->
 
     <div class="row fileupload-buttonbar">
@@ -96,6 +96,7 @@
 <% end %>
 <%= render partial: 'collections/js_templates', :locals => { 
   :collection_id => @collection.id,
+  :collection => @collection,
   :default_kiosk_id => @default_kiosk.id,
   :default_slide_type_id => @default_slide_type.id,
   :kiosk_options => @kiosk_options,
