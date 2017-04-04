@@ -36,7 +36,7 @@ class Header extends Component {
               <span className="icon-bar"></span>
               <span className="icon-bar"></span>
             </button>
-            <img className="logo" src="/images/beaverlogo.png"/>
+            <img className="logo" src="/images/osulibrarylogo.png"/>
           </div>
           <div id="navbar" className="navbar-collapse collapse">
             <div className="circ-title">Announcements</div>

@@ -120,7 +120,7 @@ class Header extends Component {
                   <span className="icon-bar"></span>
                   <span className="icon-bar"></span>
                 </button>
-                <img className={`logo ${tapped_enough ? "is_active" : ""}`} src="/images/beaverlogo.png" onClick={this._didTap.bind(this)} />
+                <img className={`logo ${tapped_enough ? "is_active" : ""}`} src="/images/osulibrarylogo.png" onClick={this._didTap.bind(this)} />
               </div>
               <div id="navbar" className="navbar-collapse collapse">
                 <ul className="nav navbar-nav">

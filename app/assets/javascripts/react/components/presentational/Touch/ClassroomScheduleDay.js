@@ -50,15 +50,17 @@ class ClassroomScheduleDay extends Component {
    * @param {Moment} date - the current day which the schedule is displaying
    * @param {Object} event - the event to render times for
    * @param {number} i - the events index
+   * @param {willamette} true if both willamette east and west are selected in
+   * the filter
    * @returns {JSX} - the TR element
    * @private
    */
-  _eventTimeRow(date, event, i) {
+  _eventTimeRow(date, event, i, willamette) {
     const start_time = moment(event.start_time);
     const end_time = moment(event.end_time);
 
     return (
-      <tr key={`event.${i}.time`} className={`event-time-row ${event.room_shortname}`}>
+      <tr key={`event.${i}.time`} className={`event-time-row ${event.room_shortname} ${event.combined_willamette_room? "willamette-combined" : ""} ${willamette ? "willamette-selected" : ""}`}>
         {CLASSROOM_HOURS.map((h) => {
           const hour = moment(date).hour(h);
           const has_hour = this._eventIncludesTime(start_time, end_time, hour);
@@ -83,6 +85,19 @@ class ClassroomScheduleDay extends Component {
   }
 
   /**
+   * This function is to check if both willamette east and west are selected by
+   * the user in the filter section
+   * @param {Object} selected - an array of rooms selected
+   * @returns {bool} - true if both willamette east and west are selected
+   * @private
+   */
+  _willametteEastWestSelected(selected) {
+    const willamette_west_selected = selected.filter(function(selection){ return (selection.shortname === "lib-willwest")});
+    const willamette_east_selected = selected.filter(function(selection){ return (selection.shortname === "lib-willeast")});
+    return (willamette_west_selected.length > 0 && willamette_east_selected.length > 0)
+  }
+
+  /**
    * An event has a detail row followed by the event time row so that the detail can have full width of the table
    * and the time cells (15min increments) are colored and lined up properly on the x axis.
    * @param {Object} classrooms - the classrooms from the application state
@@ -99,12 +114,20 @@ class ClassroomScheduleDay extends Component {
     } else {
       const rows = [];
       this._filteredEvents(classrooms, events).map((e, i) => {
+        const selected = Object.values(classrooms).filter((c) => c.selected == true);
         rows.push(this._eventDetailRow(e, i));
-        rows.push(this._eventTimeRow(date, e, i));
+
+        if (this._willametteEastWestSelected(selected) === true) {
+          rows.push(this._eventTimeRow(date, e, i, true));
+        } else {
+          rows.push(this._eventTimeRow(date, e, i, false));
+        }
+ 
       });
       return rows;
     }
   }
+
 
   /**
    * Show only events which relate to the currently selected classrooms from the filter
@@ -115,6 +138,24 @@ class ClassroomScheduleDay extends Component {
    */
   _filteredEvents(classrooms, events) {
     const selected = Object.values(classrooms).filter((c) => c.selected == true);
+    const will_combined = [];
+
+    if (this._willametteEastWestSelected(selected) === true) {
+      // both rooms (east and west) were selected
+      events.forEach(function(event_item) {
+        if (event_item.combined_willamette_room === true) {
+          // for combined events, exclude willamette east (keep west)
+          if ((event_item.room_shortname !== "lib-willeast")) {
+            will_combined.push(event_item);
+          }
+        } else {
+          will_combined.push(event_item);
+        }
+
+      });
+      return Object.values(will_combined).filter((e) => selected.some((s) => s.shortname == e.room_shortname));
+    }
+
     if (selected.length == Object.values(classrooms).length) {
       return events;
     }

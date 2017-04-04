@@ -3,6 +3,7 @@
 
 $willwest: #3d5cff;
 $willeast: #ff3c5c;
+$willeastwest: #A020F0;
 $barnard: #6eff7e;
 $autzen: #ea76ff;
 
@@ -276,6 +277,7 @@ $autzen: #ea76ff;
         ul li.lib-willeast .glyphicon.checked {
           color: $willeast;
         }
+
         ul li.lib-barnard .glyphicon.checked {
           color: $barnard;
         }
@@ -354,6 +356,10 @@ $autzen: #ea76ff;
         }
         tbody tr.lib-willeast td.event-hour span.event-time {
           background-color: $willeast;
+          border-left: solid 1px darken($willeast, 25%);
+        }
+        tbody tr.willamette-combined.willamette-selected td.event-hour span.event-time {
+          background-color: $willeastwest;
           border-left: solid 1px darken($willeast, 25%);
         }
         tbody tr.lib-barnard td.event-hour span.event-time {
