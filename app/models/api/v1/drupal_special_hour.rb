@@ -19,6 +19,7 @@ module Api
         raise Api::V1::Exceptions::BadRequest.new("DrupalSpecialHour.#{I18n.t('api.drupal.hours_for_dates.bad_request')}") if dates.nil? || dates.empty?
 
         result = {}
+        Time.zone = "UTC"
         all_hours = self.query
         dates.map! { |d| d.to_date }.sort.each do |date|
           next unless date.instance_of? Date
