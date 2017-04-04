@@ -18,6 +18,7 @@ module Api
         @contact = node.at_xpath('edu.oregonstate.calendar:contact').text
         @contact_email = node.at_xpath('edu.oregonstate.calendar:contact_email').text
         @contact_phone = node.at_xpath('edu.oregonstate.calendar:contact_phone').text
+        @combined_willamette_room = (@room.downcase.include? "willamette") && (@room.downcase.include? "west") && (@room.downcase.include? "east")
       end
     end
   end
