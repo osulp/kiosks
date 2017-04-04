@@ -35,7 +35,7 @@ class ClassroomScheduleDay extends Component {
         <td colSpan={CLASSROOM_HOURS.length}>
           <div>
             <span className="event-title">{event.title}</span>
-            <span>{event.contact}</span>
+            <span></span>
             <span>{event.room}</span>
           </div>
         </td>
@@ -177,7 +177,7 @@ class ClassroomScheduleDay extends Component {
           <th colSpan={CLASSROOM_HOURS.length}>
             <div>
               <span>Event Title</span>
-              <span>Contact</span>
+              <span></span>
               <span>Location</span>
             </div>
           </th>
