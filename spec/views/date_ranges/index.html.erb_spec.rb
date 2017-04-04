@@ -39,7 +39,7 @@ RSpec.describe "date_ranges/index", type: :view do
 
   before(:each) do
     assign(:date_ranges, [
-      DateRange.create!(valid_attributes_2),
+      DateRange.create!(valid_attributes_1),
       DateRange.create!(valid_attributes_2)
     ])
   end

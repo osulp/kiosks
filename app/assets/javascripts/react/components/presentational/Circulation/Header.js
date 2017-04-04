@@ -17,10 +17,7 @@ class Header extends Component {
       return "";
     } else {
       let today = Object.values(this.props.hours)[0];
-      if(today.open.trim() == '12:00am' && today.close.trim() == '12:00am') {
-        return `Open 24 hours on ${today.string_date}`;
-      }
-      return `Open from ${today.open.trim()} to ${today.close.trim()} on ${today.string_date}`;
+      return `${today.formatted_hours.trim()} on ${today.string_date}`;
     }
   }
 

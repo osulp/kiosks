@@ -13,10 +13,6 @@ RSpec.describe CollectionsController, type: :controller do
     { name: "" }
   }
 
-  let(:uploaded_files_attributes) {
-    { name: "my collection"}
-  }
-
   let(:user) do
     User.create(
       :email => 'user@example.com',

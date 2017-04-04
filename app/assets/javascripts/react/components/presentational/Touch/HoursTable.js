@@ -9,8 +9,7 @@ class HoursTable extends Component {
         <thead>
         <tr>
           <th></th>
-          <th>Open</th>
-          <th>Close</th>
+          <th>Hours</th>
         </tr>
         </thead>
         <tbody>
@@ -18,8 +17,7 @@ class HoursTable extends Component {
           return (
             <tr key={`hours.${i}`} className={moment(h.sortable_date).isSame(this.props.selected_date, "day") ? "alert alert-info" : ""}>
               <td>{h.string_date}</td>
-              <td>{h.open}</td>
-              <td>{h.close}</td>
+              <td>{h.formatted_hours}</td>
             </tr>
           )
         })}
