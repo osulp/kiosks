@@ -11,6 +11,7 @@ module Api
       # @return [ActiveRecord::Query] - the rooms
       def self.available_rooms(start_time)
         room_ids = active_room_ids(start_time)
+        room_ids << 91 # also exclude the id 91 (room 2525), which has been disabled for reservations
         except_rooms(room_ids)
       end
 
