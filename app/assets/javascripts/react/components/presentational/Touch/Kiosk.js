@@ -10,7 +10,7 @@ class Kiosk extends Component {
    * After the component mounts, fetch the current library hours and slides.
    */
   componentDidMount() {
-    let now = moment();
+    let now = moment().format();
     this.props.fetchHours(this.props.api.hours, [now]);
     this.props.fetchSlides(this.props.url);
   }
@@ -37,7 +37,7 @@ class Kiosk extends Component {
    */
   _fetchHoursTimeout() {
     const fetch_hours = () => {
-      let now = moment();
+      let now = moment().format();
       this.props.fetchHours(this.props.api.hours, [now]);
     };
     clearTimeout(this.hours_timeout);

@@ -19,7 +19,7 @@ class Hours extends Component {
    */
   constructor(props) {
     super(props);
-    this.state = {selected_date: now};
+    this.state = {selected_date: now.format()};
   }
 
   /**

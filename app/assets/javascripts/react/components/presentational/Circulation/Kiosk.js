@@ -12,7 +12,7 @@ class Kiosk extends Component {
   componentDidMount() {
     // var test = new Date("2016/11/03 12:00:00");
     // let now = moment(test);
-    let now = moment();
+    let now = moment().format();
     this.props.fetchHours(this.props.api.hours, [now]);
   }
 
