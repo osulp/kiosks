@@ -33,7 +33,7 @@ export const fetchRoomsAvailableCount = (url, date) => {
     if (!date) {
       date = moment();
     }
-    let parsed_date = moment(date).format("YYYYMMDDhhmmss");
+    let parsed_date = moment(date).format("YYYYMMDDHHmmss");
     return fetch(`${url.replace("{date}", parsed_date)}`, {
       method: 'GET',
       headers: {

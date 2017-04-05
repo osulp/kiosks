@@ -26,7 +26,8 @@ class Rooms extends Component {
    * After the component has mounted, fetch the rooms available given a date
    */
   componentDidMount() {
-    let now = moment();
+    let now = moment().format();
+
     this.props.fetchRoomsAvailableCount(this.props.api.available_rooms, now);
     this.setRefreshTimeout();
 
