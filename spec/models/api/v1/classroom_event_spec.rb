@@ -10,8 +10,8 @@ RSpec.describe Api::V1::ClassroomEvent do
   it 'has details' do
     expect(event.title).to eq("Jaspersoft Training")
     expect(event.link).to eq("http://calendar.oregonstate.edu/event/122043/")
-    expect(event.start_time).to eq("20170104T1630")
-    expect(event.end_time).to eq("20170104T2000")
+    expect(event.start_time).to be_in(['20170104T1630', '20170104T0830'])
+    expect(event.end_time).to be_in(['20170104T2000', '20170104T1200'])
     expect(event.room).to eq("Barnard Classroom")
     expect(event.room_shortname).to eq("lib-barnard")
     expect(event.contact).to eq("Person Name")
