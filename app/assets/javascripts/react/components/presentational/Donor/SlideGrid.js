@@ -61,7 +61,7 @@ class SlideGrid extends Component {
           <div className="col-md-4"></div>
         </div>
         <div className="row donor-grid-container ">
-          <div className="scrollable">
+          <div className="scrollable dragscroll">
             {this.filteredSlides().map((slide, i) => {
               return (
                 <SlideCell key={`cell.${i}`} slide={slide} {...this.props}/>
