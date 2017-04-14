@@ -22,6 +22,7 @@
 //= require flipclock.min
 //= require fileupload
 //= require date_range_actions
+//= require dragscroll
 // *******************************************************************************************
 // Do not require_tree, include_tree, or any other Sprockets goodness. Javascript within ./components is compiled
 // by webpack as 'dist-app' and required here.
