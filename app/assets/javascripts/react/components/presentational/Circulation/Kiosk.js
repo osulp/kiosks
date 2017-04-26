@@ -14,6 +14,7 @@ class Kiosk extends Component {
     // let now = moment(test);
     let now = moment().format();
     this.props.fetchHours(this.props.api.hours, [now]);
+    this.props.fetchSlides(this.props.url);
   }
 
   /**
@@ -21,6 +22,7 @@ class Kiosk extends Component {
    */
   componentDidUpdate() {
     this._fetchHoursTimeout();
+    this._fetchSlidesTimeout();
   }
 
   /**
@@ -28,6 +30,7 @@ class Kiosk extends Component {
    */
   componentWillUnmount() {
     clearTimeout(this.hours_timeout);
+    clearTimeout(this.slides_timeout);
   }
 
   /**
