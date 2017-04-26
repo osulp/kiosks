@@ -13,24 +13,18 @@ class Kiosk extends Component {
     // var test = new Date("2016/11/03 12:00:00");
     // let now = moment(test);
     let now = moment().format();
-    this.props.fetchHours(this.props.api.hours, [now]);
-    this.props.fetchSlides(this.props.url);
-  }
-
-  /**
-   * When the app state updates, and the component updates, reset the hours and slides timeouts.
-   */
-  componentDidUpdate() {
     this._fetchHoursTimeout();
     this._fetchSlidesTimeout();
+    this.props.fetchHours(this.props.api.hours, [now]);
+    this.props.fetchSlides(this.props.url);
   }
 
   /**
    * Before the component unmounts, clear the timeouts.
    */
   componentWillUnmount() {
-    clearTimeout(this.hours_timeout);
-    clearTimeout(this.slides_timeout);
+    clearInterval(this.hours_timeout);
+    clearInterval(this.slides_timeout);
   }
 
   /**
@@ -38,44 +32,40 @@ class Kiosk extends Component {
    * @private
    */
   _fetchHoursTimeout() {
-    const fetch_hours = () => {
+    this.hours_timeout = setInterval(() => {
       let now = moment();
       this.props.fetchHours(this.props.api.hours, [now]);
-    };
-    clearTimeout(this.hours_timeout);
-    this.hours_timeout = setTimeout(fetch_hours, 10*60*1000);
+    }, 10 * 60 * 1000);
   }
 
   /**
-   * Fetch the most recent slides every 60 minutes to keep the kiosk with updated slides as they are changed on the server.
+   * Fetch the most recent slides every 10 minutes to keep the kiosk with updated slides as they are changed on the server.
    * @private
    */
   _fetchSlidesTimeout() {
-    const fetch_slides = () => {
-      this.props.fetchSlides();
-    };
-    clearTimeout(this.slides_timeout);
-    this.slides_timeout = setTimeout(fetch_slides, 60*60*1000);
+    this.slides_timeout = setInterval(() => {
+      this.props.fetchSlides(this.props.url);
+    }, 10 * 60 * 1000);
   }
 
   render() {
     return (
-          <div id="circulation_kiosk">
-            <div className="row">
-              <div className="col-md-12">
-                <Header {...this.props} />
-              </div>
-            </div>
-            <div className="row">
-              <div className="col-md-2">
-                <Rooms {...this.props} />
-              </div>
-              <div className="col-md-10">
-                <ConnectedSlideGallery {...this.props} />
-              </div>
-            </div>
+      <div id="circulation_kiosk">
+        <div className="row">
+          <div className="col-md-12">
+            <Header {...this.props} />
           </div>
-        );
+        </div>
+        <div className="row">
+          <div className="col-md-2">
+            <Rooms {...this.props} />
+          </div>
+          <div className="col-md-10">
+            <ConnectedSlideGallery {...this.props} />
+          </div>
+        </div>
+      </div>
+    );
   }
 }
 
