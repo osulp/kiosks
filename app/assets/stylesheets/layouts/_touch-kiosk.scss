@@ -21,18 +21,20 @@ $autzen: #ea76ff;
     bottom: 0;
     width: 100%;
   }
+
   .image-gallery-bullet {
-    background-color: rgba(255, 255, 255, 0.54) !important;
+    background-color: rgba(200, 54, 54, 0.5) !important;
     border-color: rgba(255, 255, 255, 0.90) !important;
-    -webkit-box-shadow: none !important;
-    -moz-box-shadow: none !important;
-    box-shadow: none !important;
+    -webkit-box-shadow: 2px 1px 0 #1a1a1a !important;
+    -moz-box-shadow: 2px 1px 0 #1a1a1a !important;
     padding: 15px;
   }
 
   .image-gallery-bullet.active {
     background-color: $osu_orange !important;
     border-color: $not_quite_black !important;
+    -webkit-box-shadow: 1px 1px 0 #1a1a1a !important;
+    -moz-box-shadow: 1px 1px 0 #1a1a1a !important;
     border-width: 2px;
     padding: 18px;
   }
