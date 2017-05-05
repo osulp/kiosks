@@ -26,11 +26,10 @@ class Hours extends Component {
    * Set the modal to automatically hide itself after a period of time, unless the timeout is cleared beforehand
    */
   setHideTimeout() {
-    const hide = () => {
+    this.hide_timeout = setInterval(() => {
       this.props.setModalRootComponent(undefined);
       this.props.setModalVisibility(false);
-    };
-    this.hide_timeout = setTimeout(hide, 20000);
+    }, 2*10*1000);
   }
 
   /**
@@ -41,7 +40,7 @@ class Hours extends Component {
     trackClicked(this.props.google_analytics, 'TouchKiosk:Hours:Date');
     this.setState({selected_date: date});
     this.props.fetchHours(this.props.api.hours, getWeekArray(date));
-    clearTimeout(this.hide_timeout);
+    clearInterval(this.hide_timeout);
     this.setHideTimeout();
   }
 
@@ -49,8 +48,8 @@ class Hours extends Component {
    * After the component mounts, fetch a weeks worth of hours for the date that was selected (defaulting to 'now')
    */
   componentDidMount() {
-    this.props.fetchHours(this.props.api.hours, getWeekArray(now));
     this.setHideTimeout();
+    this.props.fetchHours(this.props.api.hours, getWeekArray(now));
   }
 
   /**
@@ -58,7 +57,7 @@ class Hours extends Component {
    */
   componentWillUnmount() {
     this.props.fetchHours(this.props.api.hours, [now]);
-    clearTimeout(this.hide_timeout);
+    clearInterval(this.hide_timeout);
   }
 
   /**
