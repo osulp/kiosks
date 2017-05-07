@@ -69,10 +69,16 @@
       </tr>
       <tr>
         <th scope="row">
-          <strong>Kiosk:</strong>
+          <strong>Kiosks:</strong>
         </th>
         <td>
-          <%= link_to @slide.kiosk.name, kiosk_show_path(id: @slide.kiosk.name)  if @slide.kiosk %>
+          <ul>
+            <% for kiosk in @slide.kiosks %>
+              <li>
+                <%= link_to kiosk.name, kiosk_show_path(id: kiosk.name) %>
+              </li>
+            <% end %>
+          </ul>
         </td>
       </tr>
       <tr>

@@ -45,9 +45,15 @@
             <%= f.select('slide_type_id', options_from_collection_for_select(@slide_types, :id, :name, slide.slide_type_id), { :include_blank => '-- Select One --' }, :required => true, class: "form-control") %>
           </div>
 
+          <%= f.label :kiosks %>
           <div class="field">
-            <%= f.label :kiosk_id %>
-            <%= f.select('kiosk_id', options_from_collection_for_select(@kiosks, :id, :name, slide.kiosk_id), { :include_blank => '-- Select One --' }, :required => true, class: "form-control") %>
+            <ul class="list-group">
+              <span class="ul">
+                <% @kiosks.each do |kiosk| %>
+                  <label class="li"><%= check_box_tag :kiosks, kiosk.id, slide.kiosks.include?(kiosk), :name => 'slide[kiosk_ids][]' %> <u><%= kiosk.name %></u></label><br />
+                <% end %>
+              </span>
+            </ul>
           </div>
 
         </div>

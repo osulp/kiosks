@@ -6,7 +6,6 @@ RSpec.describe "slides/edit", type: :view do
       :title => "title test",
       :caption => "caption test",
       :slide_type => SlideType.create(name: "test slide type"),
-      :kiosk => Kiosk.create(name: "test kiosk"),
       :collection => Collection.create(name: "generic"),
       :image => Rack::Test::UploadedFile.new('spec/fixtures/Board_Game_Slide.jpg', 'image/jpg'),
     ))

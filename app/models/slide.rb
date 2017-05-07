@@ -2,7 +2,10 @@ class Slide < ApplicationRecord
   include Rails.application.routes.url_helpers
   attr_accessor :image
   belongs_to :slide_type
-  belongs_to :kiosk
+
+  has_many :kiosk_slides, :dependent => :destroy
+  has_many :kiosks, through: :kiosk_slides
+
   belongs_to :collection, inverse_of: :slides
 
   has_many :date_ranges, inverse_of: :slide, dependent: :destroy

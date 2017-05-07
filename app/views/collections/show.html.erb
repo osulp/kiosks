@@ -33,7 +33,15 @@
             </ul>
           </td>
           <td><%= slide.slide_type.name if slide.slide_type %></td>
-          <td><%= link_to slide.kiosk.name, kiosk_show_path(id: slide.kiosk.name)  if slide.kiosk %></td>
+          <td>
+            <ul>
+              <% for kiosk in slide.kiosks %>
+                <li>
+                  <%= link_to kiosk.name, kiosk_show_path(id: kiosk.name) %>
+                </li>
+              <% end %>
+            </ul>
+          </td>
           <td><%= link_to 'View', slide %></td>
           <td><%= link_to 'Edit', edit_slide_path(slide) %></td>
           <td><%= link_to 'Destroy', slide, method: :delete, data: { confirm: 'Are you sure?' } %></td>
@@ -100,6 +108,7 @@
   :default_kiosk_id => @default_kiosk.id,
   :default_slide_type_id => @default_slide_type.id,
   :kiosk_options => @kiosk_options,
-  :slide_type_options => @slide_type_options
+  :slide_type_options => @slide_type_options,
+  :kiosks => @kiosks
 } %>
 

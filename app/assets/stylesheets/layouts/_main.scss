@@ -104,6 +104,13 @@ body > #application_root {
   cursor: pointer;
 }
 
+.field.checkbox_container input {
+  margin-right: 0.25em;
+}
+.field.checkbox_container label {
+  margin-right: 2em;
+}
+
 /* Animated glyphicon, 360 rotation when .is_fetching
 -----------------------------------------------------------------------*/
 .glyphicon.is_fetching {

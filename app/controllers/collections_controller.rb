@@ -28,7 +28,7 @@ class CollectionsController < ApplicationController
   # POST /collections.json
   def create
     @collection = Collection.new(collection_params)
-
+    set_kiosks(params)
     respond_to do |format|
       if @collection.save
         format.html { redirect_to @collection, notice: 'Collection was successfully created.' }
@@ -50,6 +50,8 @@ class CollectionsController < ApplicationController
         s.save!
       end
     end
+
+    set_kiosks(params)
     respond_to do |format|
       if @collection.update(collection_params)
         format.html { redirect_to @collection, notice: 'Collection was successfully updated.' }
@@ -77,6 +79,33 @@ class CollectionsController < ApplicationController
       @collection = Collection.find(params[:id])
     end
 
+    def set_kiosks(params)
+      slides = {}
+      if params[:collection] && params[:collection][:slides_attributes]
+        params[:collection][:slides_attributes].each do |k, v|
+          slide_id = v ? v["id"] : k["id"]
+          slide_kiosks = v ? v["kiosk_ids"] : k["kiosk_ids"]
+          slides[slide_id] = slide_kiosks if slide_id
+        end
+
+        @collection.slides.each do |slide|
+          kiosks = []
+          if slides[slide.id.to_s]
+            slides[slide.id.to_s].each do |kiosk|
+              kiosks << Kiosk.find(kiosk)
+            end
+          end
+          if params["commit"] == "Upload Slides"
+            if slides[slide.id.to_s]
+              slide.kiosks = kiosks
+            end
+          else
+            slide.kiosks = kiosks
+          end
+        end
+      end
+    end
+
     def set_options
       @kiosks = Kiosk.all
       @slide_types = SlideType.all
@@ -89,8 +118,8 @@ class CollectionsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def collection_params
       params.require(:collection).permit(
-        :name, 
-        slides_attributes: [:id, :caption, :expires_at, :title, :collection_id, :slide_type_id, :kiosk_id, :image, :_destroy, date_ranges_attributes: [:id, :start_date, :end_date, :slide_id, :_destroy]]
+        :name,
+        slides_attributes: [:id, :caption, :expires_at, :title, :collection_id, :slide_type_id, :image, :_destroy, date_ranges_attributes: [:id, :start_date, :end_date, :slide_id, :_destroy]]
         )
     end
 

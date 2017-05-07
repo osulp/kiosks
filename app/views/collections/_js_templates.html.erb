@@ -108,13 +108,17 @@
                   <button class="btn pull-right slide_type_button" onClick="setAllDefaultOptions({%= file.id %}, 'slide_type_id'); return false;">Set all to this Slide Type</button>
                 </div>
 
-                <label for="collection_slides_attributes_{%=file.id%}_kiosk_id" class="col-sm-5 control-label">Kiosk</label>
+                <label for="collection_slides_attributes_kiosks" class="col-sm-5 control-label">Kiosks</label>
                 <div class="col-sm-7">
-                  <select class="form-control kiosk_id_dropdown" multiple="multiple" size="" name="collection[slides_attributes][{%=file.id%}][kiosk_id]" id="collection_slides_attributes_{%=file.id%}_kiosk_id" value="{%=file.kiosk%}">
-                    <%= options_for_select(kiosk_options, default_kiosk_id)  %>
-                  </select>
-                  <button class="btn pull-right kiosk_button" onClick="setAllDefaultOptions({%= file.id %},'kiosk_id'); return false;">Set all to this Kiosk</button>
+                  <ul class="list-group">
+                    <span class="ul">
+                      <% kiosks.each do |kiosk| %>
+<label class="li"><%= check_box_tag :kiosks, kiosk.id, false, :name => 'collection[slides_attributes][{%=file.id%}][kiosk_ids][]' %> <u><%= kiosk.name %></u></label><br />
+                      <% end %>
+                    </span>
+                  </ul>
                 </div>
+
                 <input type="hidden" value="{%= file.id %}" name="collection[slides_attributes][{%= file.id %}][id]" id="collection_slides_attributes_{%= file.id %}_id">
                 <input type="hidden" <%= "value=#{collection_id}" %> name="collection[slides_attributes][{%= file.id %}][collection_id]" id="collection_slides_attributes_{%= file.id %}_collection_id">
               </div>

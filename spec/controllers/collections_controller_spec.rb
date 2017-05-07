@@ -143,20 +143,37 @@ RSpec.describe CollectionsController, type: :controller do
         Rack::Test::UploadedFile.new('spec/fixtures/Board_Game_Slide.jpg', 'image/jpg')
       }
 
+      let(:test_kiosk) {
+        Kiosk.create!(name: "circ")
+      }
+
       let(:uploaded_slide_valid_attributes) {
         {
           expires_at: Time.utc(2015, 1, 1, 12, 0, 0),
           caption: "test caption",
           title: "test title",
+          kiosk_ids: [test_kiosk.id],
           slide_type_id: SlideType.create(name: "Basic").id,
-          kiosk_id: Kiosk.create(name: "touch").id,
-          collection_id: Collection.create(name: "generic").id,
+          collection_id: test_collection.id,
           image: uploaded_file
         }
       }
 
       let(:uploaded_slide) {
         Slide.create! uploaded_slide_valid_attributes
+      }
+
+      let(:test_collection) {
+        Collection.create! valid_attributes
+      }
+
+      let(:new_attributes_multiple_kiosks) {
+        {
+          name: "my collection",
+          slides_attributes: [
+            { id: uploaded_slide.id, kiosk_ids: [test_kiosk.id] }
+          ]
+        }
       }
 
       it "updates the requested collection" do
@@ -166,9 +183,28 @@ RSpec.describe CollectionsController, type: :controller do
         expect(collection.name).to eq("Donors")
       end
 
+      it "updates collections with slides with multiple kiosks" do
+        allow(test_collection).to receive(:slides).and_return([uploaded_slide])
+        KioskSlide.create(kiosk_id: test_kiosk.id, slide_id: uploaded_slide)
+        put :update, params: {id: test_collection.id, collection: new_attributes_multiple_kiosks}
+        test_collection.reload
+        expect(test_collection.name).to eq("my collection")
+        expect(test_collection.slides.first.title).to eq("test title")
+        expect(test_collection.slides.first.kiosk_ids).to eq([test_kiosk.id])
+      end
+
+      it "updates collections with slides with multiple kiosks uploading multiple files" do
+        allow(test_collection).to receive(:slides).and_return([uploaded_slide])
+        KioskSlide.create(kiosk_id: test_kiosk.id, slide_id: uploaded_slide)
+        put :update, params: {id: test_collection.id, collection: new_attributes_multiple_kiosks, uploaded_files: [uploaded_slide.id], commit: "Upload Slides"}
+        test_collection.reload
+        expect(test_collection.name).to eq("my collection")
+        expect(test_collection.slides.first.title).to eq("test title")
+        expect(test_collection.slides.first.kiosk_ids).to eq([test_kiosk.id])
+      end
+
       it "updates uploaded files in new slides so that they belong to the selected collection" do
         collection = Collection.create! valid_attributes
-        # uploaded_slide.reload
         put :update, params: {id: collection.to_param, collection: new_attributes, uploaded_files: [uploaded_slide.id], commit: "Upload Slides"}
         collection.reload
         expect(collection.name).to eq("Donors")
