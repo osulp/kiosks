@@ -11,7 +11,7 @@ module Api
       def set_params
         # expecting a start date like "20160101120000"
         # the format should be YYYYMMDDHHmmss if it's set with moment.js
-        @start_time = Time.zone.parse(params[:start_time]).in_time_zone('UTC')
+        @start_time = Time.parse(params[:start_time]).in_time_zone('UTC')
         raise StandardError.new("Invalid start_time.") if @start_time.nil?
       end
     end
