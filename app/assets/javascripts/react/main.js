@@ -38,6 +38,4 @@ if (root_dom_element) {
     />,
     root_dom_element
   );
-} else {
-  console.error("div#application_root doesn't exist, unable to start application.");
 }
