@@ -13,9 +13,6 @@ set :repo_url, config['repository']
 # Default deploy_to directory is /var/www/my_app_name
 set :deploy_to, config['deploy_to']
 
-# Default value for :scm is :git
-set :scm, :git
-
 # The server must have rbenv installed and the version of ruby specified here.
 set :rbenv_ruby, '2.3.3'
 
