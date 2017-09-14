@@ -19,36 +19,11 @@ $(function () {
     'use strict';
     // Initialize the jQuery File Upload widget:
     var options = {
-      // done: function (e, data) {
-      //   alert('hola mundo :D');
-      //   ids.push(data.result.slide_id);
-      //   $('#collections_ids').val(ids);
-      // }
+      sequentialUploads: true,
+      limitConcurrentUploads: 1
     };
-    <% if Rails.env.development? %>
-        // use sequential uploads in development to avoid database locking problems with sqlite3.
-      options.sequentialUploads = true;
-      options.limitConcurrentUploads = 1;
-    <% end %>
 
-    $('#fileupload').kiosksUploader(options);
-      // $('#fileupload').fileupload();
-  //   $('#fileupload').fileupload({
-  //     autoUpload: true,
-  //     uploadTemplate: function (o) {
-  //       var rows = $();
-  //       $.each(o.files, function (index, file) {
-  //         console.log(file);
-  //           var row = $('<li class="span3">' +
-  //               '<div class="thumbnail">' +
-  //                 '<div class="preview" style="text-align: center;"></div>' +
-  //                 '<div class="progress progress-success progress-striped active">' +
-  //                   '<div class="bar" style="width:0%;"></div>' +
-  //                 '</div>' +
-  //               '</div>');
-  //           rows = rows.add(row);
-  //       });
-  //       return rows;
-  //   },
-  // });
+    if($('#fileupload').length > 0) {
+      $('#fileupload').kiosksUploader(options);
+    }
 });
