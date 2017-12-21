@@ -27,12 +27,9 @@ class SearchPrimo extends Component {
   render() {
     return (
       <div id="search-primo" className="panel panel-default">
-        <div className="panel-heading">
-          <span className="panel-title">1Search</span>
-        </div>
         <div className="container-fluid search-primo-table-container">
           <div className="row">
-            <div className="col-sm-12">
+            <div className="col-sm-12 search-iframe">
                 <Iframe src="https://search.library.oregonstate.edu/primo-explore/search?vid=OSU&sortby=rank" height={(window.innerHeight-200).toString() + 'px'} width="100%"/>
             </div>
           </div>
