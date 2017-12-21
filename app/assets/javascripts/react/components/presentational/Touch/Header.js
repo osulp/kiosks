@@ -2,6 +2,7 @@ import React, {Component, PropTypes} from 'react';
 import TouchHours from '../../TouchHours';
 import ConnectedTabbedPanel from '../../TabbedPanel';
 import ConnectedClassroomSchedule from '../../TouchClassroomSchedule';
+import ConnectedSearchPrimo from '../../TouchSearchPrimo';
 import {trackClicked} from '../shared/GoogleAnalytics';
 
 class Header extends Component {
@@ -71,6 +72,15 @@ class Header extends Component {
     this.props.setModalVisibility(true);
     this.props.setModalRootComponent(<ConnectedClassroomSchedule />);
   }
+  
+  /**
+   * The 1search button was clicked, set the modal to display the connected search primo component
+   */
+  searchPrimoClicked() {
+    trackClicked(this.props.google_analytics, 'TouchKiosk:Header:SearchPrimo');
+    this.props.setModalVisibility(true);
+    this.props.setModalRootComponent(<ConnectedSearchPrimo />);
+  }
 
   /**
    * Generate a Maps button if there are maps to display
@@ -127,6 +137,9 @@ class Header extends Component {
                   {this._mapsButton()}
                   <li className="show-classroom-schedule" onClick={this.classroomScheduleClicked.bind(this)}>
                     <a className="btn btn-navbar btn-default">Classrooms Schedule</a>
+                  </li>
+                  <li className="show-search-primo" onClick={this.searchPrimoClicked.bind(this)}>
+                    <a className="btn btn-navbar btn-default">1Search</a>
                   </li>
                 </ul>
                 <ul className="nav navbar-nav navbar-right">
