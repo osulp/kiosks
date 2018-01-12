@@ -25,7 +25,7 @@ module Api
       end
 
       def closes_at_night
-        (string_close_time != "12:15am" && string_close_time != "12:00am") ? true : false
+        ['12:15am','12:00am','1:00am'].include?(string_close_time) ? false : true
       end
 
       def string_open_time
