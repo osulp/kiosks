@@ -14,6 +14,16 @@ RSpec.describe Api::V1::CustomHoursFormat do
     end
   end
 
+  context "Closed" do
+    let(:open_time) { Time.zone.parse("2017-01-17 01:00:00") }
+    let(:close_time) { Time.zone.parse("2017-01-17 01:00:00") }
+    it "sets the hours to closed" do
+      expect(subject.formatted_hours).to eq "Closed"
+      expect(subject.open_all_day).to eq false
+      expect(subject.closes_at_night).to eq false
+    end
+  end
+
   context "No Closing - <close_time>" do
     let(:open_time) { Time.zone.parse("2017-01-20 00:15:00") }
     let(:close_time) { Time.zone.parse("2017-01-20 22:00:00") }
