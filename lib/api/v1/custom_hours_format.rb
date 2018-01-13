@@ -13,6 +13,8 @@ module Api
           "No Closing - #{string_close_time}"
         elsif (string_open_time == "12:00am" && string_close_time == "12:00am")
           "Open 24 Hours"
+        elsif (string_open_time == "1:00am" && string_close_time == "1:00am")
+          "Closed"
         else
           "#{string_open_time} - #{string_close_time}"
         end
@@ -23,7 +25,7 @@ module Api
       end
 
       def closes_at_night
-        (string_close_time != "12:15am" && string_close_time != "12:00am") ? true : false
+        ['12:15am','12:00am','1:00am'].include?(string_close_time) ? false : true
       end
 
       def string_open_time
