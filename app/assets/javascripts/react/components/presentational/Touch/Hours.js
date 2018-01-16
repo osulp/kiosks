@@ -9,7 +9,7 @@ import {trackClicked} from '../shared/GoogleAnalytics';
 export const now = moment();
 export const default_calendar_value = now.clone();
 export const getWeekArray = (date) => {
-  return ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"].map(d => moment(date).day(d));
+  return ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"].map(d => moment(date).day(d).format('YYYY-MM-DD'));
 };
 
 class Hours extends Component {
@@ -19,7 +19,7 @@ class Hours extends Component {
    */
   constructor(props) {
     super(props);
-    this.state = {selected_date: now.format()};
+    this.state = {selected_date: now};
   }
 
   /**
@@ -49,14 +49,14 @@ class Hours extends Component {
    */
   componentDidMount() {
     this.setHideTimeout();
-    this.props.fetchHours(this.props.api.hours, getWeekArray(now));
+    this.props.fetchHours(this.props.api.hours, getWeekArray(now.format('YYYY-MM-DD')));
   }
 
   /**
    * Before the component unmounts, clear the hide timeout
    */
   componentWillUnmount() {
-    this.props.fetchHours(this.props.api.hours, [now]);
+    this.props.fetchHours(this.props.api.hours, [now.format('YYYY-MM-DD')]);
     clearInterval(this.hide_timeout);
   }
 
@@ -70,7 +70,11 @@ class Hours extends Component {
     if (hours.error) {
       return (<HoursError error={hours.error}/>);
     } else {
-      return (<HoursTable hours={hours} selected_date={this.state.selected_date}/>);
+        if(typeof this.state.selected_date == 'string') {
+            return (<HoursTable hours={hours} selected_date={moment(this.state.selected_date)}/>);
+        } else {
+            return (<HoursTable hours={hours} selected_date={this.state.selected_date}/>);
+        }
     }
   }
 

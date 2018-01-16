@@ -8,7 +8,7 @@ module Api
       # Query Drupal to find the times the Library is open and closed for an array of Dates.
       # @param dates [Array<String>] Array of string dates you want the hours for.
       # @return [Hash<Hash>] Hash where each key is the date with the hours containing a hash with details.
-      #   ie. { "2016-11-25 00:00:00 UTC": {
+      #   ie. { "2016-11-25 00:00:00 -0800": {
       #           "open": "12:15am",
       #           "close": "10:00pm",
       #           "string_date": "Fri, Nov 25, 2016",
@@ -19,9 +19,8 @@ module Api
         raise Api::V1::Exceptions::BadRequest.new("DrupalHour.#{I18n.t('api.drupal.hours_for_dates.bad_request')}") if dates.nil? || dates.empty?
 
         result = {}
-        Time.zone = "UTC"
         all_hours = self.query
-        dates.map! { |d| d.to_date }.sort.each do |date|
+        dates.map { |d| d.to_date }.sort.each do |date|
           next unless date.instance_of? Date
           hours = all_hours.select { |x| x.term_start_date.to_date <= date && x.term_end_date.to_date >= date }[0]
           next unless hours
