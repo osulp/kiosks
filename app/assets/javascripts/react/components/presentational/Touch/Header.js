@@ -138,7 +138,10 @@ class Header extends Component {
                   <li className="show-classroom-schedule" onClick={this.classroomScheduleClicked.bind(this)}>
                     <a className="btn btn-navbar btn-default">Classrooms Schedule</a>
                   </li>
-                  <li className="show-search-primo" onClick={this.searchPrimoClicked.bind(this)}>
+                  /* TODO: enable show-search-primo button when primo instance
+                   * for kiosks is ready
+                   * */
+                  <li className="show-search-primo hidden" onClick={this.searchPrimoClicked.bind(this)}>
                     <a className="btn btn-navbar btn-default">1Search</a>
                   </li>
                 </ul>
