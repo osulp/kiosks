@@ -10,7 +10,7 @@ module Api
         if (string_close_time == "12:15am")
           "#{string_open_time} - No Closing"
         elsif (string_open_time == "12:15am")
-          "No Closing - #{string_close_time}"
+          "Closes at #{string_close_time}"
         elsif (string_open_time == "12:00am" && string_close_time == "12:00am")
           "Open 24 Hours"
         elsif (string_open_time == "1:00am" && string_close_time == "1:00am")

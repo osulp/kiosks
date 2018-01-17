@@ -20,7 +20,7 @@ module Api
         sh = DrupalSpecialHour.hours_for_dates(@dates)
         merged = h.merge(ih).merge(sh)
         raise Api::V1::Exceptions::RecordNotFound.new(I18n.t('api.drupal.hours.record_not_found')) if merged.empty?
-        merged
+        merged.sort.to_h
       end
     end
   end

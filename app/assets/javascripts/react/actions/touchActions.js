@@ -83,7 +83,7 @@ export const fetchHours = (url, dates) => {
     // Default to this weeks dates if dates is undefined
     if (!dates) {
       dates = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
-        .map(d => moment().day(d));
+        .map(d => moment().day(d).format('YYYY-MM-DD'));
     }
     return fetch(url, {
       method: 'POST',
