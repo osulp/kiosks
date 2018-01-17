@@ -56,7 +56,7 @@ class Hours extends Component {
    * Before the component unmounts, clear the hide timeout
    */
   componentWillUnmount() {
-    this.props.fetchHours(this.props.api.hours, [now.format('YYYY-MM-DD')]);
+    this.props.fetchHours(this.props.api.hours, [moment().format('YYYY-MM-DD')]);
     clearInterval(this.hide_timeout);
   }
 
