@@ -41,7 +41,6 @@ gem 'capistrano-nvm'
 
 gem 'react-rails'
 gem 'devise'
-gem "paperclip", "~> 5.0.0"
 gem 'rmagick'
 gem 'carrierwave', '~> 1.0'
 gem 'flipclockjs-rails', '~> 0.7.7'
