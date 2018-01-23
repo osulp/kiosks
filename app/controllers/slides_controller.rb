@@ -34,12 +34,13 @@ class SlidesController < ApplicationController
   def create
     if params[:files]
       default_title = params[:files].first.original_filename.to_s
-      default_params = { image: params[:files].first, caption: "Enter Caption", title: default_title , expires_at: Date.today, kiosk_id: @default_kiosk.id, slide_type_id: @default_slide_type.id, collection_id: @default_collection.id}
+      default_params = { image: params[:files].first, caption: "Enter Caption", title: default_title , expires_at: Date.today, slide_type_id: @default_slide_type.id, collection_id: @default_collection.id}
       @slide = Slide.new(default_params)
     else
       @slide = Slide.new(slide_params)
     end
 
+    set_kiosks(params)
     respond_to do |format|
       if @slide.save
         format.html { redirect_to @slide, notice: 'Slide was successfully created.' }
@@ -56,6 +57,7 @@ class SlidesController < ApplicationController
   # PATCH/PUT /slides/1
   # PATCH/PUT /slides/1.json
   def update
+    set_kiosks(params)
     respond_to do |format|
       if @slide.update(slide_params)
         format.html { redirect_to @slide, notice: 'Slide was successfully updated.' }
@@ -83,6 +85,11 @@ class SlidesController < ApplicationController
       @slide = Slide.find(params[:id])
     end
 
+    def set_kiosks(params)
+      kiosk_ids = params.dig('slide', 'kiosk_ids')
+      @slide.kiosks = (kiosk_ids) ? Kiosk.find(kiosk_ids) : []
+    end
+
     def set_options
       @kiosks = Kiosk.all
       @slide_types = SlideType.all
@@ -103,7 +110,7 @@ class SlidesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def slide_params
-      params.require(:slide).permit(:caption, :expires_at, :title, :collection_id, :slide_type_id, :kiosk_id, :image, date_ranges_attributes: [:id, :start_date, :end_date, :_destroy])
+      params.require(:slide).permit(:caption, :expires_at, :title, :collection_id, :slide_type_id, :image, :kiosk_ids, date_ranges_attributes: [:id, :start_date, :end_date, :_destroy])
     end
 
     def authorize

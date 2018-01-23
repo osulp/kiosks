@@ -16,7 +16,6 @@ RSpec.describe SlidesController, type: :controller do
       expires_at: Time.utc(2015, 1, 1, 12, 0, 0),
       caption: "test caption", title: "test title", 
       slide_type_id: slide_type_test.id,
-      kiosk_id: kiosk_test.id,
       collection_id: collection_test.id,
       image: test_file
     }
@@ -157,9 +156,13 @@ RSpec.describe SlidesController, type: :controller do
           expires_at: Time.utc(2015, 1, 1, 12, 0, 0),
           caption: "test update caption", title: "test update title", 
           slide_type_id: slide_type_test.id,
-          kiosk_id: kiosk_test.id,
+          kiosk_ids: [test_kiosk.id],
           image: Rack::Test::UploadedFile.new('spec/fixtures/Board_Game_Slide.jpg', 'image/jpg')
         }
+      }
+
+      let(:test_kiosk) {
+        Kiosk.create(name: "touch")
       }
 
       it "updates the requested slide" do
@@ -168,6 +171,7 @@ RSpec.describe SlidesController, type: :controller do
         slide.reload
         expect(slide.caption).to eq("test update caption")
         expect(slide.title).to eq("test update title")
+        expect(slide.kiosk_ids).to eq([test_kiosk.id])
       end
 
       it "assigns the requested slide as @slide" do

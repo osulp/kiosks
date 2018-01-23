@@ -12,6 +12,7 @@ RSpec.describe "collections/show", type: :view do
       :name => "Basic"
     ))
     @kiosk_options = assign(:kiosk_options, {@default_kiosk.name => @default_kiosk.id } )
+    @kiosks = assign(:kiosks, [@default_kiosk])
     @slide_type_options = assign(:slide_type_options, {@default_slide_type.name => @default_slide_type.id})
   end
 

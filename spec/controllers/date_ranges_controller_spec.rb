@@ -11,7 +11,6 @@ RSpec.describe DateRangesController, type: :controller do
       expires_at: Time.utc(2015, 1, 1, 12, 0, 0),
       caption: "test caption", title: "test title", 
       slide_type_id: slide_type_test.id,
-      kiosk_id: kiosk_test.id,
       collection_id: collection_test.id,
       image: test_file
     }
