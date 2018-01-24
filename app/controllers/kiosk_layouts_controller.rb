@@ -1,5 +1,7 @@
 class KioskLayoutsController < ApplicationController
   before_action :set_kiosk_layout, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!
+  before_action :authorize
 
   # GET /kiosk_layouts
   # GET /kiosk_layouts.json
@@ -70,5 +72,12 @@ class KioskLayoutsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def kiosk_layout_params
       params.require(:kiosk_layout).permit(:name)
+    end
+
+    def authorize
+      unless current_user && current_user.admin?
+        flash[:alert] = "You do not have sufficient permissions to view this page"
+        redirect_to root_path
+      end
     end
 end

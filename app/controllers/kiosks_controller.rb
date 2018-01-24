@@ -1,5 +1,6 @@
 class KiosksController < ApplicationController
   before_action :set_kiosk, only: [:show, :edit, :update, :destroy]
+  before_action :set_options, only: [:create, :new, :show, :edit, :update, :destroy]
   before_action :authenticate_user!
   before_action :authorize
   before_action :set_params
@@ -55,6 +56,16 @@ class KiosksController < ApplicationController
     end
   end
 
+  # DELETE /slides/1
+  # DELETE /slides/1.json
+  def destroy
+    @kiosk.destroy
+    respond_to do |format|
+      format.html { redirect_to kiosks_url, notice: 'Kiosk was successfully destroyed.' }
+      format.json { head :no_content }
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_kiosk
@@ -63,7 +74,11 @@ class KiosksController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def kiosk_params
-      params.require(:kiosk).permit(:name)
+      params.require(:kiosk).permit(:name, :kiosk_layout_id)
+    end
+
+    def set_options
+      @kiosk_layouts = KioskLayout.all
     end
 
     def set_params
