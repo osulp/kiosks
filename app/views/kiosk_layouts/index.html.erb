@@ -15,13 +15,8 @@
       <tr>
         <td><%= kiosk_layout.name %></td>
         <td><%= link_to 'Show', kiosk_layout %></td>
-        <td><%= link_to 'Edit', edit_kiosk_layout_path(kiosk_layout) %></td>
-        <td><%= link_to 'Destroy', kiosk_layout, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
-<br>
-
-<%= link_to 'New Kiosk Layout', new_kiosk_layout_path %>

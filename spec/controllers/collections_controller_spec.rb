@@ -13,6 +13,8 @@ RSpec.describe CollectionsController, type: :controller do
     { name: "" }
   }
 
+  let(:test_layout) { KioskLayout.create!(:name => "touch") }
+
   let(:user) do
     User.create(
       :email => 'user@example.com',
@@ -144,7 +146,7 @@ RSpec.describe CollectionsController, type: :controller do
       }
 
       let(:test_kiosk) {
-        Kiosk.create!(name: "circ")
+        Kiosk.create!(name: "circ", kiosk_layout_id: test_layout.id)
       }
 
       let(:uploaded_slide_valid_attributes) {

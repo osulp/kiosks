@@ -30,10 +30,5 @@ RSpec.describe KioskLayoutsController, type: :routing do
     it "routes to #update via PATCH" do
       expect(:patch => "/kiosk_layouts/1").to route_to("kiosk_layouts#update", :id => "1")
     end
-
-    it "routes to #destroy" do
-      expect(:delete => "/kiosk_layouts/1").to route_to("kiosk_layouts#destroy", :id => "1")
-    end
-
   end
 end

@@ -1,13 +1,16 @@
 require 'rails_helper'
 
 RSpec.describe "kiosks/index", type: :view do
+  let (:test_layout) { KioskLayout.create!(:name => "touch") }
   before(:each) do
     assign(:kiosks, [
       Kiosk.create!(
-        :name => "Name"
+        :name => "Name",
+        :kiosk_layout_id => test_layout.id
       ),
       Kiosk.create!(
-        :name => "Name"
+        :name => "Name",
+        :kiosk_layout_id => test_layout.id
       )
     ])
   end

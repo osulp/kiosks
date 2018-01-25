@@ -13,8 +13,9 @@ RSpec.describe KioskSlide, type: :model do
       image: test_file
     }
   }
+  let (:test_layout) { KioskLayout.create!(:name => "touch") }
   let(:test_kiosk) {
-    Kiosk.create(name: "circ")
+    Kiosk.create(name: "circ", kiosk_layout_id: test_layout.id)
   }
   let(:test_slide) {
     Slide.create! valid_attributes

@@ -53,16 +53,6 @@ class KioskLayoutsController < ApplicationController
     end
   end
 
-  # DELETE /kiosk_layouts/1
-  # DELETE /kiosk_layouts/1.json
-  def destroy
-    @kiosk_layout.destroy
-    respond_to do |format|
-      format.html { redirect_to kiosk_layouts_url, notice: 'Kiosk layout was successfully destroyed.' }
-      format.json { head :no_content }
-    end
-  end
-
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_kiosk_layout
