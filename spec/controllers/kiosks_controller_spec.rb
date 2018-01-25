@@ -4,12 +4,16 @@ RSpec.describe KiosksController, type: :controller do
   # This should return the minimal set of attributes required to create a valid
   # Kiosk. As you add validations to Kiosk, be sure to
   # adjust the attributes here as well.
+
+  let (:test_layout) { KioskLayout.create!(:name => "touch") }
+
   let(:valid_attributes) {
-    { name: "donor" }
+    { name: "donor", kiosk_layout_id: test_layout.id }
   }
 
+
   let(:invalid_attributes) {
-    { name: "" }
+    { name: "" , kiosk_layout_id: nil }
   }
 
   let(:user) do
@@ -170,6 +174,21 @@ RSpec.describe KiosksController, type: :controller do
         put :update, params: {id: kiosk.to_param, kiosk: invalid_attributes}
         expect(response).to render_template("edit")
       end
+    end
+  end
+
+  describe "DELETE #destroy" do
+    it "destroys the requested slide" do
+      kiosk = Kiosk.create! valid_attributes
+      expect {
+        delete :destroy, params: {id: kiosk.to_param}
+      }.to change(Kiosk, :count).by(-1)
+    end
+
+    it "redirects to the slides list" do
+      kiosk = Kiosk.create! valid_attributes
+      delete :destroy, params: {id: kiosk.to_param}
+      expect(response).to redirect_to(kiosks_url)
     end
   end
 end

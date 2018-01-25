@@ -1,0 +1,22 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Kiosk Layouts</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @kiosk_layouts.each do |kiosk_layout| %>
+      <tr>
+        <td><%= kiosk_layout.name %></td>
+        <td><%= link_to 'Show', kiosk_layout %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+

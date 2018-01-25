@@ -20,6 +20,7 @@
           <td><%= link_to kiosk.name, kiosk %></td>
           <td><%= link_to 'Show', kiosk_show_path(id: kiosk.name) %></td>
           <td><%= link_to 'Edit', edit_kiosk_path(kiosk) %></td>
+          <td><%= link_to 'Destroy', kiosk, method: :delete, data: { confirm: 'Are you sure?' } %></td>
         </tr>
       <% end %>
     </tbody>
@@ -28,5 +29,6 @@
 
 <br>
 
+<%= link_to 'New Kiosk', new_kiosk_path, class: "btn btn-primary" %>
 <%= link_to 'Admin Panel', admin_index_path, class: "btn btn-default" %>
 

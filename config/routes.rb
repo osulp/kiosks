@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  resources :kiosk_layouts
   resources :date_ranges
   # Api namespaced routes and modules
   # ie: /api/v1/hours => Api::V1::HoursController#show

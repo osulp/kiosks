@@ -8,7 +8,9 @@ RSpec.describe SlidesController, type: :controller do
   # adjust the attributes here as well.
   #
   let(:slide_type_test) { SlideType.create(name: "Basic") }
-  let(:kiosk_test) { Kiosk.create(name: "touch") }
+  let(:kiosk_layout_test) { KioskLayout.create(name: "circulation") }
+  let(:kiosk_test) { Kiosk.create(name: "touch", kiosk_layout_test_id: kiosk_layout_test.id) }
+
   let(:collection_test) { Collection.create(name: "generic") }
   let(:test_file) { Rack::Test::UploadedFile.new('spec/fixtures/Board_Game_Slide.jpg', 'image/jpg') }
   let(:valid_attributes) {
@@ -162,7 +164,7 @@ RSpec.describe SlidesController, type: :controller do
       }
 
       let(:test_kiosk) {
-        Kiosk.create(name: "touch")
+        Kiosk.create(name: "touch", kiosk_layout_id: kiosk_layout_test.id)
       }
 
       it "updates the requested slide" do

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170505224613) do
+ActiveRecord::Schema.define(version: 20180124180535) do
 
   create_table "collections", force: :cascade do |t|
     t.string   "name"
@@ -27,6 +27,12 @@ ActiveRecord::Schema.define(version: 20170505224613) do
     t.index ["slide_id"], name: "index_date_ranges_on_slide_id"
   end
 
+  create_table "kiosk_layouts", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "kiosk_slides", force: :cascade do |t|
     t.integer "kiosk_id"
     t.integer "slide_id"
@@ -35,8 +41,10 @@ ActiveRecord::Schema.define(version: 20170505224613) do
 
   create_table "kiosks", force: :cascade do |t|
     t.string   "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.integer  "kiosk_layout_id"
+    t.index ["kiosk_layout_id"], name: "index_kiosks_on_kiosk_layout_id"
   end
 
   create_table "slide_types", force: :cascade do |t|

@@ -1,12 +1,13 @@
 require 'rails_helper'
 
 RSpec.describe "collections/show", type: :view do
+  let (:test_layout) { KioskLayout.create!(:name => "touch") }
   before(:each) do
     @collection = assign(:collection, Collection.create!(
       :name => "Name"
     ))
     @default_kiosk = assign(:default_kiosk, Kiosk.create!(
-      :name => "touch"
+      :name => "touch", kiosk_layout_id: test_layout.id
     ))
     @default_slide_type = assign(:default_slide_type, SlideType.create!(
       :name => "Basic"
@@ -18,7 +19,7 @@ RSpec.describe "collections/show", type: :view do
 
   it "renders attributes in <p>" do
     # set default values
-    Kiosk.create!(:name => "touch")
+    Kiosk.create!(:name => "touch", :kiosk_layout_id => test_layout.id)
     SlideType.create!(:name => "Basic")
     render
     expect(rendered).to match(/Name/)
