@@ -1,6 +1,7 @@
 <div id="application_root"
      data-kiosk-type="<%= @kiosk.kiosk_layout.name %>"
      data-slides='<%= raw(render(template: "kiosk/show.json", locals: { slides: @slides })) %>'
+     data-restart-kiosk='<%= raw(render(template: "kiosk/show.json", locals: { restart_kiosk: @restart_kiosk })) %>'
      data-maps='<%= raw(render(template: "kiosk/maps.json", locals: { maps: @maps })) %>'
      data-kiosk-url="<%= kiosk_show_url id: @kiosk.name %>"
      ></div>

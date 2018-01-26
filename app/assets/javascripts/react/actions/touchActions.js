@@ -49,6 +49,47 @@ export const fetchSlides = (url) => {
   };
 };
 
+export const FETCHING_RESTART_KIOSK = 'FETCHING_RESTART_KIOSK';
+export const fetchingRestartKiosk = () => {
+  return {
+    type: FETCHING_RESTART_KIOSK
+  };
+};
+
+export const FETCHED_RESTART_KIOSK = 'FETCHED_RESTART_KIOSK';
+export const fetchedRestartKiosk = () => {
+  return {
+    type: FETCHED_RESTART_KIOSK
+  };
+};
+
+/**
+ * A redux-thunk async action that fetches from the server and handles the return by dispatching a regular
+ * action depending on success or error.
+ * @param url - the url to the server for fetching restart_kiosk
+ * @returns {Redux Async Action} - see http://redux.js.org/docs/advanced/AsyncActions.html
+ */
+export const fetchRestartKiosk = (url) => {
+  return (dispatch) => {
+    dispatch(fetchingRestartKiosk());
+    return fetch(`${url}.json`)
+      .then(response => response.json())
+      .then(json => {
+        if (json.restart_kiosk == 'true'){
+          window.location.reload(true);
+        }
+        dispatch(setRestartKiosk(json.restart_kiosk));
+        setTimeout(() => {
+          dispatch(fetchedRestartKiosk());
+        }, 800);
+      })
+      .catch(err => {
+        dispatch(addError({message: err.message, code: err.code}));
+        dispatch(fetchedRestartKiosk());
+      });
+  };
+};
+
 export const SET_HOURS = 'SET_HOURS';
 export const setHours = (hours) => {
   return {

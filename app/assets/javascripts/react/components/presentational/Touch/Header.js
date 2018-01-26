@@ -82,6 +82,10 @@ class Header extends Component {
     this.props.setModalRootComponent(<ConnectedSearchPrimo />);
   }
 
+  refreshNow() {
+      window.location.reload();
+  }
+
   /**
    * Generate a Maps button if there are maps to display
    * @returns {JSX} - the LI element containing the maps button
@@ -141,6 +145,9 @@ class Header extends Component {
                   <li className="show-search-primo hidden" onClick={this.searchPrimoClicked.bind(this)}>
                     <a className="btn btn-navbar btn-default">1Search</a>
                   </li>
+                  <li className="show-refresh" onClick={this.refreshNow.bind(this)}>
+                    <a className="btn btn-navbar btn-default">Refresh</a>
+                  </li>
                 </ul>
                 <ul className="nav navbar-nav navbar-right">
                   <li className="refresh-slides" onClick={this.refreshClicked.bind(this)}>
@@ -151,7 +158,7 @@ class Header extends Component {
                     </a>
                   </li>
                 </ul>
-                <p className="hours navbar-text">{this._hoursToday()}</p>
+                <p className="hours navbar-text">{this._hoursToday()} hola mundo</p>
               </div>
             </div>
           </nav>

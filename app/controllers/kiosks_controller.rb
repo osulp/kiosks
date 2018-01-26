@@ -5,7 +5,6 @@ class KiosksController < ApplicationController
   before_action :authorize
   before_action :set_params
 
-
   # GET /kiosks
   # GET /kiosks.json
   def index
@@ -67,6 +66,7 @@ class KiosksController < ApplicationController
   end
 
   private
+
     # Use callbacks to share common setup or constraints between actions.
     def set_kiosk
       @kiosk = Kiosk.find(params[:id])
@@ -74,11 +74,19 @@ class KiosksController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def kiosk_params
-      params.require(:kiosk).permit(:name, :kiosk_layout_id)
+      params.require(:kiosk).permit(:name, :kiosk_layout_id, :restart_at, :restart_at_active)
     end
 
     def set_options
       @kiosk_layouts = KioskLayout.all
+      @is_collapsed = (restart_kiosk?) ? '' : 'collapsed'
+      @is_expanded = (restart_kiosk?) ? 'true' : 'false'
+      @restart_button_text = (restart_kiosk?) ? '- Remove one-time restart date/time' : '+ Add one-time restart date/time'
+      @collapse_in = (restart_kiosk?) ? 'collapse in' : 'collapse'
+    end
+
+    def restart_kiosk?
+      @kiosk.present? ? @kiosk.restart_at.present? : false
     end
 
     def set_params

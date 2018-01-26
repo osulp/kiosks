@@ -16,6 +16,17 @@ export const setSlides = (slides) => {
   };
 };
 
+export const SET_RESTART_KIOSK = 'SET_RESTART_KIOSK';
+export const setRestartKiosk = (restart_kiosk) => {
+  return {
+    type: SET_RESTART_KIOSK,
+    kiosk: {
+      restart_kiosk
+    }
+  };
+};
+
+
 export const SCROLL_TO_SLIDE = "SCROLL_TO_SLIDE";
 export const scrollToSlide = (index) => {
   return {

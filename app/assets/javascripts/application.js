@@ -19,6 +19,8 @@
 //= require fileupload
 //= require dragscroll
 //= require date_range_actions
+//= require kiosk_restart_actions
+//= require kiosks
 //= require react
 //= require react_ujs
 //= require cable
