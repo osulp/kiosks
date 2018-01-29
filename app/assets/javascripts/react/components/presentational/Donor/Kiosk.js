@@ -6,7 +6,7 @@ import moment from 'moment';
 
 class Kiosk extends Component {
   /**
-   * After the component mounts, fetch the
+   * After the component mounts, fetch the restart_kiosk value
    */
   componentDidMount() {
     this._fetchRestartKioskTimeout();
@@ -21,7 +21,7 @@ class Kiosk extends Component {
   }
 
   /**
-   * Fetch the restart_kiosk value for "now" every 1 minute, to restart the kiosk when needed
+   * Fetch the restart_kiosk value for donor kiosk every 1 minute in order to restart the kiosk as scheduled
    * @private
    */
   _fetchRestartKioskTimeout() {

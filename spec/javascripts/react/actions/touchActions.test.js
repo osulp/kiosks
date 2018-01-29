@@ -1,8 +1,8 @@
 import nock from 'nock';
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
-import {ADD_ERROR, SET_SLIDES} from '../../../../app/assets/javascripts/react/actions/kioskActions';
-import {FETCHING_SLIDES, FETCHED_SLIDES, FETCHING_HOURS, FETCHED_HOURS, SET_HOURS} from '../../../../app/assets/javascripts/react/actions/touchActions';
+import {ADD_ERROR, SET_SLIDES, SET_RESTART_KIOSK} from '../../../../app/assets/javascripts/react/actions/kioskActions';
+import {FETCHING_SLIDES, FETCHED_SLIDES, FETCHING_RESTART_KIOSK, FETCHED_RESTART_KIOSK, FETCHING_HOURS, FETCHED_HOURS, SET_HOURS} from '../../../../app/assets/javascripts/react/actions/touchActions';
 import * as actionCreator from '../../../../app/assets/javascripts/react/actions/touchActions';
 import * as factories from '../.factories';
 

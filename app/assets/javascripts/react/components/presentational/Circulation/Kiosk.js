@@ -40,7 +40,7 @@ class Kiosk extends Component {
   }
 
   /**
-   * Fetch the restart_kiosk value for "now" every 1 minute, to restart the kiosk when needed
+   * Fetch the restart_kiosk value for circulation kiosk every 1 minute in order to restart the kiosk as scheduled
    * @private
    */
   _fetchRestartKioskTimeout() {
@@ -85,7 +85,6 @@ Kiosk.propTypes = {
   restart_kiosk: PropTypes.string.isRequired,
   url: PropTypes.string.isRequired,
   is_fetching_slides: PropTypes.bool.isRequired,
-  is_fetching_restart_kiosk: PropTypes.bool.isRequired,
   show_nav: PropTypes.bool.isRequired,
   fetchSlides: PropTypes.func.isRequired,
   fetchRestartKiosk: PropTypes.func.isRequired,

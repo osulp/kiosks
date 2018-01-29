@@ -1,14 +1,7 @@
 jQuery ->
-  $(document).on("change", 'input.enable_restart_at', (event) ->
-    if this.checked == true
+  $('#clear_restart_at_btn').on 'click', ->
+    $(".field.restart_at select option[value='']").attr('selected', true)
 
-      $(".field.restart_at").removeClass('hidden')
-    else
-      $(".field.restart_at").addClass('hidden')
-
-
-#    $(target).find('input.timepicker_start').datetimepicker('show')
-  )
   $('#set_today_btn').on 'click', ->
     field = 'kiosk_restart_at'
     dt = new Date()
@@ -37,8 +30,3 @@ jQuery ->
       min = dt.getMinutes()
 
     t5.val(min)
-
-#  $('#collapseKioskRestart').on 'hide.bs.collapse', ->
-#    $('#add_restart').text('+ Add one-time restart date/time')
-#    $("#collapseKioskRestart select option[value='']").attr('selected', true)
-

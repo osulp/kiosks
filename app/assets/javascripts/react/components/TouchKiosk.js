@@ -17,7 +17,6 @@ const mapStateToProps = (state) => {
     api: state.kiosk.api,
     classroom_schedule: state.touch.classroom_schedule,
     is_fetching_slides: state.touch.is_fetching_slides,
-    is_fetching_restart_kiosk: state.touch.is_fetching_restart_kiosk,
     is_fetching_hours: state.touch.is_fetching_hours,
     show_nav: state.touch.show_nav
   }

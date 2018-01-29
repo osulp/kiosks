@@ -37,7 +37,7 @@ class Header extends Component {
           </div>
           <div id="navbar" className="navbar-collapse collapse">
             <div className="circ-title">Announcements</div>
-            <div className="circ-hours navbar-text">{this._hoursToday()}hola mundo</div>
+            <div className="circ-hours navbar-text">{this._hoursToday()}</div>
           </div>
         </nav>
       </div>

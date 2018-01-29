@@ -22,15 +22,18 @@
       </div>
 
       <div class="field">
-        <%= f.label :restart_at_active %>
+        <%= f.label :restart_at_active, "Enable restarting kiosk" %>
         <%= f.check_box :restart_at_active, {:class => "enable_restart_at"} %>
       </div>
 
       <div class="field restart_at">
-        <%= f.label :restart_at, "Restart at" %><br>
+        <%= f.label :restart_at, "Restart kiosk at" %><br>
         <%= f.datetime_select :restart_at, {:include_blank => true, :select => DateTime.now}, {class: 'datetime-form-control form-inline'} %>
         <button type="button" id="set_today_btn" class="btn btn-default" autocomplete="off">
           Set to Today
+        </button>
+        <button type="button" id="clear_restart_at_btn" class="btn btn-default" autocomplete="off">
+          Clear
         </button>
       </div>
 

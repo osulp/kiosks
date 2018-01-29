@@ -22,9 +22,9 @@ export default class Root extends Component {
     store.dispatch(setSlides(this.props.slides));
     store.dispatch(setRestartKiosk(this.props.restart_kiosk));
     store.dispatch(setMaps(this.props.maps));
-    // if(typeof this.props.google_analytics != 'undefined') {
-    //   store.dispatch(setGoogleAnalytics(this.props.google_analytics));
-    // }
+    if(typeof this.props.google_analytics != 'undefined') {
+      store.dispatch(setGoogleAnalytics(this.props.google_analytics));
+    }
   }
 
   /**

@@ -12,7 +12,7 @@ class KioskController < ApplicationController
     if reload_kiosk?(@kiosk)
       if @kiosk.update_attribute(:restart_at_active, false)
         @restart_kiosk = true.to_s
-        puts "restarting kiosk #{@restart_kiosk}"
+        puts "restarting #{@kiosk.name} kiosk"
       end
     end
 

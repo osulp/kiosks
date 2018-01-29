@@ -8,6 +8,7 @@ const setup = () => {
     factories.initial_state,
     {
       slides: factories.slides,
+      restart_kiosk: factories.kiosk.restart_kiosk,
       is_fetching_slides: false,
       show_nav: true,
       maps: [],
@@ -15,6 +16,7 @@ const setup = () => {
       api: {},
       google_analytics: jest.fn(),
       fetchSlides: jest.fn(),
+      fetchRestartKiosk: jest.fn(),
       setModalVisibility: jest.fn(),
       setModalRootComponent: jest.fn(),
       scrollToSlide: jest.fn(),

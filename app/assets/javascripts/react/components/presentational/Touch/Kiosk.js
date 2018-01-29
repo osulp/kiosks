@@ -50,7 +50,7 @@ class Kiosk extends Component {
   }
 
   /**
-   * Fetch the most recent slides every 10 minutes to keep the kiosk with updated slides as they are changed on the server.
+   * Fetch the restart_kiosk value for touch kiosk every 1 minute in order to restart the kiosk as scheduled
    * @private
    */
   _fetchRestartKioskTimeout() {
@@ -84,7 +84,6 @@ Kiosk.propTypes = {
   google_analytics: PropTypes.object,
   api: PropTypes.object.isRequired,
   is_fetching_slides: PropTypes.bool.isRequired,
-  is_fetching_restart_kiosk: PropTypes.bool.isRequired,
   show_nav: PropTypes.bool.isRequired,
   fetchSlides: PropTypes.func.isRequired,
   fetchRestartKiosk: PropTypes.func.isRequired,

@@ -8,8 +8,10 @@ const setup = () => {
     factories.initial_state,
     {
       slides: factories.slides,
+      restart_kiosk: factories.kiosk.restart_kiosk,
       is_fetching_slides: false,
       show_nav: false,
+      fetchRestartKiosk: jest.fn(),
       fetchSlides: jest.fn(),
       scrollToSlide: jest.fn(),
       rooms_available_count: jest.fn(),

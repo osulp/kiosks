@@ -79,14 +79,6 @@ class KiosksController < ApplicationController
 
     def set_options
       @kiosk_layouts = KioskLayout.all
-      @is_collapsed = (restart_kiosk?) ? '' : 'collapsed'
-      @is_expanded = (restart_kiosk?) ? 'true' : 'false'
-      @restart_button_text = (restart_kiosk?) ? '- Remove one-time restart date/time' : '+ Add one-time restart date/time'
-      @collapse_in = (restart_kiosk?) ? 'collapse in' : 'collapse'
-    end
-
-    def restart_kiosk?
-      @kiosk.present? ? @kiosk.restart_at.present? : false
     end
 
     def set_params

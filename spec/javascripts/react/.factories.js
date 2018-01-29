@@ -46,6 +46,7 @@ export const kiosk = {
   },
   title: "",
   slides: [],
+  restart_kiosk: "",
   starting_slide_index: 0,
   errors: []
 };
