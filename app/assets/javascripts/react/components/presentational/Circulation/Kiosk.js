@@ -13,8 +13,10 @@ class Kiosk extends Component {
     let now = moment().format('YYYY-MM-DD');
     this._fetchHoursTimeout();
     this._fetchSlidesTimeout();
+    this._fetchRestartKioskTimeout();
     this.props.fetchHours(this.props.api.hours, [now]);
     this.props.fetchSlides(this.props.url);
+    this.props.fetchRestartKiosk(this.props.url);
   }
 
   /**
@@ -23,6 +25,7 @@ class Kiosk extends Component {
   componentWillUnmount() {
     clearInterval(this.hours_timeout);
     clearInterval(this.slides_timeout);
+    clearInterval(this.restart_kiosk_timeout);
   }
 
   /**
@@ -34,6 +37,16 @@ class Kiosk extends Component {
       let now = moment().format('YYYY-MM-DD');
       this.props.fetchHours(this.props.api.hours, [now]);
     }, 10 * 60 * 1000);
+  }
+
+  /**
+   * Fetch the restart_kiosk value for "now" every 1 minute, to restart the kiosk when needed
+   * @private
+   */
+  _fetchRestartKioskTimeout() {
+    this.restart_kiosk_timeout = setInterval(() => {
+      this.props.fetchRestartKiosk(this.props.url);
+    }, 1 * 60 * 1000);
   }
 
   /**
@@ -69,10 +82,13 @@ class Kiosk extends Component {
 
 Kiosk.propTypes = {
   slides: PropTypes.array.isRequired,
+  restart_kiosk: PropTypes.string.isRequired,
   url: PropTypes.string.isRequired,
   is_fetching_slides: PropTypes.bool.isRequired,
+  is_fetching_restart_kiosk: PropTypes.bool.isRequired,
   show_nav: PropTypes.bool.isRequired,
   fetchSlides: PropTypes.func.isRequired,
+  fetchRestartKiosk: PropTypes.func.isRequired,
   scrollToSlide: PropTypes.func.isRequired,
   api: PropTypes.object.isRequired,
   hours: PropTypes.object.isRequired,
