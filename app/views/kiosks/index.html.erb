@@ -22,9 +22,9 @@
           <td><%= link_to kiosk.name, kiosk %></td>
           <td>
             <% if kiosk.restart_at_active == true %>
-              <span class="label label-info">Active</span>
+              <span class="label label-danger">Pending</span>
             <% else %>
-              <span class="label label-default">Inactive/Expired</span>
+              <span class="label label-default">Restarted</span>
             <% end %>
           </td>
           <td><%= kiosk.restart_at %></td>
