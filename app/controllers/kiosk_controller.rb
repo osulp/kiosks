@@ -23,18 +23,8 @@ class KioskController < ApplicationController
   private
 
   def reload_kiosk?(kiosk)
-    if kiosk.respond_to? :restart_at
-      kiosk_restart_at = kiosk.restart_at
-      if kiosk_restart_at.present? && kiosk.restart_at_active.present?
-        if kiosk.restart_at_active == true
-          restart_at = DateTime.parse(kiosk_restart_at.to_s)
-          if restart_at < DateTime.now
-            return true
-          end
-        end
-      end
-    end
-    return false
+    return false if kiosk.restart_at.nil? || kiosk.restart_at_active.nil?
+    kiosk.restart_at_active && kiosk.restart_at < DateTime.now
   end
 
   def set_kiosk_params
