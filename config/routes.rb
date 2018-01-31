@@ -17,7 +17,13 @@ Rails.application.routes.draw do
   resources :collections
   resources :slides
   resources :slide_types
-  resources :kiosks
+  resources :kiosks do
+    collection do
+      get :edit_multiple
+      put :update_multiple
+    end
+  end
+
   devise_for :users, :controllers => { :registrations => "registrations" }
   get '/kiosk', :to => 'kiosk#index', :as => 'kiosk_index'
   get '/kiosk/:id', :to => 'kiosk#show', :as => 'kiosk_show'

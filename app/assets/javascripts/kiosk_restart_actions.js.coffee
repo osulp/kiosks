@@ -1,4 +1,19 @@
 jQuery ->
+  $('#check_all').on 'click', ->
+    checked = $(this).prop('checked')
+    $(".check_kiosk").prop('checked', checked)
+    if checked == true
+      $(".btn_edit_selected").removeClass('hidden')
+    else
+      $(".btn_edit_selected").addClass('hidden')
+
+  $('.check_kiosk').on 'click', ->
+    checked_count = $(".check_kiosk:checked").length
+    if checked_count > 0
+      $(".btn_edit_selected").removeClass('hidden')
+    else
+      $(".btn_edit_selected").addClass('hidden')
+
   $('#clear_restart_at_btn').on 'click', ->
     $(".field.restart_at select option[value='']").attr('selected', true)
 

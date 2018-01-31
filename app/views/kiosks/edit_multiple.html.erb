@@ -1,0 +1,39 @@
+<h1>Edit Selected Kiosks</h1>
+
+<%= form_tag update_multiple_kiosks_path, method: :put do %>
+  <ul>
+    <% @kiosks.each do |kiosk| %>
+      <li>
+        <%= hidden_field_tag "kiosk_ids[]", kiosk.id %>
+        <%= kiosk.name %>
+        <ul class="errors">
+          <% kiosk.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
+        </ul>
+      </li>
+    <% end %>
+  </ul>
+  <%= fields_for :kiosk do |f| %>
+    <div class="field">
+      <%= f.label :restart_at_active, "Enable restarting kiosk" %>
+      <%= f.check_box :restart_at_active, {:class => "enable_restart_at"} %>
+    </div>
+
+    <div class="field restart_at">
+      <%= f.label :restart_at, "Restart kiosk at" %><br>
+      <%= f.datetime_select :restart_at, {:include_blank => true, :select => DateTime.now}, {class: 'datetime-form-control form-inline'} %>
+      <button type="button" id="set_today_btn" class="btn btn-default" autocomplete="off">
+        Set to Today
+      </button>
+      <button type="button" id="clear_restart_at_btn" class="btn btn-default" autocomplete="off">
+        Clear
+      </button>
+    </div>
+
+  <% end %>
+  <div class="actions">
+    <%= link_to 'Back', kiosks_path, class: "btn btn-default" %>
+    <%= submit_tag "Update kiosks", class: "btn btn-primary" %>
+  </div>
+<% end %>
