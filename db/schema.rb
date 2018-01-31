@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180124180535) do
+ActiveRecord::Schema.define(version: 20180127115141) do
 
   create_table "collections", force: :cascade do |t|
     t.string   "name"
@@ -41,9 +41,11 @@ ActiveRecord::Schema.define(version: 20180124180535) do
 
   create_table "kiosks", force: :cascade do |t|
     t.string   "name"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
     t.integer  "kiosk_layout_id"
+    t.datetime "restart_at"
+    t.boolean  "restart_at_active"
     t.index ["kiosk_layout_id"], name: "index_kiosks_on_kiosk_layout_id"
   end
 

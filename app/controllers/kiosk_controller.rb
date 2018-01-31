@@ -8,11 +8,24 @@ class KioskController < ApplicationController
 
   def show
     @kiosk = Kiosk.find_by(name: params[:id])
+    @restart_kiosk = false.to_s
+    if reload_kiosk?(@kiosk)
+      if @kiosk.update_attribute(:restart_at_active, false)
+        @restart_kiosk = true.to_s
+        puts "restarting #{@kiosk.name} kiosk"
+      end
+    end
+
     # get only slides that have current date ranges, given a time (i.e now, Time.zone.parse("20160503050000"), etc)
     @slides = @kiosk.slides.joins(:date_ranges).where("date_ranges.start_date <= ? AND date_ranges.end_date >= ?",Time.zone.now,Time.zone.now)
   end
 
   private
+
+  def reload_kiosk?(kiosk)
+    return false if kiosk.restart_at.nil? || kiosk.restart_at_active.nil?
+    kiosk.restart_at_active && kiosk.restart_at < DateTime.now
+  end
 
   def set_kiosk_params
     @kiosks = Kiosk.all

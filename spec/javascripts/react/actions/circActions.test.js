@@ -1,7 +1,7 @@
 import nock from 'nock';
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
-import {ADD_ERROR, SET_SLIDES} from '../../../../app/assets/javascripts/react/actions/kioskActions';
+import {ADD_ERROR, SET_SLIDES, SET_RESTART_KIOSK} from '../../../../app/assets/javascripts/react/actions/kioskActions';
 import {FETCHING_ROOMS_AVAILABLE_COUNT, FETCHED_ROOMS_AVAILABLE_COUNT, SET_ROOMS_AVAILABLE_COUNT} from '../../../../app/assets/javascripts/react/actions/circActions';
 import * as actionCreator from '../../../../app/assets/javascripts/react/actions/circActions';
 import * as factories from '../.factories';

@@ -24,6 +24,30 @@
       </tr>
       <tr>
         <th scope="row">
+          <strong>Restart status</strong>
+        </th>
+        <td>
+          <p>
+            <% if @kiosk.restart_at_active == true %>
+              <span class="label label-danger">Pending</span>
+            <% else %>
+              <span class="label label-default">Restarted</span>
+            <% end %>
+          </p>
+        </td>
+      </tr>
+      <tr>
+        <th scope="row">
+          <strong>Restart at:</strong>
+        </th>
+        <td>
+          <p>
+          <%= @kiosk.restart_at %>
+          </p>
+        </td>
+      </tr>
+      <tr>
+        <th scope="row">
           <strong>Layout Name:</strong>
         </th>
         <td>

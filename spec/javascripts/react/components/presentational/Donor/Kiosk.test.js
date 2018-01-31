@@ -8,11 +8,13 @@ const setup = () => {
     factories.initial_state,
     {
       slides: factories.slides,
+      restart_kiosk: factories.kiosk.restart_kiosk,
       setModalVisibility: jest.fn(),
       setModalRootComponent: jest.fn(),
       google_analytics: jest.fn(),
       title: "Bogus actual text title",
       setTitle: jest.fn(),
+      fetchRestartKiosk: jest.fn(),
       is_modal_visible: false,
     });
   const enzyme_wrapper = shallow(<Kiosk {...props}/>);

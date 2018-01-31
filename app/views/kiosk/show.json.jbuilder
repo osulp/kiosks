@@ -19,3 +19,4 @@ json.slides @slides do |slide|
     end
   end
 end
+json.restart_kiosk @restart_kiosk

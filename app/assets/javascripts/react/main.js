@@ -13,6 +13,15 @@ const setSlides = (slides) => {
   return json.slides ? json.slides : json;
 };
 
+const setRestartKiosk = (restart_kiosk) => {
+  if(!restart_kiosk) {
+    return [];
+  }
+  let json = JSON.parse(restart_kiosk);
+  return json.restart_kiosk ? json.restart_kiosk : json;
+};
+
+
 const setMaps = (maps) => {
   if(!maps) {
     return [];
@@ -23,6 +32,7 @@ const setMaps = (maps) => {
 
 if (root_dom_element) {
   let slides = setSlides(root_dom_element.getAttribute('data-slides'));
+  let restart_kiosk = setRestartKiosk(root_dom_element.getAttribute('data-restart-kiosk'));
   let maps = setMaps(root_dom_element.getAttribute('data-maps'));
   let kiosk_type = root_dom_element.getAttribute('data-kiosk-type');
   let kiosk_url = root_dom_element.getAttribute('data-kiosk-url');
@@ -31,6 +41,7 @@ if (root_dom_element) {
   // render the root container with properties
   ReactDOM.render(
     <Root slides={slides}
+          restart_kiosk={restart_kiosk}
           maps={maps}
           kiosk_type={kiosk_type}
           kiosk_url={kiosk_url}

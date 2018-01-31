@@ -29,6 +29,15 @@ describe('Action::Kiosk', () => {
     })
   });
 
+  describe('#setRestartKiosk()', () => {
+    it('matches the snapshot', () => {
+      // execute
+      let action = actionCreator.setRestartKiosk([factories.kiosk.restart_kiosk]);
+      // verify
+      expect(action).toMatchSnapshot();
+    })
+  });
+
   describe('#setTitle()', () => {
     it('matches the snapshot', () => {
       // execute

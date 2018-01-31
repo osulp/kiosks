@@ -1,4 +1,4 @@
-import {SCROLL_TO_SLIDE, SET_SLIDES, SET_KIOSK, ADD_ERROR, SET_TITLE, SET_GOOGLE_ANALYTICS} from '../actions/kioskActions';
+import {SCROLL_TO_SLIDE, SET_SLIDES, SET_RESTART_KIOSK, SET_KIOSK, ADD_ERROR, SET_TITLE, SET_GOOGLE_ANALYTICS} from '../actions/kioskActions';
 
 export const initial_state = {
   type: "touch",
@@ -11,6 +11,7 @@ export const initial_state = {
   },
   title: "",
   slides: [],
+  restart_kiosk: "",
   starting_slide_index: 0,
   errors: [],
   google_analytics: undefined
@@ -22,6 +23,8 @@ const kioskReducer = (state = initial_state, action) => {
       return Object.assign({}, state, { errors: [...state.errors, action.error] });
     case SET_KIOSK:
       return Object.assign({}, state, { type: action.kiosk.type, url: action.kiosk.url });
+    case SET_RESTART_KIOSK:
+      return Object.assign({}, state, { restart_kiosk: action.kiosk.restart_kiosk });
     case SET_SLIDES:
       return Object.assign({}, state, { slides: action.kiosk.slides });
     case SCROLL_TO_SLIDE:

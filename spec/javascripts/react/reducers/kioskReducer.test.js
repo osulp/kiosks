@@ -23,6 +23,11 @@ describe('Reducers::Kiosk', () => {
       expect(reducerCreator(empty_state, actionCreator.setSlides(factories.slides))).toMatchSnapshot();
     })
   });
+  describe('setRestartKiosk action', () => {
+    it('matches the snapshot', () => {
+      expect(reducerCreator(empty_state, actionCreator.setRestartKiosk(factories.kiosk.restart_kiosk))).toMatchSnapshot();
+    })
+  });
   describe('scrollToSlide action', () => {
     it('matches the snapshot', () => {
       expect(reducerCreator(empty_state, actionCreator.scrollToSlide(1))).toMatchSnapshot();

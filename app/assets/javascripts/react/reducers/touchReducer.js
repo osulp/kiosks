@@ -1,11 +1,12 @@
 import {
-  FETCHED_SLIDES, FETCHING_SLIDES, FETCHED_HOURS, FETCHING_HOURS, SET_HOURS, SET_MAPS,
+  FETCHED_SLIDES, FETCHING_SLIDES, FETCHED_RESTART_KIOSK, FETCHING_RESTART_KIOSK, FETCHED_HOURS, FETCHING_HOURS, SET_HOURS, SET_MAPS,
   FETCHED_CLASSROOM_SCHEDULE, FETCHING_CLASSROOM_SCHEDULE, SET_CLASSROOM_SCHEDULE,
   FETCHED_CLASSROOMS, FETCHING_CLASSROOMS, TOGGLE_CLASSROOM_SELECTED
 } from '../actions/touchActions';
 
 export const initial_state = {
   is_fetching_slides: false,
+  is_fetching_restart_kiosk: false,
   is_fetching_hours: false,
   is_fetching_classroom_schedule: false,
   is_fetching_classrooms: false,
@@ -20,6 +21,10 @@ export const initial_state = {
 const touchReducer = (state = initial_state, action) => {
   let classrooms = [];
   switch (action.type) {
+    case FETCHED_RESTART_KIOSK:
+      return Object.assign({}, state, {is_fetching_restart_kiosk: false});
+    case FETCHING_RESTART_KIOSK:
+      return Object.assign({}, state, {is_fetching_restart_kiosk: true});
     case FETCHED_SLIDES:
       return Object.assign({}, state, {is_fetching_slides: false});
     case FETCHING_SLIDES:
