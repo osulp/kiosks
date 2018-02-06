@@ -19,8 +19,6 @@ RSpec.describe KiosksController, type: :controller do
   let(:user) do
     User.create(
       :email => 'user@example.com',
-      :password => 'admin123123',
-      :password_confirmation => 'admin123123',
       :admin => true
     )
   end
@@ -86,8 +84,6 @@ RSpec.describe KiosksController, type: :controller do
       let(:user) do
         User.create(
           :email => 'user@example.com',
-          :password => 'admin123',
-          :password_confirmation => 'admin123'
         )
       end
       it "should display an insufficient permissions error" do
@@ -103,8 +99,6 @@ RSpec.describe KiosksController, type: :controller do
       let(:user) do
         User.create(
           :email => 'user@example.com',
-          :password => 'admin123',
-          :password_confirmation => 'admin123',
           :admin => true
         )
       end
