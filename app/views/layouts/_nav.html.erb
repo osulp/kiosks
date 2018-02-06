@@ -21,6 +21,7 @@
       <ul class="nav navbar-nav navbar-right">
         <% if user_signed_in? %>
           <% if current_user && current_user.admin? %>
+            <p class="nav navbar-text">Signed in as <strong><%= current_user.username.to_s if current_user.username %></strong></p>
             <li><%= link_to 'Admin Panel', admin_index_path %></a></li>
           <% end %>
           <li><%= link_to "Logout", destroy_user_session_path, method: :delete %></li>
