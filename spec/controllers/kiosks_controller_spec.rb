@@ -24,6 +24,27 @@ RSpec.describe KiosksController, type: :controller do
       :admin => true
     )
   end
+
+  let(:kiosk1_valid_attributes) {
+    { name: "kiosk1", kiosk_layout_id: test_layout.id }
+  }
+
+  let(:kiosk2_valid_attributes) {
+    { name: "kiosk2", kiosk_layout_id: test_layout.id }
+  }
+
+  let(:kiosk1) {
+    Kiosk.create! kiosk1_valid_attributes
+  }
+
+  let(:kiosk2) {
+    Kiosk.create! kiosk2_valid_attributes
+  }
+
+  let(:kiosk_ids) {
+    [kiosk1.id, kiosk2.id]
+  }
+
   before do
     sign_in(user) if user
   end
@@ -103,6 +124,26 @@ RSpec.describe KiosksController, type: :controller do
     end
   end
 
+  describe "GET #edit_multiple" do
+    let(:restart_kiosk_at) {
+      DateTime.now
+    }
+    let(:new_attributes) {
+      {
+          restart_at: restart_kiosk_at,
+          restart_at_active: true
+      }
+    }
+    let(:kiosks) {
+      [kiosk1, kiosk2]
+    }
+
+    it "assigns the requested kiosks as @kiosks" do
+      get :edit_multiple, params: {kiosk_ids: kiosk_ids, kiosk: new_attributes}
+      expect(assigns(:kiosks)).to eq(kiosks)
+    end
+  end
+
   describe "POST #create" do
     context "with valid params" do
       it "creates a new Kiosk" do
@@ -173,6 +214,74 @@ RSpec.describe KiosksController, type: :controller do
         kiosk = Kiosk.create! valid_attributes
         put :update, params: {id: kiosk.to_param, kiosk: invalid_attributes}
         expect(response).to render_template("edit")
+      end
+    end
+  end
+
+  describe "PUT #update_multiple" do
+    context "with valid params" do
+      let(:restart_kiosk_at) {
+        DateTime.tomorrow
+      }
+      let(:new_attributes) {
+        {
+            restart_at: restart_kiosk_at,
+            restart_at_active: true
+        }
+      }
+
+      it "updates the requested kiosks" do
+        put :update_multiple, params: {kiosk_ids: kiosk_ids, kiosk: new_attributes}
+        kiosk1.reload
+        kiosk2.reload
+        # check kiosk1
+        expect(kiosk1.restart_at_active).to eq(true)
+        expect(Time.zone.local(kiosk1.restart_at.to_s)).to eq(Time.zone.local(restart_kiosk_at.to_s))
+        # check kiosk2
+        expect(kiosk2.restart_at_active).to eq(true)
+        expect(Time.zone.local(kiosk2.restart_at.to_s)).to eq(Time.zone.local(restart_kiosk_at.to_s))
+      end
+
+      it "redirects to the kiosks page" do
+        put :update_multiple, params: {kiosk_ids: kiosk_ids, kiosk: new_attributes}
+        expect(response).to redirect_to(kiosks_url)
+      end
+    end
+
+    context "with invalid params" do
+      let(:restart_kiosk_at) {
+        DateTime.yesterday
+      }
+      let(:new_attributes) {
+        {
+            restart_at: restart_kiosk_at,
+            restart_at_active: true
+        }
+      }
+
+      let(:kiosk1_valid_attributes) {
+        { name: "kiosk1", kiosk_layout_id: test_layout.id }
+      }
+
+      let(:kiosk2_valid_attributes) {
+        { name: "kiosk2", kiosk_layout_id: test_layout.id }
+      }
+
+      let(:kiosk1) {
+        Kiosk.create! kiosk1_valid_attributes
+      }
+
+      let(:kiosk2) {
+        Kiosk.create! kiosk2_valid_attributes
+      }
+
+      let(:kiosk_ids) {
+        [kiosk1.id, kiosk2.id]
+      }
+
+      it "re-renders the 'edit' template" do
+        put :update_multiple, params: {kiosk_ids: kiosk_ids, kiosk: new_attributes}
+        expect(response).to render_template("edit_multiple")
       end
     end
   end
