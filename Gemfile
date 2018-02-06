@@ -46,6 +46,10 @@ gem 'carrierwave', '~> 1.0'
 gem 'flipclockjs-rails', '~> 0.7.7'
 gem 'rails-controller-testing'
 
+gem 'rubycas-client', git: 'https://github.com/osulp/rubycas-client'
+gem 'rubycas-client-rails', git: 'https://github.com/osulp/rubycas-client-rails'
+gem 'devise_cas_authenticatable'
+
 gem 'nokogiri'
 
 gem 'mysql2'
