@@ -1,7 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import Root from "./components/Root";
-
 require("../../stylesheets/application.scss");
 const root_dom_element = document.getElementById('application_root');
 
