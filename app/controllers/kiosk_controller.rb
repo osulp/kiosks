@@ -22,7 +22,7 @@ class KioskController < ApplicationController
 
   def reload_kiosk?(kiosk)
     return false if kiosk.restart_at.nil? || kiosk.restart_at_active.nil?
-    kiosk.restart_at_active && kiosk.restart_at < DateTime.now && kiosk.restart_at > 1.minutes.ago
+    kiosk.should_restart?
   end
 
   def set_kiosk_params

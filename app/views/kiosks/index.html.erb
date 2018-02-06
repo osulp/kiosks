@@ -25,7 +25,7 @@
             <td><%= link_to kiosk.name, kiosk %></td>
             <td>
               <% if kiosk.restart_at_active == true %>
-                <% if kiosk.restart_at > DateTime.now || kiosk.restart_at > 1.minutes.ago %>
+                <% if kiosk.is_restart_pending? %>
                   <span class="label label-danger">Pending</span>
                 <% else %>
                   <span class="label label-default">Restarted</span>
