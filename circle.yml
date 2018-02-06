@@ -6,6 +6,7 @@ machine:
 dependencies:
   pre:
     - cp config/application_config.example.yml.erb config/application_config.yml.erb
+    - cp config/local_env.example.yml config/local_env.yml
     - |
       if [[ ! -e ~/.yarn/bin/yarn || $(yarn --version) != "${YARN_VERSION}" ]]; then
         echo "Download and install Yarn."
