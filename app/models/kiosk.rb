@@ -10,4 +10,12 @@ class Kiosk < ApplicationRecord
       errors.add(:restart_at, "(#{restart_at}) can't be in the past, please select a date in the future, or click 'Clear' to remove the date.")
     end
   end
+
+  def should_restart?
+    restart_at_active && restart_at < DateTime.now && restart_at > 1.minutes.ago
+  end
+
+  def is_restart_pending?
+    restart_at_active && (restart_at > DateTime.now || restart_at > 1.minutes.ago)
+  end
 end

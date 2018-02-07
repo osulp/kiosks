@@ -16,7 +16,6 @@ class Kiosk extends Component {
     this._fetchRestartKioskTimeout();
     this.props.fetchHours(this.props.api.hours, [now]);
     this.props.fetchSlides(this.props.url);
-    this.props.fetchRestartKiosk(this.props.url);
   }
 
   /**

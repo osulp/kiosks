@@ -10,7 +10,6 @@ class Kiosk extends Component {
    */
   componentDidMount() {
     this._fetchRestartKioskTimeout();
-    this.props.fetchRestartKiosk(this.props.url);
   }
 
   /**

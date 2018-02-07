@@ -25,7 +25,11 @@
             <td><%= link_to kiosk.name, kiosk %></td>
             <td>
               <% if kiosk.restart_at_active == true %>
-                <span class="label label-danger">Pending</span>
+                <% if kiosk.is_restart_pending? %>
+                  <span class="label label-danger">Pending</span>
+                <% else %>
+                  <span class="label label-default">Restarted</span>
+                <% end %>
               <% else %>
                 <span class="label label-default">Restarted</span>
               <% end %>
@@ -52,4 +56,3 @@
 
 <%= link_to 'New Kiosk', new_kiosk_path, class: "btn btn-primary" %>
 <%= link_to 'Admin Panel', admin_index_path, class: "btn btn-default" %>
-

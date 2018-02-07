@@ -10,10 +10,8 @@ class KioskController < ApplicationController
     @kiosk = Kiosk.find_by(name: params[:id])
     @restart_kiosk = false.to_s
     if reload_kiosk?(@kiosk)
-      if @kiosk.update_attribute(:restart_at_active, false)
-        @restart_kiosk = true.to_s
-        puts "restarting #{@kiosk.name} kiosk"
-      end
+      @restart_kiosk = true.to_s
+      puts "restarting #{@kiosk.name} kiosk"
     end
 
     # get only slides that have current date ranges, given a time (i.e now, Time.zone.parse("20160503050000"), etc)
@@ -24,7 +22,7 @@ class KioskController < ApplicationController
 
   def reload_kiosk?(kiosk)
     return false if kiosk.restart_at.nil? || kiosk.restart_at_active.nil?
-    kiosk.restart_at_active && kiosk.restart_at < DateTime.now
+    kiosk.should_restart?
   end
 
   def set_kiosk_params
