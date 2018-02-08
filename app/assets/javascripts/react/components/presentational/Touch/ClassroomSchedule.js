@@ -5,9 +5,6 @@ import moment from 'moment';
 import ConnectedClassroomScheduleDay from '../../TouchClassroomScheduleDay';
 import {trackClicked} from '../shared/GoogleAnalytics';
 
-export const now = moment();
-export const default_calendar_value = now.clone();
-
 class ClassroomSchedule extends Component {
   /**
    * Initialize a classroom schedule UI and set the initial state to display "today"
@@ -15,7 +12,8 @@ class ClassroomSchedule extends Component {
    */
   constructor(props) {
     super(props);
-    this.state = {selected_date: now};
+    let now = moment();
+    this.state = {selected_date: now, default_calendar_value: now};
   }
 
   /**
@@ -55,8 +53,15 @@ class ClassroomSchedule extends Component {
    */
   componentDidMount() {
     this.props.fetchClassrooms(this.props.api.classrooms);
-    this.props.fetchClassroomSchedule(this.props.api.classroom_schedule, now);
+    this.props.fetchClassroomSchedule(this.props.api.classroom_schedule, this.state.default_calendar_value);
     this.setHideTimeout();
+  }
+
+  /**
+   * Before mounting the component, set the proper state values needed
+   */
+  componentWillMount() {
+    this.setState({default_calendar_value: moment()});
   }
 
   /**
@@ -82,7 +87,7 @@ class ClassroomSchedule extends Component {
    * @returns {JSX} - the rendered UI
    */
   render() {
-    const calendar = (<Calendar defaultValue={default_calendar_value}
+    const calendar = (<Calendar defaultValue={this.state.default_calendar_value}
                                 onChange={this.dateClicked.bind(this)}
                                 showDateInput={false}/>);
     const is_fetching_class = this.props.is_fetching_classroom_schedule ? "is_fetching" : "";
@@ -100,7 +105,7 @@ class ClassroomSchedule extends Component {
             <div className="classroom-schedule-table-datepicker hidden-md hidden-lg col-sm-12">
               <DatePicker calendar={calendar}
                           animation="slide-down"
-                          defaultValue={default_calendar_value}
+                          defaultValue={this.state.default_calendar_value}
                           onChange={this.dateClicked.bind(this)}
                           showDateInput={false}>
                 {({value}) => {
