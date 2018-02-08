@@ -1,18 +1,4 @@
 import React, {Component, PropTypes} from 'react';
-import { DefaultPlayer as Video } from 'react-html5video';
-
-var MyVideo = React.createClass({
-    render: function() {
-        return (
-            <div>
-                <video controls autoPlay src={this.props.src}>
-                    <track kind="subtitles" label="English subtitles" src={this.props.en_src} srclang="en" default></track>
-                    <track kind="subtitles" label="Spanish subtitles" src={this.props.es_src} srclang="es"></track>
-                </video>
-            </div>
-        );
-    }
-});
 
 class LargeSlide extends Component {
 
@@ -22,8 +8,8 @@ class LargeSlide extends Component {
   }
 
   componentDidMount() {
-    // this.setExitingTimeout();
-    // this.setHideTimeout();
+    this.setExitingTimeout();
+    this.setHideTimeout();
   }
 
   setExitingTimeout() {
@@ -43,19 +29,42 @@ class LargeSlide extends Component {
   }
 
   componentWillUnmount() {
-    // clearTimeout(this.hide_timeout);
-    // clearTimeout(this.exiting_timeout);
+    clearTimeout(this.hide_timeout);
+    clearTimeout(this.exiting_timeout);
   }
-
-
 
   render() {
     let slide = this.props.slide;
     return (
-        <div>
-            <MyVideo src="https://download.blender.org/durian/trailer/sintel_trailer-720p.mp4" en_src="/sintel-en.vtt" es_src="/sintel-es.vtt">
-            </MyVideo>
+      <div className={`container modal-container ${this.state.slideAnimationClass}`}>
+        <div className="row donor-large-image-row">
+          <div className="col-md-offset-1 col-md-10 modal-image-col">
+            <div className="panel panel-default modal-panel">
+              <div className="panel-body donor-body-large" style={{backgroundImage: `url("${slide.xlarge}")`}}>
+
+              </div>
+            </div>
+          </div>
         </div>
+        <div className="row modal-bottom-row">
+          <div className="col-md-12 modal-caption-col">
+            <div className="panel panel-default caption-panel">
+              <div className="panel-body new-background">
+                <div className="caption-container">
+                  <div className="text-center h1">
+                    {slide.title}
+                  </div>
+                  <div className="text-center caption-text">
+                    <p>
+                      {slide.caption}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     );
   }
 }
