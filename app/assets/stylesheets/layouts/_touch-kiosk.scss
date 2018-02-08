@@ -1,5 +1,6 @@
 @import "../../../node_modules/react-image-gallery/styles/scss/image-gallery.scss";
 @import "../../../node_modules/rc-calendar/assets/index";
+
 $willwest: #3d5cff;
 $willeast: #ff3c5c;
 $willeastwest: #A020F0;
@@ -13,7 +14,6 @@ $autzen: #ea76ff;
 }
 
 #touch_kiosk {
-
   /* CUSTOMIZE GALLERY
   --------------------------------------------------------*/
   .image-gallery-slide-wrapper {
