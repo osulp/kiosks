@@ -3,6 +3,7 @@ json.slides @slides do |slide|
   json.original slide.image.url
   json.thumbnail slide.image.url(:thumb)
   json.xlarge slide.image.url(:xlarge)
+  json.video slide.video_url
   json.title slide.title
   json.caption slide.caption
   json.slide_type slide.slide_type.name
