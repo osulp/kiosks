@@ -5,7 +5,6 @@ import ConnectedSlideGallery from '../../SlideGallery';
 import ConnectedModalWindow from '../../ModalWindow';
 import moment from 'moment';
 
-
 class Kiosk extends Component {
   /**
    * After the component mounts, fetch the current library hours and slides.
