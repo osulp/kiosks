@@ -6,8 +6,6 @@ import HoursTable from './HoursTable';
 import HoursError from './HoursError';
 import {trackClicked} from '../shared/GoogleAnalytics';
 
-export const now = moment();
-export const default_calendar_value = now.clone();
 export const getWeekArray = (date) => {
   return ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"].map(d => moment(date).day(d).format('YYYY-MM-DD'));
 };
@@ -19,7 +17,8 @@ class Hours extends Component {
    */
   constructor(props) {
     super(props);
-    this.state = {selected_date: now};
+    let now = moment();
+    this.state = {selected_date: now, default_calendar_value: now};
   }
 
   /**
@@ -49,7 +48,14 @@ class Hours extends Component {
    */
   componentDidMount() {
     this.setHideTimeout();
-    this.props.fetchHours(this.props.api.hours, getWeekArray(now.format('YYYY-MM-DD')));
+    this.props.fetchHours(this.props.api.hours, getWeekArray(moment().format('YYYY-MM-DD')));
+  }
+
+  /**
+   * Before mounting the component, set the proper state values needed
+   */
+  componentWillMount() {
+    this.setState({default_calendar_value: moment()});
   }
 
   /**
@@ -84,7 +90,7 @@ class Hours extends Component {
    */
   render() {
     let hours = this.props.hours;
-    let calendar = (<Calendar defaultValue={default_calendar_value}
+    let calendar = (<Calendar defaultValue={this.state.default_calendar_value}
                               onChange={this.dateClicked.bind(this)}
                               showDateInput={false}/>);
     let is_fetching_class = this.props.is_fetching_hours ? "is_fetching" : "";
@@ -99,7 +105,7 @@ class Hours extends Component {
             <div className="hours-table-datepicker hidden-md hidden-lg col-sm-12">
               <DatePicker calendar={calendar}
                           animation="slide-down"
-                          defaultValue={default_calendar_value}
+                          defaultValue={this.state.default_calendar_value}
                           onChange={this.dateClicked.bind(this)}
                           showDateInput={false}>
                 {({value}) => {
