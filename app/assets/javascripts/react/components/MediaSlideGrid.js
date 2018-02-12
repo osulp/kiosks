@@ -1,7 +1,7 @@
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 
-import VideoGrid from './presentational/Media/MediaGrid';
+import MediaGrid from './presentational/Media/MediaGrid';
 import * as actions from '../actions';
 
 // Top level mapping of the application state to properties of component that is being
@@ -20,4 +20,4 @@ export const mapDispatchToProps = (dispatch) => {
 };
 
 // Connect the mappings (state -> properties, and actions -> dispatch) to the application component
-export default connect(mapStateToProps, mapDispatchToProps)(VideoGrid);
+export default connect(mapStateToProps, mapDispatchToProps)(MediaGrid);

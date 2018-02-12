@@ -1,7 +1,7 @@
 import {connect} from 'react-redux';
 import React, {Component, PropTypes} from 'react';
 import ConnectedModalWindow from '../../ModalWindow';
-import ConnectedSlideGrid from '../../MediaSlideGrid';
+import ConnectedMediaGrid from '../../MediaSlideGrid';
 import moment from 'moment';
 
 class Kiosk extends Component {
@@ -20,7 +20,7 @@ class Kiosk extends Component {
   }
 
   /**
-   * Fetch the restart_kiosk value for donor kiosk every 1 minute in order to restart the kiosk as scheduled
+   * Fetch the restart_kiosk value for media kiosk every 1 minute in order to restart the kiosk as scheduled
    * @private
    */
   _fetchRestartKioskTimeout() {
@@ -31,9 +31,19 @@ class Kiosk extends Component {
 
   render() {
     return (
-      <div id="oral_history_kiosk">
-        <ConnectedModalWindow />
-        <ConnectedSlideGrid />
+      <div id="media_kiosk">
+          <div className="row header">
+              <div className="col-md-2 col-sm-2 header-logo">
+                  <img className={'logo'} src="/images/osulibrarylogo.png" />
+              </div>
+              <div className="col-md-10 col-sm-10 header-title">
+                  <h1>Special Collections and Archives Research Center</h1>
+              </div>
+          </div>
+          <div className={"row"}>
+              <ConnectedModalWindow />
+              <ConnectedMediaGrid />
+          </div>
       </div>
     );
   }

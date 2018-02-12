@@ -5,7 +5,7 @@ import {trackClicked} from '../shared/GoogleAnalytics';
 class MediaCell extends Component {
 
   cellClicked (e) {
-    trackClicked(this.props.google_analytics, 'OralHistoryKiosk:MediaClicked');
+    trackClicked(this.props.google_analytics, 'DonorKiosk:SlideClicked');
     this.props.setModalVisibility(true);
     this.props.setModalRootComponent(<LargeMedia {...this.props} />);
   }
@@ -13,13 +13,15 @@ class MediaCell extends Component {
   render() {
     let slide = this.props.slide;
     return (
-      <div className="col-md-2 oral-history-cell-small" onClick={this.cellClicked.bind(this)}>
-        <div className="panel panel-default oral-history-panel-small">
-          <div className="panel-body oral-history-body-small"
-               style={{backgroundImage: `url("${slide.xlarge}")`}}>
-          </div>
+        <div className="col-md-4 col-sm-4" onClick={this.cellClicked.bind(this)}>
+            <div className="thumbnail">
+                <img src={slide.xlarge} alt={slide.caption} style={{width: '100%'}}></img>
+                    <div className="caption-cell">
+                        <h1>{slide.label}</h1>
+                        <p>{slide.caption}</p>
+                    </div>
+            </div>
         </div>
-      </div>
     );
   }
 }

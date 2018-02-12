@@ -31,6 +31,11 @@
           </div>
 
           <div class="field">
+            <%= f.label :description %>
+            <%= f.text_area :description, required: false,class: "form-control" %>
+          </div>
+
+          <div class="field">
             <%= f.label :image %>
             <%= f.file_field :image, required: false, class: "form-control" %>
           </div>
@@ -38,6 +43,11 @@
           <div class="field">
             <%= f.label :video %>
             <%= f.file_field :video, required: false, class: "form-control" %>
+          </div>
+
+          <div class="field">
+            <%= f.label :subtitle %>
+            <%= f.file_field :subtitle, required: false, class: "form-control" %>
           </div>
 
           <div class="field">

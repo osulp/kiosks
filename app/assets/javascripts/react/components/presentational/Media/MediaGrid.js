@@ -12,31 +12,48 @@ class MediaGrid extends Component {
   componentDidMount() {
   }
 
+  buildGrid(filter_status) {
+      let slides = this.props.slides;
+      let rows = slides.reduce((row, curr, i) => {
+          let size = 3;
+          if ( !(i % size)  ) {
+              row.push(slides.slice(i, i + size));
+          }
+          return row;
+      }, []);
+      return rows;
+  }
+
   componentDidUpdate() {
-    if(this.props.is_modal_visible === true) {
-    }
+
+  }
+
+  setTitle(e) {
+    trackClicked(this.props.google_analytics, `MediaKiosk:FilterSlides:${e.target.dataset.slidetype}`);
+    this.props.setTitle(e.target.dataset.slidetype);
+  }
+
+  renderRow(slide, i, j) {
+      return (
+          <MediaCell key={`cell.${i}.${j}`} slide={slide} {...this.props}/>
+      )
   }
 
   render() {
     let title = this.props.title;
     return (
       <div className="container-fluid">
-        <div className="row">
-          <div className="col-md-4"></div>
-          <div className="col-md-4 donor-title text-center">
-            {title}
+          <div className="row media-grid-container ">
+              {this.buildGrid().map((row, i) => {
+                  return (
+                      <div key={`row.${i}`} className="row">
+                          {row.map((slide, j) => {
+                              return (this.renderRow(slide, i, j))
+                          })}
+                      </div>
+                  )
+              })}
           </div>
-          <div className="col-md-4"></div>
-        </div>
-        <div className="row donor-grid-container ">
-          <div className="scrollable dragscroll">
-            {this.props.slides.map((slide, i) => {
-              return (
-                <MediaCell key={`cell.${i}`} slide={slide} {...this.props}/>
-              )
-            })}
-          </div>
-        </div>
       </div>
     );
   }
@@ -48,6 +65,7 @@ MediaGrid.propTypes = {
   google_analytics: PropTypes.object.isRequired,
   setModalVisibility: PropTypes.func.isRequired,
   setModalRootComponent: PropTypes.func.isRequired,
+  setTitle: PropTypes.func.isRequired,
   is_modal_visible: PropTypes.bool.isRequired,
 };
 

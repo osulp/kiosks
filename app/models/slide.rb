@@ -2,6 +2,7 @@ class Slide < ApplicationRecord
   include Rails.application.routes.url_helpers
   attr_accessor :image
   attr_accessor :video
+  attr_accessor :subtitle
   belongs_to :slide_type
 
   has_many :kiosk_slides, :dependent => :destroy
@@ -15,7 +16,7 @@ class Slide < ApplicationRecord
   validates :title, :caption, :presence => true
 
   mount_uploader :video, VideoUploader
-
+  mount_uploader :subtitle, SubtitleUploader
   mount_uploader :image, ImageUploader
 
   def to_jq_upload
