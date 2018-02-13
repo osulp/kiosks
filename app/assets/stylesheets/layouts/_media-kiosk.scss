@@ -32,6 +32,7 @@
     color: #7A6855;
   }
 
+
   .scrollable {
     height: 100%;
     position: relative;
@@ -195,17 +196,20 @@
       height: 30px;
       width: 160px;
     }
-    //.media-body-large video {
-    //  max-width: 670px;
-    //}
   }
 }
 
 @media (min-width: 768px) {
   #media_kiosk {
     .media-body-large video {
-      max-width: 670px;
+      max-width: 848px;
     }
+
+    .media-large-image-row img,
+    .media-large-image-row audio {
+      width: 100%;
+    }
+
   }
 }
 
@@ -214,6 +218,14 @@
     img.logo {
       height: 30px;
       width: 160px;
+    }
+    .media-body-large video {
+      width: 86%;
+      max-width: 100%;
+    }
+    .media-large-image-row img,
+    .media-large-image-row audio {
+      width: 80%;
     }
   }
 }

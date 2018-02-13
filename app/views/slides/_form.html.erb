@@ -36,17 +36,17 @@
           </div>
 
           <div class="field">
-            <%= f.label :image %>
+            <%= f.label :image, 'Image (jpg, jpeg, gif, png)' %>
             <%= f.file_field :image, required: false, class: "form-control" %>
           </div>
 
           <div class="field">
-            <%= f.label :video %>
+            <%= f.label :video, 'Audio/Video (mp3, m4v)'  %>
             <%= f.file_field :video, required: false, class: "form-control" %>
           </div>
 
           <div class="field">
-            <%= f.label :subtitle %>
+            <%= f.label :subtitle, 'English Subtitles (vtt)' %>
             <%= f.file_field :subtitle, required: false, class: "form-control" %>
           </div>
 

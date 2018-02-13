@@ -32,4 +32,8 @@ class Slide < ApplicationRecord
       "id" => id
     }
   end
+
+  def subtitle_filename
+    File.basename subtitle.url if subtitle.present?
+  end
 end
