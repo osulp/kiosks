@@ -2,13 +2,39 @@ import React, {Component, PropTypes} from 'react';
 
 var MyVideo = React.createClass({
     render: function() {
-        return (
-            <div>
-                <video controls autoPlay src={this.props.src} >
-                    <track kind="subtitles" label="English subtitles" src={this.props.en_src} srcLang="en" default></track>
-                </video>
-            </div>
-        );
+        if (this.props.en_src.length == 0 && this.props.es_src.length == 0) {
+            return (
+                <div>
+                    <video controls autoPlay src={this.props.src}>
+                    </video>
+                </div>
+            );
+        } else if (this.props.en_src.length > 0 && this.props.es_src.length == 0) {
+            return (
+                <div>
+                    <video controls autoPlay src={this.props.src} >
+                        <track kind="subtitles" label="English subtitles" src={this.props.en_src} srcLang="en" default></track>
+                    </video>
+                </div>
+            );
+        } else if (this.props.en_src.length == 0 && this.props.es_src.length > 0) {
+            return (
+                <div>
+                    <video controls autoPlay src={this.props.src} >
+                        <track kind="subtitles" label="Spanish subtitles" src={this.props.es_src} srcLang="es"></track>
+                    </video>
+                </div>
+            );
+        } else {
+            return (
+                <div>
+                    <video controls autoPlay src={this.props.src} >
+                        <track kind="subtitles" label="English subtitles" src={this.props.en_src} srcLang="en" default></track>
+                        <track kind="subtitles" label="Spanish subtitles" src={this.props.es_src} srcLang="es"></track>
+                    </video>
+                </div>
+            );
+        }
     }
 });
 
@@ -40,7 +66,7 @@ class LargeMedia extends Component {
      let slide = this.props.slide;
      if (slide.av_media.endsWith("m4v")) {
          return (
-             <MyVideo src={slide.av_media} en_src={slide.subtitle} >
+             <MyVideo src={slide.av_media} en_src={slide.subtitle_en} es_src={slide.subtitle_es} >
              </MyVideo>
          )
      } else if (slide.av_media.endsWith("mp3")) {

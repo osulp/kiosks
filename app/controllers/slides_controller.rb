@@ -110,7 +110,7 @@ class SlidesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def slide_params
-      params.require(:slide).permit(:caption, :expires_at, :title, :description, :collection_id, :slide_type_id, :image, :video, :subtitle, :kiosk_ids, date_ranges_attributes: [:id, :start_date, :end_date, :_destroy])
+      params.require(:slide).permit(:caption, :expires_at, :title, :description, :collection_id, :slide_type_id, :image, :video, :kiosk_ids, {subtitles: []}, date_ranges_attributes: [:id, :start_date, :end_date, :_destroy])
     end
 
     def authorize

@@ -46,8 +46,12 @@
           </div>
 
           <div class="field">
-            <%= f.label :subtitle, 'English Subtitles (vtt)' %>
-            <%= f.file_field :subtitle, required: false, class: "form-control" %>
+            <%= f.label :subtitles, 'Subtitles (vtt)' %>
+            <input class="form-control" type="file" name="slide[subtitles][]" id="slide_subtitles">
+            <input class="form-control" type="file" name="slide[subtitles][]" id="slide_subtitles">
+          </div>
+
+          <div class="field">
           </div>
 
           <div class="field">

@@ -39,7 +39,11 @@
         </th>
         <td>
           <p>
-            <%= link_to(@slide.subtitle_filename, @slide.subtitle.url) if @slide && @slide.subtitle.url.present? %>
+            <% @slide.subtitles.each_with_index do |subtitle, index| %>
+              <li>
+                <%= link_to(@slide.subtitle_filename(index), subtitle.url) %>
+              </li>
+            <% end %>
           </p>
         </td>
       </tr>
