@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180206160152) do
+ActiveRecord::Schema.define(version: 20180213193109) do
 
   create_table "collections", force: :cascade do |t|
     t.string   "name"
@@ -67,6 +67,9 @@ ActiveRecord::Schema.define(version: 20180206160152) do
     t.integer  "image_file_size"
     t.datetime "image_updated_at"
     t.integer  "collection_id"
+    t.string   "video"
+    t.text     "description"
+    t.string   "subtitles"
     t.index ["collection_id"], name: "index_slides_on_collection_id"
     t.index ["slide_type_id"], name: "index_slides_on_slide_type_id"
   end

@@ -25,6 +25,30 @@
       </tr>
       <tr>
         <th scope="row">
+          <strong>Description:</strong>
+        </th>
+        <td>
+          <p>
+          <%= @slide.description %>
+          </p>
+        </td>
+      </tr>
+      <tr>
+        <th scope="row">
+          <strong>English Subtitles:</strong>
+        </th>
+        <td>
+          <p>
+            <% @slide.subtitles.each_with_index do |subtitle, index| %>
+              <li>
+                <%= link_to(@slide.subtitle_filename(index), subtitle.url) %>
+              </li>
+            <% end %>
+          </p>
+        </td>
+      </tr>
+      <tr>
+        <th scope="row">
           <strong>Display dates:</strong>
         </th>
         <td>

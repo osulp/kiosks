@@ -1,6 +1,8 @@
 class Slide < ApplicationRecord
   include Rails.application.routes.url_helpers
   attr_accessor :image
+  attr_accessor :video
+  attr_accessor :subtitles
   belongs_to :slide_type
 
   has_many :kiosk_slides, :dependent => :destroy
@@ -13,7 +15,11 @@ class Slide < ApplicationRecord
 
   validates :title, :caption, :presence => true
 
+  mount_uploader :video, VideoUploader
+  mount_uploaders :subtitles, SubtitleUploader
+  serialize :subtitles, JSON
   mount_uploader :image, ImageUploader
+
   def to_jq_upload
     {
       "name" => read_attribute(:image),
@@ -26,5 +32,9 @@ class Slide < ApplicationRecord
       "caption" => read_attribute(:caption),
       "id" => id
     }
+  end
+
+  def subtitle_filename(index)
+    File.basename subtitles[index].url if subtitles[index].present?
   end
 end
