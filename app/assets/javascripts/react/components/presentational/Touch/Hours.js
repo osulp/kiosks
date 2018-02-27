@@ -21,6 +21,10 @@ class Hours extends Component {
     this.state = {selected_date: now, default_calendar_value: now};
   }
 
+  componentWillReceiveProps(nextProps) {
+    this.setState({selected_date: moment(), default_calendar_value: moment()});
+  }
+
   /**
    * Set the modal to automatically hide itself after a period of time, unless the timeout is cleared beforehand
    */
