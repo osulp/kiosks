@@ -72,7 +72,7 @@ class Header extends Component {
     this.props.setModalVisibility(true);
     this.props.setModalRootComponent(<ConnectedClassroomSchedule />);
   }
-  
+
   /**
    * The 1search button was clicked, set the modal to display the connected search primo component
    */
@@ -112,7 +112,7 @@ class Header extends Component {
   }
 
   render() {
-    let tapped_enough = this.state.taps > 20;
+    let tapped_enough = (this.state.taps > 20);
     let is_fetching = this.props.is_fetching_slides ? "is_fetching" : "";
     return (
       <div className="navbar-wrapper">
@@ -127,7 +127,7 @@ class Header extends Component {
                   <span className="icon-bar"></span>
                   <span className="icon-bar"></span>
                 </button>
-                <img className={`logo ${tapped_enough ? "is_active" : ""}`} src="/images/osulibrarylogo.png" onClick={this._didTap.bind(this)} />
+                <img className={`logo ${tapped_enough ? 'is_active' : ''}`} src="/images/osulibrarylogo.png" onClick={this._didTap.bind(this)} />
               </div>
               <div id="navbar" className="navbar-collapse collapse">
                 <ul className="nav navbar-nav">
@@ -165,12 +165,12 @@ Header.propTypes = {
   url: PropTypes.string.isRequired,
   maps: PropTypes.array,
   hours: PropTypes.object.isRequired,
-  google_analytics: PropTypes.object,
+  google_analytics: PropTypes.func,
   is_fetching_slides: PropTypes.bool.isRequired,
   fetchSlides: PropTypes.func.isRequired,
   setModalVisibility: PropTypes.func.isRequired,
   setModalRootComponent: PropTypes.func.isRequired,
-  scrollToSlide: PropTypes.func.isRequired,
+  scrollToSlide: PropTypes.func.isRequired
 };
 
 export default Header;

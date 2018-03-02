@@ -13,7 +13,7 @@ var Iframe = React.createClass({
 
 class SearchPrimo extends Component {
   /**
-   * Initialize an Search Primo UI 
+   * Initialize an Search Primo UI
    * @param props - the properties passed into the component
    */
   constructor(props) {
@@ -41,7 +41,7 @@ class SearchPrimo extends Component {
 
 SearchPrimo.propTypes = {
   api: PropTypes.object.isRequired,
-  google_analytics: PropTypes.object,
+  google_analytics: PropTypes.func,
 };
 
 export default SearchPrimo;
