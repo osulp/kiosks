@@ -80,7 +80,7 @@ Kiosk.propTypes = {
   maps: PropTypes.array,
   hours: PropTypes.object.isRequired,
   url: PropTypes.string.isRequired,
-  google_analytics: PropTypes.object,
+  google_analytics: PropTypes.func,
   api: PropTypes.object.isRequired,
   is_fetching_slides: PropTypes.bool.isRequired,
   show_nav: PropTypes.bool.isRequired,

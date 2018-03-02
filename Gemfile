@@ -1,5 +1,6 @@
-source 'https://rubygems.org'
+# frozen_string_literal: true
 
+source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.0.0', '>= 5.0.0.1'
@@ -34,43 +35,43 @@ gem 'redis', '~> 3.0'
 
 # Use Capistrano for deployment
 gem 'capistrano', '~> 3.6'
+gem 'capistrano-nvm'
 gem 'capistrano-passenger'
 gem 'capistrano-rails'
 gem 'capistrano-rbenv'
-gem 'capistrano-nvm'
 
-gem 'react-rails'
-gem 'devise'
-gem 'rmagick'
 gem 'carrierwave', '~> 1.0'
+gem 'devise'
 gem 'flipclockjs-rails', '~> 0.7.7'
 gem 'rails-controller-testing'
+gem 'react-rails'
+gem 'rmagick'
 
+gem 'devise_cas_authenticatable'
+gem 'rubocop'
 gem 'rubycas-client', git: 'https://github.com/osulp/rubycas-client'
 gem 'rubycas-client-rails', git: 'https://github.com/osulp/rubycas-client-rails'
-gem 'devise_cas_authenticatable'
-
-gem 'nokogiri'
 
 gem 'mysql2'
+gem 'nokogiri'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platform: :mri
-  gem 'rspec-rails', '~> 3.5'
-  gem 'rspec-mocks', '~> 3.5'
-  gem 'webmock'
   gem 'coveralls'
-  gem 'simplecov'
   gem 'pry'
-  gem 'rspec-console'
   gem 'pry-byebug'
+  gem 'rspec-console'
+  gem 'rspec-mocks', '~> 3.5'
+  gem 'rspec-rails', '~> 3.5'
+  gem 'simplecov'
+  gem 'webmock'
 end
 
 group :development do
   # Access an IRB console on exception pages or by using <%= console %> anywhere in the code.
-  gem 'web-console'
   gem 'listen', '~> 3.0.5'
+  gem 'web-console'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'

@@ -136,7 +136,7 @@ class Hours extends Component {
 Hours.propTypes = {
   hours: PropTypes.object.isRequired,
   api: PropTypes.object.isRequired,
-  google_analytics: PropTypes.object,
+  google_analytics: PropTypes.func,
   is_fetching_hours: PropTypes.bool.isRequired,
   fetchHours: PropTypes.func.isRequired,
 };
