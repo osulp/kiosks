@@ -6,6 +6,7 @@ RSpec.describe "kiosks/show", type: :view do
   before(:each) do
     @kiosk = assign(:kiosk, Kiosk.create!(
       :name => "Name",
+      :map_default_floor_number => 2,
       :kiosk_layout_id => test_layout.id
     ))
   end
@@ -13,6 +14,7 @@ RSpec.describe "kiosks/show", type: :view do
   it "renders attributes in <p>" do
     render
     expect(rendered).to match(/Name/)
+    expect(rendered).to match(/2/)
     expect(rendered).to match(/touch/)
   end
 end

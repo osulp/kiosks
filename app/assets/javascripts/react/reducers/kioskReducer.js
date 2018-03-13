@@ -22,7 +22,7 @@ const kioskReducer = (state = initial_state, action) => {
     case ADD_ERROR:
       return Object.assign({}, state, { errors: [...state.errors, action.error] });
     case SET_KIOSK:
-      return Object.assign({}, state, { type: action.kiosk.type, url: action.kiosk.url });
+      return Object.assign({}, state, { type: action.kiosk.type, url: action.kiosk.url, map_default_floor_number: action.kiosk.map_default_floor_number });
     case SET_RESTART_KIOSK:
       return Object.assign({}, state, { restart_kiosk: action.kiosk.restart_kiosk });
     case SET_SLIDES:

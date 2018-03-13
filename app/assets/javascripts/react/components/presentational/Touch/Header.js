@@ -2,6 +2,7 @@ import React, {Component, PropTypes} from 'react';
 import TouchHours from '../../TouchHours';
 import ConnectedTabbedPanel from '../../TabbedPanel';
 import ConnectedClassroomSchedule from '../../TouchClassroomSchedule';
+import ConnectedMaps from '../../TouchMaps';
 import ConnectedSearchPrimo from '../../TouchSearchPrimo';
 import {trackClicked} from '../shared/GoogleAnalytics';
 
@@ -81,19 +82,13 @@ class Header extends Component {
     this.props.setModalVisibility(true);
     this.props.setModalRootComponent(<ConnectedSearchPrimo />);
   }
-
   /**
-   * Generate a Maps button if there are maps to display
-   * @returns {JSX} - the LI element containing the maps button
-   * @private
+   * The maps button was clicked, set the modal to display the maps component
    */
-  _mapsButton() {
-    if (this.props.maps) {
-      return (
-        <li className="show-maps" onClick={this.mapsClicked.bind(this)}>
-          <a className="btn btn-navbar btn-default">Maps</a>
-        </li>);
-    }
+  mapsClicked() {
+    trackClicked(this.props.google_analytics, 'TouchKiosk:Header:Maps');
+    this.props.setModalVisibility(true);
+    this.props.setModalRootComponent(<ConnectedMaps />);
   }
 
   /**
@@ -134,7 +129,9 @@ class Header extends Component {
                   <li className="show-hours" onClick={this.hoursClicked.bind(this)}>
                     <a className="btn btn-navbar btn-default">Hours</a>
                   </li>
-                  {this._mapsButton()}
+                  <li className="show-maps" onClick={this.mapsClicked.bind(this)}>
+                    <a className="btn btn-navbar btn-default">Maps</a>
+                  </li>
                   <li className="show-classroom-schedule" onClick={this.classroomScheduleClicked.bind(this)}>
                     <a className="btn btn-navbar btn-default">Classrooms Schedule</a>
                   </li>
