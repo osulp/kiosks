@@ -20,7 +20,10 @@
         <%= f.label :kiosk_layout_id %>
         <%= f.select('kiosk_layout_id', options_from_collection_for_select(@kiosk_layouts, :id, :name, kiosk.kiosk_layout_id), { :include_blank => '-- Select One --' }, :required => true, class: "form-control") %>
       </div>
-
+      <div class="field">
+        <%= f.label :map_default_floor_number %>
+        <%= f.text_field :map_default_floor_number, class: "form-control" %>
+      </div>
       <div class="field">
         <%= f.label :restart_at_active, "Enable restarting kiosk" %>
         <%= f.check_box :restart_at_active, {:class => "enable_restart_at"} %>

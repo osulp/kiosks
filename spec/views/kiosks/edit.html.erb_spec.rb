@@ -13,8 +13,8 @@ RSpec.describe "kiosks/edit", type: :view do
     render
 
     assert_select "form[action=?][method=?]", kiosk_path(@kiosk), "post" do
-
       assert_select "input#kiosk_name[name=?]", "kiosk[name]"
+      assert_select "input#kiosk_map_default_floor_number[name=?]", "kiosk[map_default_floor_number]"
     end
   end
 end

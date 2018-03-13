@@ -8,7 +8,7 @@ RSpec.describe KiosksController, type: :controller do
   let (:test_layout) { KioskLayout.create!(:name => "touch") }
 
   let(:valid_attributes) {
-    { name: "donor", kiosk_layout_id: test_layout.id }
+    { name: "donor", kiosk_layout_id: test_layout.id, map_default_floor_number: 2 }
   }
 
 
@@ -24,11 +24,11 @@ RSpec.describe KiosksController, type: :controller do
   end
 
   let(:kiosk1_valid_attributes) {
-    { name: "kiosk1", kiosk_layout_id: test_layout.id }
+    { name: "kiosk1", kiosk_layout_id: test_layout.id, map_default_floor_number: 2 }
   }
 
   let(:kiosk2_valid_attributes) {
-    { name: "kiosk2", kiosk_layout_id: test_layout.id }
+    { name: "kiosk2", kiosk_layout_id: test_layout.id, map_default_floor_number: 2 }
   }
 
   let(:kiosk1) {
@@ -174,7 +174,7 @@ RSpec.describe KiosksController, type: :controller do
   describe "PUT #update" do
     context "with valid params" do
       let(:new_attributes) {
-        { name: "scarc" }
+        { name: "scarc", map_default_floor_number: 14 }
       }
 
       it "updates the requested kiosk" do
@@ -182,6 +182,7 @@ RSpec.describe KiosksController, type: :controller do
         put :update, params: {id: kiosk.to_param, kiosk: new_attributes}
         kiosk.reload
         expect(kiosk.name).to eq("scarc")
+        expect(kiosk.map_default_floor_number).to eq(14)
       end
 
       it "assigns the requested kiosk as @kiosk" do

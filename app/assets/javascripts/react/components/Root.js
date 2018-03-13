@@ -19,7 +19,7 @@ export default class Root extends Component {
    * Prior to mounting, dispatch the Redux action to set the slides for the app
    */
   componentWillMount() {
-    store.dispatch(setKiosk(this.props.kiosk_type, this.props.kiosk_url));
+    store.dispatch(setKiosk(this.props.kiosk_type, this.props.kiosk_url, this.props.kiosk_map_default_floor_number));
     store.dispatch(setSlides(this.props.slides));
     store.dispatch(setRestartKiosk(this.props.restart_kiosk));
     store.dispatch(setMaps(this.props.maps));

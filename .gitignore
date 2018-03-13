@@ -33,4 +33,5 @@
 
 /app/assets/javascripts/dist-app*
 /public/uploads/*
+/public/uploaded/*
 /public/system*

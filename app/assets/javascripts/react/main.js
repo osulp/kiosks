@@ -34,6 +34,7 @@ if (root_dom_element) {
   let slides = setSlides(root_dom_element.getAttribute('data-slides'));
   let restart_kiosk = setRestartKiosk(root_dom_element.getAttribute('data-restart-kiosk'));
   let maps = setMaps(root_dom_element.getAttribute('data-maps'));
+  let map_default_floor_number = root_dom_element.getAttribute('data-kiosk-map-default-floor-number');
   let kiosk_type = root_dom_element.getAttribute('data-kiosk-type');
   let kiosk_url = root_dom_element.getAttribute('data-kiosk-url');
   let ga = window.ga;
@@ -43,6 +44,7 @@ if (root_dom_element) {
     <Root slides={slides}
           restart_kiosk={restart_kiosk}
           maps={maps}
+          kiosk_map_default_floor_number={map_default_floor_number}
           kiosk_type={kiosk_type}
           kiosk_url={kiosk_url}
           google_analytics={ga}

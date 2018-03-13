@@ -95,7 +95,7 @@ class KiosksController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def kiosk_params
-      params.require(:kiosk).permit(:name, :kiosk_layout_id, :restart_at, :restart_at_active)
+      params.require(:kiosk).permit(:name, :map_default_floor_number, :kiosk_layout_id, :restart_at, :restart_at_active)
     end
 
     # Only allow restart_at and restart_at_active (restart status) for mass update

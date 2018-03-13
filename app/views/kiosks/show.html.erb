@@ -24,6 +24,16 @@
       </tr>
       <tr>
         <th scope="row">
+          <strong>Maps Default Floor Number:</strong>
+        </th>
+        <td>
+          <p>
+          <%= @kiosk.map_default_floor_number %>
+          </p>
+        </td>
+      </tr>
+      <tr>
+        <th scope="row">
           <strong>Restart status</strong>
         </th>
         <td>
@@ -58,7 +68,7 @@
       </tr>
     </tbody>
   </table>
-</div> 
+</div>
 
 <%= link_to 'Edit', edit_kiosk_path(@kiosk), class: "btn btn-primary" %>
 <%= link_to 'All Kiosks', kiosks_path, class: "btn btn-default" %>
