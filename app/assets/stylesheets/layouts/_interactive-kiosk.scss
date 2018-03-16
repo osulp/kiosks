@@ -1,0 +1,497 @@
+@import "../../../node_modules/react-image-gallery/styles/scss/image-gallery.scss";
+@import "../../../node_modules/rc-calendar/assets/index";
+
+$willwest: #3d5cff;
+$willeast: #ff3c5c;
+$willeastwest: #A020F0;
+$barnard: #6eff7e;
+$autzen: #ea76ff;
+$niceblue: #00859B;
+
+/* Set container elements to 100% height. */
+#interactive_kiosk, #slide_gallery, .image-gallery {
+  height: 100%;
+  width: 100%;
+}
+
+#interactive_kiosk {
+  div#content {
+    padding-left: 10px;
+  }
+
+  /* CUSTOMIZE GALLERY
+  --------------------------------------------------------*/
+  .image-gallery-bullet {
+    background: url("/images/orangeoff.svg");
+    background-repeat: no-repeat;
+    background-size: 100%;
+    border: none;
+    height: 40px;
+    width: 40px;
+  }
+
+  .image-gallery-bullets {
+    bottom: -50px;
+  }
+
+  .image-gallery-bullet.active {
+    background: url("/images/orangeon.svg");
+    background-repeat: no-repeat;
+    background-size: 100%;
+    height: 40px;
+    width: 40px;
+  }
+
+  .image-gallery-left-nav {
+    left: 10px;
+  }
+
+  .image-gallery-right-nav {
+    right: 10px;
+  }
+
+  /* CUSTOMIZE THE NAVBAR
+  -------------------------------------------------- */
+
+  .navbar-wrapper {
+    padding-left: 10px;
+    padding-bottom: 5px;
+  }
+
+  .navbar-wrapper .navbar {
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-bottom: 0px;
+  }
+
+  .navbar-wrapper .navbar .container {
+    width: auto;
+  }
+  .container-kiosk {
+    max-width: 92%;
+  }
+
+  .container-kiosk-slides-expanded {
+    max-width: 97%;
+  }
+
+  .container-kiosk .rc-calendar {
+    margin-left: -30px;
+  }
+
+  .container-kiosk-full {
+    max-width: 92%;
+  }
+
+  .container-kiosk .container-content #content {
+    margin-right: 30px;
+  }
+
+  .navbar-wrapper .navbar.navbar-static-top {
+    background-color: transparent;
+    border-color: transparent;
+  }
+
+  .navbar-text.hours {
+    font-size: 20px;
+    line-height: 28px;
+  }
+
+  .navbar-header img {
+    height: 45px;
+    margin-top: 10px;
+    margin-right: 20px;
+  }
+
+  .navbar-header img.is_active {
+    -webkit-animation: spin 1000ms infinite linear;
+    -moz-animation: spin 1000ms infinite linear;
+    -ms-animation: spin 1000ms infinite linear;
+  }
+
+  .navbar-wrapper .refresh-slides > a {
+    padding: 0;
+    padding-top: 11px;
+    padding-right: 11px;
+  }
+
+  .navbar-wrapper .refresh-slides > a > .glyphicon {
+    font-size: 25px;
+    width: 25px;
+    height: 25px;
+    display: none;
+  }
+  .navbar-wrapper .refresh-slides > a > .glyphicon:hover {
+    cursor: pointer;
+  }
+
+  .nav.navbar-nav li a.btn,
+  .nav.navbar-nav button.main-menu
+  {
+    background: url("/images/pretty-button.svg");
+    background-repeat: no-repeat;
+    background-size: 100%;
+    border-color: transparent;
+    padding: 10px;
+    margin-top: 4px;
+    font-size: 30px;
+    height: 81px;
+    width: 216px;
+    color: #eee;
+    font-family: 'CaladeaRegular';
+    font-weight: normal;
+    font-style: normal;
+  }
+
+  .icons-only .nav.navbar-nav li a.btn,
+  .icons-only .nav.navbar-nav button.main-menu
+  {
+    background: url("/images/prettybutton_small.svg");
+    background-repeat: no-repeat;
+    background-size: 100%;
+    border-color: transparent;
+    padding-left: 6px;
+    margin-top: 4px;
+    font-size: 30px;
+    height: 81px;
+    width: 87px;
+    color: #eee;
+  }
+
+  .icons-only .nav.navbar-nav li a.menu-item-selected {
+    background: url("/images/prettybutton_small_active.svg");
+    background-repeat: no-repeat;
+  }
+
+  .icons-only .menu-item-text{
+    font-size: 16px;
+    line-height: 90px;
+    text-align: center;
+  }
+
+  .menu-text {
+    position: fixed;
+    right: 0px;
+    z-index: 3;
+  }
+
+  .icons-only {
+    position: fixed;
+    right: 0px;
+    z-index: 3;
+  }
+
+
+  .menu-text .nav > li {
+    margin-right: 8px;
+  }
+
+  .icons-only .nav > li {
+    margin-right: 8px;
+  }
+
+  .nav.navbar-nav button.main-menu {
+    background: none;
+    border-color: transparent;
+    width: 80px;
+    height: 53px;
+  }
+
+  .container-kiosk .main-menu-header {
+    margin-right: -90px;
+  }
+
+  .container-kiosk-full .main-menu-header {
+    margin-right: -90px;
+  }
+
+  img.menu-item-icon {
+    width: 42px;
+    height: 42px;
+    float: right;
+    padding-top: 10px;
+    display: none;
+  }
+
+  .icons-only img.menu-item-icon {
+    display: block;
+    position: absolute;
+    margin-top: -10px;
+    margin-left: 13px;
+  }
+
+  .nav > li {
+    margin-right: 25px;
+  }
+
+  .nav.navbar-nav > li {
+    float: none;
+  }
+
+  .navbar-nav > li > a {
+    line-height: 55px;
+  }
+
+  /* Hours component styles
+  ---------------------------------------------------------*/
+  #hours {
+    padding: 0;
+
+    .panel-title {
+      font-size: 30px;
+    }
+    .panel-heading .glyphicon {
+      color: $shaded_grey;
+      width: 20px;
+      height: 20px;
+      font-size: 20px;
+      float: right;
+      display: none;
+      margin-top: 10px;
+    }
+    .glyphicon.is_fetching {
+      display: inline-block;
+    }
+    .hours-table-container {
+      height: 550px;
+      margin-top: 15px;
+      padding-bottom: 15px;
+
+      .rc-calendar {
+        width: 100%;
+        font-size: 20px;
+        margin: 10px;
+      }
+      .rc-calendar-body {
+        height: 100%;
+      }
+      .rc-calendar-cell {
+        padding: 3px 0;
+        .rc-calendar-date {
+          line-height: 35px;
+          height: 35px;
+          width: 35px;
+
+        }
+      }
+      .rc-calendar-prev-month-btn, .rc-calendar-next-month-btn, .rc-calendar-prev-year-btn, .rc-calendar-next-year-btn {
+        font-size: 30px;
+      }
+
+      .hours-table-datepicker {
+        text-align: center;
+        margin-botom: 10px;
+        label {
+          margin-right: 5px;
+        }
+      }
+    }
+    table.hours-table {
+      margin: 0 auto;
+
+      thead tr th:first-child,
+      tbody tr td:first-child {
+        text-align: right;
+        padding-right: 25px;
+      }
+    }
+
+    .hours-table-error {
+      text-align: center;
+      padding: 20px 0 0 0;
+    }
+    .hours-table-error > span {
+      color: $bright-red;
+      display: inline-block;
+      padding-right: 5px;
+      vertical-align: bottom;
+    }
+    .hours-table-error > .glyphicon {
+      font-size: 30px;
+    }
+  }
+
+  #maps_tabbed_panel {
+    height: 90%;
+    ul {
+      height: 90%;
+      li,
+      li > div {
+        height: 90%;
+      }
+    }
+  }
+
+  #maps {
+    iframe {
+      height: 625px;
+    }
+  }
+  #search-primo {
+   .search-iframe {
+     padding: 0px;
+   }
+    .search-iframe iframe {
+      max-height: 555px;
+    }
+  }
+
+  #classroom_schedule {
+    height: 633px;
+    overflow-y: scroll;
+
+    .panel-title {
+      font-size: 30px;
+    }
+    .panel-heading .glyphicon {
+      color: $shaded_grey;
+      width: 20px;
+      height: 20px;
+      font-size: 20px;
+      float: right;
+      display: none;
+      margin-top: 10px;
+    }
+    .glyphicon.is_fetching {
+      display: inline-block;
+    }
+    .classroom-schedule-table-container {
+
+      h2 {
+        text-align: center;
+      }
+      .classroom-filter {
+        border-bottom: solid 1px #efefef;
+        padding-bottom: 10px;
+        font-size: large;
+        ul {
+          list-style: none;
+        }
+        ul li {
+          float: left;
+          margin: 0 20px;
+        }
+        ul li:first-child {
+          text-align: right;
+          color: #cecece;
+        }
+        ul li .glyphicon {
+          margin-right: 5px;
+          width: 20px;
+          color: #adadad;
+        }
+        ul li .glyphicon.checked {
+          color: #000;
+        }
+        ul li.lib-willwest .glyphicon.checked {
+          color: $willwest;
+        }
+        ul li.lib-willeast .glyphicon.checked {
+          color: $willeast;
+        }
+
+        ul li.lib-barnard .glyphicon.checked {
+          color: $barnard;
+        }
+        ul li.lib-autzen .glyphicon.checked {
+          color: $autzen;
+        }
+      }
+      .classroom-schedule-table {
+        margin-top: 20px;
+        thead tr th,
+        tbody tr td {
+          border: none;
+        }
+        thead tr th,
+        tbody tr td {
+          padding: 0;
+        }
+        thead tr.event-header-row th div,
+        tbody tr.event-detail-row td div {
+          float: left;
+          width: 100%;
+        }
+        tbody tr.event-detail-row td div {
+          padding-top: 15px;
+        }
+        thead tr.event-header-row th div span {
+          font-weight: normal;
+          color: #cecece;
+          font-size: large;
+        }
+        thead tr.event-header-row th div span,
+        tbody tr.event-detail-row td div span {
+          display: inline-block;
+          width: 30%;
+          vertical-align: bottom;
+          text-align: center;
+        }
+        tbody tr.event-detail-row td div span.event-title {
+          font-size: large;
+          text-align: left;
+        }
+
+        tbody tr.event-time-row td {
+          border-top: solid 1px #ececec;
+        }
+        tbody tr.event-time-row td span {
+          width: 25%;
+          float: left;
+        }
+        tbody tr.event-time-row td span.event-hour-header {
+          width: 100%;
+          float: left;
+          font-size: 10px;
+          display: none;
+          background-color: transparent;
+        }
+        tbody tr.event-time-row td.event-hour span {
+          border-left: solid 1px #adadad;
+          background-color: #ececec;
+          line-height: 15px;
+        }
+        tbody tr.event-time-row td.event-hour span.event-hour-header {
+          display: inline-block;
+          border-left: solid 1px #adadad;
+          padding-left: 3px;
+        }
+        tbody tr.event-time-row td.event-hour span.event-time {
+          background-color: #000;
+          margin-bottom: 5px;
+          border: none;
+        }
+
+        tbody tr.lib-willwest td.event-hour span.event-time {
+          background-color: $willwest;
+          border-left: solid 1px darken($willwest, 25%);
+        }
+        tbody tr.lib-willeast td.event-hour span.event-time {
+          background-color: $willeast;
+          border-left: solid 1px darken($willeast, 25%);
+        }
+        tbody tr.willamette-combined.willamette-selected td.event-hour span.event-time {
+          background-color: $willeastwest;
+          border-left: solid 1px darken($willeast, 25%);
+        }
+        tbody tr.lib-barnard td.event-hour span.event-time {
+          background-color: $barnard;
+          border-left: solid 1px darken($barnard, 25%);
+        }
+        tbody tr.lib-autzen td.event-hour span.event-time {
+          background-color: $autzen;
+          border-left: solid 1px darken($autzen, 25%);
+        }
+
+      }
+    }
+  }
+  /* RESPONSIVE CSS
+  -------------------------------------------------- */
+
+  @media (min-width: 768px) {
+    /* void */
+  }
+}
+
+

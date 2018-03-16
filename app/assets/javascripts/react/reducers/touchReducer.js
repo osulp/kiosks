@@ -1,16 +1,18 @@
 import {
   FETCHED_SLIDES, FETCHING_SLIDES, FETCHED_RESTART_KIOSK, FETCHING_RESTART_KIOSK, FETCHED_HOURS, FETCHING_HOURS, SET_HOURS, SET_MAPS,
   FETCHED_CLASSROOM_SCHEDULE, FETCHING_CLASSROOM_SCHEDULE, SET_CLASSROOM_SCHEDULE,
-  FETCHED_CLASSROOMS, FETCHING_CLASSROOMS, TOGGLE_CLASSROOM_SELECTED
+  FETCHED_CLASSROOMS, FETCHING_CLASSROOMS, TOGGLE_CLASSROOM_SELECTED, FETCHED_TODAYS_HOURS, FETCHING_TODAYS_HOURS, SET_TODAYS_HOURS
 } from '../actions/touchActions';
 
 export const initial_state = {
   is_fetching_slides: false,
   is_fetching_restart_kiosk: false,
   is_fetching_hours: false,
+  is_fetching_todays_hours: false,
   is_fetching_classroom_schedule: false,
   is_fetching_classrooms: false,
   hours: {},
+  todays_hours: {},
   classroom_schedule: {},
   classrooms: {},
   date: '',
@@ -35,6 +37,12 @@ const touchReducer = (state = initial_state, action) => {
       return Object.assign({}, state, {is_fetching_hours: true});
     case SET_HOURS:
       return Object.assign({}, state, {hours: action.hours});
+    case FETCHED_TODAYS_HOURS:
+      return Object.assign({}, state, {is_fetching_todays_hours: false});
+    case FETCHING_TODAYS_HOURS:
+      return Object.assign({}, state, {is_fetching_todays_hours: true});
+    case SET_TODAYS_HOURS:
+      return Object.assign({}, state, {todays_hours: action.todays_hours});
     case FETCHED_CLASSROOM_SCHEDULE:
       return Object.assign({}, state, {is_fetching_classroom_schedule: false});
     case FETCHING_CLASSROOM_SCHEDULE:
