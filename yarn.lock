@@ -6511,7 +6511,7 @@ vinyl@^1.0.0:
     clone-stats "^0.0.1"
     replace-ext "0.0.1"
 
-virtual-keyboard@^1.25.28:
+virtual-keyboard@^1.25.28, virtual-keyboard@^1.28.0:
   version "1.28.0"
   resolved "https://registry.yarnpkg.com/virtual-keyboard/-/virtual-keyboard-1.28.0.tgz#3a3584b6ebe22678351853c6f9e32f663f5f32d0"
   dependencies:
