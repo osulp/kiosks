@@ -29,6 +29,17 @@ class SearchPrimo extends Component {
 
   componentDidMount() {
     $('#primo_search').keyboard({
+      autoAccept: true,
+      layout: 'custom',
+      customLayout: {
+        'normal': [
+          '1 2 3 4 5 6 7 8 9 0 - = {bksp}',
+          'q w e r t y u i o p',
+          'a s d f g h j k l ; \'',
+          'z x c v b n m , .',
+          '{accept} {space} {cancel}'
+        ],
+      },
       accepted: function(e, k, el) {
         el.dispatchEvent(new Event('input', { bubbles: true }));
       }
@@ -71,7 +82,7 @@ class SearchPrimo extends Component {
         <div className="container-fluid search-primo-table-container">
           <div className="row search-bar">
             <div className='col-sm-6 col-sm-offset-3'>
-              <input className='form-control' type='text' id='primo_search' onChange={this.performSearch.bind(this)} placeholder='Search anything' />
+              <input className='form-control' type='text' id='primo_search' onChange={this.performSearch.bind(this)} placeholder='Search Valley Library resources' />
               <i id='primo_search_icon' className='material-icons'>search</i>
             </div>
           </div>
