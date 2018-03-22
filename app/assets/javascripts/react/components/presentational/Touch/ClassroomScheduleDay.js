@@ -122,7 +122,7 @@ class ClassroomScheduleDay extends Component {
         } else {
           rows.push(this._eventTimeRow(date, e, i, false));
         }
- 
+
       });
       return rows;
     }
@@ -137,7 +137,8 @@ class ClassroomScheduleDay extends Component {
    * @private
    */
   _filteredEvents(classrooms, events) {
-    const selected = Object.values(classrooms).filter((c) => c.selected == true);
+    const some_selected = Object.values(classrooms).some((c) => c.selected === true);
+    const selected = some_selected ? Object.values(classrooms).filter((c) => c.selected == true) : Object.values(classrooms);
     const will_combined = [];
 
     if (this._willametteEastWestSelected(selected) === true) {

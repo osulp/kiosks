@@ -13,7 +13,7 @@ class ClassroomSchedule extends Component {
   constructor(props) {
     super(props);
     let now = moment();
-    this.state = {selected_date: now, default_calendar_value: now};
+    this.state = {selected_date: now};
   }
 
   /**
@@ -53,15 +53,8 @@ class ClassroomSchedule extends Component {
    */
   componentDidMount() {
     this.props.fetchClassrooms(this.props.api.classrooms);
-    this.props.fetchClassroomSchedule(this.props.api.classroom_schedule, this.state.default_calendar_value);
+    this.props.fetchClassroomSchedule(this.props.api.classroom_schedule, this.state.selected_date);
     this.setHideTimeout();
-  }
-
-  /**
-   * Before mounting the component, set the proper state values needed
-   */
-  componentWillMount() {
-    this.setState({default_calendar_value: moment()});
   }
 
   /**
@@ -82,12 +75,16 @@ class ClassroomSchedule extends Component {
     return ordered;
   }
 
+  _hasSelectedClassroom(element, index, array) {
+    return element.selected === true;
+  }
+
   /**
    * Includes Bootstrap elements for mobile and regular displays using hidden-*  and col-* semantics
    * @returns {JSX} - the rendered UI
    */
   render() {
-    const calendar = (<Calendar defaultValue={this.state.default_calendar_value}
+    const calendar = (<Calendar defaultValue={this.state.selected_date}
                                 onChange={this.dateClicked.bind(this)}
                                 showDateInput={false}/>);
     const is_fetching_class = this.props.is_fetching_classroom_schedule ? "is_fetching" : "";
@@ -105,7 +102,7 @@ class ClassroomSchedule extends Component {
             <div className="classroom-schedule-table-datepicker hidden-md hidden-lg col-sm-12">
               <DatePicker calendar={calendar}
                           animation="slide-down"
-                          defaultValue={this.state.default_calendar_value}
+                          defaultValue={this.state.selected_date}
                           onChange={this.dateClicked.bind(this)}
                           showDateInput={false}>
                 {({value}) => {
@@ -128,11 +125,12 @@ class ClassroomSchedule extends Component {
               <ul>
                 <li key="filter.classroom_schedule" >Filter Schedule:</li>
                 {classrooms.map((classroom) => {
+                  let selected = classrooms.some(this._hasSelectedClassroom) ? classroom.selected : true;
                   return (
                     <li key={classroom.shortname}
                         className={`${classroom.shortname} ${classroom.selected ? "selected" : ""}`}
                         data-shortname={classroom.shortname}
-                        data-selected={classroom.selected}
+                        data-selected={selected}
                         onClick={this.classroomClicked.bind(this, classroom)}>
                       <span className={`glyphicon glyphicon-ok-sign ${classroom.selected ? "checked" : ""}`}
                             aria-hidden="true">
