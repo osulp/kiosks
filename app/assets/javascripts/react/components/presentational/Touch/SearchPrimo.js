@@ -18,6 +18,47 @@ class SearchPrimo extends Component {
    */
   constructor(props) {
     super(props);
+    this.state = {
+      uri: 'http://alliance-primo-sb.hosted.exlibrisgroup.com/primo-explore/search?sortby=rank&vid=OSU_KIOSK&lang=en_US',
+      search_delay: 1000,
+      search_querystring: 'query=any,contains,[TERM]&tab=default_tab&search_scope=osu_print',
+      search_timer: null,
+      search_uri: 'http://alliance-primo-sb.hosted.exlibrisgroup.com/primo-explore/search?sortby=rank&vid=OSU_KIOSK&lang=en_US'
+    }
+  }
+
+  componentDidMount() {
+    $('#primo_search').keyboard({
+      accepted: function(e, k, el) {
+        el.dispatchEvent(new Event('input', { bubbles: true }));
+      }
+    });
+    $('#primo_search_icon').on('click', function(e) {
+      document.getElementById('primo_search').dispatchEvent(new Event('input', { bubbles: true }));
+    });
+  }
+
+  searchUri(term) {
+    if(term !== '') {
+      return this.state.uri + '&' + this.state.search_querystring.replace('[TERM]', term);
+    } else {
+      return this.state.uri;
+    }
+  }
+
+  performSearch(e) {
+    if(this.state.search_timer === null) {
+      let self = this;
+      let term = e.target.value;
+      let search_uri = this.searchUri(term);
+      let timer = setTimeout(function() {
+        self.setState({ search_uri: search_uri, search_timer: null });
+      }, this.state.search_delay);
+      this.setState({search_timer: timer});
+    } else {
+      clearTimeout(this.state.search_timer);
+      this.setState({search_timer: null});
+    }
   }
 
   /**
@@ -28,9 +69,15 @@ class SearchPrimo extends Component {
     return (
       <div id="search-primo" className="panel panel-default">
         <div className="container-fluid search-primo-table-container">
+          <div className="row search-bar">
+            <div className='col-sm-6 col-sm-offset-3'>
+              <input className='form-control' type='text' id='primo_search' onChange={this.performSearch.bind(this)} placeholder='Search anything' />
+              <i id='primo_search_icon' className='material-icons'>search</i>
+            </div>
+          </div>
           <div className="row">
             <div className="col-sm-12 search-iframe">
-                <Iframe src="https://search.library.oregonstate.edu/primo-explore/search?vid=OSU&sortby=rank" height={(window.innerHeight-200).toString() + 'px'} width="100%"/>
+                <Iframe src={this.state.search_uri} height={(window.innerHeight-50).toString() + 'px'} width="100%" />
             </div>
           </div>
         </div>
