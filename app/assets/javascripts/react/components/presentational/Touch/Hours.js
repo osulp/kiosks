@@ -18,7 +18,7 @@ class Hours extends Component {
   constructor(props) {
     super(props);
     let now = moment();
-    this.state = {selected_date: now, default_calendar_value: now};
+    this.state = {selected_date: now};
   }
 
   /**
@@ -49,13 +49,6 @@ class Hours extends Component {
   componentDidMount() {
     this.setHideTimeout();
     this.props.fetchHours(this.props.api.hours, getWeekArray(moment().format('YYYY-MM-DD')));
-  }
-
-  /**
-   * Before mounting the component, set the proper state values needed
-   */
-  componentWillMount() {
-    this.setState({default_calendar_value: moment()});
   }
 
   /**
@@ -90,7 +83,7 @@ class Hours extends Component {
    */
   render() {
     let hours = this.props.hours;
-    let calendar = (<Calendar defaultValue={this.state.default_calendar_value}
+    let calendar = (<Calendar defaultValue={this.state.selected_date}
                               onChange={this.dateClicked.bind(this)}
                               showDateInput={false}/>);
     let is_fetching_class = this.props.is_fetching_hours ? "is_fetching" : "";
@@ -105,7 +98,7 @@ class Hours extends Component {
             <div className="hours-table-datepicker hidden-md hidden-lg col-sm-12">
               <DatePicker calendar={calendar}
                           animation="slide-down"
-                          defaultValue={this.state.default_calendar_value}
+                          defaultValue={this.state.selected_date}
                           onChange={this.dateClicked.bind(this)}
                           showDateInput={false}>
                 {({value}) => {

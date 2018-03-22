@@ -268,7 +268,7 @@ export const fetchClassrooms = (url) => {
         // adding "selected" field to each of the classrooms for the purpose of the UI
         // to track which classrooms are selected.
         const classrooms = json.reduce((accumulator, current, index) => {
-          accumulator[current.shortname] = Object.assign({}, current, {selected: true});
+          accumulator[current.shortname] = Object.assign({}, current, {selected: false});
           return accumulator;
         }, {});
         // it's fast, so let the fetching_classrooms animation run for 800ms more. ;)
