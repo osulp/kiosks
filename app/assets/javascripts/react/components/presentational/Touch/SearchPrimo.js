@@ -37,9 +37,10 @@ class SearchPrimo extends Component {
           'q w e r t y u i o p',
           'a s d f g h j k l ; \'',
           'z x c v b n m , .',
-          '{accept} {space} {cancel}'
+          '{cancel} {space} {accept}'
         ],
       },
+      acceptValid: true,
       accepted: function(e, k, el) {
         el.dispatchEvent(new Event('input', { bubbles: true }));
       }

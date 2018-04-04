@@ -30,7 +30,7 @@ class Maps extends Component {
         <div className="container-fluid maps-table-container">
           <div className="row">
             <div className="col-sm-12 search-iframe">
-                <Iframe src={`http://navigation.library.oregonstate.edu/floor/${this.props.map_default_floor_number}?show_navbar=false&kiosk=true`} height={(window.innerHeight-200).toString() + 'px'} width="100%"/>
+                <Iframe src={`http://libnav-dev.library.oregonstate.edu/floor/${this.props.map_default_floor_number}?show_navbar=false&kiosk=true`} height={(window.innerHeight-200).toString() + 'px'} width="100%"/>
             </div>
           </div>
         </div>

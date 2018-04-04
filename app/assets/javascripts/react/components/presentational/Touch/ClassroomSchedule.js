@@ -121,7 +121,7 @@ class ClassroomSchedule extends Component {
                 }}
               </DatePicker>
             </div>
-            <div className="hidden-sm hidden-xs col-md-9 classroom-filter">
+            <div className="hidden-sm hidden-xs col-md-12 classroom-filter">
               <ul>
                 <li key="filter.classroom_schedule" >Filter Schedule:</li>
                 {classrooms.map((classroom) => {

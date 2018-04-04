@@ -112,6 +112,29 @@ export const fetchedHours = () => {
   };
 };
 
+export const SET_TODAYS_HOURS = 'SET_TODAYS_HOURS';
+export const setTodaysHours = (todays_hours) => {
+  return {
+    type: SET_TODAYS_HOURS,
+    todays_hours
+  };
+};
+
+export const FETCHING_TODAYS_HOURS = 'FETCHING_TODAYS_HOURS';
+export const fetchingTodaysHours = () => {
+  return {
+    type: FETCHING_TODAYS_HOURS
+  };
+};
+
+export const FETCHED_TODAYS_HOURS = 'FETCHED_TODAYS_HOURS';
+export const fetchedTodaysHours = () => {
+  return {
+    type: FETCHED_TODAYS_HOURS
+  };
+};
+
+
 /**
  * A redux-thunk async action that fetches from the server and handles the return by dispatching a regular
  * action depending on success or error.
@@ -157,6 +180,50 @@ export const fetchHours = (url, dates) => {
       });
   };
 };
+
+/**
+ * A redux-thunk async action that fetches from the server and handles the return by dispatching a regular
+ * action depending on success or error.
+ * @param url - the url to the server for fetching slides
+ * @returns {Redux Async Action} - see http://redux.js.org/docs/advanced/AsyncActions.html
+ */
+export const fetchTodaysHours = (url) => {
+  return (dispatch) => {
+    dispatch(fetchingTodaysHours());
+    let now = moment().format('YYYY-MM-DD');
+    let dates = [now];
+    return fetch(url, {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/vnd.kiosks.v1',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({dates: [...dates]})
+    })
+      .then(response => {
+        switch (response.status) {
+          case 200:
+            return response.json();
+          case 404:
+            return {"error": "Hours not found for the selected date."};
+          default:
+            return {"error": "Error fetching hours, please notify the help desk."};
+        }
+      })
+      .then(json => {
+        dispatch(setTodaysHours(json));
+        // it's fast, so let the fetching_hours animation run for 800ms more. ;)
+        setTimeout(() => {
+          dispatch(fetchedTodaysHours());
+        }, 800);
+      })
+      .catch(err => {
+        dispatch(addError({message: err.message, code: err.code}));
+        dispatch(fetchedTodaysHours());
+      });
+  };
+};
+
 
 export const SET_CLASSROOM_SCHEDULE = 'SET_CLASSROOM_SCHEDULE';
 export const setClassroomSchedule = (classroom_schedule, date) => {

@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="3223 2836 109.5 146">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #fff;
+      }
+    </style>
+  </defs>
+  <path id="map-marker" class="cls-1" d="M49.123,143.054C7.691,82.989,0,76.825,0,54.75a54.75,54.75,0,1,1,109.5,0c0,22.075-7.691,28.239-49.123,88.3A6.847,6.847,0,0,1,49.123,143.054Z" transform="translate(3223 2836)"/>
+</svg>

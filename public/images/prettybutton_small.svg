@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="3100 3095 361.82 308.147">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: url(#linear-gradient);
+      }
+
+      .cls-2 {
+        fill: url(#radial-gradient);
+      }
+    </style>
+    <linearGradient id="linear-gradient" x1="0.5" y1="1" x2="0.5" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#1b1b1b"/>
+      <stop offset="0.15" stop-color="#020202"/>
+    </linearGradient>
+    <radialGradient id="radial-gradient" cx="297.91" cy="255.073" r="158.368" gradientTransform="translate(26.837 -180.268) scale(0.852 2.17)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#020202"/>
+      <stop offset="1" stop-color="#bdbdbd"/>
+    </radialGradient>
+  </defs>
+  <g id="prettybutton" transform="translate(3100 3095)">
+    <rect id="Rectangle_314" data-name="Rectangle 314" class="cls-1" width="361.82" height="308.147" rx="21.6" transform="translate(0)"/>
+    <path id="Path_76" data-name="Path 76" class="cls-2" d="M457.409,106.052c10.726.028,19.418,22.176,19.429,49.506V354.59c-.011,27.33-8.7,49.478-19.429,49.506h-319c-10.726-.028-19.418-22.176-19.429-49.506V155.557c.011-27.33,8.7-49.478,19.429-49.506h319m0-5.052h-319c-11.812.083-21.379,24.461-21.412,54.557V354.59c.033,30.1,9.6,54.474,21.412,54.557h319c11.812-.083,21.379-24.461,21.412-54.557V155.557C478.788,125.461,469.22,101.083,457.409,101Z" transform="translate(-117 -101)"/>
+  </g>
+</svg>

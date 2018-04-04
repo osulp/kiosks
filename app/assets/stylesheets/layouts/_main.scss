@@ -248,3 +248,11 @@ button.ui-keyboard-accept.ui-keyboard-invalid-input:hover { background: #a00; }
  * Media queries can be found in the keyboard.css file,
  * but are not included here
  */
+
+
+@font-face {
+  font-family: 'CaladeaRegular';
+  src:font_url('caladea-regular.ttf') fotmat('truetype');
+  font-weight: normal;
+  font-style: normal;
+}

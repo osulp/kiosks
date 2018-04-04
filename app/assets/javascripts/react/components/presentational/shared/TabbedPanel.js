@@ -83,6 +83,7 @@ TabbedPanel.propTypes = {
   })),
   timeout: PropTypes.number,
   setModalRootComponent: PropTypes.func.isRequired,
+  setContentRootComponent: PropTypes.func.isRequired,
   setModalVisibility: PropTypes.func.isRequired,
   selectedIndex: PropTypes.number.isRequired,
 };
