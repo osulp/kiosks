@@ -3,12 +3,16 @@ ENV["RAILS_ENV"] ||= 'test'
 require 'spec_helper'
 require 'simplecov'
 require 'coveralls'
+require 'capybara/rspec'
 
 SimpleCov.formatters = [
   SimpleCov::Formatter::HTMLFormatter,
   Coveralls::SimpleCov::Formatter
 ]
 SimpleCov.start
+
+require 'capybara/poltergeist'
+Capybara.javascript_driver = :poltergeist
 
 require File.expand_path('../../config/environment', __FILE__)
 # Prevent database truncation if the environment is production
@@ -66,5 +70,8 @@ RSpec.configure do |config|
   # config.filter_gems_from_backtrace("gem name")
 
   config.include Devise::Test::ControllerHelpers, type: :controller
+  config.include Capybara::DSL, type: :feature
+  config.include Capybara::RSpecMatchers, type: :feature
+  config.include Capybara::RSpecMatchers, type: :view
   config.include Warden::Test::Helpers
 end

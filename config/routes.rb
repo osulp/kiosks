@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   resources :kiosk_layouts
   resources :date_ranges
   # Api namespaced routes and modules
@@ -27,7 +28,6 @@ Rails.application.routes.draw do
   devise_for :users, :controllers => { :registrations => "registrations" }
   get '/kiosk', :to => 'kiosk#index', :as => 'kiosk_index'
   get '/kiosk/:id', :to => 'kiosk#show', :as => 'kiosk_show'
-  get '/admin', :to => 'admin#index', :as => 'admin_index'
 
   post '/uploads', to: 'slides#create'
   # This is a hack that is required because the rails form the uploader is on
