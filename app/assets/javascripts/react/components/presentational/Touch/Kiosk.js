@@ -78,6 +78,7 @@ Kiosk.propTypes = {
   slides: PropTypes.array.isRequired,
   restart_kiosk: PropTypes.string.isRequired,
   maps: PropTypes.array,
+  maps_base_url: PropTypes.string,
   hours: PropTypes.object.isRequired,
   url: PropTypes.string.isRequired,
   google_analytics: PropTypes.func,

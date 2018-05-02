@@ -4,4 +4,5 @@
      data-restart-kiosk='<%= raw(render(template: "kiosk/show.json", locals: { restart_kiosk: @restart_kiosk })) %>'
      data-kiosk-map-default-floor-number="<%= @kiosk.map_default_floor_number %>"
      data-kiosk-url="<%= kiosk_show_url id: @kiosk.name %>"
+     data-maps-base-url="<%= @maps_base_url %>"
      ></div>

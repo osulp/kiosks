@@ -7,3 +7,4 @@ KIOSKS_ROOMRES_PASSWORD: password
 KIOSKS_ROOMRES_HOST: localhost
 CAS_BASE_URL: 'https://example/cas'
 CAS_VALIDATE_URL: 'https://example/cas/samlValidate'
+MAPS_BASE_URL: 'http://example/maps'
