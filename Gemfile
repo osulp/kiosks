@@ -43,6 +43,7 @@ gem 'capistrano-rbenv'
 gem 'carrierwave', '~> 1.0'
 gem 'devise'
 gem 'flipclockjs-rails', '~> 0.7.7'
+gem 'rails_admin', '~> 1.3'
 gem 'rails-controller-testing'
 gem 'react-rails'
 gem 'rmagick'
@@ -66,6 +67,8 @@ group :development, :test do
   gem 'rspec-rails', '~> 3.5'
   gem 'simplecov'
   gem 'webmock'
+  gem 'capybara'
+  gem 'poltergeist'
 end
 
 group :development do

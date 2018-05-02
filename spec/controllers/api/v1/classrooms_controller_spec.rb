@@ -14,6 +14,11 @@ RSpec.describe Api::V1::ClassroomsController, type: :controller do
     expect(response).to have_http_status(:bad_request)
   end
 
+  it "returns rooms from api classrooms rooms config" do
+    get :rooms, params: {}
+    expect(response).to have_http_status(:ok)
+  end
+
   it "returns detail" do
     stub_request(:get, "http://calendar.oregonstate.edu/20170108/day/library/rss20.xml").
       with(:headers => { 'Accept' => '*/*', 'Accept-Encoding' => 'gzip;q=1.0,deflate;q=0.6,identity;q=0.3', 'User-Agent' => 'Ruby' }).
