@@ -1,6 +1,4 @@
 import React, {Component, PropTypes} from 'react';
-
-import {trackClicked} from '../shared/GoogleAnalytics';
 import moment from 'moment';
 
 class Menu extends Component {
@@ -15,6 +13,7 @@ class Menu extends Component {
   render() {
     let tapped_enough = (this.state.taps > 20);
     let is_fetching = this.props.is_fetching_slides ? "is_fetching" : "";
+    let maps_click_handler = (this.props.maps_base_url.trim().length == 0) ? this.props.staticMapsClicked : this.props.mapsClicked;
     return (
         <ul className="nav navbar-nav">
             <li className="show-home" onClick={this.props.homeClicked}>
@@ -29,7 +28,7 @@ class Menu extends Component {
                     <span className={"menu-item-text"}>Hours</span>
                 </a>
             </li>
-            <li className="show-maps" onClick={this.props.mapsClicked}>
+            <li className="show-maps" onClick={maps_click_handler}>
                 <a className={`btn btn-navbar btn-default ${(this.props.selectedMenuItem == "maps" ? "menu-item-selected" : "")}`}>
                     <img className={"menu-item-icon"} src={"/images/map-marker.svg"} />
                     <span className={"menu-item-text"}>Maps</span>
@@ -55,6 +54,7 @@ class Menu extends Component {
 Menu.propTypes = {
   url: PropTypes.string.isRequired,
   maps: PropTypes.array,
+  maps_base_url: PropTypes.string,
   hours: PropTypes.object.isRequired,
   google_analytics: PropTypes.func,
   is_fetching_slides: PropTypes.bool.isRequired,

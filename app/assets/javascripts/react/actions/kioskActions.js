@@ -1,8 +1,8 @@
 export const SET_KIOSK = 'SET_KIOSK';
-export const setKiosk = (type, url, map_default_floor_number) => {
+export const setKiosk = (type, url, map_default_floor_number, maps_base_url) => {
   return {
     type: SET_KIOSK,
-    kiosk: { type, url, map_default_floor_number }
+    kiosk: { type, url, map_default_floor_number, maps_base_url }
   };
 };
 

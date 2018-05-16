@@ -31,5 +31,6 @@ class KioskController < ApplicationController
 
   def set_maps_params
     @maps = APPLICATION_CONFIG['maps'].map {|m| {title: m['title'], image_url: m['image_url']}}
+    @maps_base_url = ENV['MAPS_BASE_URL']
   end
 end

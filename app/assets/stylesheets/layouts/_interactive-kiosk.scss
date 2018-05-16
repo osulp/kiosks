@@ -19,6 +19,11 @@ $niceblue: #00859B;
     padding-left: 10px;
   }
 
+  .btn-primary {
+    margin-top: 0em;
+    margin-bottom: 0em;
+  }
+
   /* CUSTOMIZE GALLERY
   --------------------------------------------------------*/
   .image-gallery-bullet {
@@ -312,14 +317,43 @@ $niceblue: #00859B;
   }
 
   #maps_tabbed_panel {
-    height: 90%;
+    height: 630px;
     ul {
-      height: 90%;
       li,
       li > div {
-        height: 90%;
+        height: 568px;
       }
     }
+
+    .btn-group-vertical {
+      min-width: 190px;
+    }
+
+    button.btn {
+      margin: 0.75em;
+    }
+
+    .floor-buttons {
+      margin-top: 5em;
+    }
+
+    .btn-default {
+      color: #dc4405;
+      background: #eee;
+      border-radius: 2px;
+      border: 1px solid #eee;
+      -webkit-box-shadow: 0 1px 2px #ccc;
+      box-shadow: 0 1px 2px #ccc;
+    }
+
+    .btn-primary,
+    .btn-primary:active:hover,
+    .btn-primary:active:focus {
+      color: #fff;
+      background-color: #dc4405;
+      border-color: #dc4405;
+    }
+
   }
 
   #maps {

@@ -3,6 +3,7 @@ import React, { Component, PropTypes } from 'react';
 import Header from './Header';
 import Menu from './Menu';
 import ConnectedSlideGallery from '../../SlideGallery';
+import ConnectedTabbedPanel from '../../SidebarPanel';
 import ConnectedMainContent from '../../MainContent';
 import TouchHours from '../../TouchHours';
 import ConnectedClassroomSchedule from '../../TouchClassroomSchedule';
@@ -24,6 +25,7 @@ class Kiosk extends Component {
       this.homeClicked = this.homeClicked.bind(this);
       this.hoursClicked = this.hoursClicked.bind(this);
       this.mapsClicked = this.mapsClicked.bind(this);
+      this.staticMapsClicked = this.staticMapsClicked.bind(this);
       this.searchPrimoClicked = this.searchPrimoClicked.bind(this);
       this.classroomScheduleClicked = this.classroomScheduleClicked.bind(this);
       this._didTap = this._didTap.bind(this);
@@ -104,6 +106,30 @@ class Kiosk extends Component {
     clearInterval(this.show_slides_timeout);
     this._showSlidesTimeout();
   }
+
+  /**
+   * Static Maps button was clicked (temporary component to use while libnav gets released)
+   */
+  staticMapsClicked() {
+    trackClicked(this.props.google_analytics, 'TouchKiosk:Header:StaticMaps');
+    this.setState({ menuCollapsed: true });
+    this.setState({ selectedMenuItem: 'maps' });
+    let tabs = this.props.maps.map((m) => {
+      return {
+        button_text: m.title,
+        content: (<div style={{backgroundImage: `url("${m.image_url}")`}}>&nbsp;</div>)
+      };
+    });
+    // this.props.setModalVisibility(true);
+    this.props.setContentRootComponent(<ConnectedTabbedPanel id="maps_tabbed_panel"
+                                                           tabs={tabs}
+                                                           selectedIndex={1}
+                                                           timeout={30000}/>);
+    clearInterval(this.show_slides_timeout);
+    this._showSlidesTimeout();
+  }
+
+
 
   /**
    * The 1search button was clicked, set the content to display the connected search primo component
@@ -220,6 +246,7 @@ class Kiosk extends Component {
                           hoursClicked={this.hoursClicked}
                           homeClicked={this.homeClicked}
                           mapsClicked={this.mapsClicked}
+                          staticMapsClicked={this.staticMapsClicked}
                           searchPrimoClicked={this.searchPrimoClicked}
                           classroomScheduleClicked={this.classroomScheduleClicked}
                           selectedMenuItem={this.state.selectedMenuItem}
@@ -236,6 +263,7 @@ Kiosk.propTypes = {
   slides: PropTypes.array.isRequired,
   restart_kiosk: PropTypes.string.isRequired,
   maps: PropTypes.array,
+  maps_base_url: PropTypes.string,
   hours: PropTypes.object.isRequired,
   todays_hours: PropTypes.object.isRequired,
   url: PropTypes.string.isRequired,
