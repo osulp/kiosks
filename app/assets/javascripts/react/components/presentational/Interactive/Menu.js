@@ -1,6 +1,4 @@
 import React, {Component, PropTypes} from 'react';
-
-import {trackClicked} from '../shared/GoogleAnalytics';
 import moment from 'moment';
 
 class Menu extends Component {
@@ -29,7 +27,7 @@ class Menu extends Component {
                     <span className={"menu-item-text"}>Hours</span>
                 </a>
             </li>
-            <li className="show-maps" onClick={this.props.mapsClicked}>
+            <li className="show-maps" onClick={this.props.staticMapsClicked}>
                 <a className={`btn btn-navbar btn-default ${(this.props.selectedMenuItem == "maps" ? "menu-item-selected" : "")}`}>
                     <img className={"menu-item-icon"} src={"/images/map-marker.svg"} />
                     <span className={"menu-item-text"}>Maps</span>

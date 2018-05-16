@@ -1,79 +1,10 @@
 import React, {Component, PropTypes} from 'react';
-import TouchHours from '../../TouchHours';
-import ConnectedTabbedPanel from '../../TabbedPanel';
-import ConnectedClassroomSchedule from '../../TouchClassroomSchedule';
-import ConnectedMaps from '../../TouchMaps';
-import ConnectedSearchPrimo from '../../TouchSearchPrimo';
-import ConnectedSlideGallery from '../../SlideGallery';
 import {trackClicked} from '../shared/GoogleAnalytics';
 
 class Header extends Component {
   constructor(props) {
     super(props);
     this.state = { taps: 0 };
-  }
-
-  /**
-   * Refresh button was clicked, fire off actions to fetch the latest slides and reset
-   * the gallery scroll position
-   */
-  refreshClicked() {
-    trackClicked(this.props.google_analytics, 'InteractiveKiosk:Header:Refresh');
-    this.props.fetchSlides(this.props.url);
-    this.props.scrollToSlide(0);
-  }
-
-  /**
-   * Hours button was clicked, set the modal to display the connected Hours component
-   */
-  hoursClicked() {
-    trackClicked(this.props.google_analytics, 'InteractiveKiosk:Header:Hours');
-    this.props.setModalVisibility(true);
-    this.props.setModalRootComponent(<TouchHours />);
-  }
-
-  /**
-   * Maps button was clicked, set the modal to display the connected tab panel component
-   */
-  mapsClicked() {
-    trackClicked(this.props.google_analytics, 'InteractiveKiosk:Header:Maps');
-    let tabs = this.props.maps.map((m) => {
-      return {
-        button_text: m.title,
-        content: (<div style={{backgroundImage: `url("${m.image_url}")`}}>&nbsp;</div>)
-      };
-    });
-    this.props.setModalVisibility(true);
-    this.props.setModalRootComponent(<ConnectedTabbedPanel id="maps_tabbed_panel"
-                                                           tabs={tabs}
-                                                           selectedIndex={1}
-                                                           timeout={30000}/>);
-  }
-
-  /**
-   * The classroom schedule button was clicked, set the modal to display the connected classroom schedule component
-   */
-  classroomScheduleClicked() {
-    trackClicked(this.props.google_analytics, 'InteractiveKiosk:Header:ClassroomSchedule');
-    this.props.setModalVisibility(true);
-    this.props.setModalRootComponent(<ConnectedClassroomSchedule />);
-  }
-
-  /**
-   * The 1search button was clicked, set the modal to display the connected search primo component
-   */
-  searchPrimoClicked() {
-    trackClicked(this.props.google_analytics, 'InteractiveKiosk:Header:SearchPrimo');
-    this.props.setModalVisibility(true);
-    this.props.setModalRootComponent(<ConnectedSearchPrimo />);
-  }
-  /**
-   * The maps button was clicked, set the modal to display the maps component
-   */
-  mapsClicked() {
-    trackClicked(this.props.google_analytics, 'InteractiveKiosk:Header:Maps');
-    this.props.setModalVisibility(true);
-    this.props.setModalRootComponent(<ConnectedMaps />);
   }
 
   /**

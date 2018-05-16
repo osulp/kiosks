@@ -33,7 +33,7 @@ const setMaps = (maps) => {
 if (root_dom_element) {
   let slides = setSlides(root_dom_element.getAttribute('data-slides'));
   let restart_kiosk = setRestartKiosk(root_dom_element.getAttribute('data-restart-kiosk'));
-  let maps = setMaps(root_dom_element.getAttribute('data-maps'));
+  let maps = setMaps(root_dom_element.getAttribute('data-static-maps'));
   let map_default_floor_number = root_dom_element.getAttribute('data-kiosk-map-default-floor-number');
   let kiosk_type = root_dom_element.getAttribute('data-kiosk-type');
   let kiosk_url = root_dom_element.getAttribute('data-kiosk-url');
