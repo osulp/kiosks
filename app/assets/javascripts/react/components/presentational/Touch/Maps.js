@@ -30,7 +30,7 @@ class Maps extends Component {
         <div className="container-fluid maps-table-container">
           <div className="row">
             <div className="col-sm-12 search-iframe">
-                <Iframe src={`${this.props.maps_base_url}/floor/${this.props.map_default_floor_number}?show_navbar=false&kiosk=true`} height={(window.innerHeight-200).toString() + 'px'} width="100%"/>
+                <Iframe src={`http://libnav-dev.library.oregonstate.edu/floor/${this.props.map_default_floor_number}?show_navbar=false&kiosk=true`} height={(window.innerHeight-200).toString() + 'px'} width="100%"/>
             </div>
           </div>
         </div>
@@ -42,8 +42,7 @@ class Maps extends Component {
 Maps.propTypes = {
   api: PropTypes.object.isRequired,
   google_analytics: PropTypes.func,
-  map_default_floor_number: PropTypes.string,
-  maps_base_url: PropTypes.string
+  map_default_floor_number: PropTypes.string
 };
 
 export default Maps;

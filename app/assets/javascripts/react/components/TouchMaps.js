@@ -10,8 +10,7 @@ const mapStateToProps = (state) => {
   return {
     api: state.kiosk.api,
     google_analytics: state.kiosk.google_analytics,
-    map_default_floor_number: state.kiosk.map_default_floor_number,
-    maps_base_url: state.kiosk.maps_base_url
+    map_default_floor_number: state.kiosk.map_default_floor_number
   }
 };
 

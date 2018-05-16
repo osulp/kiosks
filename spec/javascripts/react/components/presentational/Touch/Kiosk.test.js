@@ -12,7 +12,6 @@ const setup = () => {
       is_fetching_slides: false,
       show_nav: true,
       maps: [],
-        maps_base_url: "http://example/maps",
       hours: {},
       api: {},
       google_analytics: jest.fn(),

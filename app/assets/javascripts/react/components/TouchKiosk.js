@@ -11,7 +11,6 @@ const mapStateToProps = (state) => {
     slides: state.kiosk.slides,
     restart_kiosk: state.kiosk.restart_kiosk,
     maps: state.touch.maps,
-    maps_base_url: state.kiosk.maps_base_url,
     hours: state.touch.hours,
     url: state.kiosk.url,
     google_analytics: state.kiosk.google_analytics,
