@@ -3,7 +3,7 @@
 source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 5.0.0', '>= 5.0.0.1'
+gem 'rails', '~> 5.1.0'
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3'
 # Use Puma as the app server
@@ -46,7 +46,7 @@ gem 'flipclockjs-rails', '~> 0.7.7'
 gem 'rails_admin', '~> 1.3'
 gem 'rails-controller-testing'
 gem 'react-rails'
-gem 'rmagick'
+gem 'rmagick', '~> 2.0'
 
 gem 'devise_cas_authenticatable'
 gem 'rubocop'
@@ -63,8 +63,8 @@ group :development, :test do
   gem 'pry'
   gem 'pry-byebug'
   gem 'rspec-console'
-  gem 'rspec-mocks', '~> 3.5'
-  gem 'rspec-rails', '~> 3.5'
+  gem 'rspec-mocks', '~> 3.7'
+  gem 'rspec-rails', '~> 3.7'
   gem 'simplecov'
   gem 'webmock'
   gem 'capybara'
