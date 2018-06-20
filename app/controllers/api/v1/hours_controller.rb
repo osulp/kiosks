@@ -1,3 +1,4 @@
+require 'faraday'
 module Api
   module V1
     class HoursController < ApiController
@@ -15,12 +16,16 @@ module Api
       end
 
       def merged_hours
-        h = DrupalHour.hours_for_dates(@dates)
-        ih = DrupalIntersessionHour.hours_for_dates(@dates)
-        sh = DrupalSpecialHour.hours_for_dates(@dates)
-        merged = h.merge(ih).merge(sh)
-        raise Api::V1::Exceptions::RecordNotFound.new(I18n.t('api.drupal.hours.record_not_found')) if merged.empty?
-        merged.sort.to_h
+        res = api_request
+        json = JSON.parse(res.body) 
+      end
+
+      def api_request
+        conn = Faraday.new(:url => 'http://api.library.oregonstate.edu') do |faraday|
+          faraday.request  :url_encoded             # form-encode POST params
+          faraday.adapter  Faraday.default_adapter  # make requests with Net::HTTP
+        end
+        conn.post '/hours.json', { :dates => @dates } 
       end
     end
   end

@@ -135,6 +135,8 @@ GEM
     docile (1.1.5)
     erubi (1.7.1)
     execjs (2.7.0)
+    faraday (0.15.2)
+      multipart-post (>= 1.2, < 3)
     ffi (1.9.18)
     flipclockjs-rails (0.7.7)
       jquery-rails (>= 1.0.17)
@@ -186,6 +188,7 @@ GEM
     mini_portile2 (2.3.0)
     minitest (5.11.3)
     multi_json (1.12.1)
+    multipart-post (2.0.0)
     mysql2 (0.4.5)
     nested_form (0.3.2)
     net-scp (1.2.1)
@@ -386,6 +389,7 @@ DEPENDENCIES
   coveralls
   devise
   devise_cas_authenticatable
+  faraday
   flipclockjs-rails (~> 0.7.7)
   jbuilder (~> 2.5)
   jquery-rails
