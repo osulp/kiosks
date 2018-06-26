@@ -58,8 +58,7 @@ services:
     # taking time to run.
     command: >
       bash -c "rm -f tmp/pids/server.pid
-      && bundle exec rails server -d -p 3000 -b '0.0.0.0' -e ${RAILS_ENV}"
-      && yarn run prod
+      && bundle exec rails server -p 3000 -b '0.0.0.0' -e ${RAILS_ENV}"
     depends_on:
       db:
         condition: service_started
@@ -73,6 +72,15 @@ services:
       - db
       - db_test
 
+  yarn:
+    extends: app
+    # Ideally we will replace this set of commands with an entrypoint script that checks to see if these
+    # have been run already have been run and if so it just starts the server without the first three commands
+    # taking time to run.
+    command: yarn run prod
+    depends_on:
+      web:
+        condition: service_started
   ##
   # Ensure that the database migrations are run on the appropriate database related to the RAILS_ENV running
   db_migrate:
