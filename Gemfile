@@ -56,6 +56,8 @@ gem 'rubycas-client-rails', git: 'https://github.com/osulp/rubycas-client-rails'
 gem 'mysql2'
 gem 'nokogiri'
 
+gem 'faraday'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platform: :mri
