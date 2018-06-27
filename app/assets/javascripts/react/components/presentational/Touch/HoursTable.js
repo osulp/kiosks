@@ -18,6 +18,7 @@ class HoursTable extends Component {
             <tr key={`hours.${i}`} className={moment(h.sortable_date).isSame(this.props.selected_date, "day") ? "alert alert-info" : ""}>
               <td>{h.string_date}</td>
               <td>{h.formatted_hours}</td>
+              <td>{h.event_desc}</td>
             </tr>
           )
         })}
