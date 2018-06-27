@@ -1,7 +1,7 @@
-class AddAttachmentImageToSlides < ActiveRecord::Migration
+class AddAttachmentImageToSlides < ActiveRecord::Migration[5.1]
   def self.up
     change_table :slides do |t|
-      t.attachment :image
+      # t.attachment :image
     end
   end
 
