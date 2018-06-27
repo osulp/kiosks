@@ -8,3 +8,5 @@ KIOSKS_ROOMRES_HOST: localhost
 CAS_BASE_URL: 'https://example/cas'
 CAS_VALIDATE_URL: 'https://example/cas/samlValidate'
 MAPS_BASE_URL: 'http://example/maps'
+API_URI: 'http://uri.to.example-api'
+API_ROUTE: '/example-route.json'
