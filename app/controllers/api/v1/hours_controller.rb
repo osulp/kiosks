@@ -21,11 +21,11 @@ module Api
       end
 
       def api_request
-        conn = Faraday.new(:url => 'http://api.library.oregonstate.edu') do |faraday|
+        conn = Faraday.new(:url => ENV['API_URI']) do |faraday|
           faraday.request  :url_encoded             # form-encode POST params
           faraday.adapter  Faraday.default_adapter  # make requests with Net::HTTP
         end
-        conn.post '/hours.json', { :dates => @dates } 
+        conn.post ENV['API_ROUTE'], { :dates => @dates } 
       end
     end
   end
