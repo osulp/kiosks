@@ -1,6 +1,8 @@
 import React, {Component, PropTypes} from 'react';
 import {trackClicked} from '../shared/GoogleAnalytics';
 
+const root_dom_element = document.getElementById('application_root');
+
 var Iframe = React.createClass({
     render: function() {
         return(
@@ -19,11 +21,11 @@ class SearchPrimo extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      uri: 'http://alliance-primo-sb.hosted.exlibrisgroup.com/primo-explore/search?sortby=rank&vid=OSU_KIOSK&lang=en_US',
+      uri: root_dom_element.getAttribute('data-api-uri'),
       search_delay: 1000,
       search_querystring: 'query=any,contains,[TERM]&tab=default_tab&search_scope=osu_print',
       search_timer: null,
-      search_uri: 'http://alliance-primo-sb.hosted.exlibrisgroup.com/primo-explore/search?sortby=rank&vid=OSU_KIOSK&lang=en_US'
+      search_uri: root_dom_element.getAttribute('data-api-uri')
     }
   }
 
