@@ -2,6 +2,7 @@ desc 'Save kiosks records in a file'
 
 task :save_data => :environment do |t, args|
   save_to_json(Collection)
+  save_to_json(KioskLayout)
   save_to_json(Slide)
   save_to_json(SlideType)
   save_to_json(Kiosk)
