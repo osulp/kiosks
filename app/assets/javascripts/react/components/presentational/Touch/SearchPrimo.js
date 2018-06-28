@@ -21,11 +21,11 @@ class SearchPrimo extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      uri: root_dom_element.getAttribute('data-kiosk-url'),
+      uri: root_dom_element.getAttribute('data-api-uri'),
       search_delay: 1000,
       search_querystring: 'query=any,contains,[TERM]&tab=default_tab&search_scope=osu_print',
       search_timer: null,
-      search_uri: root_dom_element.getAttribute('data-kiosk-url')
+      search_uri: root_dom_element.getAttribute('data-api-uri')
     }
   }
 
