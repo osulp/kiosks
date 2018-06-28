@@ -16,6 +16,8 @@ class KioskController < ApplicationController
 
     # get only slides that have current date ranges, given a time (i.e now, Time.zone.parse("20160503050000"), etc)
     @slides = @kiosk.slides.joins(:date_ranges).where("date_ranges.start_date <= ? AND date_ranges.end_date >= ?",Time.zone.now,Time.zone.now)
+    @api_uri = ENV['PRIMO_API_URI'] || ''
+    @search_uri = ENV['SEARCH_URI'] || ''
   end
 
   private

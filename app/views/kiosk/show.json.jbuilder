@@ -23,3 +23,5 @@ json.slides @slides do |slide|
   end
 end
 json.restart_kiosk @restart_kiosk
+json.api_uri @api_uri
+json.search_uri @search_uri
