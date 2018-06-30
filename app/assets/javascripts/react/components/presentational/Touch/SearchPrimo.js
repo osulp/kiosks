@@ -7,7 +7,7 @@ var Iframe = React.createClass({
     render: function() {
         return(
             <div>
-                <iframe src={this.props.src} height={this.props.height} width={this.props.width} frameBorder={0} />
+                <iframe key={this.props.key} src={this.props.src} height={this.props.height} width={this.props.width} frameBorder={0} />
             </div>
         )
     }
@@ -25,22 +25,28 @@ class SearchPrimo extends Component {
       search_delay: 1000,
       search_querystring: 'query=any,contains,[TERM]&tab=default_tab&search_scope=osu_print',
       search_timer: null,
-      search_uri: root_dom_element.getAttribute('data-api-uri')
+      search_uri: root_dom_element.getAttribute('data-api-uri'),
+      key: Math.random(),
+      search_term: '',
+      show_clear_icon: false
     }
   }
-
+  
   componentDidMount() {
     $('#primo_search').keyboard({
       autoAccept: true,
       layout: 'custom',
       customLayout: {
         'normal': [
-          '1 2 3 4 5 6 7 8 9 0 - = {bksp}',
+          '1 2 3 4 5 6 7 8 9 0 - = {bksp} {clear!!}',
           'q w e r t y u i o p',
           'a s d f g h j k l ; \'',
           'z x c v b n m , .',
           '{cancel} {space} {accept}'
         ],
+      },
+      display: {
+        'clear': 'Clear'
       },
       acceptValid: true,
       accepted: function(e, k, el) {
@@ -61,6 +67,8 @@ class SearchPrimo extends Component {
   }
 
   performSearch(e) {
+    this.setState({ search_term: e.target.value });
+    this.setState({ show_clear_icon: true});
     if(this.state.search_timer === null) {
       let self = this;
       let term = e.target.value;
@@ -74,6 +82,13 @@ class SearchPrimo extends Component {
       this.setState({search_timer: null});
     }
   }
+  
+  resetSearch(e) {
+      this.setState({ search_term: '' });
+      this.setState({ search_uri: root_dom_element.getAttribute('data-api-uri')});
+      this.setState({ key: Math.random() });
+      this.setState({ show_clear_icon: false});
+  }
 
   /**
    * Includes Bootstrap elements for mobile and regular displays using hidden-*  and col-* semantics
@@ -85,13 +100,14 @@ class SearchPrimo extends Component {
         <div className="container-fluid search-primo-table-container">
           <div className="row search-bar">
             <div className='col-sm-6 col-sm-offset-3'>
-              <input className='form-control' type='text' id='primo_search' onChange={this.performSearch.bind(this)} placeholder='Search Valley Library resources' />
+              <input className='form-control' value={this.state.search_term} type='text' id='primo_search' onChange={this.performSearch.bind(this)} placeholder='Search Valley Library resources' />
               <i id='primo_search_icon' className='material-icons'>search</i>
+              <i id='primo_clear_icon' className={`material-icons ${this.state.show_clear_icon ? "": "hidden"}`} onClick={this.resetSearch.bind(this)}>cancel</i>
             </div>
           </div>
           <div className="row">
             <div className="col-sm-12 search-iframe">
-                <Iframe src={this.state.search_uri} height={(window.innerHeight-50).toString() + 'px'} width="100%" />
+                <Iframe key={this.state.key} src={this.state.search_uri} height={(window.innerHeight-50).toString() + 'px'} width="100%" />
             </div>
           </div>
         </div>
