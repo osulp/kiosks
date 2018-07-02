@@ -4,10 +4,10 @@ jobs:
     docker:
       - image: buildpack-deps:trusty
       - image: circleci/ruby:2.5
-    environment:
-      RAILS_ENV: test
-      YARN_VERSION: 0.17.10
-      PATH: "${PATH}:${HOME}/.yarn/bin"
+        environment:
+          RAILS_ENV: test
+          YARN_VERSION: 0.17.10
+          PATH: "${PATH}:${HOME}/.yarn/bin"
     working_directory: ~/app
     steps:
       - checkout
