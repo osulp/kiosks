@@ -2,6 +2,7 @@ version: 2
 jobs:
   build:
     docker:
+      - image: buildpack-deps:trusty
       - image: circleci/ruby:2.5
         environment:
           RAILS_ENV: test
