@@ -4,7 +4,7 @@ jobs:
     docker:
       - image: buildpack-deps:trusty
       - image: circleci/ruby:2.5
-      - image: circleci/node:9
+      - image: circleci/node:9.11
         environment:
           RAILS_ENV: test
     working_directory: ~/app
