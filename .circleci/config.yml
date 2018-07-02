@@ -1,0 +1,42 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: circleci/ruby:2.5-node
+      - image: buildpack-deps:trusty
+        environment:
+          RAILS_ENV: test
+    working_directory: ~/app
+    steps:
+      - checkout
+      - restore_cache:
+          key: gemfile-{{ checksum "Gemfile.lock" }}
+      - run:
+          name: Setup configs
+          command: |
+            cp config/application_config.example.yml.erb config/application_config.yml.erb
+            cp config/local_env.example.yml config/local_env.yml
+      - run: yarn install
+      - save_cache:
+          key: yarn-cache-{{ .Branch }}-{{ checksum "yarn.lock" }}
+          paths: node_modules
+      - run: bundle check --path=vendor/bundle || bundle install --path=vendor/bundle --jobs=4 --retry=3
+      - save_cache:
+          key: gemfile-{{ checksum "Gemfile.lock" }}
+          paths:
+            - vendor/bundle
+      - run: bundle exec rake db:create db:schema:load --trace
+      - run: yarn test -- -u
+      - run:
+          name: Run Tests
+          command: |
+            bundle exec rspec --profile 10 \
+                              --format RspecJunitFormatter \
+                              --out /tmp/test-results/rspec.xml \
+                              --format progress \
+                              $(circleci tests glob "spec/**/*_spec.rb" | circleci tests split --split-by=timings)
+      - store_artifacts:
+          path: coverage
+          destination: coverage
+      - store_test_results:
+          path: /tmp/circle-junit
