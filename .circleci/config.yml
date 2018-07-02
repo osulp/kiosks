@@ -1,0 +1,65 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: circleci/ruby:2.5
+        environment:
+          RAILS_ENV: test
+          YARN_VERSION: 0.17.10
+          PATH: "${PATH}:${HOME}/.yarn/bin"
+    working_directory: ~/app
+    steps:
+      - run:
+          name: Update Debian Packages
+          command: |
+            sudo apt-get update -qq
+            sudo apt-get upgrade -qq
+            sudo apt-get install -y -f software-properties-common build-essential default-libmysqlclient-dev mysql-client nodejs make apt-utils
+      - checkout
+      - restore_cache:
+          key: gemfile-{{ checksum "Gemfile.lock" }}
+      - run:
+          name: Setup configs
+          command: |
+            cp config/application_config.example.yml.erb config/application_config.yml.erb
+            cp config/local_env.example.yml config/local_env.yml
+      - run:
+          name: Install Yarn<tab>
+          command: |
+            if [[ ! -e ~/.yarn/bin/yarn || $(yarn --version) != "${YARN_VERSION}" ]]; then
+              echo "Download and install Yarn."
+              curl -o- -L https://yarnpkg.com/install.sh | bash -s -- --version $YARN_VERSION
+            else
+              echo "The correct version of Yarn is already installed."
+            fi
+      - run:
+          name: Install node modules
+          command: yarn
+      - run:
+          name: Install Ruby Dependencies
+          command: bundle check --path=vendor/bundle || bundle install --path=vendor/bundle --jobs=4 --retry=3
+      - save_cache:
+          key: gemfile-{{ checksum "Gemfile.lock" }}
+          paths:
+            - vendor/bundle
+            - ~/.yarn
+            - ~/.yarn-cache
+      - run:
+          name: Create DB
+          command: bundle exec rake db:create db:schema:load --trace
+      - run:
+          name: Run Jest Tests
+          command: yarn test -- -u
+      - run:
+          name: Run Tests
+          command: |
+            bundle exec rspec --profile 10 \
+                              --format RspecJunitFormatter \
+                              --out /tmp/test-results/rspec.xml \
+                              --format progress \
+                              $(circleci tests glob "spec/**/*_spec.rb" | circleci tests split --split-by=timings)
+      - store_artifacts:
+          path: coverage
+          destination: coverage
+      - store_test_results:
+          path: /tmp/circle-junit
