@@ -2,9 +2,8 @@ version: 2
 jobs:
   build:
     docker:
+      - image: circleci/ruby:2.5-node
       - image: buildpack-deps:trusty
-      - image: circleci/ruby:2.5
-      - image: node:9.11
         environment:
           RAILS_ENV: test
     working_directory: ~/app
