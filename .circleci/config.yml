@@ -10,10 +10,6 @@ jobs:
     working_directory: ~/app
     steps:
       - checkout
-      - run: apt-get install -y sudo
-      - run:
-          name: Update Debian Packages
-          command: sudo apt-get update -qq && sudo apt-get upgrade -qq && sudo apt-get install -y -f software-properties-common build-essential default-libmysqlclient-dev mysql-client nodejs make apt-utils
       - restore_cache:
           key: gemfile-{{ checksum "Gemfile.lock" }}
       - run:
@@ -22,7 +18,7 @@ jobs:
             cp config/application_config.example.yml.erb config/application_config.yml.erb
             cp config/local_env.example.yml config/local_env.yml
       - run:
-          name: Install Yarn<tab>
+          name: Install Yarn
           command: |
             if [[ ! -e ~/.yarn/bin/yarn || $(yarn --version) != "${YARN_VERSION}" ]]; then
               echo "Download and install Yarn."
