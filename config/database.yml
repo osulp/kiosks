@@ -27,33 +27,6 @@ staging:
 production:
   <<: *default
   database: db/production.sqlite3
-# -----------------------------------------------------------------------
-# API Drupal Connection
-# -----------------------------------------------------------------------
-drupal_default: &drupal_default
-  adapter: mysql2
-  database: drupal_cms
-  username: <%= ENV['KIOSKS_DRUPAL_USERNAME'] %>
-  password: <%= ENV['KIOSKS_DRUPAL_PASSWORD'] %>
-  host: <%= ENV['KIOSKS_DRUPAL_HOST'] %>
-
-drupal_development:
-  adapter: sqlite3
-  pool: 5
-  timeout: 5000
-  database: db/drupal_development.sqlite3
-
-drupal_test:
-  adapter: sqlite3
-  pool: 5
-  timeout: 5000
-  database: db/drupal_test.sqlite3
-
-drupal_staging:
-  <<: *drupal_default
-
-drupal_production:
-  <<: *drupal_default
 
 # -----------------------------------------------------------------------
 # API RoomRes Connection

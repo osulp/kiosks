@@ -1,23 +1,23 @@
-import fetch from 'isomorphic-fetch';
-import moment from 'moment';
-import {addError, setSlides} from './kioskActions';
+import fetch from "isomorphic-fetch";
+import moment from "moment";
+import { addError, setSlides } from "./kioskActions";
 
-export const SET_MAPS = 'SET_MAPS';
-export const setMaps = (maps) => {
+export const SET_MAPS = "SET_MAPS";
+export const setMaps = maps => {
   return {
     type: SET_MAPS,
     maps
   };
 };
 
-export const FETCHING_SLIDES = 'FETCHING_SLIDES';
+export const FETCHING_SLIDES = "FETCHING_SLIDES";
 export const fetchingSlides = () => {
   return {
     type: FETCHING_SLIDES
   };
 };
 
-export const FETCHED_SLIDES = 'FETCHED_SLIDES';
+export const FETCHED_SLIDES = "FETCHED_SLIDES";
 export const fetchedSlides = () => {
   return {
     type: FETCHED_SLIDES
@@ -30,8 +30,8 @@ export const fetchedSlides = () => {
  * @param url - the url to the server for fetching slides
  * @returns {Redux Async Action} - see http://redux.js.org/docs/advanced/AsyncActions.html
  */
-export const fetchSlides = (url) => {
-  return (dispatch) => {
+export const fetchSlides = url => {
+  return dispatch => {
     dispatch(fetchingSlides());
     return fetch(`${url}.json`)
       .then(response => response.json())
@@ -43,20 +43,20 @@ export const fetchSlides = (url) => {
         }, 800);
       })
       .catch(err => {
-        dispatch(addError({message: err.message, code: err.code}));
+        dispatch(addError({ message: err.message, code: err.code }));
         dispatch(fetchedSlides());
       });
   };
 };
 
-export const FETCHING_RESTART_KIOSK = 'FETCHING_RESTART_KIOSK';
+export const FETCHING_RESTART_KIOSK = "FETCHING_RESTART_KIOSK";
 export const fetchingRestartKiosk = () => {
   return {
     type: FETCHING_RESTART_KIOSK
   };
 };
 
-export const FETCHED_RESTART_KIOSK = 'FETCHED_RESTART_KIOSK';
+export const FETCHED_RESTART_KIOSK = "FETCHED_RESTART_KIOSK";
 export const fetchedRestartKiosk = () => {
   return {
     type: FETCHED_RESTART_KIOSK
@@ -69,13 +69,13 @@ export const fetchedRestartKiosk = () => {
  * @param url - the url to the server for fetching restart_kiosk
  * @returns {Redux Async Action} - see http://redux.js.org/docs/advanced/AsyncActions.html
  */
-export const fetchRestartKiosk = (url) => {
-  return (dispatch) => {
+export const fetchRestartKiosk = url => {
+  return dispatch => {
     dispatch(fetchingRestartKiosk());
     return fetch(`${url}.json`)
       .then(response => response.json())
       .then(json => {
-        if (json.restart_kiosk == 'true'){
+        if (json.restart_kiosk == "true") {
           window.location.reload(true);
         }
         dispatch(setRestartKiosk(json.restart_kiosk));
@@ -84,56 +84,55 @@ export const fetchRestartKiosk = (url) => {
         }, 800);
       })
       .catch(err => {
-        dispatch(addError({message: err.message, code: err.code}));
+        dispatch(addError({ message: err.message, code: err.code }));
         dispatch(fetchedRestartKiosk());
       });
   };
 };
 
-export const SET_HOURS = 'SET_HOURS';
-export const setHours = (hours) => {
+export const SET_HOURS = "SET_HOURS";
+export const setHours = hours => {
   return {
     type: SET_HOURS,
     hours
   };
 };
 
-export const FETCHING_HOURS = 'FETCHING_HOURS';
+export const FETCHING_HOURS = "FETCHING_HOURS";
 export const fetchingHours = () => {
   return {
     type: FETCHING_HOURS
   };
 };
 
-export const FETCHED_HOURS = 'FETCHED_HOURS';
+export const FETCHED_HOURS = "FETCHED_HOURS";
 export const fetchedHours = () => {
   return {
     type: FETCHED_HOURS
   };
 };
 
-export const SET_TODAYS_HOURS = 'SET_TODAYS_HOURS';
-export const setTodaysHours = (todays_hours) => {
+export const SET_TODAYS_HOURS = "SET_TODAYS_HOURS";
+export const setTodaysHours = todays_hours => {
   return {
     type: SET_TODAYS_HOURS,
     todays_hours
   };
 };
 
-export const FETCHING_TODAYS_HOURS = 'FETCHING_TODAYS_HOURS';
+export const FETCHING_TODAYS_HOURS = "FETCHING_TODAYS_HOURS";
 export const fetchingTodaysHours = () => {
   return {
     type: FETCHING_TODAYS_HOURS
   };
 };
 
-export const FETCHED_TODAYS_HOURS = 'FETCHED_TODAYS_HOURS';
+export const FETCHED_TODAYS_HOURS = "FETCHED_TODAYS_HOURS";
 export const fetchedTodaysHours = () => {
   return {
     type: FETCHED_TODAYS_HOURS
   };
 };
-
 
 /**
  * A redux-thunk async action that fetches from the server and handles the return by dispatching a regular
@@ -142,29 +141,42 @@ export const fetchedTodaysHours = () => {
  * @returns {Redux Async Action} - see http://redux.js.org/docs/advanced/AsyncActions.html
  */
 export const fetchHours = (url, dates) => {
-  return (dispatch) => {
+  return dispatch => {
     dispatch(fetchingHours());
     // Default to this weeks dates if dates is undefined
     if (!dates) {
-      dates = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
-        .map(d => moment().day(d).format('YYYY-MM-DD'));
+      dates = [
+        "Sunday",
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday"
+      ].map(d =>
+        moment()
+          .day(d)
+          .format("YYYY-MM-DD")
+      );
     }
     return fetch(url, {
-      method: 'POST',
+      method: "POST",
       headers: {
-        'Accept': 'application/vnd.kiosks.v1',
-        'Content-Type': 'application/json'
+        Accept: "application/vnd.kiosks.v1",
+        "Content-Type": "application/json"
       },
-      body: JSON.stringify({dates: [...dates]})
+      body: JSON.stringify({ dates: [...dates] })
     })
       .then(response => {
         switch (response.status) {
           case 200:
             return response.json();
           case 404:
-            return {"error": "Hours not found for the selected date."};
+            return { error: "Hours not found for the selected date." };
           default:
-            return {"error": "Error fetching hours, please notify the help desk."};
+            return {
+              error: "Error fetching hours, please notify the help desk."
+            };
         }
       })
       .then(json => {
@@ -175,7 +187,7 @@ export const fetchHours = (url, dates) => {
         }, 800);
       })
       .catch(err => {
-        dispatch(addError({message: err.message, code: err.code}));
+        dispatch(addError({ message: err.message, code: err.code }));
         dispatch(fetchedHours());
       });
   };
@@ -187,27 +199,29 @@ export const fetchHours = (url, dates) => {
  * @param url - the url to the server for fetching slides
  * @returns {Redux Async Action} - see http://redux.js.org/docs/advanced/AsyncActions.html
  */
-export const fetchTodaysHours = (url) => {
-  return (dispatch) => {
+export const fetchTodaysHours = url => {
+  return dispatch => {
     dispatch(fetchingTodaysHours());
-    let now = moment().format('YYYY-MM-DD');
+    let now = moment().format("YYYY-MM-DD");
     let dates = [now];
     return fetch(url, {
-      method: 'POST',
+      method: "POST",
       headers: {
-        'Accept': 'application/vnd.kiosks.v1',
-        'Content-Type': 'application/json'
+        Accept: "application/vnd.kiosks.v1",
+        "Content-Type": "application/json"
       },
-      body: JSON.stringify({dates: [...dates]})
+      body: JSON.stringify({ dates: [...dates] })
     })
       .then(response => {
         switch (response.status) {
           case 200:
             return response.json();
           case 404:
-            return {"error": "Hours not found for the selected date."};
+            return { error: "Hours not found for the selected date." };
           default:
-            return {"error": "Error fetching hours, please notify the help desk."};
+            return {
+              error: "Error fetching hours, please notify the help desk."
+            };
         }
       })
       .then(json => {
@@ -218,31 +232,31 @@ export const fetchTodaysHours = (url) => {
         }, 800);
       })
       .catch(err => {
-        dispatch(addError({message: err.message, code: err.code}));
+        dispatch(addError({ message: err.message, code: err.code }));
         dispatch(fetchedTodaysHours());
       });
   };
 };
 
-
-export const SET_CLASSROOM_SCHEDULE = 'SET_CLASSROOM_SCHEDULE';
+export const SET_CLASSROOM_SCHEDULE = "SET_CLASSROOM_SCHEDULE";
 export const setClassroomSchedule = (classroom_schedule, date) => {
   return {
     type: SET_CLASSROOM_SCHEDULE,
     data: {
-      classroom_schedule, date
+      classroom_schedule,
+      date
     }
   };
 };
 
-export const FETCHING_CLASSROOM_SCHEDULE = 'FETCHING_CLASSROOM_SCHEDULE';
+export const FETCHING_CLASSROOM_SCHEDULE = "FETCHING_CLASSROOM_SCHEDULE";
 export const fetchingClassroomSchedule = () => {
   return {
     type: FETCHING_CLASSROOM_SCHEDULE
   };
 };
 
-export const FETCHED_CLASSROOM_SCHEDULE = 'FETCHED_CLASSROOM_SCHEDULE';
+export const FETCHED_CLASSROOM_SCHEDULE = "FETCHED_CLASSROOM_SCHEDULE";
 export const fetchedClassroomSchedule = () => {
   return {
     type: FETCHED_CLASSROOM_SCHEDULE
@@ -250,7 +264,7 @@ export const fetchedClassroomSchedule = () => {
 };
 
 export const fetchClassroomSchedule = (url, date) => {
-  return (dispatch) => {
+  return dispatch => {
     dispatch(fetchingClassroomSchedule());
     // Default to today
     if (!date) {
@@ -258,10 +272,10 @@ export const fetchClassroomSchedule = (url, date) => {
     }
     let parsed_date = moment(date).format("YYYYMMDD");
     return fetch(`${url.replace("{date}", parsed_date)}`, {
-      method: 'GET',
+      method: "GET",
       headers: {
-        'Accept': 'application/vnd.kiosks.v1',
-        'Content-Type': 'application/json'
+        Accept: "application/vnd.kiosks.v1",
+        "Content-Type": "application/json"
       }
     })
       .then(response => {
@@ -269,9 +283,14 @@ export const fetchClassroomSchedule = (url, date) => {
           case 200:
             return response.json();
           case 404:
-            return {"error": "Classroom schedule not found for the selected date."};
+            return {
+              error: "Classroom schedule not found for the selected date."
+            };
           default:
-            return {"error": "Error fetching classroom schedule, please notify the help desk."};
+            return {
+              error:
+                "Error fetching classroom schedule, please notify the help desk."
+            };
         }
       })
       .then(json => {
@@ -282,42 +301,42 @@ export const fetchClassroomSchedule = (url, date) => {
         }, 800);
       })
       .catch(err => {
-        dispatch(addError({message: err.message, code: err.code}));
+        dispatch(addError({ message: err.message, code: err.code }));
         dispatch(fetchedClassroomSchedule());
       });
   };
 };
 
-export const TOGGLE_CLASSROOM_SELECTED = 'TOGGLE_CLASSROOM_SELECTED';
+export const TOGGLE_CLASSROOM_SELECTED = "TOGGLE_CLASSROOM_SELECTED";
 export const toggleClassroomSelected = (shortname, selected) => {
   return {
     type: TOGGLE_CLASSROOM_SELECTED,
-    data: {shortname, selected: selected}
+    data: { shortname, selected: selected }
   };
 };
 
-export const FETCHING_CLASSROOMS = 'FETCHING_CLASSROOMS';
+export const FETCHING_CLASSROOMS = "FETCHING_CLASSROOMS";
 export const fetchingClassrooms = () => {
   return {
     type: FETCHING_CLASSROOMS
   };
 };
-export const FETCHED_CLASSROOMS = 'FETCHED_CLASSROOMS';
-export const fetchedClassrooms = (classrooms) => {
+export const FETCHED_CLASSROOMS = "FETCHED_CLASSROOMS";
+export const fetchedClassrooms = classrooms => {
   return {
     type: FETCHED_CLASSROOMS,
     classrooms
   };
 };
 
-export const fetchClassrooms = (url) => {
-  return (dispatch) => {
+export const fetchClassrooms = url => {
+  return dispatch => {
     dispatch(fetchingClassrooms());
     return fetch(url, {
-      method: 'GET',
+      method: "GET",
       headers: {
-        'Accept': 'application/vnd.kiosks.v1',
-        'Content-Type': 'application/json'
+        Accept: "application/vnd.kiosks.v1",
+        "Content-Type": "application/json"
       }
     })
       .then(response => {
@@ -325,9 +344,11 @@ export const fetchClassrooms = (url) => {
           case 200:
             return response.json();
           case 404:
-            return {"error": "Classrooms not found."};
+            return { error: "Classrooms not found." };
           default:
-            return {"error": "Error fetching classrooms, please notify the help desk."};
+            return {
+              error: "Error fetching classrooms, please notify the help desk."
+            };
         }
       })
       .then(json => {
@@ -335,7 +356,9 @@ export const fetchClassrooms = (url) => {
         // adding "selected" field to each of the classrooms for the purpose of the UI
         // to track which classrooms are selected.
         const classrooms = json.reduce((accumulator, current, index) => {
-          accumulator[current.shortname] = Object.assign({}, current, {selected: false});
+          accumulator[current.shortname] = Object.assign({}, current, {
+            selected: false
+          });
           return accumulator;
         }, {});
         // it's fast, so let the fetching_classrooms animation run for 800ms more. ;)
@@ -344,7 +367,7 @@ export const fetchClassrooms = (url) => {
         }, 800);
       })
       .catch(err => {
-        dispatch(addError({message: err.message, code: err.code}));
+        dispatch(addError({ message: err.message, code: err.code }));
         dispatch(fetchedClassrooms([]));
       });
   };

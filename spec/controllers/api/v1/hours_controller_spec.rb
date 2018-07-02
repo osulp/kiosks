@@ -35,8 +35,8 @@ RSpec.describe Api::V1::HoursController, type: :controller do
 
   context "returns hours" do
     before do
-      ENV['API_URI'] = 'http://api.library.oregonstate.edu'
-      ENV['API_ROUTE'] = '/hours.json'
+      ENV['API_URI'] = 'http://server'
+      ENV['API_ROUTE'] = '/action.json'
 
       allow_any_instance_of(Api::V1::HoursController).to receive(:merged_hours).and_return(valid_json)
       post :show, params: valid_attributes
