@@ -85,7 +85,7 @@ class SearchPrimo extends Component {
   resetSearch(e) {
       this.setState({ search_term: '' });
       this.setState({ search_uri: root_dom_element.getAttribute('data-api-uri')});
-      this.setState({ key: Math.random() });
+      this.setState({ search_iframe_key: Math.random() });
   }
 
   /**
