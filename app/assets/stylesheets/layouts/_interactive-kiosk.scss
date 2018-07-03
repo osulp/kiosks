@@ -369,11 +369,13 @@ $niceblue: #00859B;
       max-height: 555px;
     }
     .search-bar {
-      .btn-default {
+      .start_new_search {
+        position: fixed;
+      }
+      .start_new_search .btn-default {
         font-size: 2rem;
         line-height: 2rem;
         height: 5rem;
-        margin-left: -0.5em;
         color: white;
         background: black;
         border-radius: 2px;

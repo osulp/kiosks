@@ -96,11 +96,12 @@ class SearchPrimo extends Component {
       <div id="search-primo" className="panel panel-default">
         <div className="container-fluid search-primo-table-container">
           <div className="row search-bar">
-            <div className='col-sm-6 col-sm-offset-2'>
-              <input className='form-control' value={this.state.search_term} type='text' id='primo_search' onChange={this.performSearch.bind(this)} placeholder='Search Valley Library resources' />
-            </div>
-            <div className='col-sm-3'>
+            <div className='start_new_search'>
               <button className='btn btn-default' type='button' onClick={this.resetSearch.bind(this)}>New Search</button>
+            </div>
+            <div className='col-sm-6 col-sm-offset-3'>
+              <input className='form-control' value={this.state.search_term} type='text' id='primo_search' onChange={this.performSearch.bind(this)} placeholder='Search Valley Library resources' />
+              <i id='primo_search_icon' className='material-icons'>search</i> 
             </div>
           </div>
           <div className="row">
