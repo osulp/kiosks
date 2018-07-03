@@ -39,7 +39,7 @@ class Header extends Component {
                         </button>
                         <img className={`logo ${tapped_enough ? 'is_active' : ''}`} src="/images/osulogo.svg" onClick={this.props._didTap} />
                     </div>
-                    <p className="hours navbar-text">{this._hoursToday()}</p>
+                    <p className="hours navbar-text">Valley Library Hours Today: {this._hoursToday()}</p>
                     <div className="nav navbar-nav navbar-right main-menu-header">
                         <button className="btn btn-default main-menu hidden" onClick={this.props.mainMenuClicked}>
                             <span className={`glyphicon glyphicon-menu-hamburger`}></span>
