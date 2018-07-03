@@ -45,7 +45,8 @@ class SearchPrimo extends Component {
         ],
       },
       display: {
-        'clear': 'Clear'
+        'clear': 'Clear',
+        'accept': 'Search'
       },
       acceptValid: true,
       accepted: function(e, k, el) {
