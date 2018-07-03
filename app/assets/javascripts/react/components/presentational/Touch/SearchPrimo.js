@@ -7,7 +7,7 @@ var Iframe = React.createClass({
     render: function() {
         return(
             <div>
-                <iframe key={this.props.key} src={this.props.src} height={this.props.height} width={this.props.width} frameBorder={0} />
+                <iframe key={this.props.search_iframe_key} src={this.props.src} height={this.props.height} width={this.props.width} frameBorder={0} />
             </div>
         )
     }
@@ -26,9 +26,8 @@ class SearchPrimo extends Component {
       search_querystring: 'query=any,contains,[TERM]&tab=default_tab&search_scope=osu_print',
       search_timer: null,
       search_uri: root_dom_element.getAttribute('data-api-uri'),
-      key: Math.random(),
+      search_iframe_key: Math.random(),
       search_term: '',
-      show_clear_icon: false
     }
   }
   
@@ -68,7 +67,6 @@ class SearchPrimo extends Component {
 
   performSearch(e) {
     this.setState({ search_term: e.target.value });
-    this.setState({ show_clear_icon: true});
     if(this.state.search_timer === null) {
       let self = this;
       let term = e.target.value;
@@ -87,7 +85,6 @@ class SearchPrimo extends Component {
       this.setState({ search_term: '' });
       this.setState({ search_uri: root_dom_element.getAttribute('data-api-uri')});
       this.setState({ key: Math.random() });
-      this.setState({ show_clear_icon: false});
   }
 
   /**
@@ -99,15 +96,16 @@ class SearchPrimo extends Component {
       <div id="search-primo" className="panel panel-default">
         <div className="container-fluid search-primo-table-container">
           <div className="row search-bar">
-            <div className='col-sm-6 col-sm-offset-3'>
+            <div className='col-sm-6 col-sm-offset-2'>
               <input className='form-control' value={this.state.search_term} type='text' id='primo_search' onChange={this.performSearch.bind(this)} placeholder='Search Valley Library resources' />
-              <i id='primo_search_icon' className='material-icons'>search</i>
-              <i id='primo_clear_icon' className={`material-icons ${this.state.show_clear_icon ? "": "hidden"}`} onClick={this.resetSearch.bind(this)}>cancel</i>
+            </div>
+            <div className='col-sm-3'>
+              <button className='btn btn-default' type='button' onClick={this.resetSearch.bind(this)}>New Search</button>
             </div>
           </div>
           <div className="row">
             <div className="col-sm-12 search-iframe">
-                <Iframe key={this.state.key} src={this.state.search_uri} height={(window.innerHeight-50).toString() + 'px'} width="100%" />
+                <Iframe search_iframe_key={this.state.search_iframe_key} src={this.state.search_uri} height={(window.innerHeight-50).toString() + 'px'} width="100%" />
             </div>
           </div>
         </div>
