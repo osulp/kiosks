@@ -35,6 +35,8 @@ if (root_dom_element) {
   let restart_kiosk = setRestartKiosk(root_dom_element.getAttribute('data-restart-kiosk'));
   let maps = setMaps(root_dom_element.getAttribute('data-static-maps'));
   let map_default_floor_number = root_dom_element.getAttribute('data-kiosk-map-default-floor-number');
+  let kiosk_name = root_dom_element.getAttribute('data-kiosk-name');
+  let kiosk_id = root_dom_element.getAttribute('data-kiosk-id');
   let kiosk_type = root_dom_element.getAttribute('data-kiosk-type');
   let kiosk_url = root_dom_element.getAttribute('data-kiosk-url');
   let maps_base_url = root_dom_element.getAttribute('data-maps-base-url');
@@ -49,6 +51,8 @@ if (root_dom_element) {
           kiosk_map_default_floor_number={map_default_floor_number}
           kiosk_type={kiosk_type}
           kiosk_url={kiosk_url}
+          kiosk_id={kiosk_id}
+          kiosk_name={kiosk_name}
           google_analytics={ga}
     />,
     root_dom_element

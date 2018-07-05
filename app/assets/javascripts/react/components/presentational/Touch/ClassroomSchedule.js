@@ -32,7 +32,7 @@ class ClassroomSchedule extends Component {
    * @param {Object} classroom - the classroom which was clicked
    */
   classroomClicked(classroom) {
-    trackClicked(this.props.google_analytics, 'TouchKiosk:ClassroomSchedule:Classroom');
+    trackClicked(this.props.google_analytics, `${this.props.kiosk_name}:${this.props.kiosk_id}:InteractiveKiosk:ClassroomSchedule:Classroom`);
     this.props.toggleClassroomSelected(classroom.shortname, classroom.selected);
   }
 
@@ -41,7 +41,7 @@ class ClassroomSchedule extends Component {
    * @param {Moment} date - the date clicked
    */
   dateClicked(date) {
-    trackClicked(this.props.google_analytics, 'TouchKiosk:ClassroomSchedule:Date');
+    trackClicked(this.props.google_analytics, `${this.props.kiosk_name}:${this.props.kiosk_id}:InteractiveKiosk:ClassroomSchedule:Date`);
     this.setState({selected_date: date});
     this.props.fetchClassroomSchedule(this.props.api.classroom_schedule, date);
     clearTimeout(this.hide_timeout);
@@ -155,6 +155,8 @@ class ClassroomSchedule extends Component {
 ClassroomSchedule.propTypes = {
   classrooms: PropTypes.object.isRequired,
   api: PropTypes.object.isRequired,
+  kiosk_name: PropTypes.string,
+  kiosk_id: PropTypes.string,
   google_analytics: PropTypes.func,
   is_fetching_classroom_schedule: PropTypes.bool.isRequired,
   fetchClassroomSchedule: PropTypes.func.isRequired,
