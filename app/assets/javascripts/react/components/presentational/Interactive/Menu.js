@@ -37,10 +37,10 @@ class Menu extends Component {
             <li className="show-search-primo" onClick={this.props.searchPrimoClicked}>
                 <a className={`btn btn-navbar btn-default ${(this.props.selectedMenuItem == "primo" ? "menu-item-selected" : "")}`}>
                     <img className={"menu-item-icon"} src={"/images/search.svg"} />
-                    <span className={"menu-item-text"}>Search</span>
+                    <span className={"menu-item-text"}>1Search</span>
                 </a>
             </li>
-            <li className="show-classroom-schedule" onClick={this.props.classroomScheduleClicked}>
+            <li className="show-classroom-schedule hidden" onClick={this.props.classroomScheduleClicked}>
                 <a className={`btn btn-navbar btn-default ${(this.props.selectedMenuItem == "schedule" ? "menu-item-selected" : "")}`}>
                     <img className={"menu-item-icon"} src={"/images/calendar-alt.svg"} />
                     <span className={"menu-item-text"}>Classrooms</span>
