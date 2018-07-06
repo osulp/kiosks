@@ -368,6 +368,22 @@ $niceblue: #00859B;
     .search-iframe iframe {
       max-height: 555px;
     }
+    .search-bar {
+      .start_new_search {
+        position: fixed;
+      }
+      .start_new_search .btn-default {
+        font-size: 2rem;
+        line-height: 2rem;
+        height: 5rem;
+        color: white;
+        background: black;
+        border-radius: 2px;
+        border: 1px solid black;
+        -webkit-box-shadow: 0 1px 2px gray;
+        box-shadow: 0 1px 2px gray;
+      }
+    }
   }
 
   #classroom_schedule {
