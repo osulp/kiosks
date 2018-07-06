@@ -36,7 +36,9 @@ const kioskReducer = (state = initial_state, action) => {
         type: action.kiosk.type,
         url: action.kiosk.url,
         map_default_floor_number: action.kiosk.map_default_floor_number,
-        maps_base_url: action.kiosk.maps_base_url
+        maps_base_url: action.kiosk.maps_base_url,
+        name: action.kiosk.name,
+        kid: action.kiosk.kid
       });
     case SET_RESTART_KIOSK:
       return Object.assign({}, state, {

@@ -7,6 +7,8 @@ import * as factories from '../../../.factories';
 const setup = (hours_error) => {
   const props = {
     hours: hours_error || factories.hours,
+    kiosk_name: "test",
+    kiosk_id: "1",
     api: { hours: "/some/bogus/url" },
     google_analytics: jest.fn(),
     is_fetching_hours: false,

@@ -10,6 +10,8 @@ export const mapStateToProps = (state) => {
   return {
     slides: state.kiosk.slides,
     restart_kiosk: state.kiosk.restart_kiosk,
+    kiosk_name: state.kiosk.name,
+    kiosk_id: state.kiosk.kid,
     url: state.kiosk.url,
     title: state.kiosk.title,
     google_analytics: state.kiosk.google_analytics

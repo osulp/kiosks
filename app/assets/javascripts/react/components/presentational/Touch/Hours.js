@@ -36,7 +36,7 @@ class Hours extends Component {
    * @param {Moment} date - the date that was clicked
    */
   dateClicked(date) {
-    trackClicked(this.props.google_analytics, 'TouchKiosk:Hours:Date');
+    trackClicked(this.props.google_analytics, `${this.props.kiosk_name}:${this.props.kiosk_id}:InteractiveKiosk:Hours:Date`);
     this.setState({selected_date: date});
     this.props.fetchHours(this.props.api.hours, getWeekArray(date));
     clearInterval(this.hide_timeout);
@@ -132,6 +132,8 @@ Hours.propTypes = {
   google_analytics: PropTypes.func,
   is_fetching_hours: PropTypes.bool.isRequired,
   fetchHours: PropTypes.func.isRequired,
+  kiosk_name: PropTypes.string,
+  kiosk_id: PropTypes.string
 };
 
 export default Hours;

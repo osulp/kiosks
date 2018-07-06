@@ -39,7 +39,7 @@ class Kiosk extends Component {
    * @private
    */
   _didTap() {
-    trackClicked(this.props.google_analytics, 'InteractiveKiosk:Header:Logo');
+    trackClicked(this.props.google_analytics, `${this.props.kiosk_name}:${this.props.kiosk_id}:InteractiveKiosk:Header:Logo`);
     this.setState({taps: this.state.taps + 1});
     this.setState({menuCollapsed: true});
     this.setState({ selectedMenuItem: 'home' });
@@ -55,7 +55,7 @@ class Kiosk extends Component {
    * Main Menu button was clicked, set the content to display the connected main menu component
    */
   mainMenuClicked() {
-    trackClicked(this.props.google_analytics, 'InteractiveKiosk:Header:MainMenu');
+    trackClicked(this.props.google_analytics, `${this.props.kiosk_name}:${this.props.kiosk_id}:InteractiveKiosk:Header:MainMenu`);
     this.setState({ menuCollapsed: !this.state.menuCollapsed });
   }
 
@@ -77,7 +77,7 @@ class Kiosk extends Component {
    * Home button was clicked, set the content to go to the main menu
    */
   homeClicked() {
-      trackClicked(this.props.google_analytics, 'InteractiveKiosk:Menu:Home');
+      trackClicked(this.props.google_analytics, `${this.props.kiosk_name}:${this.props.kiosk_id}:InteractiveKiosk:Menu:Home`);
       this.setState({ menuCollapsed: true });
       this.setState({ selectedMenuItem: 'home' });
       this.props.setContentRootComponent(<ConnectedSlideGallery {...this.props} />)
@@ -87,7 +87,7 @@ class Kiosk extends Component {
    * Hours button was clicked, set the content to display the connected Hours component
    */
   hoursClicked() {
-    trackClicked(this.props.google_analytics, 'InteractiveKiosk:Menu:Hours');
+    trackClicked(this.props.google_analytics, `${this.props.kiosk_name}:${this.props.kiosk_id}:InteractiveKiosk:Menu:Hours`);
     this.setState({ menuCollapsed: true });
     this.setState({ selectedMenuItem: 'hours' });
     this.props.setContentRootComponent(<TouchHours />);
@@ -99,7 +99,7 @@ class Kiosk extends Component {
    * The maps button was clicked, set the content to display the maps component
    */
   mapsClicked() {
-    trackClicked(this.props.google_analytics, 'InteractiveKiosk:Menu:Maps');
+    trackClicked(this.props.google_analytics, `${this.props.kiosk_name}:${this.props.kiosk_id}:InteractiveKiosk:Menu:Maps`);
     this.setState({ menuCollapsed: true });
     this.setState({ selectedMenuItem: 'maps' });
     this.props.setContentRootComponent(<ConnectedMaps />);
@@ -111,7 +111,7 @@ class Kiosk extends Component {
    * Static Maps button was clicked (temporary component to use while libnav gets released)
    */
   staticMapsClicked() {
-    trackClicked(this.props.google_analytics, 'TouchKiosk:Header:StaticMaps');
+    trackClicked(this.props.google_analytics, `${this.props.kiosk_name}:${this.props.kiosk_id}:InteractiveKiosk:Menu:StaticMaps`);
     this.setState({ menuCollapsed: true });
     this.setState({ selectedMenuItem: 'maps' });
     let tabs = this.props.maps.map((m) => {
@@ -120,10 +120,9 @@ class Kiosk extends Component {
         content: (<div style={{backgroundImage: `url("${m.image_url}")`}}>&nbsp;</div>)
       };
     });
-    // this.props.setModalVisibility(true);
     this.props.setContentRootComponent(<ConnectedTabbedPanel id="maps_tabbed_panel"
                                                            tabs={tabs}
-                                                           selectedIndex={1}
+                                                           selectedIndex={this.props.map_default_floor_number - 1}
                                                            timeout={30000}/>);
     clearInterval(this.show_slides_timeout);
     this._showSlidesTimeout();
@@ -135,7 +134,7 @@ class Kiosk extends Component {
    * The 1search button was clicked, set the content to display the connected search primo component
    */
   searchPrimoClicked() {
-    trackClicked(this.props.google_analytics, 'InteractiveKiosk:Menu:SearchPrimo');
+    trackClicked(this.props.google_analytics, `${this.props.kiosk_name}:${this.props.kiosk_id}:InteractiveKiosk:Menu:SearchPrimo`);
     this.setState({ menuCollapsed: true });
     this.setState({ selectedMenuItem: 'primo' });
     this.props.setContentRootComponent(<ConnectedSearchPrimo />);
@@ -147,7 +146,7 @@ class Kiosk extends Component {
    * The classroom schedule button was clicked, set the content to display the connected classroom schedule component
    */
   classroomScheduleClicked() {
-    trackClicked(this.props.google_analytics, 'InteractiveKiosk:Menu:ClassroomSchedule');
+    trackClicked(this.props.google_analytics, `${this.props.kiosk_name}:${this.props.kiosk_id}:InteractiveKiosk:Menu:ClassroomSchedule`);
     this.setState({ menuCollapsed: true });
     this.setState({ selectedMenuItem: 'schedule' });
     this.props.setContentRootComponent(<ConnectedClassroomSchedule />);
@@ -264,6 +263,9 @@ Kiosk.propTypes = {
   restart_kiosk: PropTypes.string.isRequired,
   maps: PropTypes.array,
   maps_base_url: PropTypes.string,
+  map_default_floor_number: PropTypes.string,
+  kiosk_id: PropTypes.string,
+  kiosk_name: PropTypes.string,
   hours: PropTypes.object.isRequired,
   todays_hours: PropTypes.object.isRequired,
   url: PropTypes.string.isRequired,

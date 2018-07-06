@@ -41,6 +41,8 @@ class Kiosk extends Component {
 
 Kiosk.propTypes = {
   slides: PropTypes.array.isRequired,
+  kiosk_name: PropTypes.string,
+  kiosk_id: PropTypes.string,
   restart_kiosk: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   url: PropTypes.string.isRequired,

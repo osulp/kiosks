@@ -8,6 +8,8 @@ const setup = () => {
     factories.initial_state,
     {
       slides: factories.slides,
+      kiosk_name: "test",
+      kiosk_id: "1",
       restart_kiosk: factories.kiosk.restart_kiosk,
       setModalVisibility: jest.fn(),
       setModalRootComponent: jest.fn(),

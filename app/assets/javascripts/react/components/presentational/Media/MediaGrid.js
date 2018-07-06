@@ -62,6 +62,8 @@ class MediaGrid extends Component {
 MediaGrid.propTypes = {
   slides: PropTypes.array.isRequired,
   title: PropTypes.string.isRequired,
+  kiosk_name: PropTypes.string,
+  kiosk_id: PropTypes.string,
   google_analytics: PropTypes.object.isRequired,
   setModalVisibility: PropTypes.func.isRequired,
   setModalRootComponent: PropTypes.func.isRequired,
