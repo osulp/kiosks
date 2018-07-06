@@ -44,7 +44,7 @@ class SlideGrid extends Component {
   }
 
   setTitle(e) {
-    trackClicked(this.props.google_analytics, `DonorKiosk:FilterSlides:${e.target.dataset.slidetype}`);
+    trackClicked(this.props.google_analytics, `${this.props.kiosk_name}:${this.props.kiosk_id}:DonorKiosk:FilterSlides:${e.target.dataset.slidetype}`);
     clearTimeout(this.random_timer);
     this.props.setTitle(e.target.dataset.slidetype);
   }
@@ -95,6 +95,8 @@ SlideGrid.propTypes = {
   slides: PropTypes.array.isRequired,
   title: PropTypes.string.isRequired,
   google_analytics: PropTypes.object.isRequired,
+  kiosk_name: PropTypes.string,
+  kiosk_id: PropTypes.string,
   setModalVisibility: PropTypes.func.isRequired,
   setModalRootComponent: PropTypes.func.isRequired,
   setTitle: PropTypes.func.isRequired,

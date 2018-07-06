@@ -9,6 +9,8 @@ import * as actions from '../actions';
 export const mapStateToProps = (state) => {
   return {
     slides: state.kiosk.slides,
+    kiosk_name: state.kiosk.name,
+    kiosk_id: state.kiosk.kid,
     restart_kiosk: state.kiosk.restart_kiosk,
     url: state.kiosk.url,
     title: state.kiosk.title,

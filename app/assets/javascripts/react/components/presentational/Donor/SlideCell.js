@@ -5,7 +5,7 @@ import {trackClicked} from '../shared/GoogleAnalytics';
 class SlideCell extends Component {
 
   cellClicked (e) {
-    trackClicked(this.props.google_analytics, 'DonorKiosk:SlideClicked');
+    trackClicked(this.props.google_analytics, `${this.props.kiosk_name}:${this.props.kiosk_id}:DonorKiosk:SlideClicked`);
     this.props.setModalVisibility(true);
     this.props.setModalRootComponent(<LargeSlide {...this.props} />);
   }
@@ -26,6 +26,8 @@ class SlideCell extends Component {
 
 SlideCell.propTypes = {
   slide: PropTypes.object.isRequired,
+  kiosk_name: PropTypes.string,
+  kiosk_id: PropTypes.string,
   setModalVisibility: PropTypes.func.isRequired,
   setModalRootComponent: PropTypes.func.isRequired,
 };
