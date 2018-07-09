@@ -53,7 +53,7 @@ gem 'rubocop'
 gem 'rubycas-client', git: 'https://github.com/osulp/rubycas-client'
 gem 'rubycas-client-rails', git: 'https://github.com/osulp/rubycas-client-rails'
 
-gem 'mysql2'
+gem 'mysql2', '0.4.5'
 gem 'nokogiri'
 
 gem 'faraday'
