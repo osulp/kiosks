@@ -2,6 +2,6 @@
 
 if %w[production staging].include? Rails.env
   Datadog.configure do |c|
-    c.use :rails, service_name: 'kiosks'
+    c.use :rails, service_name: "kiosks-#{Rails.env}"
   end
 end
