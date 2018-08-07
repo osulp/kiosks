@@ -53,10 +53,12 @@ gem 'rubocop'
 gem 'rubycas-client', git: 'https://github.com/osulp/rubycas-client'
 gem 'rubycas-client-rails', git: 'https://github.com/osulp/rubycas-client-rails'
 
-gem 'mysql2', '0.4.5'
+gem 'mysql2', '~> 0.4.10'
 gem 'nokogiri'
 
 gem 'faraday'
+
+gem 'lograge'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -84,4 +86,8 @@ end
 
 group :test do
   gem 'rspec_junit_formatter'
+end
+
+group :staging, :production do
+  gem 'ddtrace'
 end
