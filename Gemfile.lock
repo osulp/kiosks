@@ -139,7 +139,7 @@ GEM
     execjs (2.7.0)
     faraday (0.15.2)
       multipart-post (>= 1.2, < 3)
-    ffi (1.9.18)
+    ffi (1.9.25)
     flipclockjs-rails (0.7.7)
       jquery-rails (>= 1.0.17)
     font-awesome-rails (4.7.0.4)
@@ -403,6 +403,7 @@ DEPENDENCIES
   devise
   devise_cas_authenticatable
   faraday
+  ffi (>= 1.9.24)
   flipclockjs-rails (~> 0.7.7)
   jbuilder (~> 2.5)
   jquery-rails
