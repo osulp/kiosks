@@ -111,20 +111,32 @@ RSpec.describe SlidesController, type: :controller do
 
   describe "POST #create" do
     context "with valid params" do
+      let(:valid_attributes) {
+        {
+          expires_at: Time.utc(2015, 1, 1, 12, 0, 0),
+          caption: "test caption", title: "test title",
+          slide_type_id: slide_type_test.id,
+          collection_id: collection_test.id
+        }
+      }
+      let(:test_files) {
+        [test_file]
+      }
+
       it "creates a new Slide" do
         expect {
-          post :create, params: {slide: valid_attributes}
+          post :create, params: {slide: valid_attributes, files: test_files}
         }.to change(Slide, :count).by(1)
       end
 
       it "assigns a newly created slide as @slide" do
-        post :create, params: {slide: valid_attributes, :format => 'json'}
+        post :create, params: {slide: valid_attributes, files: test_files, :format => 'json'}
         expect(assigns(:slide)).to be_a(Slide)
         expect(assigns(:slide)).to be_persisted
       end
 
       it "redirects to the created slide" do
-        post :create, params: {slide: valid_attributes}
+        post :create, params: {slide: valid_attributes, files: test_files}
         expect(response).to redirect_to(Slide.last)
       end
     end
