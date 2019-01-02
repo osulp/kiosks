@@ -22,9 +22,6 @@ RSpec.describe SlidesController, type: :controller do
       image: test_file
     }
   }
-  let(:test_files) {
-    [test_file]
-  }
 
   let(:invalid_attributes) {
     { caption: "", title: "" }
