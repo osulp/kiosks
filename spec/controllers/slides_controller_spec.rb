@@ -22,9 +22,6 @@ RSpec.describe SlidesController, type: :controller do
       image: test_file
     }
   }
-  let(:test_files) {
-    [test_file]
-  }
 
   let(:invalid_attributes) {
     { caption: "", title: "" }
@@ -114,6 +111,18 @@ RSpec.describe SlidesController, type: :controller do
 
   describe "POST #create" do
     context "with valid params" do
+      let(:valid_attributes) {
+        {
+          expires_at: Time.utc(2015, 1, 1, 12, 0, 0),
+          caption: "test caption", title: "test title",
+          slide_type_id: slide_type_test.id,
+          collection_id: collection_test.id
+        }
+      }
+      let(:test_files) {
+        [test_file]
+      }
+
       it "creates a new Slide" do
         expect {
           post :create, params: {slide: valid_attributes, files: test_files}
