@@ -50,6 +50,7 @@ class Kiosk extends Component {
 
   /**
    * Fetch the most recent slides every 10 minutes to keep the kiosk with updated slides as they are changed on the server.
+   * TODO: enable Rooms component when https://github.com/osulp/kiosks/issues/259 gets resolved.
    * @private
    */
   _fetchSlidesTimeout() {
@@ -67,10 +68,10 @@ class Kiosk extends Component {
           </div>
         </div>
         <div className="row">
-          <div className="col-md-2">
+          <div className="col-md-2 hide">
             <Rooms {...this.props} />
           </div>
-          <div className="col-md-10">
+          <div className="col-md-12">
             <ConnectedSlideGallery {...this.props} />
           </div>
         </div>
