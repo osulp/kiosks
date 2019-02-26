@@ -14,8 +14,10 @@
         <%= f.fields_for :slides do |builder, index| %>
           <tr>
             <th scope="row">
-              <strong>Slide:</strong><br>
+              <strong>Slide:</strong>
               <%= image_tag(builder.object.image_url(:thumb)) if builder.object.image_url(:thumb) %>
+              <%= builder.hidden_field :_destroy %>
+              <%= link_to "remove", '#', class: "col-xs-12 remove_fields btn btn-danger", style: 'margin-top:10px;'%>
             </th>
             <td>
               <fieldset>
