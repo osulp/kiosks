@@ -9,6 +9,7 @@ import DonorKiosk from './DonorKiosk';
 import CirculationKiosk from './CirculationKiosk';
 import MediaKiosk from './MediaKiosk';
 import InteractiveKiosk from './InteractiveKiosk';
+import TallKiosk from './TallKiosk';
 import {setKiosk, setSlides, setRestartKiosk, setGoogleAnalytics} from '../actions/kioskActions';
 import {setMaps} from '../actions/touchActions';
 
@@ -58,6 +59,8 @@ export default class Root extends Component {
         return (<MediaKiosk />);
       case 'interactive':
         return (<InteractiveKiosk />);
+      case 'tall':
+        return (<TallKiosk />);
       default:
         return (<App />);
     }
