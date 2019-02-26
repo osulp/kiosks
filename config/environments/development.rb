@@ -53,4 +53,7 @@ Rails.application.configure do
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
 
   config.log_formatter = ::Logger::Formatter.new
+
+  # Whitelist docker containers for webconsole during development
+  config.web_console.whitelisted_ips = ['172.0.0.0/8', '192.0.0.0/8']
 end
