@@ -74,59 +74,61 @@ class CollectionsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_collection
-      @collection = Collection.find(params[:id])
-    end
 
-    def set_kiosks(params)
-      slides = {}
-      if params[:collection] && params[:collection][:slides_attributes]
-        params[:collection][:slides_attributes].each do |k, v|
-          slide_id = v ? v["id"] : k["id"]
-          slide_kiosks = v ? v["kiosk_ids"] : k["kiosk_ids"]
-          slides[slide_id] = slide_kiosks if slide_id
-        end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_collection
+    @collection = Collection.find(params[:id])
+  end
 
-        @collection.slides.each do |slide|
-          kiosks = []
-          if slides[slide.id.to_s]
-            slides[slide.id.to_s].each do |kiosk|
-              kiosks << Kiosk.find(kiosk)
-            end
+  def set_kiosks(params)
+    slides = {}
+    if params[:collection] && params[:collection][:slides_attributes]
+      params[:collection][:slides_attributes].each do |k, v|
+        slide_id = v ? v["id"] : k["id"]
+        slide_kiosks = v ? v["kiosk_ids"] : k["kiosk_ids"]
+        slides[slide_id] = slide_kiosks if slide_id
+      end
+
+      @collection.slides.each do |slide|
+        kiosks = []
+        if slides[slide.id.to_s]
+          slides[slide.id.to_s].each do |kiosk|
+            kiosks << Kiosk.find(kiosk)
           end
-          if params["commit"] == "Upload Slides"
-            if slides[slide.id.to_s]
-              slide.kiosks = kiosks
-            end
-          else
+        end
+        if params["commit"] == "Upload Slides"
+          if slides[slide.id.to_s]
             slide.kiosks = kiosks
           end
+        else
+          slide.kiosks = kiosks
         end
       end
     end
+  end
 
-    def set_options
-      @kiosks = Kiosk.all
-      @slide_types = SlideType.all
-      @default_kiosk = Kiosk.find_by_name("touch")
-      @default_slide_type = SlideType.find_by_name("Basic")
-      @kiosk_options = Kiosk.all.collect { |obj| {obj.name => obj.id} }.inject(:merge)
-      @slide_type_options = SlideType.all.collect { |obj| {obj.name => obj.id} }.inject(:merge)
-    end
+  def set_options
+    @kiosks = Kiosk.all
+    @slide_types = SlideType.all
+    @default_kiosk = Kiosk.find_by_name('touch')
+    @default_slide_type = SlideType.find_or_create_by(name: 'Basic')
+    @kiosk_options = Kiosk.all.collect { |obj| { obj.name => obj.id } }.inject(:merge)
+    @slide_type_options = SlideType.all.collect { |obj| { obj.name => obj.id } }.inject(:merge)
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def collection_params
-      params.require(:collection).permit(
-        :name,
-        slides_attributes: [:id, :caption, :expires_at, :title, :collection_id, :slide_type_id, :image, :_destroy, date_ranges_attributes: [:id, :start_date, :end_date, :slide_id, :_destroy]]
-        )
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def collection_params
+    params.require(:collection).permit(
+      :detail,
+      :name,
+      slides_attributes: [:id, :caption, :expires_at, :title, :collection_id, :slide_type_id, :image, :_destroy, date_ranges_attributes: [:id, :start_date, :end_date, :slide_id, :_destroy]]
+    )
+  end
 
-    def authorize
-      unless current_user && current_user.admin?
-        flash[:alert] = "You do not have sufficient permissions to view this page"
-        redirect_to root_path
-      end
+  def authorize
+    unless current_user&.admin?
+      flash[:alert] = 'You do not have sufficient permissions to view this page'
+      redirect_to root_path
     end
+  end
 end
