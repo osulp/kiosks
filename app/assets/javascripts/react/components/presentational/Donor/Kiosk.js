@@ -1,22 +1,22 @@
-import {connect} from 'react-redux';
-import React, {Component, PropTypes} from 'react';
-import ConnectedModalWindow from '../../ModalWindow';
-import ConnectedSlideGrid from '../../DonorSlideGrid';
-import moment from 'moment';
+import { connect } from "react-redux"
+import React, { Component, PropTypes } from "react"
+import ConnectedModalWindow from "../../ModalWindow"
+import ConnectedSlideGrid from "../../DonorSlideGrid"
+import moment from "moment"
 
 class Kiosk extends Component {
   /**
    * After the component mounts, fetch the restart_kiosk value
    */
   componentDidMount() {
-    this._fetchRestartKioskTimeout();
+    this._fetchRestartKioskTimeout()
   }
 
   /**
    * Before the component unmounts, clear the timeouts.
    */
   componentWillUnmount() {
-    clearInterval(this.restart_kiosk_timeout);
+    clearInterval(this.restart_kiosk_timeout)
   }
 
   /**
@@ -25,8 +25,8 @@ class Kiosk extends Component {
    */
   _fetchRestartKioskTimeout() {
     this.restart_kiosk_timeout = setInterval(() => {
-      this.props.fetchRestartKiosk(this.props.url);
-    }, 1 * 60 * 1000);
+      this.props.fetchRestartKiosk(this.props.url)
+    }, 1 * 60 * 1000)
   }
 
   render() {
@@ -35,7 +35,7 @@ class Kiosk extends Component {
         <ConnectedModalWindow />
         <ConnectedSlideGrid />
       </div>
-    );
+    )
   }
 }
 
@@ -50,7 +50,7 @@ Kiosk.propTypes = {
   setModalVisibility: PropTypes.func.isRequired,
   fetchRestartKiosk: PropTypes.func.isRequired,
   setModalRootComponent: PropTypes.func.isRequired,
-  setTitle: PropTypes.func.isRequired,
-};
+  setTitle: PropTypes.func.isRequired
+}
 
-export default Kiosk;
+export default Kiosk

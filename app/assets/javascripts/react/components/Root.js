@@ -50,6 +50,7 @@ export default class Root extends Component {
     switch(kiosk_type) {
       case 'touch':
         return (<TouchKiosk />);
+      case 'donorcoverflow':
       case 'donor':
         return (<DonorKiosk />);
       case 'circulation':
