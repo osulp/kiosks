@@ -14,7 +14,7 @@ set :repo_url, config['repository']
 set :deploy_to, config['deploy_to']
 
 # The server must have rbenv installed and the version of ruby specified here.
-set :rbenv_ruby, '2.3.3'
+set :rbenv_ruby, '2.5.1'
 
 # The server must have nvm installed at the user level, and to have yarn installed globally as an npm package
 # for the node version specified here.
