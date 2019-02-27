@@ -1,6 +1,6 @@
 class CollectionsController < ApplicationController
-  before_action :set_collection, only: [:show, :edit, :update, :destroy]
-  before_action :set_options, only: [:new, :show, :edit, :update, :destroy]
+  before_action :set_collection, only: %i[show edit update destroy]
+  before_action :set_options, only: %i[new show edit update destroy]
   before_action :authenticate_user!
   before_action :authorize
 
@@ -12,8 +12,7 @@ class CollectionsController < ApplicationController
 
   # GET /collections/1
   # GET /collections/1.json
-  def show
-  end
+  def show; end
 
   # GET /collections/new
   def new
@@ -21,8 +20,7 @@ class CollectionsController < ApplicationController
   end
 
   # GET /collections/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /collections
   # POST /collections.json
@@ -43,14 +41,7 @@ class CollectionsController < ApplicationController
   # PATCH/PUT /collections/1
   # PATCH/PUT /collections/1.json
   def update
-    if (params["commit"] == "Upload Slides")
-      params["uploaded_files"].each do |fid|
-        s = Slide.find(fid)
-        s.collection_id = params["id"]
-        s.save!
-      end
-    end
-
+    upload_slides(params)
     set_kiosks(params)
     respond_to do |format|
       if @collection.update(collection_params)
@@ -80,29 +71,39 @@ class CollectionsController < ApplicationController
     @collection = Collection.find(params[:id])
   end
 
+  def upload_slides(params)
+    return unless params['commit'] == 'Upload Slides'
+
+    params['uploaded_files'].each do |fid|
+      s = Slide.find(fid)
+      s.collection_id = params['id']
+      s.save!
+    end
+  end
+
   def set_kiosks(params)
+    return unless params[:collection] && params[:collection][:slides_attributes]
+
     slides = {}
-    if params[:collection] && params[:collection][:slides_attributes]
-      params[:collection][:slides_attributes].each do |k, v|
-        slide_id = v ? v["id"] : k["id"]
-        slide_kiosks = v ? v["kiosk_ids"] : k["kiosk_ids"]
-        slides[slide_id] = slide_kiosks if slide_id
+    params[:collection][:slides_attributes].each do |k, v|
+      slide_id = v ? v['id'] : k['id']
+      slide_kiosks = v ? v['kiosk_ids'] : k['kiosk_ids']
+      slides[slide_id] = slide_kiosks if slide_id
+    end
+
+    @collection.slides.each do |slide|
+      slide_id = slide.id.to_s
+      kiosks = []
+      if slides.key? slide_id
+        slides[slide_id].each do |k|
+          kiosks << Kiosk.find(k)
+        end
       end
 
-      @collection.slides.each do |slide|
-        kiosks = []
-        if slides[slide.id.to_s]
-          slides[slide.id.to_s].each do |kiosk|
-            kiosks << Kiosk.find(kiosk)
-          end
-        end
-        if params["commit"] == "Upload Slides"
-          if slides[slide.id.to_s]
-            slide.kiosks = kiosks
-          end
-        else
-          slide.kiosks = kiosks
-        end
+      if params['commit'] == 'Upload Slides'
+        slide.kiosks = kiosks if slides.key? slide_id
+      else
+        slide.kiosks = kiosks
       end
     end
   end
@@ -110,7 +111,7 @@ class CollectionsController < ApplicationController
   def set_options
     @kiosks = Kiosk.all
     @slide_types = SlideType.all
-    @default_kiosk = Kiosk.find_by_name('touch')
+    @default_kiosk = Kiosk.find_or_create_by(name: 'touch')
     @default_slide_type = SlideType.find_or_create_by(name: 'Basic')
     @kiosk_options = Kiosk.all.collect { |obj| { obj.name => obj.id } }.inject(:merge)
     @slide_type_options = SlideType.all.collect { |obj| { obj.name => obj.id } }.inject(:merge)
@@ -121,7 +122,17 @@ class CollectionsController < ApplicationController
     params.require(:collection).permit(
       :detail,
       :name,
-      slides_attributes: [:id, :caption, :expires_at, :title, :collection_id, :slide_type_id, :image, :_destroy, date_ranges_attributes: [:id, :start_date, :end_date, :slide_id, :_destroy]]
+      slides_attributes: [
+        :id,
+        :caption,
+        :expires_at,
+        :title,
+        :collection_id,
+        :slide_type_id,
+        :image,
+        :_destroy,
+        date_ranges_attributes: %i[id start_date end_date slide_id _destroy]
+      ]
     )
   end
 

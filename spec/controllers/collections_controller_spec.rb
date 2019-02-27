@@ -1,34 +1,23 @@
-require 'rails_helper'
+# frozen_string_literal:true
 
 RSpec.describe CollectionsController, type: :controller do
-
   # This should return the minimal set of attributes required to create a valid
   # Collection. As you add validations to Collection, be sure to
   # adjust the attributes here as well.
-  let(:valid_attributes) {
-    { name: "Impact" }
-  }
+  let(:valid_attributes) { { name: 'Impact' } }
+  let(:invalid_attributes) { { name: '' } }
+  let(:test_layout) { create(:kiosk_layout) }
+  let(:user) { create(:admin_user) }
+  let(:collection) { create(:collection) }
 
-  let(:invalid_attributes) {
-    { name: "" }
-  }
-
-  let(:test_layout) { KioskLayout.create!(:name => "touch") }
-
-  let(:user) do
-    User.create(
-      :email => 'user@example.com',
-      :admin => true
-    )
-  end
   before do
     sign_in(user) if user
   end
 
   describe "GET #index" do
     it "assigns all collections as @collections" do
-      collection = Collection.create! valid_attributes
       get :index, params: {}
+      puts response
       expect(assigns(:collections)).to eq([collection])
     end
   end
