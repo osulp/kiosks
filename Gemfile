@@ -76,6 +76,7 @@ group :development, :test do
   gem 'webmock'
   gem 'capybara'
   gem 'poltergeist'
+  gem 'factory_bot_rails'
 end
 
 group :development do

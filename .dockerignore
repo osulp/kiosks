@@ -1,0 +1,13 @@
+.git*
+db/*.sqlite3
+db/*.sqlite3-journal
+log/*
+tmp/*
+node_modules/*
+coverage/*
+Dockerfile
+README.rdoc
+
+fits.log
+.byebug_history
+docker-compose.override.yml
