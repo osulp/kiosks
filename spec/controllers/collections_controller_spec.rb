@@ -14,230 +14,180 @@ RSpec.describe CollectionsController, type: :controller do
     sign_in(user) if user
   end
 
-  describe "GET #index" do
-    it "assigns all collections as @collections" do
+  describe 'GET #index' do
+    before do
       get :index, params: {}
-      puts response
-      expect(assigns(:collections)).to eq([collection])
     end
+
+    it { expect(assigns(:collections)).to eq([collection]) }
   end
 
-  describe "GET #show" do
-    it "assigns the requested collection as @collection" do
-      collection = Collection.create! valid_attributes
-      get :show, params: {id: collection.to_param}
-      expect(assigns(:collection)).to eq(collection)
+  describe 'GET #show' do
+    before do
+      get :show, params: { id: collection.to_param }
     end
+
+    it { expect(assigns(:collection)).to eq(collection) }
   end
 
-  describe "GET #new" do
-    it "assigns a new collection as @collection" do
+  describe 'GET #new' do
+    before do
       get :new, params: {}
-      expect(assigns(:collection)).to be_a_new(Collection)
     end
 
-    context "When not logged in" do
+    it { expect(assigns(:collection)).to be_a_new(Collection) }
+
+    context 'when not logged in' do
       let(:user) { nil }
-      it "should display an insufficient permissions error" do
-        get :new, params: {}
-        expect(flash[:alert]).to eq("You need to sign in or sign up before continuing.")
-      end
-      it "should redirect" do
-        get :new, params: {}
-        expect(response).to redirect_to user_session_path
-      end
+
+      it { expect(flash[:alert]).to eq('You need to sign in or sign up before continuing.') }
+      it { expect(response).to redirect_to user_session_path }
     end
-    context "When logged in as a user" do
-      let(:user) do
-        User.create(
-          :email => 'user@example.com',
-        )
-      end
-      it "should display an insufficient permissions error" do
-        get :new, params: {}
-        expect(flash[:alert]).to eq("You do not have sufficient permissions to view this page")
-      end
-      it "should redirect" do
-        get :new, params: {}
-        expect(response).to redirect_to root_path
-      end
+
+    context 'when logged in as a user' do
+      let(:user) { create(:user) }
+
+      it { expect(flash[:alert]).to eq('You do not have sufficient permissions to view this page') }
+      it { expect(response).to redirect_to root_path }
     end
-    context "When logged in as an admin" do
-      let(:user) do
-        User.create(
-          :email => 'user@example.com',
-          :admin => true
-        )
-      end
-      it 'should display the admin panel' do
-        get :new, params: {}
-        expect(response).to be_success
-      end
+
+    context 'when logged in as an admin' do
+      it { expect(response).to be_success }
     end
 
   end
 
-  describe "GET #edit" do
-    it "assigns the requested collection as @collection" do
-      collection = Collection.create! valid_attributes
-      get :edit, params: {id: collection.to_param}
-      expect(assigns(:collection)).to eq(collection)
+  describe 'GET #edit' do
+    before do
+      get :edit, params: { id: collection.to_param }
+    end
+
+    it { expect(assigns(:collection)).to eq(collection) }
+  end
+
+  describe 'POST #create' do
+    context 'with valid params' do
+      before do
+        post :create, params: { collection: valid_attributes }
+      end
+
+      it { expect { post :create, params: { collection: valid_attributes } }.to change(Collection, :count).by(1) }
+      it { expect(assigns(:collection)).to be_a(Collection) }
+      it { expect(assigns(:collection)).to be_persisted }
+      it { expect(response).to redirect_to(Collection.last) }
+    end
+
+    context 'with invalid params' do
+      before do
+        post :create, params: { collection: invalid_attributes }
+      end
+
+      it { expect(assigns(:collection)).to be_a_new(Collection) }
+      it { expect(response).to render_template('new') }
     end
   end
 
-  describe "POST #create" do
-    context "with valid params" do
-      it "creates a new Collection" do
-        expect {
-          post :create, params: {collection: valid_attributes}
-        }.to change(Collection, :count).by(1)
-      end
-
-      it "assigns a newly created collection as @collection" do
-        post :create, params: {collection: valid_attributes}
-        expect(assigns(:collection)).to be_a(Collection)
-        expect(assigns(:collection)).to be_persisted
-      end
-
-      it "redirects to the created collection" do
-        post :create, params: {collection: valid_attributes}
-        expect(response).to redirect_to(Collection.last)
-      end
-    end
-
-    context "with invalid params" do
-      it "assigns a newly created but unsaved collection as @collection" do
-        post :create, params: {collection: invalid_attributes}
-        expect(assigns(:collection)).to be_a_new(Collection)
-      end
-
-      it "re-renders the 'new' template" do
-        post :create, params: {collection: invalid_attributes}
-        expect(response).to render_template("new")
-      end
-    end
-  end
-
-  describe "PUT #update" do
-    context "with valid params" do
-      let(:new_attributes) {
-        { name: "Donors" }
-      }
-
-      let(:uploaded_file) {
-        Rack::Test::UploadedFile.new('spec/fixtures/Board_Game_Slide.jpg', 'image/jpg')
-      }
-
-      let(:test_kiosk) {
-        Kiosk.create!(name: "circ", kiosk_layout_id: test_layout.id)
-      }
-
+  describe 'PUT #update' do
+    context 'with valid params' do
+      let(:new_attributes) { { name: 'Donors' } }
+      let(:uploaded_file) { Rack::Test::UploadedFile.new('spec/fixtures/Board_Game_Slide.jpg', 'image/jpg') }
+      let(:test_kiosk) { create(:kiosk) }
       let(:uploaded_slide_valid_attributes) {
         {
           expires_at: Time.utc(2015, 1, 1, 12, 0, 0),
-          caption: "test caption",
-          title: "test title",
+          caption: 'test caption',
+          title: 'test title',
           kiosk_ids: [test_kiosk.id],
-          slide_type_id: SlideType.create(name: "Basic").id,
-          collection_id: test_collection.id,
+          slide_type_id: create(:slide_type).id,
+          collection_id: collection.id,
           image: uploaded_file
         }
       }
-
-      let(:uploaded_slide) {
-        Slide.create! uploaded_slide_valid_attributes
-      }
-
-      let(:test_collection) {
-        Collection.create! valid_attributes
-      }
-
+      let(:uploaded_slide) { create(:slide, uploaded_slide_valid_attributes) }
       let(:new_attributes_multiple_kiosks) {
         {
-          name: "my collection",
+          name: 'my collection',
           slides_attributes: [
             { id: uploaded_slide.id, kiosk_ids: [test_kiosk.id] }
           ]
         }
       }
+      let(:kiosk_slide) { create(:kiosk_slide, koisk: test_kiosk, slide: uploaded_slide) }
 
-      it "updates the requested collection" do
-        collection = Collection.create! valid_attributes
-        put :update, params: {id: collection.to_param, collection: new_attributes}
-        collection.reload
-        expect(collection.name).to eq("Donors")
+      context 'with new attributes' do
+        before do
+          put :update, params: { id: collection.to_param, collection: new_attributes }
+          collection.reload
+        end
+
+        it { expect(collection.name).to eq('Donors') }
       end
 
-      it "updates collections with slides with multiple kiosks" do
-        allow(test_collection).to receive(:slides).and_return([uploaded_slide])
-        KioskSlide.create(kiosk_id: test_kiosk.id, slide_id: uploaded_slide)
-        put :update, params: {id: test_collection.id, collection: new_attributes_multiple_kiosks}
-        test_collection.reload
-        expect(test_collection.name).to eq("my collection")
-        expect(test_collection.slides.first.title).to eq("test title")
-        expect(test_collection.slides.first.kiosk_ids).to eq([test_kiosk.id])
+      context 'with slides with multiple kiosks' do
+        before do
+          allow(collection).to receive(:slides).and_return([uploaded_slide])
+          put :update, params: { id: collection.id, collection: new_attributes_multiple_kiosks }
+          collection.reload
+        end
+
+        it { expect(collection.name).to eq('my collection') }
+        it { expect(collection.slides.first.title).to eq('test title') }
+        it { expect(collection.slides.first.kiosk_ids).to eq([test_kiosk.id]) }
       end
 
-      it "updates collections with slides with multiple kiosks uploading multiple files" do
-        allow(test_collection).to receive(:slides).and_return([uploaded_slide])
-        KioskSlide.create(kiosk_id: test_kiosk.id, slide_id: uploaded_slide)
-        put :update, params: {id: test_collection.id, collection: new_attributes_multiple_kiosks, uploaded_files: [uploaded_slide.id], commit: "Upload Slides"}
-        test_collection.reload
-        expect(test_collection.name).to eq("my collection")
-        expect(test_collection.slides.first.title).to eq("test title")
-        expect(test_collection.slides.first.kiosk_ids).to eq([test_kiosk.id])
+      context 'with slides with multiple kiosks uploading multiple files' do
+        before do
+          allow(collection).to receive(:slides).and_return([uploaded_slide])
+          put :update, params: { id: collection.id, collection: new_attributes_multiple_kiosks, uploaded_files: [uploaded_slide.id], commit: 'Upload Slides' }
+          collection.reload
+        end
+
+        it { expect(collection.name).to eq('my collection') }
+        it { expect(collection.slides.first.title).to eq('test title') }
+        it { expect(collection.slides.first.kiosk_ids).to eq([test_kiosk.id]) }
       end
 
-      it "updates uploaded files in new slides so that they belong to the selected collection" do
-        collection = Collection.create! valid_attributes
-        put :update, params: {id: collection.to_param, collection: new_attributes, uploaded_files: [uploaded_slide.id], commit: "Upload Slides"}
-        collection.reload
-        expect(collection.name).to eq("Donors")
+      context 'with files in new slides so that they belong to the selected collection' do
+        before do
+          put :update, params: { id: collection.to_param, collection: new_attributes, uploaded_files: [uploaded_slide.id], commit: 'Upload Slides' }
+          collection.reload
+        end
+
+        it { expect(collection.name).to eq('Donors') }
       end
 
-      it "assigns the requested collection as @collection" do
-        collection = Collection.create! valid_attributes
-        put :update, params: {id: collection.to_param, collection: valid_attributes}
-        expect(assigns(:collection)).to eq(collection)
-      end
+      context 'with valid parameters' do
+        before do
+          put :update, params: { id: collection.to_param, collection: valid_attributes }
+        end
 
-      it "redirects to the collection" do
-        collection = Collection.create! valid_attributes
-        put :update, params: {id: collection.to_param, collection: valid_attributes}
-        expect(response).to redirect_to(collection)
+        it { expect(assigns(:collection)).to eq(collection) }
+        it { expect(response).to redirect_to(collection) }
       end
     end
 
-    context "with invalid params" do
-      it "assigns the collection as @collection" do
-        collection = Collection.create! valid_attributes
-        put :update, params: {id: collection.to_param, collection: invalid_attributes}
-        expect(assigns(:collection)).to eq(collection)
+    context 'with invalid params' do
+      before do
+        put :update, params: { id: collection.to_param, collection: invalid_attributes }
       end
 
-      it "re-renders the 'edit' template" do
-        collection = Collection.create! valid_attributes
-        put :update, params: {id: collection.to_param, collection: invalid_attributes}
-        expect(response).to render_template("edit")
-      end
+      it { expect(assigns(:collection)).to eq(collection) }
+      it { expect(response).to render_template("edit") }
     end
   end
 
-  describe "DELETE #destroy" do
-    it "destroys the requested collection" do
-      collection = Collection.create! valid_attributes
-      expect {
-        delete :destroy, params: {id: collection.to_param}
-      }.to change(Collection, :count).by(-1)
+  describe 'DELETE #destroy' do
+    before do
+      collection
     end
 
-    it "redirects to the collections list" do
-      collection = Collection.create! valid_attributes
-      delete :destroy, params: {id: collection.to_param}
+    it { expect { delete :destroy, params: { id: collection.to_param } }.to change(Collection, :count).by(-1) }
+
+    it 'redirects to the collections list' do
+      delete :destroy, params: { id: collection.to_param }
       expect(response).to redirect_to(collections_url)
     end
   end
-
 end
 
 
