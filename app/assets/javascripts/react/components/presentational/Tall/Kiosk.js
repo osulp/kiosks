@@ -79,9 +79,6 @@ Kiosk.propTypes = {
   fetchSlides: PropTypes.func.isRequired,
   fetchRestartKiosk: PropTypes.func.isRequired,
   scrollToSlide: PropTypes.func.isRequired,
-  api: PropTypes.object.isRequired,
-  hours: PropTypes.object.isRequired,
-  fetchHours: PropTypes.func.isRequired,
 };
 
 export default Kiosk;
