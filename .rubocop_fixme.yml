@@ -1,0 +1,17 @@
+Metrics/AbcSize:
+  Exclude:
+
+Style/Documentation:
+  Exclude:
+    - 'spec/**/*'
+
+Metrics/BlockLength:
+  Exclude:
+    - 'lib/tasks/*.rake'
+    - 'lib/tasks/**/**/*.rake'
+    - 'spec/**/*.rb'
+    - 'config/**/*'
+
+RSpec/ExampleLength:
+  Exclude:
+    - 'spec/**/*'

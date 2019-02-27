@@ -1,10 +1,12 @@
-class SlidesController < ApplicationController
-  before_action :set_slide, only: [:show, :edit, :update, :destroy]
-  before_action :set_options, only: [:create, :new, :show, :edit, :update, :destroy]
+# frozen_string_literal: true
 
-  before_action :set_default_kiosk, only: [:create, :new, :edit, :update, :destroy]
-  before_action :set_default_slide_type, only: [:create, :new, :edit, :update, :destroy]
-  before_action :set_default_collection, only: [:create, :new, :edit, :update, :destroy]
+class SlidesController < ApplicationController
+  before_action :set_slide, only: %i[show edit update destroy]
+  before_action :set_options, only: %i[create new show edit update destroy]
+
+  before_action :set_default_kiosk, only: %i[create new edit update destroy]
+  before_action :set_default_slide_type, only: %i[create new edit update destroy]
+  before_action :set_default_collection, only: %i[create new edit update destroy]
 
   before_action :authenticate_user!
   before_action :authorize
@@ -17,8 +19,7 @@ class SlidesController < ApplicationController
 
   # GET /slides/1
   # GET /slides/1.json
-  def show
-  end
+  def show; end
 
   # GET /slides/new
   def new
@@ -26,15 +27,14 @@ class SlidesController < ApplicationController
   end
 
   # GET /slides/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /slides
   # POST /slides.json
   def create
     if params[:files]
       default_title = params[:files].first.original_filename.to_s
-      default_params = { image: params[:files].first, caption: "Enter Caption", title: default_title , expires_at: Date.today, slide_type_id: @default_slide_type.id, collection_id: @default_collection.id}
+      default_params = { image: params[:files].first, caption: 'Enter Caption', title: default_title, expires_at: Date.today, slide_type_id: @default_slide_type.id, collection_id: @default_collection.id }
       @slide = Slide.new(default_params)
     else
       @slide = Slide.new(slide_params)
@@ -44,9 +44,9 @@ class SlidesController < ApplicationController
     respond_to do |format|
       if @slide.save
         format.html { redirect_to @slide, notice: 'Slide was successfully created.' }
-        format.json {
-          render :json => {files: [@slide.to_jq_upload]}
-        }.to_json
+        format.json do
+          render json: { files: [@slide.to_jq_upload] }
+        end.to_json
       else
         format.html { render :new }
         format.json { render json: @slide.errors, status: :unprocessable_entity }.to_json
@@ -80,43 +80,44 @@ class SlidesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_slide
-      @slide = Slide.find(params[:id])
-    end
 
-    def set_kiosks(params)
-      kiosk_ids = params.dig('slide', 'kiosk_ids')
-      @slide.kiosks = (kiosk_ids) ? Kiosk.find(kiosk_ids) : []
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_slide
+    @slide = Slide.find(params[:id])
+  end
 
-    def set_options
-      @kiosks = Kiosk.all
-      @slide_types = SlideType.all
-      @collections = Collection.all
-    end
+  def set_kiosks(params)
+    kiosk_ids = params.dig('slide', 'kiosk_ids')
+    @slide.kiosks = kiosk_ids ? Kiosk.find(kiosk_ids) : []
+  end
 
-    def set_default_kiosk
-      @default_kiosk = Kiosk.find_by_name("touch")
-    end
+  def set_options
+    @kiosks = Kiosk.all
+    @slide_types = SlideType.all
+    @collections = Collection.all
+  end
 
-    def set_default_slide_type
-      @default_slide_type = SlideType.find_by_name("Basic")
-    end
+  def set_default_kiosk
+    @default_kiosk = Kiosk.find_by_name('touch')
+  end
 
-    def set_default_collection
-      @default_collection = Collection.find_by_name("generic")
-    end
+  def set_default_slide_type
+    @default_slide_type = SlideType.find_by_name('Basic')
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def slide_params
-      params.require(:slide).permit(:caption, :expires_at, :title, :description, :collection_id, :slide_type_id, :image, :video, :kiosk_ids, {subtitles: []}, date_ranges_attributes: [:id, :start_date, :end_date, :_destroy])
-    end
+  def set_default_collection
+    @default_collection = Collection.find_by_name('generic')
+  end
 
-    def authorize
-      unless current_user && current_user.admin?
-        flash[:alert] = "You do not have sufficient permissions to view this page"
-        redirect_to root_path
-      end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def slide_params
+    params.require(:slide).permit(:caption, :expires_at, :title, :description, :collection_id, :slide_type_id, :image, :video, :kiosk_ids, { subtitles: [] }, date_ranges_attributes: %i[id start_date end_date _destroy])
+  end
+
+  def authorize
+    unless current_user&.admin?
+      flash[:alert] = 'You do not have sufficient permissions to view this page'
+      redirect_to root_path
     end
+  end
 end

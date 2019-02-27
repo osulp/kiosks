@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'date'
 
 module Api
@@ -5,9 +7,9 @@ module Api
     module Concerns
       module VersionExpirationHandler
         extend ActiveSupport::Concern
-        OK = 'OK'.freeze
-        WARNED = 'WARNED'.freeze
-        EXPIRED = 'EXPIRED'.freeze
+        OK = 'OK'
+        WARNED = 'WARNED'
+        EXPIRED = 'EXPIRED'
 
         included do
           before_action :check_expiration!
@@ -33,8 +35,10 @@ module Api
         def expiration_state
           @expired ||= APPLICATION_CONFIG['api']['last_expired_version']
           return EXPIRED if @expired > 0 && api_version <= @expired.to_i
+
           @warned ||= APPLICATION_CONFIG['api']['last_warned_version']
           return WARNED if @warned > 0 && api_version <= @warned.to_i
+
           OK
         end
 

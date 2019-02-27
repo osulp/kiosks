@@ -1,9 +1,11 @@
+# frozen_string_literal: true
+
 module Api
   module V1
     class Exceptions
-      class BadRequest < Exception
+      class BadRequest < RuntimeError
       end
-      class RecordNotFound < Exception
+      class RecordNotFound < RuntimeError
       end
     end
   end

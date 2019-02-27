@@ -1,18 +1,19 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
-RSpec.describe "kiosk_layouts/new", type: :view do
-  before(:each) do
+RSpec.describe 'kiosk_layouts/new', type: :view do
+  before do
     assign(:kiosk_layout, KioskLayout.new(
-      :name => "MyString"
-    ))
+                            name: 'MyString'
+                          ))
   end
 
-  it "renders new kiosk_layout form" do
+  it 'renders new kiosk_layout form' do
     render
 
-    assert_select "form[action=?][method=?]", kiosk_layouts_path, "post" do
-
-      assert_select "input#kiosk_layout_name[name=?]", "kiosk_layout[name]"
+    assert_select 'form[action=?][method=?]', kiosk_layouts_path, 'post' do
+      assert_select 'input#kiosk_layout_name[name=?]', 'kiosk_layout[name]'
     end
   end
 end

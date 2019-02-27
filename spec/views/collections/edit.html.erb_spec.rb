@@ -1,18 +1,16 @@
-require 'rails_helper'
+# frozen_string_literal: true
 
-RSpec.describe "collections/edit", type: :view do
-  before(:each) do
-    @collection = assign(:collection, Collection.create!(
-      :name => "MyString"
-    ))
+RSpec.describe 'collections/edit', type: :view do
+  let(:collection) { create(:collection, name: 'MyString') }
+
+  before do
+    assign(:collection, collection)
   end
 
-  it "renders the edit collection form" do
+  it 'renders the edit collection form' do
     render
-
-    assert_select "form[action=?][method=?]", collection_path(@collection), "post" do
-
-      assert_select "input#collection_name[name=?]", "collection[name]"
+    assert_select 'form[action=?][method=?]', collection_path(collection), 'post' do
+      assert_select 'input#collection_name[name=?]', 'collection[name]'
     end
   end
 end

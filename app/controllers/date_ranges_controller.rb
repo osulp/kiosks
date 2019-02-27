@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class DateRangesController < ApplicationController
-  before_action :set_date_range, only: [:show, :edit, :update, :destroy]
+  before_action :set_date_range, only: %i[show edit update destroy]
   before_action :authenticate_user!
   before_action :authorize
 
@@ -11,8 +13,7 @@ class DateRangesController < ApplicationController
 
   # GET /date_ranges/1
   # GET /date_ranges/1.json
-  def show
-  end
+  def show; end
 
   # GET /date_ranges/new
   def new
@@ -20,8 +21,7 @@ class DateRangesController < ApplicationController
   end
 
   # GET /date_ranges/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /date_ranges
   # POST /date_ranges.json
@@ -64,20 +64,21 @@ class DateRangesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_date_range
-      @date_range = DateRange.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def date_range_params
-      params.require(:date_range).permit(:start_date, :end_date, :slide_id)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_date_range
+    @date_range = DateRange.find(params[:id])
+  end
 
-    def authorize
-      unless current_user && current_user.admin?
-        flash[:alert] = "You do not have sufficient permissions to view this page"
-        redirect_to root_path
-      end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def date_range_params
+    params.require(:date_range).permit(:start_date, :end_date, :slide_id)
+  end
+
+  def authorize
+    unless current_user&.admin?
+      flash[:alert] = 'You do not have sufficient permissions to view this page'
+      redirect_to root_path
     end
+  end
 end

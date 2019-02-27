@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'nokogiri'
 
 module Api
@@ -20,6 +22,7 @@ module Api
       end
 
       private
+
       def fetch(*args)
         RssCalendar.fetch(*args)
       end
@@ -29,8 +32,9 @@ module Api
       # @param [Nokogiri::XML::Document] xml_doc - the xml doc
       # @return [Array<ClassroomEvent>] an array of ClassroomEvent objects
       def events(xml_doc)
-        items = xml_doc.xpath("rss/channel/item")
+        items = xml_doc.xpath('rss/channel/item')
         return [] if items.empty?
+
         items.map { |i| ClassroomEvent.new(i) }
       end
 
@@ -39,11 +43,10 @@ module Api
       # @param [String] date - the date formatted in YYYYMMDD
       # @return [Nokogiri::XML::Document]
       def fetch_date(date)
-        url = APPLICATION_CONFIG['api']['classrooms']['rss']['url'].gsub("{date}", date)
+        url = APPLICATION_CONFIG['api']['classrooms']['rss']['url'].gsub('{date}', date)
         cached_for = APPLICATION_CONFIG['api']['classrooms']['rss']['cached_minutes']
         Nokogiri::XML(fetch(date, url, cached_for))
       end
-
     end
   end
 end

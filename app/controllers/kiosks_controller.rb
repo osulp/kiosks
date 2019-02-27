@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 class KiosksController < ApplicationController
-  before_action :set_kiosk, only: [:show, :edit, :update, :destroy]
-  before_action :set_options, only: [:create, :new, :show, :edit, :update, :destroy]
+  before_action :set_kiosk, only: %i[show edit update destroy]
+  before_action :set_options, only: %i[create new show edit update destroy]
   before_action :authenticate_user!
   before_action :authorize
   before_action :set_params
@@ -13,8 +15,7 @@ class KiosksController < ApplicationController
 
   # GET /kiosks/1
   # GET /kiosks/1.json
-  def show
-  end
+  def show; end
 
   # GET /kiosks/new
   def new
@@ -22,8 +23,7 @@ class KiosksController < ApplicationController
   end
 
   # GET /kiosks/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /kiosks
   # POST /kiosks.json
@@ -65,7 +65,6 @@ class KiosksController < ApplicationController
     end
   end
 
-
   # GET /kiosks/1/edit_multiple
   def edit_multiple
     @kiosks = Kiosk.find(params[:kiosk_ids])
@@ -82,62 +81,61 @@ class KiosksController < ApplicationController
       redirect_to kiosks_url
     else
       @kiosk = Kiosk.new(kiosk_params_multiple)
-      render "edit_multiple"
+      render 'edit_multiple'
     end
   end
 
   private
 
-    # Use callbacks to share common setup or constraints between actions.
-    def set_kiosk
-      @kiosk = Kiosk.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_kiosk
+    @kiosk = Kiosk.find(params[:id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def kiosk_params
-      params.require(:kiosk).permit(:name, :map_default_floor_number, :kiosk_layout_id, :restart_at, :restart_at_active)
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def kiosk_params
+    params.require(:kiosk).permit(:name, :map_default_floor_number, :kiosk_layout_id, :restart_at, :restart_at_active)
+  end
 
-    # Only allow restart_at and restart_at_active (restart status) for mass update
-    def kiosk_params_multiple
-      params.require(:kiosk).permit(:restart_at, :restart_at_active)
-    end
+  # Only allow restart_at and restart_at_active (restart status) for mass update
+  def kiosk_params_multiple
+    params.require(:kiosk).permit(:restart_at, :restart_at_active)
+  end
 
-    def set_options
-      @kiosk_layouts = KioskLayout.all
-    end
+  def set_options
+    @kiosk_layouts = KioskLayout.all
+  end
 
-    def set_params
-      @kiosk_type ||= params[:id]
-      # TODO: replace this with current slides for a specific kiosk type
-      @slides = [{
-        id: 1,
-        image_url: "/uploads/default_slide_1.png",
-        expires_at: "2020-12-31T23:59:59Z",
-        created_at: "2000-12-31T11:59:59Z",
-        updated_at: "2000-12-31T23:59:59Z",
-        title: "Slide.title",
-        caption: "Slide.caption",
-        slide_type: "SlideType.name",
-        kiosk: "Kiosk.name"
-      }, {
-        id: 2,
-        image_url: "/uploads/default_slide_2.png",
-        expires_at: "2010-11-11T13:00:00Z",
-        created_at: "2000-11-11T11:00:00Z",
-        updated_at: "2000-11-11T13:00:00Z",
-        title: "Slide.title:2",
-        caption: "Slide.caption:2",
-        slide_type: "SlideType.name:2",
-        kiosk: "Kiosk.name:2"
-      }]
-    end
+  def set_params
+    @kiosk_type ||= params[:id]
+    # TODO: replace this with current slides for a specific kiosk type
+    @slides = [{
+      id: 1,
+      image_url: '/uploads/default_slide_1.png',
+      expires_at: '2020-12-31T23:59:59Z',
+      created_at: '2000-12-31T11:59:59Z',
+      updated_at: '2000-12-31T23:59:59Z',
+      title: 'Slide.title',
+      caption: 'Slide.caption',
+      slide_type: 'SlideType.name',
+      kiosk: 'Kiosk.name'
+    }, {
+      id: 2,
+      image_url: '/uploads/default_slide_2.png',
+      expires_at: '2010-11-11T13:00:00Z',
+      created_at: '2000-11-11T11:00:00Z',
+      updated_at: '2000-11-11T13:00:00Z',
+      title: 'Slide.title:2',
+      caption: 'Slide.caption:2',
+      slide_type: 'SlideType.name:2',
+      kiosk: 'Kiosk.name:2'
+    }]
+  end
 
-    def authorize
-      unless current_user && current_user.admin?
-        flash[:alert] = "You do not have sufficient permissions to view this page"
-        redirect_to root_path
-      end
+  def authorize
+    unless current_user&.admin?
+      flash[:alert] = 'You do not have sufficient permissions to view this page'
+      redirect_to root_path
     end
-
+  end
 end

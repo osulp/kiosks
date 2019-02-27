@@ -1,5 +1,7 @@
-class VideoUploader < CarrierWave::Uploader::Base
+# frozen_string_literal: true
 
+# Uploader for vidoes related to slides
+class VideoUploader < CarrierWave::Uploader::Base
   # Include RMagick or MiniMagick support:
   # include CarrierWave::RMagick
   # include CarrierWave::MiniMagick
@@ -37,7 +39,7 @@ class VideoUploader < CarrierWave::Uploader::Base
   # Add a white list of extensions which are allowed to be uploaded.
   # For images you might use something like this:
   def extension_whitelist
-    %w(mp3 m4v mp4)
+    %w[mp3 m4v mp4]
   end
 
   # Override the filename of the uploaded files:
@@ -45,5 +47,4 @@ class VideoUploader < CarrierWave::Uploader::Base
   # def filename
   #   "something.jpg" if original_filename
   # end
-
 end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 json.slides @slides do |slide|
   json.id slide.id
   json.original slide.image.url

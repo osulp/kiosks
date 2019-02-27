@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class SlideTypesController < ApplicationController
-  before_action :set_slide_type, only: [:show, :edit, :update, :destroy]
+  before_action :set_slide_type, only: %i[show edit update destroy]
   before_action :authenticate_user!
   before_action :authorize
 
@@ -11,8 +13,7 @@ class SlideTypesController < ApplicationController
 
   # GET /slide_types/1
   # GET /slide_types/1.json
-  def show
-  end
+  def show; end
 
   # GET /slide_types/new
   def new
@@ -20,8 +21,7 @@ class SlideTypesController < ApplicationController
   end
 
   # GET /slide_types/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /slide_types
   # POST /slide_types.json
@@ -54,20 +54,21 @@ class SlideTypesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_slide_type
-      @slide_type = SlideType.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def slide_type_params
-      params.require(:slide_type).permit(:name)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_slide_type
+    @slide_type = SlideType.find(params[:id])
+  end
 
-    def authorize
-      unless current_user && current_user.admin?
-        flash[:alert] = "You do not have sufficient permissions to view this page"
-        redirect_to root_path
-      end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def slide_type_params
+    params.require(:slide_type).permit(:name)
+  end
+
+  def authorize
+    unless current_user&.admin?
+      flash[:alert] = 'You do not have sufficient permissions to view this page'
+      redirect_to root_path
     end
+  end
 end

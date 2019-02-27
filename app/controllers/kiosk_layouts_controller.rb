@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class KioskLayoutsController < ApplicationController
-  before_action :set_kiosk_layout, only: [:show, :edit, :update, :destroy]
+  before_action :set_kiosk_layout, only: %i[show edit update destroy]
   before_action :authenticate_user!
   before_action :authorize
 
@@ -11,8 +13,7 @@ class KioskLayoutsController < ApplicationController
 
   # GET /kiosk_layouts/1
   # GET /kiosk_layouts/1.json
-  def show
-  end
+  def show; end
 
   # GET /kiosk_layouts/new
   def new
@@ -20,8 +21,7 @@ class KioskLayoutsController < ApplicationController
   end
 
   # GET /kiosk_layouts/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /kiosk_layouts
   # POST /kiosk_layouts.json
@@ -54,20 +54,21 @@ class KioskLayoutsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_kiosk_layout
-      @kiosk_layout = KioskLayout.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def kiosk_layout_params
-      params.require(:kiosk_layout).permit(:name)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_kiosk_layout
+    @kiosk_layout = KioskLayout.find(params[:id])
+  end
 
-    def authorize
-      unless current_user && current_user.admin?
-        flash[:alert] = "You do not have sufficient permissions to view this page"
-        redirect_to root_path
-      end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def kiosk_layout_params
+    params.require(:kiosk_layout).permit(:name)
+  end
+
+  def authorize
+    unless current_user&.admin?
+      flash[:alert] = 'You do not have sufficient permissions to view this page'
+      redirect_to root_path
     end
+  end
 end

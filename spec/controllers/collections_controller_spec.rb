@@ -54,7 +54,6 @@ RSpec.describe CollectionsController, type: :controller do
     context 'when logged in as an admin' do
       it { expect(response).to be_success }
     end
-
   end
 
   describe 'GET #edit' do
@@ -92,7 +91,7 @@ RSpec.describe CollectionsController, type: :controller do
       let(:new_attributes) { { name: 'Donors' } }
       let(:uploaded_file) { Rack::Test::UploadedFile.new('spec/fixtures/Board_Game_Slide.jpg', 'image/jpg') }
       let(:test_kiosk) { create(:kiosk) }
-      let(:uploaded_slide_valid_attributes) {
+      let(:uploaded_slide_valid_attributes) do
         {
           expires_at: Time.utc(2015, 1, 1, 12, 0, 0),
           caption: 'test caption',
@@ -102,16 +101,16 @@ RSpec.describe CollectionsController, type: :controller do
           collection_id: collection.id,
           image: uploaded_file
         }
-      }
+      end
       let(:uploaded_slide) { create(:slide, uploaded_slide_valid_attributes) }
-      let(:new_attributes_multiple_kiosks) {
+      let(:new_attributes_multiple_kiosks) do
         {
           name: 'my collection',
           slides_attributes: [
             { id: uploaded_slide.id, kiosk_ids: [test_kiosk.id] }
           ]
         }
-      }
+      end
       let(:kiosk_slide) { create(:kiosk_slide, koisk: test_kiosk, slide: uploaded_slide) }
 
       context 'with new attributes' do
@@ -172,7 +171,7 @@ RSpec.describe CollectionsController, type: :controller do
       end
 
       it { expect(assigns(:collection)).to eq(collection) }
-      it { expect(response).to render_template("edit") }
+      it { expect(response).to render_template('edit') }
     end
   end
 
@@ -189,5 +188,3 @@ RSpec.describe CollectionsController, type: :controller do
     end
   end
 end
-
-
