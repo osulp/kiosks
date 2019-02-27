@@ -12,11 +12,15 @@ RUN apt-get update -qq && \
 # Necessary for bundler to properly install some gems
 ENV LANG C.UTF-8
 ENV LC_ALL C.UTF-8
+
+RUN gem install bundler
+
 RUN mkdir /data
 WORKDIR /data
 
 ADD Gemfile /data/Gemfile
 ADD Gemfile.lock /data/Gemfile.lock
+RUN bundle install -j $(nproc)
 
 ADD package.json /data/package.json
 ADD yarn.lock /data/yarn.lock
