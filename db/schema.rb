@@ -65,6 +65,9 @@ ActiveRecord::Schema.define(version: 20190226225845) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "image"
+    t.string "image_content_type"
+    t.integer "image_file_size"
+    t.datetime "image_updated_at"
     t.integer "collection_id"
     t.string "video"
     t.text "description"
