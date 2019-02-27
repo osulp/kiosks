@@ -1,5 +1,6 @@
-<p id="notice"><%= notice %></p>
 <h1><%= @collection.name %></h1>
+<label>Detail</label>
+<pre><%= @collection.detail %></pre>
 
 <div class="panel panel-primary">
   <div class="panel-heading">
@@ -56,7 +57,7 @@
 
 <%= form_for @collection, :html => { :multipart => true, :id => "fileupload"  } do |f| %>
   <!-- <div id="fileupload"> -->
- 
+
   <!-- Redirect browsers with JavaScript disabled to the origin page -->
   <noscript><input type="hidden" name="redirect" value="<%= main_app.root_path %>"></noscript>
   <!-- The table listing the files available for upload/download -->
@@ -102,7 +103,7 @@
 <!-- </div> -->
 
 <% end %>
-<%= render partial: 'collections/js_templates', :locals => { 
+<%= render partial: 'collections/js_templates', :locals => {
   :collection_id => @collection.id,
   :collection => @collection,
   :default_kiosk_id => @default_kiosk.id,
