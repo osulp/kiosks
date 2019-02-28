@@ -105,7 +105,11 @@ class SlidesController < ApplicationController
   end
 
   def default_collection
-    @default_collection = Collection.find_by_name('generic')
+    if params[:collection_id].present?
+      @default_collection = Collection.find(params[:collection_id])
+    else
+      @default_collection = Collection.find_by_name('generic')
+    end
   end
 
   # Never trust parameters from the scary internet, only allow the white list through.

@@ -66,6 +66,8 @@
   <h2>Upload Local Slides</h2>
   <!-- The fileupload-buttonbar contains buttons to add/delete files and start/cancel the upload -->
 
+    <!-- The collection ID to pass to the upload controller -->
+    <input id="collection_id" type="hidden" value="<%= @collection.id %>">
     <div class="row fileupload-buttonbar">
       <div class="col-xs-7">
         <!-- The fileinput-button span is used to style the file input field as button -->
