@@ -20,13 +20,27 @@ class SlideGallery extends Component {
     console.log(`Image Loaded:${e.target.src})`);
   }
 
+  itemPath(item) {
+    let path = '';
+
+    switch(item.kiosk[0].name) {
+      case 'tall':
+        path = item.xtall;
+        break;
+      default:
+        path = item.original;
+        break;
+    }
+    return path;
+  }
+
   _renderItem(item) {
     const onImageError = this.onImageError;
     const onImageLoad = this.onImageLoad;
 
     return (
       <div className='image-gallery-image'>
-        <img src={item.original}
+        <img src={this.itemPath(item)}
              alt={`Image:${item.id} : ${item.original}`}
              srcSet={item.srcSet}
              sizes={item.sizes}

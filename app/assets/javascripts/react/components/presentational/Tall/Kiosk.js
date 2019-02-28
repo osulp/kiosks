@@ -9,10 +9,8 @@ class Kiosk extends Component {
    */
   componentDidMount() {
     let now = moment().format('YYYY-MM-DD');
-    this._fetchHoursTimeout();
     this._fetchSlidesTimeout();
     this._fetchRestartKioskTimeout();
-    this.props.fetchHours(this.props.api.hours, [now]);
     this.props.fetchSlides(this.props.url);
   }
 
@@ -20,20 +18,8 @@ class Kiosk extends Component {
    * Before the component unmounts, clear the timeouts.
    */
   componentWillUnmount() {
-    clearInterval(this.hours_timeout);
     clearInterval(this.slides_timeout);
     clearInterval(this.restart_kiosk_timeout);
-  }
-
-  /**
-   * Fetch the hours for "now" every 10 minutes, to keep kiosk with updated hours and the date as it changes.
-   * @private
-   */
-  _fetchHoursTimeout() {
-    this.hours_timeout = setInterval(() => {
-      let now = moment().format('YYYY-MM-DD');
-      this.props.fetchHours(this.props.api.hours, [now]);
-    }, 10 * 60 * 1000);
   }
 
   /**
