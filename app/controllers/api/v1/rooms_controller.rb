@@ -1,5 +1,8 @@
+# frozen_string_literal: true
+
 module Api
   module V1
+    # API controller for querying room reservation system
     class RoomsController < ApiController
       before_action :set_params
       def available
@@ -13,7 +16,7 @@ module Api
         # the format should be YYYYMMDDHHmmss if it's set with moment.js
         rounded_to_next_20_min = Time.at((Time.parse(params[:start_time]).to_f / 20.minutes).ceil * 20.minutes)
         @start_time = rounded_to_next_20_min
-        raise StandardError.new("Invalid start_time.") if @start_time.nil?
+        raise StandardError, 'Invalid start_time.' if @start_time.nil?
       end
     end
   end

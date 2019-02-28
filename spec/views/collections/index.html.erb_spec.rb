@@ -1,19 +1,11 @@
-require 'rails_helper'
+# frozen_string_literal: true
 
-RSpec.describe "collections/index", type: :view do
-  before(:each) do
-    assign(:collections, [
-      Collection.create!(
-        :name => "Name"
-      ),
-      Collection.create!(
-        :name => "Name"
-      )
-    ])
-  end
-
-  it "renders a list of collections" do
+RSpec.describe 'collections/index', type: :view do
+  before do
+    assign(:collections, [create(:collection), create(:collection, name: 'Name2')])
     render
-    assert_select "tr>td", :text => "Name".to_s, :count => 2
   end
+
+  it { expect(rendered).to match(/Name2/) }
+  it { expect(rendered).to match(/Impact/) }
 end

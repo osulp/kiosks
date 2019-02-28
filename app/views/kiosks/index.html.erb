@@ -27,7 +27,7 @@
             <td><%= kiosk.map_default_floor_number %></td>
             <td>
               <% if kiosk.restart_at_active == true %>
-                <% if kiosk.is_restart_pending? %>
+                <% if kiosk.restart_pending? %>
                   <span class="label label-danger">Pending</span>
                 <% else %>
                   <span class="label label-default">Restarted</span>

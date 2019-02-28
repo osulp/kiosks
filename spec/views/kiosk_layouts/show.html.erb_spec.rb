@@ -1,14 +1,10 @@
-require 'rails_helper'
+# frozen_string_literal: true
 
-RSpec.describe "kiosk_layouts/show", type: :view do
-  before(:each) do
-    @kiosk_layout = assign(:kiosk_layout, KioskLayout.create!(
-      :name => "Name"
-    ))
-  end
-
-  it "renders attributes in <p>" do
+RSpec.describe 'kiosk_layouts/show', type: :view do
+  before do
+    assign(:kiosk_layout, create(:kiosk_layout))
     render
-    expect(rendered).to match(/Name/)
   end
+
+  it { expect(rendered).to match(/touch/) }
 end

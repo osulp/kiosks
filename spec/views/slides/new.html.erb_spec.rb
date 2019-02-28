@@ -1,22 +1,17 @@
-require 'rails_helper'
+# frozen_string_literal: true
 
-RSpec.describe "slides/new", type: :view do
-
-  before(:each) do
-    @slide = assign(:slide, Slide.create!(
-      :title => "title test",
-      :caption => "caption test",
-      :slide_type => SlideType.create(name: "test slide type"),
-      :collection => Collection.create(name: "generic"),
-      :image => Rack::Test::UploadedFile.new('spec/fixtures/Board_Game_Slide.jpg', 'image/jpg'),
-    ))
+RSpec.describe 'slides/new', type: :view do
+  before do
+    assign(:slide, build(:slide))
+    assign(:slide_types, SlideType.all)
+    assign(:kiosks, Kiosk.all)
+    assign(:collections, Collection.all)
+    render
   end
 
-  it "renders new slide form" do
-    @slide_types = SlideType.all
-    @kiosks = Kiosk.all
-    @collections = Collection.all
-    render
-    expect(rendered).to match /New Slide/
+  it 'renders new slide form' do
+    assert_select 'form[action=?][method=?]', slides_path, 'post' do
+      assert_select 'input#slide_title[name=?]', 'slide[title]'
+    end
   end
 end

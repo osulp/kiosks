@@ -1,9 +1,12 @@
+# frozen_string_literal: true
+
 module Api
   module V1
+    # Room Reservation database model
     class RoomResRoom < RoomResRecord
       self.table_name = APPLICATION_CONFIG['api']['database']['roomres']['rooms']['table_name']
-      has_many :reservations, :class_name => 'Api::V1::RoomResReservation', :foreign_key => 'room_id'
-      scope :except_rooms, ->(room_ids) { where("id NOT IN(?)", room_ids) }
+      has_many :reservations, class_name: 'Api::V1::RoomResReservation', foreign_key: 'room_id'
+      scope :except_rooms, ->(room_ids) { where('id NOT IN(?)', room_ids) }
 
       ##
       # Return all rooms which do not have an active reservation during the start_time provided
@@ -21,7 +24,7 @@ module Api
       # @return [ActiveRecord::Query] - the room ids which have an active reservation now or within 10 minutes
       def self.active_room_ids(start_time)
         joins(:reservations)
-          .where("(reservations.start_time <= ? AND reservations.end_time > ? AND reservations.deleted_at IS NULL) OR (reservations.start_time <= ? AND reservations.end_time > ? AND reservations.deleted_at IS NULL)", start_time, start_time, start_time + 10.minutes, start_time + 10.minutes)
+          .where('(reservations.start_time <= ? AND reservations.end_time > ? AND reservations.deleted_at IS NULL) OR (reservations.start_time <= ? AND reservations.end_time > ? AND reservations.deleted_at IS NULL)', start_time, start_time, start_time + 10.minutes, start_time + 10.minutes)
           .pluck(:id)
       end
     end

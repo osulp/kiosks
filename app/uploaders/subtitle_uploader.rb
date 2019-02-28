@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# Uploader for subtitles related to slides
 class SubtitleUploader < CarrierWave::Uploader::Base
   # Include RMagick or MiniMagick support:
   # include CarrierWave::RMagick
@@ -36,7 +39,7 @@ class SubtitleUploader < CarrierWave::Uploader::Base
   # Add a white list of extensions which are allowed to be uploaded.
   # For images you might use something like this:
   def extension_whitelist
-    %w(vtt)
+    %w[vtt]
   end
 
   # Override the filename of the uploaded files:
