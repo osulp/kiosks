@@ -12,10 +12,8 @@ RSpec.describe 'collections/show', type: :view do
     assign(:kiosk_options, default_kiosk.name => default_kiosk.id)
     assign(:kiosks, [default_kiosk])
     assign(:slide_type_options, default_slide_type.name => default_slide_type.id)
+    render
   end
 
-  it 'renders attributes in <p>' do
-    render
-    expect(rendered).to match(/Name/)
-  end
+  it { expect(rendered).to match(/Name/) }
 end

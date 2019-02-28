@@ -4,18 +4,10 @@ require 'rails_helper'
 
 RSpec.describe 'kiosk_layouts/index', type: :view do
   before do
-    assign(:kiosk_layouts, [
-             KioskLayout.create!(
-               name: 'Name'
-             ),
-             KioskLayout.create!(
-               name: 'Name'
-             )
-           ])
+    assign(:kiosk_layouts, [create(:kiosk_layout), create(:kiosk_layout, name: 'Name2')])
+    render
   end
 
-  it 'renders a list of kiosk_layouts' do
-    render
-    assert_select 'tr>td', text: 'Name'.to_s, count: 2
-  end
+  it { expect(rendered).to match(/Name2/) }
+  it { expect(rendered).to match(/touch/) }
 end

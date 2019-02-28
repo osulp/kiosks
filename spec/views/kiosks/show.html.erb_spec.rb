@@ -1,22 +1,12 @@
 # frozen_string_literal: true
 
-require 'rails_helper'
-
 RSpec.describe 'kiosks/show', type: :view do
-  let (:test_layout) { KioskLayout.create!(name: 'touch') }
-
   before do
-    @kiosk = assign(:kiosk, Kiosk.create!(
-                              name: 'Name',
-                              map_default_floor_number: 2,
-                              kiosk_layout_id: test_layout.id
-                            ))
+    assign(:kiosk, create(:kiosk))
+    render
   end
 
-  it 'renders attributes in <p>' do
-    render
-    expect(rendered).to match(/Name/)
-    expect(rendered).to match(/2/)
-    expect(rendered).to match(/touch/)
-  end
+  it { expect(rendered).to match(/touch/) }
+  it { expect(rendered).to match(/2/) }
+  it { expect(rendered).to match(/circ/) }
 end

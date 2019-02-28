@@ -1,28 +1,11 @@
 # frozen_string_literal: true
 
-require 'rails_helper'
-
 RSpec.describe 'kiosks/index', type: :view do
-  let (:test_layout) { KioskLayout.create!(name: 'touch') }
-
   before do
-    assign(:kiosks, [
-             Kiosk.create!(
-               name: 'Name',
-               map_default_floor_number: 2,
-               kiosk_layout_id: test_layout.id
-             ),
-             Kiosk.create!(
-               name: 'Name',
-               map_default_floor_number: 2,
-               kiosk_layout_id: test_layout.id
-             )
-           ])
+    assign(:kiosks, [create(:kiosk), create(:kiosk, name: 'Name2')])
+    render
   end
 
-  it 'renders a list of kiosks' do
-    render
-    assert_select 'tr>td', text: 'Name'.to_s, count: 2
-    assert_select 'tr>td', text: '2', count: 2
-  end
+  it { expect(rendered).to match(/Name2/) }
+  it { expect(rendered).to match(/circ/) }
 end

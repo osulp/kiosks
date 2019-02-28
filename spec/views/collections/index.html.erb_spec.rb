@@ -1,21 +1,11 @@
 # frozen_string_literal: true
 
-require 'rails_helper'
-
 RSpec.describe 'collections/index', type: :view do
   before do
-    assign(:collections, [
-             Collection.create!(
-               name: 'Name'
-             ),
-             Collection.create!(
-               name: 'Name'
-             )
-           ])
+    assign(:collections, [create(:collection), create(:collection, name: 'Name2')])
+    render
   end
 
-  it 'renders a list of collections' do
-    render
-    assert_select 'tr>td', text: 'Name'.to_s, count: 2
-  end
+  it { expect(rendered).to match(/Name2/) }
+  it { expect(rendered).to match(/Impact/) }
 end

@@ -1,17 +1,12 @@
 # frozen_string_literal: true
 
-require 'rails_helper'
-
 RSpec.describe 'slide_types/new', type: :view do
   before do
-    assign(:slide_type, SlideType.new(
-                          name: 'MyString'
-                        ))
+    assign(:slide_type, build(:slide_type))
+    render
   end
 
   it 'renders new slide_type form' do
-    render
-
     assert_select 'form[action=?][method=?]', slide_types_path, 'post' do
       assert_select 'input#slide_type_name[name=?]', 'slide_type[name]'
     end
