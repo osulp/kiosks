@@ -50,7 +50,6 @@ gem 'react-rails'
 gem 'rmagick'
 
 gem 'devise_cas_authenticatable'
-gem 'rubocop'
 gem 'rubycas-client', git: 'https://github.com/osulp/rubycas-client'
 gem 'rubycas-client-rails', git: 'https://github.com/osulp/rubycas-client-rails'
 
@@ -72,6 +71,8 @@ group :development, :test do
   gem 'rspec-console'
   gem 'rspec-mocks'
   gem 'rspec-rails'
+  gem 'rubocop'
+  gem 'rubocop-rspec'
   gem 'simplecov'
   gem 'webmock'
   gem 'capybara'

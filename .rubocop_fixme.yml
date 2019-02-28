@@ -1,0 +1,69 @@
+Metrics/AbcSize:
+  Exclude:
+    - app/controllers/collections_controller.rb
+    - app/controllers/kiosk_controller.rb
+    - app/controllers/slides_controller.rb
+    - app/helpers/application_helper.rb
+    - app/models/api/v1/classroom_event.rb
+
+Metrics/CyclomaticComplexity:
+  Exclude:
+    - app/controllers/collections_controller.rb
+
+Metrics/PerceivedComplexity:
+  Exclude:
+    - app/controllers/collections_controller.rb
+
+Style/Documentation:
+  Exclude:
+    - 'spec/**/*'
+
+Style/GuardClause:
+  Exclude:
+    - 'app/controllers/collections_controller.rb'
+    - 'app/controllers/slides_controller.rb'
+    - 'app/controllers/kiosk_layouts_controller.rb'
+    - 'app/controllers/kiosks_controller.rb'
+    - 'app/controllers/slide_types_controller.rb'
+    - 'app/controllers/date_ranges_controller.rb'
+
+Metrics/ClassLength:
+  Exclude:
+    - 'app/controllers/collections_controller.rb'
+    - 'app/controllers/kiosks_controller.rb'
+
+Metrics/BlockLength:
+  Exclude:
+    - 'lib/tasks/*.rake'
+    - 'lib/tasks/**/**/*.rake'
+    - 'spec/**/*.rb'
+    - 'config/**/*'
+    - 'app/views/kiosk/show.json.jbuilder'
+
+RSpec/ExampleLength:
+  Exclude:
+    - 'spec/**/*'
+
+RSpec/NestedGroups:
+  Exclude:
+    - 'spec/controllers/collections_controller_spec.rb'
+
+Metrics/MethodLength:
+  Exclude:
+    - app/controllers/collections_controller.rb
+    - app/controllers/kiosks_controller.rb
+    - app/controllers/slides_controller.rb
+    - app/models/api/v1/classroom_event.rb
+    - app/models/slide.rb
+
+RSpec/MultipleExpectations:
+  Exclude:
+    - spec/controllers/api/v1/hours_controller_spec.rb
+    - spec/controllers/date_ranges_controller_spec.rb
+    - spec/controllers/kiosk_layouts_controller_spec.rb
+    - spec/controllers/kiosks_controller_spec.rb
+    - spec/controllers/slide_types_controller_spec.rb
+    - spec/controllers/slides_controller_spec.rb
+    - spec/features/admin_management_spec.rb
+    - spec/models/api/v1/classroom_calendar_spec.rb
+    - spec/models/api/v1/classroom_event_spec.rb

@@ -1,14 +1,10 @@
-require 'rails_helper'
+# frozen_string_literal: true
 
-RSpec.describe "slide_types/show", type: :view do
-  before(:each) do
-    @slide_type = assign(:slide_type, SlideType.create!(
-      :name => "Name"
-    ))
-  end
-
-  it "renders attributes in <p>" do
+RSpec.describe 'slide_types/show', type: :view do
+  before do
+    assign(:slide_type, create(:slide_type))
     render
-    expect(rendered).to match(/Name/)
   end
+
+  it { expect(rendered).to match(/Basic/) }
 end

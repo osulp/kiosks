@@ -1,6 +1,9 @@
+# frozen_string_literal: true
+
+# Controller for collections of slides
 class CollectionsController < ApplicationController
-  before_action :set_collection, only: %i[show edit update destroy]
-  before_action :set_options, only: %i[new show edit update destroy]
+  before_action :find_collection, only: %i[show edit update destroy]
+  before_action :related_models, only: %i[new show edit update destroy]
   before_action :authenticate_user!
   before_action :authorize
 
@@ -26,7 +29,7 @@ class CollectionsController < ApplicationController
   # POST /collections.json
   def create
     @collection = Collection.new(collection_params)
-    set_kiosks(params)
+    build_kiosks(params)
     respond_to do |format|
       if @collection.save
         format.html { redirect_to @collection, notice: 'Collection was successfully created.' }
@@ -42,7 +45,7 @@ class CollectionsController < ApplicationController
   # PATCH/PUT /collections/1.json
   def update
     upload_slides(params)
-    set_kiosks(params)
+    build_kiosks(params)
     respond_to do |format|
       if @collection.update(collection_params)
         format.html { redirect_to @collection, notice: 'Collection was successfully updated.' }
@@ -67,7 +70,7 @@ class CollectionsController < ApplicationController
   private
 
   # Use callbacks to share common setup or constraints between actions.
-  def set_collection
+  def find_collection
     @collection = Collection.find(params[:id])
   end
 
@@ -81,7 +84,7 @@ class CollectionsController < ApplicationController
     end
   end
 
-  def set_kiosks(params)
+  def build_kiosks(params)
     return unless params[:collection] && params[:collection][:slides_attributes]
 
     slides = {}
@@ -108,7 +111,7 @@ class CollectionsController < ApplicationController
     end
   end
 
-  def set_options
+  def related_models
     @kiosks = Kiosk.all
     @slide_types = SlideType.all
     @default_kiosk = Kiosk.find_or_create_by(name: 'touch')

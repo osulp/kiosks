@@ -1,5 +1,8 @@
+# frozen_string_literal: true
+
 module Api
   module V1
+    # API controller for querying the classroom schedules, DEPRECATED
     class ClassroomsController < ApiController
       before_action :set_params
 

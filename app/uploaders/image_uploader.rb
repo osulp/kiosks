@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# Uploader for images related to slides
 class ImageUploader < CarrierWave::Uploader::Base
   include CarrierWave::Compatibility::Paperclip
   # Include RMagick or MiniMagick support:
@@ -54,7 +57,7 @@ class ImageUploader < CarrierWave::Uploader::Base
   # Add a white list of extensions which are allowed to be uploaded.
   # For images you might use something like this:
   def extension_whitelist
-    %w(jpg jpeg gif png)
+    %w[jpg jpeg gif png]
   end
 
   # Override the filename of the uploaded files:
@@ -62,5 +65,4 @@ class ImageUploader < CarrierWave::Uploader::Base
   # def filename
   #   "something.jpg" if original_filename
   # end
-
 end

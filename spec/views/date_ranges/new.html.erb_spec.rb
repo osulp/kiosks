@@ -1,14 +1,10 @@
-require 'rails_helper'
+# frozen_string_literal: true
 
-RSpec.describe "date_ranges/new", type: :view do
-  before(:each) do
-    assign(:date_range, DateRange.new())
-  end
-
-  it "renders new date_range form" do
+RSpec.describe 'date_ranges/new', type: :view do
+  before do
+    assign(:date_range, build(:date_range))
     render
-
-    assert_select "form[action=?][method=?]", date_ranges_path, "post" do
-    end
   end
+
+  it { assert_select 'form[action=?][method=?]', date_ranges_path, 'post' }
 end

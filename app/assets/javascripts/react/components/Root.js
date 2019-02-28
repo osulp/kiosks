@@ -6,6 +6,7 @@ import App from "./App"
 import TouchKiosk from "./TouchKiosk"
 import DonorKiosk from "./DonorKiosk"
 import DonorCoverflowKiosk from "./DonorCoverflowKiosk"
+import TallKiosk from './TallKiosk';
 import CirculationKiosk from "./CirculationKiosk"
 import MediaKiosk from "./MediaKiosk"
 import InteractiveKiosk from "./InteractiveKiosk"
@@ -73,6 +74,8 @@ export default class Root extends Component {
         return <MediaKiosk />
       case "interactive":
         return <InteractiveKiosk />
+      case 'tall':
+        return (<TallKiosk />);
       default:
         return <App />
     }

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Api
   module V1
     # Constraints used in config/routes.rb, gives the ability to set version number and limit
@@ -13,7 +15,8 @@ module Api
           (req.respond_to?('headers') &&
             req.headers.key?('Accept') &&
             req.headers['Accept'].include?(
-              "application/vnd.kiosks.v#{@version}"))
+              "application/vnd.kiosks.v#{@version}"
+            ))
       end
     end
   end

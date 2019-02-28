@@ -1,6 +1,9 @@
+# frozen_string_literal: true
+
 module Api
   module V1
     module Concerns
+      # The general approach for handling errors raised by the API
       module ErrorHandler
         extend ActiveSupport::Concern
 
