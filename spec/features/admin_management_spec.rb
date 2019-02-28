@@ -1,16 +1,18 @@
 # frozen_string_literal: true
 
 RSpec.describe 'Admin management', type: :feature, js: false do
-  let(:user) { User.first }
   let(:current_user) { user }
   let(:dist_app) { Rails.root.join('app/assets/javascripts/dist-app.js') }
   let(:ticket) { CASClient::ServiceTicket.new('ST-test', nil) }
 
   context 'with a guest user' do
+    let(:user) { create(:user) }
+
     before do
-      ticket.extra_attributes = { id: 10, email: 'guest@example.com' }
-      ticket.success = true
-      ticket.user = 'guest'
+      allow(ticket).to receive(:extra_attributes).and_return(id: 10, email: 'guest@example.com' )
+      allow(ticket).to receive(:success).and_return(true)
+      allow(ticket).to receive(:user).and_return('guest')
+
       Devise.cas_create_user = true
       User.authenticate_with_cas_ticket(ticket)
 
@@ -48,10 +50,13 @@ RSpec.describe 'Admin management', type: :feature, js: false do
   end
 
   context 'with an admin user' do
+    let(:user) { create(:admin_user) }
+
     before do
-      ticket.extra_attributes = { id: 10, email: 'admin@example.com' }
-      ticket.success = true
-      ticket.user = 'admin'
+      allow(ticket).to receive(:extra_attributes).and_return(id: 10, email: 'admin@example.com' )
+      allow(ticket).to receive(:success).and_return(true)
+      allow(ticket).to receive(:user).and_return('admin')
+
       Devise.cas_create_user = true
       User.authenticate_with_cas_ticket(ticket)
 
@@ -59,19 +64,15 @@ RSpec.describe 'Admin management', type: :feature, js: false do
       allow(current_user).to receive(:admin?).and_return(true)
 
       dist_app.write('test') unless dist_app.exist?
-    end
 
-    it 'User goes to the admin panel' do
       login_as user
       visit root_path
       click_link 'Admin Panel'
-      expect(page).to have_text('Site Administration')
     end
+
+    it { expect(page).to have_text('Site Administration') }
 
     it 'User goes to the list of kiosk layouts page' do
-      login_as user
-      visit root_path
-      click_link 'Admin Panel'
       within('body.rails_admin .content') do
         click_link 'Kiosk layouts'
       end
@@ -79,9 +80,6 @@ RSpec.describe 'Admin management', type: :feature, js: false do
     end
 
     it 'User goes to the list of slide types page' do
-      login_as user
-      visit root_path
-      click_link 'Admin Panel'
       within('body.rails_admin .content') do
         click_link 'Slide types'
       end
@@ -89,9 +87,6 @@ RSpec.describe 'Admin management', type: :feature, js: false do
     end
 
     it 'User goes to the list of users page' do
-      login_as user
-      visit root_path
-      click_link 'Admin Panel'
       within('body.rails_admin .content') do
         click_link 'Users'
       end
