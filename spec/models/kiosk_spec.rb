@@ -11,7 +11,7 @@ RSpec.describe Kiosk, type: :model do
     expect(kiosk).not_to be_valid
   end
   it 'is not valid with a restart_at datetime in the past' do
-    kiosk = Kiosk.new(name: 'test', kiosk_layout_id: test_layout.id, restart_at: Time.yesterday)
+    kiosk = Kiosk.new(name: 'test', kiosk_layout_id: test_layout.id, restart_at: Date.yesterday)
     expect(kiosk).not_to be_valid
   end
 
@@ -39,13 +39,13 @@ RSpec.describe Kiosk, type: :model do
     it 'restart is pending' do
       now = Time.zone.parse('2018-01-17 06:30:10')
       allow(Time).to receive(:now) { now }
-      expect(kiosk).to be_is_restart_pending
+      expect(kiosk).to be_restart_pending
     end
 
     it 'kiosk is restarted' do
       now = Time.zone.parse('2018-01-17 08:30:00')
       allow(Time).to receive(:now) { now }
-      expect(kiosk).not_to be_is_restart_pending
+      expect(kiosk).not_to be_restart_pending
     end
   end
 end

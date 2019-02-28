@@ -207,7 +207,7 @@ RSpec.describe KiosksController, type: :controller do
   describe 'PUT #update_multiple' do
     context 'with valid params' do
       let(:restart_kiosk_at) do
-        Time.tomorrow
+        Date.tomorrow
       end
       let(:new_attributes) do
         {
@@ -236,7 +236,7 @@ RSpec.describe KiosksController, type: :controller do
 
     context 'with invalid params' do
       let(:restart_kiosk_at) do
-        Time.yesterday
+        Date.yesterday
       end
       let(:new_attributes) do
         {

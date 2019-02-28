@@ -8,12 +8,12 @@ RSpec.describe Api::V1::ClassroomsController, type: :controller do
 
   it 'returns bad_request with missing attributes' do
     get :date, params: { date: '' }
-    expect(response).to have_http_status(:bad_request)
+    expect(response).to have_http_status(:internal_server_error)
   end
 
   it 'returns bad_request with invalid attributes' do
     get :date, params: { date: 1 }
-    expect(response).to have_http_status(:bad_request)
+    expect(response).to have_http_status(:internal_server_error)
   end
 
   it 'returns rooms from api classrooms rooms config' do
