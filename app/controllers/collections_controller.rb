@@ -125,6 +125,7 @@ class CollectionsController < ApplicationController
     params.require(:collection).permit(
       :detail,
       :name,
+      :primary_slide_id,
       slides_attributes: [
         :id,
         :caption,

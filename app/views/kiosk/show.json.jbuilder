@@ -24,7 +24,7 @@ json.slides @slides do |slide|
     end
   end
   json.collection do |collection|
-    json.detail collection.detail || ''
+    json.detail collection.detail
     json.slides do
       json.array!(slide.collection.slides) do |collection_slide|
         json.id collection_slide.id

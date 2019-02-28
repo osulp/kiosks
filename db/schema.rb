@@ -10,13 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190226225845) do
+ActiveRecord::Schema.define(version: 20190228215259) do
 
   create_table "collections", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.text "detail"
+    t.integer "primary_slide_id"
   end
 
   create_table "date_ranges", force: :cascade do |t|
@@ -65,9 +66,6 @@ ActiveRecord::Schema.define(version: 20190226225845) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "image"
-    t.string "image_content_type"
-    t.integer "image_file_size"
-    t.datetime "image_updated_at"
     t.integer "collection_id"
     t.string "video"
     t.text "description"

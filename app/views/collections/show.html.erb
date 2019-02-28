@@ -4,6 +4,51 @@
 
 <div class="panel panel-primary">
   <div class="panel-heading">
+    <h2 class="panel-title">Primary Slide</h2>
+  </div>
+  <!-- Table -->
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Slide</th>
+        <th>Title</th>
+        <th>Caption</th>
+        <th>Display Dates</th>
+        <th>Slide type</th>
+        <th>Kiosk</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr>
+        <td><%= image_tag(@collection.primary_slide.image_url(:thumb)) if @collection.primary_slide.image_url(:thumb) %></td>
+        <td><%= link_to @collection.primary_slide.title, @collection.primary_slide %></td>
+        <td><%= @collection.primary_slide.caption %></td>
+        <td>
+          <ul>
+            <% for date_range in @collection.primary_slide.date_ranges %>
+              <li><%= date_range.start_date.strftime("%m/%d/%y") %> - <%= date_range.end_date.strftime("%m/%d/%y") %></li>
+            <% end %>
+          </ul>
+        </td>
+        <td><%= @collection.primary_slide.slide_type.name if @collection.primary_slide.slide_type %></td>
+        <td>
+          <ul>
+            <% for kiosk in @collection.primary_slide.kiosks %>
+              <li>
+                <%= link_to kiosk.name, kiosk_show_path(id: kiosk.name) %>
+              </li>
+            <% end %>
+          </ul>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+
+<div class="panel panel-primary">
+  <div class="panel-heading">
     <h2 class="panel-title">Slides in collection</h2>
   </div>
   <!-- Table -->
