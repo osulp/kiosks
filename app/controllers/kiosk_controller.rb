@@ -13,7 +13,7 @@ class KioskController < ApplicationController
     @restart_kiosk = false.to_s
     if reload_kiosk?(@kiosk)
       @restart_kiosk = true.to_s
-      puts "restarting #{@kiosk.name} kiosk"
+      Rails.logger.info "restarting #{@kiosk.name} kiosk"
     end
 
     # get only slides that have current date ranges, given a time (i.e now, Time.zone.parse("20160503050000"), etc)
