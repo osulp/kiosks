@@ -5,6 +5,11 @@ import LargeSlide from "./LargeSlide"
 import { trackClicked } from "../shared/GoogleAnalytics"
 
 class Kiosk extends Component {
+  constructor(props) {
+    super(props)
+    this.state = { active: 0 }
+  }
+
   /**
    * After the component mounts, fetch the restart_kiosk value
    */
@@ -29,17 +34,21 @@ class Kiosk extends Component {
     }, 1 * 60 * 1000)
   }
 
-  slideClicked(slide) {
+  slideClicked(slide, index) {
     trackClicked(
       this.props.google_analytics,
       `${this.props.kiosk_name}:${
         this.props.kiosk_id
       }:DonorCoverflowKiosk:SlideClicked`
     )
-    this.props.setModalVisibility(true)
-    this.props.setModalRootComponent(
-      <LargeSlide slide={slide} {...this.props} />
-    )
+    if (this.state.active === index) {
+      this.props.setModalVisibility(true)
+      this.props.setModalRootComponent(
+        <LargeSlide slide={slide} {...this.props} />
+      )
+    } else {
+      this.setState({ active: index })
+    }
   }
 
   render() {
@@ -51,14 +60,14 @@ class Kiosk extends Component {
           navigation={false}
           enableScroll={true}
           clickable={true}
-          active={0}
+          active={this.state.active}
         >
           {this.props.slides.map((slide, i) => {
             return (
               <div
                 key={`slide.${i}`}
-                onClick={this.slideClicked.bind(this, slide)}
-                onKeyDown={this.slideClicked.bind(this, slide)}
+                onClick={this.slideClicked.bind(this, slide, i)}
+                onKeyDown={this.slideClicked.bind(this, slide, i)}
                 role="menuitem"
                 tabIndex={i}
               >
