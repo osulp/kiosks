@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# Kiosk records relate to individual screens
 class Kiosk < ApplicationRecord
   belongs_to :kiosk_layout
   has_many :kiosk_slides, dependent: :destroy
@@ -15,7 +16,7 @@ class Kiosk < ApplicationRecord
     restart_at_active && restart_at < DateTime.now && restart_at > 1.minutes.ago
   end
 
-  def is_restart_pending?
+  def restart_pending?
     restart_at_active && (restart_at > DateTime.now || restart_at > 1.minutes.ago)
   end
 end

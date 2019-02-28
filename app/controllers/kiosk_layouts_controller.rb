@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# Controller for managing kiosks layouts
 class KioskLayoutsController < ApplicationController
   before_action :set_kiosk_layout, only: %i[show edit update destroy]
   before_action :authenticate_user!

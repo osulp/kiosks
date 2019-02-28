@@ -2,6 +2,7 @@
 
 module Api
   module V1
+    # API controller for querying room reservation system
     class RoomsController < ApiController
       before_action :set_params
       def available

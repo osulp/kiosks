@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# Users are generally only necessary for administration purposes
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable

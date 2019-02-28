@@ -1,21 +1,18 @@
 # frozen_string_literal: true
 
-require 'rails_helper'
-
 RSpec.describe 'Admin management', type: :feature, js: false do
   let(:user) { User.first }
   let(:current_user) { user }
-
   let(:dist_app) { Rails.root.join('app/assets/javascripts/dist-app.js') }
+  let(:ticket) { CASClient::ServiceTicket.new('ST-test', nil) }
 
-  context 'login as guest user' do
+  context 'with a guest user' do
     before do
-      @ticket = CASClient::ServiceTicket.new('ST-test', nil)
-      @ticket.extra_attributes = { id: 10, email: 'guest@example.com' }
-      @ticket.success = true
-      @ticket.user = 'guest'
+      ticket.extra_attributes = { id: 10, email: 'guest@example.com' }
+      ticket.success = true
+      ticket.user = 'guest'
       Devise.cas_create_user = true
-      User.authenticate_with_cas_ticket(@ticket)
+      User.authenticate_with_cas_ticket(ticket)
 
       dist_app.write('test') unless dist_app.exist?
     end
@@ -44,22 +41,21 @@ RSpec.describe 'Admin management', type: :feature, js: false do
 
     it 'Guest user goes to kiosks page' do
       login_as user
-      visit slides_path
+      visit kiosks_path
       expect(page).not_to have_text 'Admin Panel'
       expect(page).to have_text('You do not have sufficient permissions to view this page')
     end
   end
 
-  context 'login as admin user' do
+  context 'with an admin user' do
     before do
-      @ticket = CASClient::ServiceTicket.new('ST-test', nil)
-      @ticket.extra_attributes = { id: 10, email: 'admin@example.com' }
-      @ticket.success = true
-      @ticket.user = 'admin'
+      ticket.extra_attributes = { id: 10, email: 'admin@example.com' }
+      ticket.success = true
+      ticket.user = 'admin'
       Devise.cas_create_user = true
-      User.authenticate_with_cas_ticket(@ticket)
+      User.authenticate_with_cas_ticket(ticket)
 
-      allow_any_instance_of(User).to receive(:admin?).and_return(true)
+      allow(user).to receive(:admin?).and_return(true)
       allow(current_user).to receive(:admin?).and_return(true)
 
       dist_app.write('test') unless dist_app.exist?

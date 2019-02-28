@@ -2,38 +2,30 @@
 
 RSpec.describe KiosksController, type: :controller do
   let(:test_layout) { KioskLayout.create!(name: 'touch') }
-
   let(:valid_attributes) do
     { name: 'donor', kiosk_layout_id: test_layout.id, map_default_floor_number: 2 }
   end
-
   let(:invalid_attributes) do
     { name: '', kiosk_layout_id: nil }
   end
-
   let(:user) do
     User.create(
       email: 'user@example.com',
       admin: true
     )
   end
-
   let(:kiosk1_valid_attributes) do
     { name: 'kiosk1', kiosk_layout_id: test_layout.id, map_default_floor_number: 2 }
   end
-
   let(:kiosk2_valid_attributes) do
     { name: 'kiosk2', kiosk_layout_id: test_layout.id, map_default_floor_number: 2 }
   end
-
   let(:kiosk1) do
     Kiosk.create! kiosk1_valid_attributes
   end
-
   let(:kiosk2) do
     Kiosk.create! kiosk2_valid_attributes
   end
-
   let(:kiosk_ids) do
     [kiosk1.id, kiosk2.id]
   end
@@ -64,7 +56,7 @@ RSpec.describe KiosksController, type: :controller do
       expect(assigns(:kiosk)).to be_a_new(Kiosk)
     end
 
-    context 'When not logged in' do
+    context 'when not logged in' do
       let(:user) { nil }
 
       it 'displays an insufficient permissions error' do
@@ -77,7 +69,7 @@ RSpec.describe KiosksController, type: :controller do
       end
     end
 
-    context 'When logged in as a user' do
+    context 'when logged in as a user' do
       let(:user) do
         User.create(
           email: 'user@example.com'
@@ -94,7 +86,7 @@ RSpec.describe KiosksController, type: :controller do
       end
     end
 
-    context 'When logged in as an admin' do
+    context 'when logged in as an admin' do
       let(:user) do
         User.create(
           email: 'user@example.com',

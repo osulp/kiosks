@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# Slides are the primary representation of the media on display at the various kiosks
 class Slide < ApplicationRecord
   include Rails.application.routes.url_helpers
   attr_accessor :image

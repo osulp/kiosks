@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# Helpers to generate links and partials
 module ApplicationHelper
   def link_to_add_date_ranges(name, f, association)
     new_object = f.object.send(association).klass.new

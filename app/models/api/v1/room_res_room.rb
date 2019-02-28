@@ -2,6 +2,7 @@
 
 module Api
   module V1
+    # Room Reservation database model
     class RoomResRoom < RoomResRecord
       self.table_name = APPLICATION_CONFIG['api']['database']['roomres']['rooms']['table_name']
       has_many :reservations, class_name: 'Api::V1::RoomResReservation', foreign_key: 'room_id'

@@ -1,13 +1,12 @@
 # frozen_string_literal: true
 
+# Controller to manage slides related to kiosks
 class SlidesController < ApplicationController
-  before_action :set_slide, only: %i[show edit update destroy]
-  before_action :set_options, only: %i[create new show edit update destroy]
-
-  before_action :set_default_kiosk, only: %i[create new edit update destroy]
-  before_action :set_default_slide_type, only: %i[create new edit update destroy]
-  before_action :set_default_collection, only: %i[create new edit update destroy]
-
+  before_action :find_slide, only: %i[show edit update destroy]
+  before_action :related_models, only: %i[create new show edit update destroy]
+  before_action :default_kiosk, only: %i[create new edit update destroy]
+  before_action :default_slide_type, only: %i[create new edit update destroy]
+  before_action :default_collection, only: %i[create new edit update destroy]
   before_action :authenticate_user!
   before_action :authorize
 
@@ -40,7 +39,7 @@ class SlidesController < ApplicationController
       @slide = Slide.new(slide_params)
     end
 
-    set_kiosks(params)
+    build_kiosks(params)
     respond_to do |format|
       if @slide.save
         format.html { redirect_to @slide, notice: 'Slide was successfully created.' }
@@ -57,7 +56,7 @@ class SlidesController < ApplicationController
   # PATCH/PUT /slides/1
   # PATCH/PUT /slides/1.json
   def update
-    set_kiosks(params)
+    build_kiosks(params)
     respond_to do |format|
       if @slide.update(slide_params)
         format.html { redirect_to @slide, notice: 'Slide was successfully updated.' }
@@ -82,30 +81,30 @@ class SlidesController < ApplicationController
   private
 
   # Use callbacks to share common setup or constraints between actions.
-  def set_slide
+  def find_slide
     @slide = Slide.find(params[:id])
   end
 
-  def set_kiosks(params)
+  def build_kiosks(params)
     kiosk_ids = params.dig('slide', 'kiosk_ids')
     @slide.kiosks = kiosk_ids ? Kiosk.find(kiosk_ids) : []
   end
 
-  def set_options
+  def related_models
     @kiosks = Kiosk.all
     @slide_types = SlideType.all
     @collections = Collection.all
   end
 
-  def set_default_kiosk
+  def default_kiosk
     @default_kiosk = Kiosk.find_by_name('touch')
   end
 
-  def set_default_slide_type
+  def default_slide_type
     @default_slide_type = SlideType.find_by_name('Basic')
   end
 
-  def set_default_collection
+  def default_collection
     @default_collection = Collection.find_by_name('generic')
   end
 

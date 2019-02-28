@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# Controller for rendering the kiosk UIs
 class KiosksController < ApplicationController
   before_action :set_kiosk, only: %i[show edit update destroy]
   before_action :set_options, only: %i[create new show edit update destroy]

@@ -1,27 +1,19 @@
 # frozen_string_literal: true
 
-require 'rails_helper'
-
 RSpec.describe KioskLayoutsController, type: :controller do
-  let(:valid_attributes) do
-    { name: 'touch' }
-  end
-
-  let(:invalid_attributes) do
-    { name: '' }
-  end
-
+  let(:valid_attributes) { { name: 'touch' } }
+  let(:invalid_attributes) { { name: '' } }
   let(:user) do
     User.create(
       email: 'user@example.com',
       admin: true
     )
   end
+  let(:valid_session) { {} }
+
   before do
     sign_in(user) if user
   end
-
-  let(:valid_session) { {} }
 
   describe 'GET #index' do
     it 'assigns all kiosk_layouts as @kiosk_layouts' do
@@ -45,7 +37,7 @@ RSpec.describe KioskLayoutsController, type: :controller do
       expect(assigns(:kiosk_layout)).to be_a_new(KioskLayout)
     end
 
-    context 'When not logged in' do
+    context 'when not logged in' do
       let(:user) { nil }
 
       it 'displays an insufficient permissions error' do
@@ -58,7 +50,7 @@ RSpec.describe KioskLayoutsController, type: :controller do
       end
     end
 
-    context 'When logged in as a user' do
+    context 'when logged in as a user' do
       let(:user) do
         User.create(
           email: 'user@example.com'
@@ -75,7 +67,7 @@ RSpec.describe KioskLayoutsController, type: :controller do
       end
     end
 
-    context 'When logged in as an admin' do
+    context 'when logged in as an admin' do
       let(:user) do
         User.create(
           email: 'user@example.com',

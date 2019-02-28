@@ -4,6 +4,7 @@ require 'nokogiri'
 
 module Api
   module V1
+    # Model related to classroom api
     class ClassroomCalendar
       attr_reader :xml_doc
 

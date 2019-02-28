@@ -1,17 +1,16 @@
 # frozen_string_literal: true
 
-require 'rails_helper'
-describe User, type: :model do
+RSpec.describe User, type: :model do
   let(:user) { User.first }
+  let(:ticket) { CASClient::ServiceTicket.new('ST-test', nil) }
 
-  before (:each) do
-    @ticket = CASClient::ServiceTicket.new('ST-test', nil)
-    @ticket.extra_attributes = { id: 10, email: 'admin@example.com' }
-    @ticket.success = true
-    @ticket.user = 'cas_username'
+  before do
+    allow(ticket).to receive(:extra_attributes).and_return(id: 10, email: 'admin@example.com')
+    allow(ticket).to receive(:success).and_return(true)
+    allow(ticket).to receive(:user).and_return('cas_username')
 
     Devise.cas_create_user = true
-    User.authenticate_with_cas_ticket(@ticket)
+    User.authenticate_with_cas_ticket(ticket)
   end
 
   it 'user has cas username' do

@@ -1,13 +1,10 @@
 # frozen_string_literal: true
 
-require 'rails_helper'
-
 RSpec.describe DateRangesController, type: :controller do
   let(:slide_type_test) { SlideType.create(name: 'Basic') }
   let(:kiosk_test) { Kiosk.create(name: 'touch') }
   let(:collection_test) { Collection.create(name: 'generic') }
   let(:test_file) { Rack::Test::UploadedFile.new('spec/fixtures/Board_Game_Slide.jpg', 'image/jpg') }
-
   let(:valid_slide_attributes) do
     {
       expires_at: Time.utc(2015, 1, 1, 12, 0, 0),
@@ -17,12 +14,7 @@ RSpec.describe DateRangesController, type: :controller do
       image: test_file
     }
   end
-
   let(:valid_slide) { Slide.create! valid_slide_attributes }
-
-  # This should return the minimal set of attributes required to create a valid
-  # DateRange. As you add validations to DateRange, be sure to
-  # adjust the attributes here as well.
   let(:valid_attributes) do
     {
       start_date: Time.utc(2015, 1, 1, 12, 0, 0),
@@ -30,11 +22,9 @@ RSpec.describe DateRangesController, type: :controller do
       slide_id: valid_slide.id
     }
   end
-
   let(:invalid_attributes) do
     { slide_id: '' }
   end
-
   let(:user) do
     User.create(
       email: 'user@example.com',
@@ -68,7 +58,7 @@ RSpec.describe DateRangesController, type: :controller do
       expect(assigns(:date_range)).to be_a_new(DateRange)
     end
 
-    context 'When not logged in' do
+    context 'when not logged in' do
       let(:user) { nil }
 
       it 'displays an insufficient permissions error' do
@@ -81,7 +71,7 @@ RSpec.describe DateRangesController, type: :controller do
       end
     end
 
-    context 'When logged in as a user' do
+    context 'when logged in as a user' do
       let(:user) do
         User.create(
           email: 'user@example.com'
@@ -98,7 +88,7 @@ RSpec.describe DateRangesController, type: :controller do
       end
     end
 
-    context 'When logged in as an admin' do
+    context 'when logged in as an admin' do
       let(:user) do
         User.create(
           email: 'user@example.com',

@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'rails_helper'
-
 RSpec.describe KioskSlide, type: :model do
   let(:slide_type_test) { SlideType.create(name: 'Basic') }
   let(:collection_test) { Collection.create(name: 'generic') }
@@ -15,7 +13,7 @@ RSpec.describe KioskSlide, type: :model do
       image: test_file
     }
   end
-  let (:test_layout) { KioskLayout.create!(name: 'touch') }
+  let(:test_layout) { KioskLayout.create!(name: 'touch') }
   let(:test_kiosk) do
     Kiosk.create(name: 'circ', kiosk_layout_id: test_layout.id)
   end

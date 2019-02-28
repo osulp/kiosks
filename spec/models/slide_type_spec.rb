@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'rails_helper'
-
 RSpec.describe SlideType, type: :model do
   it 'is valid with valid attributes' do
     expect(SlideType.new(name: 'test')).to be_valid

@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-require 'rails_helper'
 require 'ostruct'
 
 RSpec.describe Api::V1::HoursController, type: :controller do
@@ -37,8 +36,7 @@ RSpec.describe Api::V1::HoursController, type: :controller do
     before do
       ENV['API_URI'] = 'http://server'
       ENV['API_ROUTE'] = '/action.json'
-
-      allow_any_instance_of(Api::V1::HoursController).to receive(:merged_hours).and_return(valid_json)
+      stub_request(:post, 'http://server/action.json').to_return(status: 200, body: valid_json.to_json, headers: {})
       post :show, params: valid_attributes
     end
 

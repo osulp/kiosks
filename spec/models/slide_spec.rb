@@ -1,9 +1,7 @@
 # frozen_string_literal: true
 
-require 'rails_helper'
-
 RSpec.describe Slide, type: :model do
-  subject { described_class.new }
+  let(:model) { described_class.new }
 
   context 'with valid attributes' do
     let(:slide_title) { 'title test' }
@@ -15,21 +13,21 @@ RSpec.describe Slide, type: :model do
     let(:slide_video) { Rack::Test::UploadedFile.new('spec/fixtures/sample_mpeg4.mp4', 'video/mp4') }
 
     before do
-      subject.title = slide_title
-      subject.caption = slide_caption
-      subject.slide_type = slide_donor_section
-      subject.collection = slide_collection
-      subject.image = slide_image
-      subject.video = slide_video
-      subject.subtitles = [en_subtitles]
+      model.title = slide_title
+      model.caption = slide_caption
+      model.slide_type = slide_donor_section
+      model.collection = slide_collection
+      model.image = slide_image
+      model.video = slide_video
+      model.subtitles = [en_subtitles]
     end
 
     it 'is valid with valid attributes' do
-      expect(subject).to be_valid
+      expect(model).to be_valid
     end
 
     it 'returns filename for a stored file' do
-      expect(subject.subtitle_filename(0)).to eq('test-subtitles-en.vtt')
+      expect(model.subtitle_filename(0)).to eq('test-subtitles-en.vtt')
     end
   end
 

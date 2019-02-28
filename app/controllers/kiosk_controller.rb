@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# Controller for managing kiosks
 class KioskController < ApplicationController
   layout 'react_application', except: [:index]
   before_action :set_kiosk_params, only: [:index]

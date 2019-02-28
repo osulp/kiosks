@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'rails_helper'
-
 RSpec.describe Collection, type: :model do
   it 'is valid with valid attributes' do
     expect(Collection.new(name: 'test')).to be_valid

@@ -1,15 +1,11 @@
 # frozen_string_literal: true
 
-require 'rails_helper'
-
 RSpec.describe DateRange, type: :model do
-  subject { described_class.new }
-
+  let(:model) { described_class.new }
   let(:slide_type_test) { SlideType.create(name: 'Basic') }
   let(:kiosk_test) { Kiosk.create(name: 'touch') }
   let(:collection_test) { Collection.create(name: 'generic') }
   let(:test_file) { Rack::Test::UploadedFile.new('spec/fixtures/Board_Game_Slide.jpg', 'image/jpg') }
-
   let(:valid_attributes) do
     {
       expires_at: Time.utc(2015, 1, 1, 12, 0, 0),
@@ -21,11 +17,11 @@ RSpec.describe DateRange, type: :model do
   end
 
   it 'is valid with valid attributes' do
-    subject.start_date = Time.utc(2015, 1, 1, 12, 0, 0)
-    subject.end_date = Time.utc(2015, 1, 1, 12, 0, 0)
+    model.start_date = Time.utc(2015, 1, 1, 12, 0, 0)
+    model.end_date = Time.utc(2015, 1, 1, 12, 0, 0)
     slide = Slide.create! valid_attributes
-    subject.slide_id = slide.id
-    expect(subject).to be_valid
+    model.slide_id = slide.id
+    expect(model).to be_valid
   end
 
   it 'is not valid without a title' do

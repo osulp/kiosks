@@ -3,14 +3,9 @@
 require 'rack/test'
 
 RSpec.describe SlidesController, type: :controller do
-  # This should return the minimal set of attributes required to create a valid
-  # Slide. As you add validations to Slide, be sure to
-  # adjust the attributes here as well.
-  #
   let(:slide_type_test) { SlideType.create(name: 'Basic') }
   let(:kiosk_layout_test) { KioskLayout.create(name: 'circulation') }
   let(:kiosk_test) { Kiosk.create(name: 'touch', kiosk_layout_test_id: kiosk_layout_test.id) }
-
   let(:collection_test) { Collection.create(name: 'generic') }
   let(:test_file) { Rack::Test::UploadedFile.new('spec/fixtures/Board_Game_Slide.jpg', 'image/jpg') }
   let(:valid_attributes) do
@@ -22,11 +17,7 @@ RSpec.describe SlidesController, type: :controller do
       image: test_file
     }
   end
-
-  let(:invalid_attributes) do
-    { caption: '', title: '' }
-  end
-
+  let(:invalid_attributes) { { caption: '', title: '' } }
   let(:user) do
     User.create(
       email: 'user@example.com',

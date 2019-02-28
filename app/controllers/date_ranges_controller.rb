@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# Controller for date ranges associated to slides
 class DateRangesController < ApplicationController
   before_action :set_date_range, only: %i[show edit update destroy]
   before_action :authenticate_user!

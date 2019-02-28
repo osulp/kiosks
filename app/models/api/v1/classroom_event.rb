@@ -2,6 +2,7 @@
 
 module Api
   module V1
+    # Model related to classroom events
     class ClassroomEvent
       attr_reader :title, :link, :start_time, :end_time, :subtitle, :room, :contact, :contact_phone, :contact_email, :room_shortname
 
