@@ -11,8 +11,8 @@ RSpec.describe Api::V1::RoomsController, type: :controller do
         "id": 2,
         "name": 'Room 2',
         "floor": 2,
-        "created_at": DateTime.now,
-        "updated_at": DateTime.now,
+        "created_at": Time.now,
+        "updated_at": Time.now,
         "description": 'description',
         "image": 'some url',
         "floor_map": 'some url'
@@ -36,7 +36,7 @@ RSpec.describe Api::V1::RoomsController, type: :controller do
 
   context 'when room 2 is available' do
     before do
-      get :available, params: { start_time: (DateTime.now + 5.minutes).strftime('%Y%m%d%H%M%S') }
+      get :available, params: { start_time: (Time.now + 5.minutes).strftime('%Y%m%d%H%M%S') }
     end
 
     it { expect(response).to have_http_status(:ok) }

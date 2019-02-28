@@ -4,7 +4,7 @@ require 'rails_helper'
 
 RSpec.describe KioskController, type: :controller do
   let(:test_layout) { KioskLayout.create!(name: 'touch') }
-  let(:restart_kiosk_at) { DateTime.tomorrow }
+  let(:restart_kiosk_at) { Time.tomorrow }
   let(:valid_attributes) do
     {
       name: 'donor',

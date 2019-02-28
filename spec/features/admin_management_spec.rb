@@ -9,7 +9,7 @@ RSpec.describe 'Admin management', type: :feature, js: false do
     let(:user) { create(:user) }
 
     before do
-      allow(ticket).to receive(:extra_attributes).and_return(id: 10, email: 'guest@example.com' )
+      allow(ticket).to receive(:extra_attributes).and_return(id: 10, email: 'guest@example.com')
       allow(ticket).to receive(:success).and_return(true)
       allow(ticket).to receive(:user).and_return('guest')
 
@@ -53,7 +53,7 @@ RSpec.describe 'Admin management', type: :feature, js: false do
     let(:user) { create(:admin_user) }
 
     before do
-      allow(ticket).to receive(:extra_attributes).and_return(id: 10, email: 'admin@example.com' )
+      allow(ticket).to receive(:extra_attributes).and_return(id: 10, email: 'admin@example.com')
       allow(ticket).to receive(:success).and_return(true)
       allow(ticket).to receive(:user).and_return('admin')
 

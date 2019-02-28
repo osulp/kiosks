@@ -12,7 +12,7 @@ task save_data: :environment do |_t, _args|
 end
 
 def save_to_json(obj)
-  datetime_today = DateTime.now.strftime('%m-%d-%Y-%H-%M-%p') # "10-27-2017-12-59-PM"
+  datetime_today = Time.now.strftime('%m-%d-%Y-%H-%M-%p') # "10-27-2017-12-59-PM"
   puts "saving all #{obj} records"
   File.open("tmp/#{obj}-#{datetime_today}.json", 'w') do |f|
     f.write(obj.all.to_json)
