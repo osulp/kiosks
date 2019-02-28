@@ -46,11 +46,7 @@ class Kiosk extends Component {
   render() {
     return (
       <div id="circulation_kiosk">
-        <div className="row">
-          <div className="col-md-12">
-            <ConnectedSlideGallery {...this.props} />
-          </div>
-        </div>
+        <ConnectedSlideGallery {...this.props} />
       </div>
     );
   }
