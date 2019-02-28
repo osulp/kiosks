@@ -33,7 +33,7 @@ RSpec.describe Api::V1::HoursController, type: :controller do
     { dates: ['2016-01-02', '2016-01-03', '2016-01-05'] }
   end
 
-  context 'returns hours' do
+  context 'with valid hours' do
     before do
       ENV['API_URI'] = 'http://server'
       ENV['API_ROUTE'] = '/action.json'

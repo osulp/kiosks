@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-require 'rails_helper'
 require 'ostruct'
 
 RSpec.describe Api::V1::RoomsController, type: :controller do
@@ -35,9 +34,12 @@ RSpec.describe Api::V1::RoomsController, type: :controller do
     expect(response).to have_http_status(:internal_server_error)
   end
 
-  it 'returns room 2 when it is available' do
-    get :available, params: { start_time: (DateTime.now + 5.minutes).strftime('%Y%m%d%H%M%S') }
-    expect(response).to have_http_status(:ok)
-    expect(response.body).to include('Room 2')
+  context 'when room 2 is available' do
+    before do
+      get :available, params: { start_time: (DateTime.now + 5.minutes).strftime('%Y%m%d%H%M%S') }
+    end
+
+    it { expect(response).to have_http_status(:ok) }
+    it { expect(response.body).to include('Room 2') }
   end
 end

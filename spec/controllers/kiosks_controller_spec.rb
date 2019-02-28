@@ -1,13 +1,7 @@
 # frozen_string_literal: true
 
-require 'rails_helper'
-
 RSpec.describe KiosksController, type: :controller do
-  # This should return the minimal set of attributes required to create a valid
-  # Kiosk. As you add validations to Kiosk, be sure to
-  # adjust the attributes here as well.
-
-  let (:test_layout) { KioskLayout.create!(name: 'touch') }
+  let(:test_layout) { KioskLayout.create!(name: 'touch') }
 
   let(:valid_attributes) do
     { name: 'donor', kiosk_layout_id: test_layout.id, map_default_floor_number: 2 }

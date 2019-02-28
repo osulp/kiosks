@@ -3,16 +3,8 @@
 require 'rails_helper'
 
 RSpec.describe KioskController, type: :controller do
-  # This should return the minimal set of attributes required to create a valid
-  # Kiosk. As you add validations to Kiosk, be sure to
-  # adjust the attributes here as well.
-
-  let (:test_layout) { KioskLayout.create!(name: 'touch') }
-
-  let(:restart_kiosk_at) do
-    DateTime.tomorrow
-  end
-
+  let(:test_layout) { KioskLayout.create!(name: 'touch') }
+  let(:restart_kiosk_at) { DateTime.tomorrow }
   let(:valid_attributes) do
     {
       name: 'donor',
@@ -22,14 +14,12 @@ RSpec.describe KioskController, type: :controller do
       restart_at_active: true
     }
   end
-
   let(:user) do
     User.create(
       email: 'user@example.com',
       admin: true
     )
   end
-
   let(:kiosk2_valid_attributes) do
     {
       name: 'testtouch',
@@ -39,7 +29,6 @@ RSpec.describe KioskController, type: :controller do
       restart_at_active: true
     }
   end
-
   let(:kiosk2) do
     k = Kiosk.new(kiosk2_valid_attributes)
     k.save(validate: false)

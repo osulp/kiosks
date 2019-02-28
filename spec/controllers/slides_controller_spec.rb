@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-require 'rails_helper'
 require 'rack/test'
 
 RSpec.describe SlidesController, type: :controller do
@@ -61,7 +60,7 @@ RSpec.describe SlidesController, type: :controller do
       expect(assigns(:slide)).to be_a_new(Slide)
     end
 
-    context 'When not logged in' do
+    context 'when not logged in' do
       let(:user) { nil }
 
       it 'displays an insufficient permissions error' do
@@ -74,7 +73,7 @@ RSpec.describe SlidesController, type: :controller do
       end
     end
 
-    context 'When logged in as a user' do
+    context 'when logged in as a user' do
       let(:user) do
         User.create(
           email: 'user@example.com'
@@ -91,7 +90,7 @@ RSpec.describe SlidesController, type: :controller do
       end
     end
 
-    context 'When logged in as an admin' do
+    context 'when logged in as an admin' do
       let(:user) do
         User.create(
           email: 'user@example.com',
