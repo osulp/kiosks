@@ -70,28 +70,28 @@ class Kiosk extends Component {
         <ConnectedModalWindow />
         <Coverflow
           displayQuantityOfSide={2}
-          navigation={false}
+          navigation={true}
+          infiniteScroll={true}
           enableScroll={true}
           clickable={true}
+          enableHeading={true}
           active={this.state.active}
         >
           {this.state.primary_slides.map((slide, i) => {
             return (
-              <div
+              <img
                 key={`slide.${i}`}
                 onClick={this.slideClicked.bind(this, slide, i)}
                 onKeyDown={this.slideClicked.bind(this, slide, i)}
                 role="menuitem"
                 tabIndex={i}
-              >
-                <img
-                  src={slide.original}
-                  style={{
-                    display: "block",
-                    width: "100%"
-                  }}
-                />
-              </div>
+                src={slide.original}
+                alt={slide.caption}
+                style={{
+                  display: "block",
+                  width: "100%"
+                }}
+              />
             )
           })}
         </Coverflow>
