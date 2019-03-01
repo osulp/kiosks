@@ -7,7 +7,7 @@ import { trackClicked } from "../shared/GoogleAnalytics"
 class Kiosk extends Component {
   constructor(props) {
     super(props)
-    this.state = { active: 0 }
+    this.state = { active: 0, primary_slides: [] }
   }
 
   /**
@@ -15,6 +15,7 @@ class Kiosk extends Component {
    */
   componentDidMount() {
     this._fetchRestartKioskTimeout()
+    this._primarySlides()
   }
 
   /**
@@ -32,6 +33,18 @@ class Kiosk extends Component {
     this.restart_kiosk_timeout = setInterval(() => {
       this.props.fetchRestartKiosk(this.props.url)
     }, 1 * 60 * 1000)
+  }
+
+  _primarySlides() {
+    let primary_slide_ids = this.props.slides.map(
+      (s, _i) => s.collection.primary_slide.id
+    )
+    // in-line unique filter
+    this.setState({
+      primary_slides: this.props.slides.filter(
+        (e, i) => primary_slide_ids.findIndex(a => a === e.id) > -1
+      )
+    })
   }
 
   slideClicked(slide, index) {
@@ -62,7 +75,7 @@ class Kiosk extends Component {
           clickable={true}
           active={this.state.active}
         >
-          {this.props.slides.map((slide, i) => {
+          {this.state.primary_slides.map((slide, i) => {
             return (
               <div
                 key={`slide.${i}`}

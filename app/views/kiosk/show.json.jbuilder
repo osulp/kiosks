@@ -24,7 +24,13 @@ json.slides @slides do |slide|
     end
   end
   json.collection do |collection|
-    json.detail collection.detail
+    json.detail slide.collection.detail
+    json.primary_slide do |primary_slide|
+      json.id slide.collection.primary_slide.id
+      json.original slide.collection.primary_slide.image.url
+      json.thumbnail slide.collection.primary_slide.image.url(:thumb)
+      json.xlarge slide.collection.primary_slide.image.url(:xlarge)
+    end
     json.slides do
       json.array!(slide.collection.slides) do |collection_slide|
         json.id collection_slide.id
