@@ -23,7 +23,7 @@ class SlideGallery extends Component {
   itemPath(item) {
     let path = '';
 
-    switch(item.kiosk[0].name) {
+    switch(item.current_kiosk) {
       case 'tall':
         path = item.xtall;
         break;
