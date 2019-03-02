@@ -7,7 +7,7 @@ import { trackClicked } from "../shared/GoogleAnalytics"
 class Kiosk extends Component {
   constructor(props) {
     super(props)
-    this.state = { active: 0, primary_slides: [] }
+    this.state = { active: 0, primary_slides: [], activeSlide: undefined }
   }
 
   /**
@@ -23,6 +23,19 @@ class Kiosk extends Component {
    */
   componentWillUnmount() {
     clearInterval(this.restart_kiosk_timeout)
+  }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    if (
+      this.state.active === nextState.active &&
+      nextState.activeSlide !== undefined
+    ) {
+      this.props.setModalVisibility(true)
+      this.props.setModalRootComponent(
+        <LargeSlide slide={nextState.activeSlide} {...this.props} />
+      )
+    }
+    return true
   }
 
   /**
@@ -47,21 +60,14 @@ class Kiosk extends Component {
     })
   }
 
-  slideClicked(slide, index) {
+  slideClicked(e, slide, index) {
     trackClicked(
       this.props.google_analytics,
       `${this.props.kiosk_name}:${
         this.props.kiosk_id
       }:DonorCoverflowKiosk:SlideClicked`
     )
-    if (this.state.active === index) {
-      this.props.setModalVisibility(true)
-      this.props.setModalRootComponent(
-        <LargeSlide slide={slide} {...this.props} />
-      )
-    } else {
-      this.setState({ active: index })
-    }
+    this.setState({ active: index, activeSlide: slide })
   }
 
   render() {
@@ -79,19 +85,23 @@ class Kiosk extends Component {
         >
           {this.state.primary_slides.map((slide, i) => {
             return (
-              <img
+              <div
                 key={`slide.${i}`}
-                onClick={this.slideClicked.bind(this, slide, i)}
-                onKeyDown={this.slideClicked.bind(this, slide, i)}
+                data-slide_index={i}
+                onClick={e => this.slideClicked(e, slide, i)}
+                onKeyDown={e => this.slideClicked(e, slide, i)}
                 role="menuitem"
                 tabIndex={i}
-                src={slide.original}
-                alt={slide.caption}
-                style={{
-                  display: "block",
-                  width: "100%"
-                }}
-              />
+              >
+                <img
+                  src={slide.original}
+                  alt={slide.caption}
+                  style={{
+                    display: "block",
+                    width: "100%"
+                  }}
+                />
+              </div>
             )
           })}
         </Coverflow>
