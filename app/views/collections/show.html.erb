@@ -1,6 +1,6 @@
 <h1><%= @collection.name %></h1>
 <label>Detail</label>
-<pre><%= @collection.detail %></pre>
+<pre style="white-space: pre-wrap; word-break: break-word;"><%= @collection.detail %></pre>
 
 <div class="panel panel-primary">
   <div class="panel-heading">
@@ -20,28 +20,34 @@
     </thead>
 
     <tbody>
-      <tr>
-        <td><%= image_tag(@collection.primary_slide.image_url(:thumb)) if @collection.primary_slide.image_url(:thumb) %></td>
-        <td><%= link_to @collection.primary_slide.title, @collection.primary_slide %></td>
-        <td><%= @collection.primary_slide.caption %></td>
-        <td>
-          <ul>
-            <% for date_range in @collection.primary_slide.date_ranges %>
-              <li><%= date_range.start_date.strftime("%m/%d/%y") %> - <%= date_range.end_date.strftime("%m/%d/%y") %></li>
-            <% end %>
-          </ul>
-        </td>
-        <td><%= @collection.primary_slide.slide_type.name if @collection.primary_slide.slide_type %></td>
-        <td>
-          <ul>
-            <% for kiosk in @collection.primary_slide.kiosks %>
-              <li>
-                <%= link_to kiosk.name, kiosk_show_path(id: kiosk.name) %>
-              </li>
-            <% end %>
-          </ul>
-        </td>
-      </tr>
+      <% unless @collection.primary_slide %>
+        <tr>
+          <td colspan='6'>No primary slide selected. This feature is only necessary for the Donor Kiosk.</td>
+        </tr>
+      <% else %>
+        <tr>
+          <td><%= image_tag(@collection.primary_slide.image_url(:thumb)) if @collection.primary_slide.image_url(:thumb) %></td>
+          <td><%= link_to @collection.primary_slide.title, @collection.primary_slide %></td>
+          <td><%= @collection.primary_slide.caption %></td>
+          <td>
+            <ul>
+              <% for date_range in @collection.primary_slide.date_ranges %>
+                <li><%= date_range.start_date.strftime("%m/%d/%y") %> - <%= date_range.end_date.strftime("%m/%d/%y") %></li>
+              <% end %>
+            </ul>
+          </td>
+          <td><%= @collection.primary_slide.slide_type.name if @collection.primary_slide.slide_type %></td>
+          <td>
+            <ul>
+              <% for kiosk in @collection.primary_slide.kiosks %>
+                <li>
+                  <%= link_to kiosk.name, kiosk_show_path(id: kiosk.name) %>
+                </li>
+              <% end %>
+            </ul>
+          </td>
+        </tr>
+      <% end %>
     </tbody>
   </table>
 </div>
