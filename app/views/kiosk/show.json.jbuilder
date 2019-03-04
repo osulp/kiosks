@@ -23,9 +23,9 @@ json.slides @slides do |slide|
       json.end_date date_range.end_date
     end
   end
-  json.collection do |collection|
+  json.collection do
     json.detail slide.collection.detail
-    json.primary_slide do |primary_slide|
+    json.primary_slide do
       json.id slide.collection.primary_slide.id
       json.original slide.collection.primary_slide.image.url
       json.thumbnail slide.collection.primary_slide.image.url(:thumb)
