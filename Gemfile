@@ -62,6 +62,8 @@ gem 'lograge'
 gem "loofah", ">= 2.2.3"
 gem "ffi", ">= 1.9.24"
 
+gem 'webpacker', '~> 3.5'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platform: :mri
