@@ -22,5 +22,8 @@ module Kiosks
       end if File.exists?(env_file)
     end
     config.rubycas.cas_base_url = ENV['CAS_BASE_URL']
+
+    # Any sqlite3 databases need to be modified for the booleans to work with Rails 5.2
+    config.active_record.sqlite3.represent_boolean_as_integer = true
   end
 end

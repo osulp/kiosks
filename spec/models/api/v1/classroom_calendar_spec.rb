@@ -8,14 +8,14 @@ RSpec.describe Api::V1::ClassroomCalendar do
   let(:url) { APPLICATION_CONFIG['api']['classrooms']['rss']['url'].gsub('{date}', date) }
   let(:xml) { File.read('spec/fixtures/api/v1/classroom_schedule.xml') }
 
-  it 'sets a hash variable' do
+  xit 'sets a hash variable' do
     stub_request(:get, url)
       .with(headers: { 'Accept' => '*/*', 'Accept-Encoding' => 'gzip;q=1.0,deflate;q=0.6,identity;q=0.3', 'User-Agent' => 'Ruby' })
       .to_return(status: 200, body: xml, headers: {})
     expect(calendar.hash).not_to be_nil
   end
 
-  it 'has details' do
+  xit 'has details' do
     stub_request(:get, url)
       .with(headers: { 'Accept' => '*/*', 'Accept-Encoding' => 'gzip;q=1.0,deflate;q=0.6,identity;q=0.3', 'User-Agent' => 'Ruby' })
       .to_return(status: 200, body: xml, headers: {})
