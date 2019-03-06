@@ -25,6 +25,10 @@
       <%= f.label :detail %>
       <%= f.text_area :detail, class: "form-control" %>
     </div>
+    <div class="field">
+      <%= f.label :primary_slide %>
+      <%= f.select('primary_slide_id', options_from_collection_for_select(collection.slides, :id, :caption, f.object.primary_slide_id), { :include_blank => '-- Select One --' }, :required => false, class: "form-control") %>
+    </div>
   </div>
 </div>
 

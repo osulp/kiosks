@@ -29,12 +29,12 @@ Rails.application.routes.draw do
   get '/kiosk', :to => 'kiosk#index', :as => 'kiosk_index'
   get '/kiosk/:id', :to => 'kiosk#show', :as => 'kiosk_show'
 
-  post '/uploads', to: 'slides#create'
+  post '/uploads/:collection_id', to: 'slides#create'
   # This is a hack that is required because the rails form the uploader is on
   # sets the _method parameter to patch when the work already exists.
   # Eventually it would be good to update the javascript so that it doesn't
   # submit the form, just the file and always uses POST.
-  patch '/uploads', to: 'slides#create'
+  patch '/uploads/:collection_id', to: 'slides#create'
 
   root to: 'kiosk#index'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
