@@ -6,7 +6,6 @@ import ConnectedSlideGallery from '../../SlideGallery';
 import ConnectedTabbedPanel from '../../SidebarPanel';
 import ConnectedMainContent from '../../MainContent';
 import TouchHours from '../../TouchHours';
-import ConnectedClassroomSchedule from '../../TouchClassroomSchedule';
 import ConnectedMaps from '../../TouchMaps';
 import ConnectedSearchPrimo from '../../TouchSearchPrimo';
 import {trackClicked} from '../shared/GoogleAnalytics';
@@ -27,7 +26,6 @@ class Kiosk extends Component {
       this.mapsClicked = this.mapsClicked.bind(this);
       this.staticMapsClicked = this.staticMapsClicked.bind(this);
       this.searchPrimoClicked = this.searchPrimoClicked.bind(this);
-      this.classroomScheduleClicked = this.classroomScheduleClicked.bind(this);
       this._didTap = this._didTap.bind(this);
   }
 
@@ -143,18 +141,6 @@ class Kiosk extends Component {
   }
 
   /**
-   * The classroom schedule button was clicked, set the content to display the connected classroom schedule component
-   */
-  classroomScheduleClicked() {
-    trackClicked(this.props.google_analytics, `${this.props.kiosk_name}:${this.props.kiosk_id}:InteractiveKiosk:Menu:ClassroomSchedule`);
-    this.setState({ menuCollapsed: true });
-    this.setState({ selectedMenuItem: 'schedule' });
-    this.props.setContentRootComponent(<ConnectedClassroomSchedule />);
-    clearInterval(this.show_slides_timeout);
-    this._showSlidesTimeout();
-  }
-
-  /**
   * After the component mounts, fetch the current library hours and slides.
   */
   componentDidMount() {
@@ -247,7 +233,6 @@ class Kiosk extends Component {
                           mapsClicked={this.mapsClicked}
                           staticMapsClicked={this.staticMapsClicked}
                           searchPrimoClicked={this.searchPrimoClicked}
-                          classroomScheduleClicked={this.classroomScheduleClicked}
                           selectedMenuItem={this.state.selectedMenuItem}
                           {...this.props} />
                   </div>
