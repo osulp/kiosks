@@ -25,6 +25,10 @@
         <%= f.text_field :map_default_floor_number, class: "form-control" %>
       </div>
       <div class="field">
+        <%= f.label "Slide Length (in seconds)" %>
+        <%= f.number_field :slide_length, class: "form-control", min: 5 %>
+      </div>
+      <div class="field">
         <%= f.label :restart_at_active, "Enable restarting kiosk" %>
         <%= f.check_box :restart_at_active, {:class => "enable_restart_at"} %>
       </div>
