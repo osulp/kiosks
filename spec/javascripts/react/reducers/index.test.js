@@ -1,7 +1,7 @@
-import {default as combinedReducers} from '../../../../app/assets/javascripts/react/reducers';
+import { default as combinedReducers } from "../../../../app/javascript/react/reducers"
 
-describe('Reducers::RootReducer', () => {
-  it('matches the snapshot', () => {
-    expect(combinedReducers).toMatchSnapshot();
-  });
-});
+describe("Reducers::RootReducer", () => {
+  it("matches the snapshot", () => {
+    expect(combinedReducers).toMatchSnapshot()
+  })
+})

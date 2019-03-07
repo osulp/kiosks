@@ -1,10 +1,7 @@
 {
   "name": "kiosks",
   "version": "0.0.1",
-  "main": "index.js",
   "scripts": {
-    "prod": "webpack --progress --watch",
-    "compile": "webpack -p --config webpack.config.production.js",
     "test": "jest"
   },
   "jest": {
@@ -13,7 +10,7 @@
     "cacheDirectory": "tmp/jest",
     "collectCoverage": true,
     "collectCoverageFrom": [
-      "app/assets/javascripts/react/**/*.{js,jsx}",
+      "app/javascript/react/**/*.{js,jsx}",
       "!**/node_modules/**",
       "!**/vendor/**"
     ],
@@ -25,22 +22,13 @@
   "author": "Josh Gum <josh.gum@oregonstate.edu>",
   "license": "MIT",
   "dependencies": {
-    "@rails/webpacker": "3.5",
-    "babel-core": "^6.18.2",
-    "babel-preset-es2015": "^6.18.0",
-    "babel-preset-react": "^6.24.1",
-    "babel-preset-stage-2": "^6.18.0",
-    "babelify": "^7.3.0",
-    "browserify": "^13.1.1",
-    "browserify-incremental": "^3.1.1",
-    "isomorphic-fetch": "^2.2.1",
-    "masonry-layout": "^4.2.2",
+    "@rails/webpacker": "^4.0",
     "moment": "^2.17.1",
     "prop-types": "^15.7.2",
-    "rc-calendar": "^7.5.2",
+    "rc-calendar": "^9.10.10",
     "react": "^16.8.4",
-    "react-addons-css-transition-group": "^15.4.1",
     "react-coverflow": "osulp/react-coverflow",
+    "react-addons-css-transition-group": "^16.0.0-alpha.3",
     "react-dom": "^16.8.4",
     "react-image-gallery": "^0.7.4",
     "react-redux": "^4.4.6",
@@ -50,26 +38,31 @@
     "redux-devtools-dock-monitor": "^1.1.1",
     "redux-devtools-log-monitor": "^1.1.1",
     "redux-thunk": "^2.1.0",
-    "virtual-keyboard": "^1.28.0"
+    "virtual-keyboard": "^1.28.0",
+    "webpack": "^4.29",
+    "typescript": "*"
   },
   "devDependencies": {
-    "babel-jest": "^17.0.2",
-    "babel-loader": "^6.2.8",
-    "babel-polyfill": "^6.20.0",
+    "@babel/polyfill": "^7.0.0",
+    "@babel/preset-react": "^7.0.0",
+    "@babel/core": "^7.0.0",
+    "babel-core": "^7.0.0-bridge.0",
+    "babel-jest": "^23.4.2",
+    "babel-loader": "^8.0.0",
     "css-loader": "^0.26.1",
-    "enzyme": "^2.6.0",
+    "enzyme": "^3.9.0",
+    "enzyme-adapter-react-16": "^1.10.0",
     "file-loader": "^0.9.0",
     "image-webpack-loader": "^3.0.0",
     "jest": "^17.0.3",
     "nock": "^9.0.2",
     "node-sass": "^3.13.0",
-    "react-addons-test-utils": "^15.4.1",
+    "react-addons-test-utils": "^16.0.0-alpha.3",
     "react-hot-loader": "^1.3.1",
-    "react-test-renderer": "^15.4.1",
+    "react-test-renderer": "^16.8.4",
     "redux-mock-store": "^1.2.1",
-    "sass-loader": "^4.0.2",
+    "sass-loader": "^7.1.0",
     "style-loader": "^0.13.1",
-    "webpack": "^1.13.3",
-    "webpack-dev-server": "2.11.2"
+    "webpack-dev-server": "^3.1"
   }
 }

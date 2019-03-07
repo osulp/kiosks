@@ -44,6 +44,7 @@ services:
     build: .
     environment:
       - RAILS_ENV=${RAILS_ENV}
+      - RAILS_LOG_TO_STDOUT=yesplease
     volumes:
       - .:/data
       - app:/data/tmp/uploads
@@ -60,35 +61,15 @@ services:
     # taking time to run.
     command: >
       bash -c "rm -f tmp/pids/server.pid
+      && bundle exec rails db:migrate
       && bundle exec rails server -p 3000 -b '0.0.0.0' -e ${RAILS_ENV}"
     depends_on:
       db:
         condition: service_started
       db_test:
         condition: service_started
-      db_migrate:
-        condition: service_started
-      yarn:
-        condition: service_started
     expose:
       - 3000
-    links:
-      - db
-      - db_test
-
-  yarn:
-    extends: app
-    command: yarn run prod
-
-  ##
-  # Ensure that the database migrations are run on the appropriate database related to the RAILS_ENV running
-  db_migrate:
-    extends: app
-    restart: on-failure
-    command: bundle exec rails db:migrate RAILS_ENV=${RAILS_ENV}
-    depends_on:
-      - db
-      - db_test
     links:
       - db
       - db_test

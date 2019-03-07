@@ -3,8 +3,11 @@
 default: &default
   source_path: app/javascript
   source_entry_path: packs
+  public_root_path: public
   public_output_path: packs
   cache_path: tmp/cache/webpacker
+  check_yarn_integrity: false
+  webpack_compile_output: false
 
   # Additional paths webpack should lookup modules
   # ['app/assets', 'engine/foo/app/assets']
@@ -13,8 +16,25 @@ default: &default
   # Reload manifest.json on all requests so we reload latest compiled packs
   cache_manifest: false
 
+  extract_css: false
+
+  static_assets_extensions:
+    - .jpg
+    - .jpeg
+    - .png
+    - .gif
+    - .tiff
+    - .ico
+    - .svg
+    - .eot
+    - .otf
+    - .ttf
+    - .woff
+    - .woff2
+
   extensions:
     - .jsx
+    - .mjs
     - .js
     - .sass
     - .scss
@@ -49,8 +69,7 @@ development:
     headers:
       'Access-Control-Allow-Origin': '*'
     watch_options:
-      ignored: /node_modules/
-
+      ignored: '**/node_modules/**'
 
 test:
   <<: *default
@@ -67,3 +86,16 @@ production:
 
   # Cache manifest.json for performance
   cache_manifest: true
+
+  extract_css: true
+
+staging:
+  <<: *default
+
+  # Production depends on precompilation of packs prior to booting for performance.
+  compile: false
+
+  # Cache manifest.json for performance
+  cache_manifest: true
+
+  extract_css: true
