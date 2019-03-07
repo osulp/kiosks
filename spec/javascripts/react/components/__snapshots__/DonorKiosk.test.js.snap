@@ -1,39 +1,43 @@
 exports[`Donor Kiosk maps dispatch to props 1`] = `
 Object {
   "addError": [Function],
-  "fetchClassroomSchedule": [Function],
-  "fetchClassrooms": [Function],
   "fetchHours": [Function],
+  "fetchRestartKiosk": [Function],
   "fetchRoomsAvailableCount": [Function],
   "fetchSlides": [Function],
-  "fetchedClassroomSchedule": [Function],
-  "fetchedClassrooms": [Function],
+  "fetchTodaysHours": [Function],
   "fetchedHours": [Function],
+  "fetchedRestartKiosk": [Function],
   "fetchedRoomsAvailableCount": [Function],
   "fetchedSlides": [Function],
-  "fetchingClassroomSchedule": [Function],
-  "fetchingClassrooms": [Function],
+  "fetchedTodaysHours": [Function],
   "fetchingHours": [Function],
+  "fetchingRestartKiosk": [Function],
   "fetchingRoomsAvailableCount": [Function],
   "fetchingSlides": [Function],
+  "fetchingTodaysHours": [Function],
   "scrollToSlide": [Function],
-  "setClassroomSchedule": [Function],
+  "setContentRootComponent": [Function],
   "setGoogleAnalytics": [Function],
   "setHours": [Function],
   "setKiosk": [Function],
   "setMaps": [Function],
   "setModalRootComponent": [Function],
   "setModalVisibility": [Function],
+  "setRestartKiosk": [Function],
   "setRoomsAvailableCount": [Function],
   "setSlides": [Function],
   "setTitle": [Function],
-  "toggleClassroomSelected": [Function],
+  "setTodaysHours": [Function],
 }
 `;
 
 exports[`Donor Kiosk maps state to props 1`] = `
 Object {
   "google_analytics": undefined,
+  "kiosk_id": undefined,
+  "kiosk_name": undefined,
+  "restart_kiosk": "",
   "slides": Array [
     Object {
       "caption": "Slide.caption",
@@ -63,5 +67,6 @@ Object {
     },
   ],
   "title": "Slide.title",
+  "url": undefined,
 }
 `;
