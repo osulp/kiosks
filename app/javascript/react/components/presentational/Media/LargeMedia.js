@@ -1,8 +1,8 @@
 import React, { Component } from "react"
 import PropTypes from "prop-types"
 
-var MyVideo = React.createClass({
-  render: function() {
+class MyVideo extends Component {
+  render() {
     if (this.props.en_src.length == 0 && this.props.es_src.length == 0) {
       return (
         <div>
@@ -58,10 +58,10 @@ var MyVideo = React.createClass({
       )
     }
   }
-})
+}
 
-var MyAudio = React.createClass({
-  render: function() {
+class MyAudio extends Component {
+  render() {
     return (
       <div>
         <img src={this.props.thumb} alt={this.props.alt} />
@@ -69,7 +69,7 @@ var MyAudio = React.createClass({
       </div>
     )
   }
-})
+}
 
 class LargeMedia extends Component {
   constructor(props) {
