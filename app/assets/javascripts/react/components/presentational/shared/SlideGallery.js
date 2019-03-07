@@ -60,7 +60,6 @@ class SlideGallery extends Component {
     return (
       <ImageGallery ref={i => this._imageGallery = i }
                     items={slides}
-                    slideInterval={5000}
                     showThumbnails={false}
                     showNav={this.props.show_nav}
                     autoPlay={true}
