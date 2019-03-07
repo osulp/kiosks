@@ -30,7 +30,7 @@
     "react-coverflow": "osulp/react-coverflow",
     "react-addons-css-transition-group": "^16.0.0-alpha.3",
     "react-dom": "^16.8.4",
-    "react-image-gallery": "^0.7.4",
+    "react-image-gallery": "^0.8.14",
     "react-redux": "^4.4.6",
     "react-virtual-keyboard": "^1.0.2",
     "redux": "^3.6.0",
