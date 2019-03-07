@@ -57,7 +57,7 @@ class SlideGallery extends Component {
   render() {
     let slides = this.props.slides;
     // Set the slide length and if no value exists then use the minimum of 5 seconds
-    let slide_length = this.props.slides[0].slide_length || 5000
+    let slide_length = this.props.slides[0].slide_length
     return (
       <ImageGallery ref={i => this._imageGallery = i }
                     items={slides}

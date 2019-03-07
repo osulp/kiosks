@@ -19,4 +19,8 @@ class Kiosk < ApplicationRecord
   def restart_pending?
     restart_at_active && (restart_at > Time.now || restart_at > 1.minutes.ago)
   end
+
+  def slide_length_ms
+    (slide_length || 5) * 1000
+  end
 end
