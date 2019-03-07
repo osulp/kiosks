@@ -43,65 +43,10 @@ describe("Reducers::Touch", () => {
       ).toMatchSnapshot()
     })
   })
-  describe("fetchedClassroomSchedule action", () => {
-    it("matches the snapshot", () => {
-      expect(
-        reducerCreator(empty_state, actionCreator.fetchedClassroomSchedule())
-      ).toMatchSnapshot()
-    })
-  })
-  describe("fetchingClassroomSchedule action", () => {
-    it("matches the snapshot", () => {
-      expect(
-        reducerCreator(empty_state, actionCreator.fetchingClassroomSchedule())
-      ).toMatchSnapshot()
-    })
-  })
-  describe("fetchedClassrooms action", () => {
-    it("matches the snapshot", () => {
-      expect(
-        reducerCreator(empty_state, actionCreator.fetchedClassrooms())
-      ).toMatchSnapshot()
-    })
-  })
-  describe("fetchingClassrooms action", () => {
-    it("matches the snapshot", () => {
-      expect(
-        reducerCreator(empty_state, actionCreator.fetchingClassrooms())
-      ).toMatchSnapshot()
-    })
-  })
-  describe("setClassroomSchedule action", () => {
-    it("matches the snapshot", () => {
-      expect(
-        reducerCreator(
-          empty_state,
-          actionCreator.setClassroomSchedule(
-            factories.classroom_schedule,
-            "20170110"
-          )
-        )
-      ).toMatchSnapshot()
-    })
-  })
   describe("setMaps action", () => {
     it("matches the snapshot", () => {
       expect(
         reducerCreator(empty_state, actionCreator.setMaps(factories.map))
-      ).toMatchSnapshot()
-    })
-  })
-  describe("toggleClassroomSelected action", () => {
-    it("matches the snapshot", () => {
-      let the_state = { classrooms: { test_shortname: factories.classroom } }
-      expect(
-        reducerCreator(
-          the_state,
-          actionCreator.toggleClassroomSelected(
-            factories.classroom.shortname,
-            false
-          )
-        )
       ).toMatchSnapshot()
     })
   })

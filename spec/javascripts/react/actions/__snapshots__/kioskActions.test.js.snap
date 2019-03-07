@@ -18,10 +18,25 @@ Object {
 exports[`Action::Kiosk #setKiosk() matches the snapshot 1`] = `
 Object {
   "kiosk": Object {
+    "kid": undefined,
+    "map_default_floor_number": undefined,
+    "maps_base_url": undefined,
+    "name": undefined,
     "type": "touch",
     "url": "/url/to/action",
   },
   "type": "SET_KIOSK",
+}
+`;
+
+exports[`Action::Kiosk #setRestartKiosk() matches the snapshot 1`] = `
+Object {
+  "kiosk": Object {
+    "restart_kiosk": Array [
+      "",
+    ],
+  },
+  "type": "SET_RESTART_KIOSK",
 }
 `;
 

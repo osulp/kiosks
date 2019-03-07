@@ -2,7 +2,6 @@ import React, { Component } from "react"
 import PropTypes from "prop-types"
 import TouchHours from "../../TouchHours"
 import ConnectedTabbedPanel from "../../TabbedPanel"
-import ConnectedClassroomSchedule from "../../TouchClassroomSchedule"
 import ConnectedMaps from "../../TouchMaps"
 import ConnectedSearchPrimo from "../../TouchSearchPrimo"
 import { trackClicked } from "../shared/GoogleAnalytics"
@@ -70,18 +69,6 @@ class Header extends Component {
         timeout={30000}
       />
     )
-  }
-
-  /**
-   * The classroom schedule button was clicked, set the modal to display the connected classroom schedule component
-   */
-  classroomScheduleClicked() {
-    trackClicked(
-      this.props.google_analytics,
-      "TouchKiosk:Header:ClassroomSchedule"
-    )
-    this.props.setModalVisibility(true)
-    this.props.setModalRootComponent(<ConnectedClassroomSchedule />)
   }
 
   /**
@@ -157,14 +144,6 @@ class Header extends Component {
                     onClick={this.mapsClicked.bind(this)}
                   >
                     <a className="btn btn-navbar btn-default">Maps</a>
-                  </li>
-                  <li
-                    className="show-classroom-schedule"
-                    onClick={this.classroomScheduleClicked.bind(this)}
-                  >
-                    <a className="btn btn-navbar btn-default">
-                      Classrooms Schedule
-                    </a>
                   </li>
                   <li
                     className="show-search-primo"

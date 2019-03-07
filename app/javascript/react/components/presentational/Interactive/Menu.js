@@ -63,24 +63,6 @@ class Menu extends Component {
             <span className={"menu-item-text"}>1Search</span>
           </a>
         </li>
-        <li
-          className="show-classroom-schedule hidden"
-          onClick={this.props.classroomScheduleClicked}
-        >
-          <a
-            className={`btn btn-navbar btn-default ${
-              this.props.selectedMenuItem == "schedule"
-                ? "menu-item-selected"
-                : ""
-            }`}
-          >
-            <img
-              className={"menu-item-icon"}
-              src={"/images/calendar-alt.svg"}
-            />
-            <span className={"menu-item-text"}>Classrooms</span>
-          </a>
-        </li>
       </ul>
     )
   }
