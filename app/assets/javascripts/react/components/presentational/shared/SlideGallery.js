@@ -56,6 +56,7 @@ class SlideGallery extends Component {
 
   render() {
     let slides = this.props.slides;
+    let slide_length = this.props.slides[0].slide_length || 1000
     return (
       <ImageGallery ref={i => this._imageGallery = i }
                     items={slides}
@@ -71,7 +72,8 @@ class SlideGallery extends Component {
                     onImageError={this.onImageError}
                     onImageLoad={this.onImageLoad}
                     renderItem={this._renderItem.bind(this)}
-                    startIndex={this.props.starting_slide_index}/>
+                    startIndex={this.props.starting_slide_index}
+                    slideDuration={slide_length}/>
     );
   }
 }

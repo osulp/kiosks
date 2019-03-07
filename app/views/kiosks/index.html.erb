@@ -13,6 +13,7 @@
           <th><input type="checkbox" name="check_all" id="check_all" value=""></th>
           <th>Name</th>
           <th>Map Default Floor Number (if applicable)</th>
+          <th>Slide Length</th>
           <th>Restart Status</th>
           <th>Restart Date/time</th>
           <th colspan="3"></th>
@@ -25,6 +26,7 @@
             <td><%= check_box_tag "kiosk_ids[]", kiosk.id, false, class: "check_kiosk" %></td>
             <td><%= link_to kiosk.name, kiosk %></td>
             <td><%= kiosk.map_default_floor_number %></td>
+            <td><%= kiosk.slide_length %></td>
             <td>
               <% if kiosk.restart_at_active == true %>
                 <% if kiosk.restart_pending? %>
