@@ -73,7 +73,7 @@ class SlideGallery extends Component {
                     onImageLoad={this.onImageLoad}
                     renderItem={this._renderItem.bind(this)}
                     startIndex={this.props.starting_slide_index}
-                    slideDuration={slide_length}/>
+                    slideInterval={slide_length}/>
     );
   }
 }
