@@ -1,6 +1,6 @@
 import React, { Component } from "react"
 import PropTypes from "prop-types"
-import { trackClicked } from "../shared/GoogleAnalytics"
+import keyboard from "virtual-keyboard/dist/js/jquery.keyboard"
 
 const root_dom_element = document.getElementById("application_root")
 
