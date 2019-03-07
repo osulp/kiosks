@@ -16,7 +16,7 @@ class ModalWindow extends Component {
     let display = this.props.visible ? "block" : "none"
     let root_component = this.props.root_component
     let close_icon_component = React.createElement(
-      "SPAN",
+      "span",
       {
         className: "glyphicon glyphicon-remove-circle",
         onClick: this.closeModal.bind(this),
