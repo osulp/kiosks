@@ -58,11 +58,12 @@ class SlideGallery extends Component {
 
   render() {
     let slides = this.props.slides
+    // Set the slide length and if no value exists then use the minimum of 5 seconds
+    let slide_length = this.props.slides[0].slide_length
     return (
       <ImageGallery
         ref={i => (this._imageGallery = i)}
         items={slides}
-        slideInterval={5000}
         showThumbnails={false}
         showNav={this.props.show_nav}
         autoPlay={true}
@@ -75,6 +76,7 @@ class SlideGallery extends Component {
         onImageLoad={this.onImageLoad}
         renderItem={this._renderItem.bind(this)}
         startIndex={this.props.starting_slide_index}
+        slideInterval={slide_length}
       />
     )
   }

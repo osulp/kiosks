@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_28_215259) do
+ActiveRecord::Schema.define(version: 2019_03_07_200231) do
 
   create_table "collections", force: :cascade do |t|
     t.string "name"
@@ -49,6 +49,7 @@ ActiveRecord::Schema.define(version: 2019_02_28_215259) do
     t.datetime "restart_at"
     t.boolean "restart_at_active"
     t.integer "map_default_floor_number", default: 2
+    t.integer "slide_length"
     t.index ["kiosk_layout_id"], name: "index_kiosks_on_kiosk_layout_id"
   end
 
