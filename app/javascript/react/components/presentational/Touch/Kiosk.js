@@ -1,5 +1,6 @@
 import { connect } from "react-redux"
-import React, { Component, PropTypes } from "react"
+import React, { Component } from "react"
+import PropTypes from "prop-types"
 import Header from "./Header"
 import ConnectedSlideGallery from "../../SlideGallery"
 import ConnectedModalWindow from "../../ModalWindow"

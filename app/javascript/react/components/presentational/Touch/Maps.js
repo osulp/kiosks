@@ -1,8 +1,9 @@
-import React, { Component, PropTypes } from "react"
+import React, { Component } from "react"
+import PropTypes from "prop-types"
 import { trackClicked } from "../shared/GoogleAnalytics"
 
-var Iframe = React.createClass({
-  render: function() {
+class Iframe extends Component {
+  render() {
     return (
       <div>
         <iframe
@@ -14,7 +15,7 @@ var Iframe = React.createClass({
       </div>
     )
   }
-})
+}
 
 class Maps extends Component {
   /**

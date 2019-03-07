@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from "react"
+import React, { Component } from "react"
+import PropTypes from "prop-types"
 import MediaCell from "./MediaCell"
 import LargeMedia from "./LargeMedia"
 import { trackClicked } from "../shared/GoogleAnalytics"

@@ -1,5 +1,6 @@
 import { connect } from "react-redux"
-import React, { Component, PropTypes } from "react"
+import React, { Component } from "react"
+import PropTypes from "prop-types"
 
 class ModalWindow extends Component {
   closeModal(event) {

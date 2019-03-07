@@ -1,10 +1,11 @@
-import React, { Component, PropTypes } from "react"
+import React, { Component } from "react"
+import PropTypes from "prop-types"
 import { trackClicked } from "../shared/GoogleAnalytics"
 
 const root_dom_element = document.getElementById("application_root")
 
-var Iframe = React.createClass({
-  render: function() {
+class Iframe extends Component {
+  render() {
     return (
       <div>
         <iframe
@@ -17,7 +18,7 @@ var Iframe = React.createClass({
       </div>
     )
   }
-})
+}
 
 class SearchPrimo extends Component {
   /**

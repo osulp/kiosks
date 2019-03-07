@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from "react"
+import React, { Component } from "react"
+import PropTypes from "prop-types"
 import Calendar from "rc-calendar"
 import DatePicker from "rc-calendar/lib/Picker"
 import moment from "moment"

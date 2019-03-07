@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from "react"
+import React, { Component } from "react"
+import PropTypes from "prop-types"
 import TouchHours from "../../TouchHours"
 import ConnectedTabbedPanel from "../../TabbedPanel"
 import ConnectedClassroomSchedule from "../../TouchClassroomSchedule"

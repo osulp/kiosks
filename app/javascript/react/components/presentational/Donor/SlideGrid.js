@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from "react"
+import React, { Component } from "react"
+import PropTypes from "prop-types"
 import SlideCell from "./SlideCell"
 import LargeSlide from "./LargeSlide"
 import { trackClicked } from "../shared/GoogleAnalytics"
