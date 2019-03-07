@@ -21,6 +21,12 @@ maps:
     image_url: "/images/FloorMaps/floor_5.png"
 
 api:
+  # API version which is expired, intended to be at least 2 versions older than the current.
+  # default:0 = All versions are supported
+  last_expired_version: 0
+  # API version which is warned, intended to be at least 1 version older than the current.
+  # default:0 = All versions are supported
+  last_warned_version: 0
   database:
     roomres:
       reservations:
