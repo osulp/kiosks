@@ -1,163 +1,63 @@
-exports[`Reducers::Touch fetchedClassroomSchedule action matches the snapshot 1`] = `
-Object {
-  "classroom_schedule": Object {},
-  "classrooms": Object {},
-  "date": "",
-  "hours": Object {},
-  "is_fetching_classroom_schedule": false,
-  "is_fetching_classrooms": false,
-  "is_fetching_hours": false,
-  "is_fetching_slides": false,
-  "maps": Array [],
-  "show_nav": true,
-}
-`;
-
-exports[`Reducers::Touch fetchedClassrooms action matches the snapshot 1`] = `
-Object {
-  "classroom_schedule": Object {},
-  "classrooms": undefined,
-  "date": "",
-  "hours": Object {},
-  "is_fetching_classroom_schedule": false,
-  "is_fetching_classrooms": false,
-  "is_fetching_hours": false,
-  "is_fetching_slides": false,
-  "maps": Array [],
-  "show_nav": true,
-}
-`;
-
 exports[`Reducers::Touch fetchedHours action matches the snapshot 1`] = `
 Object {
-  "classroom_schedule": Object {},
-  "classrooms": Object {},
   "date": "",
   "hours": Object {},
-  "is_fetching_classroom_schedule": false,
-  "is_fetching_classrooms": false,
   "is_fetching_hours": false,
+  "is_fetching_restart_kiosk": false,
   "is_fetching_slides": false,
+  "is_fetching_todays_hours": false,
   "maps": Array [],
   "show_nav": true,
+  "todays_hours": Object {},
 }
 `;
 
 exports[`Reducers::Touch fetchedSlides action matches the snapshot 1`] = `
 Object {
-  "classroom_schedule": Object {},
-  "classrooms": Object {},
   "date": "",
   "hours": Object {},
-  "is_fetching_classroom_schedule": false,
-  "is_fetching_classrooms": false,
   "is_fetching_hours": false,
+  "is_fetching_restart_kiosk": false,
   "is_fetching_slides": false,
+  "is_fetching_todays_hours": false,
   "maps": Array [],
   "show_nav": true,
-}
-`;
-
-exports[`Reducers::Touch fetchingClassroomSchedule action matches the snapshot 1`] = `
-Object {
-  "classroom_schedule": Object {},
-  "classrooms": Object {},
-  "date": "",
-  "hours": Object {},
-  "is_fetching_classroom_schedule": true,
-  "is_fetching_classrooms": false,
-  "is_fetching_hours": false,
-  "is_fetching_slides": false,
-  "maps": Array [],
-  "show_nav": true,
-}
-`;
-
-exports[`Reducers::Touch fetchingClassrooms action matches the snapshot 1`] = `
-Object {
-  "classroom_schedule": Object {},
-  "classrooms": Object {},
-  "date": "",
-  "hours": Object {},
-  "is_fetching_classroom_schedule": false,
-  "is_fetching_classrooms": true,
-  "is_fetching_hours": false,
-  "is_fetching_slides": false,
-  "maps": Array [],
-  "show_nav": true,
+  "todays_hours": Object {},
 }
 `;
 
 exports[`Reducers::Touch fetchingHours action matches the snapshot 1`] = `
 Object {
-  "classroom_schedule": Object {},
-  "classrooms": Object {},
   "date": "",
   "hours": Object {},
-  "is_fetching_classroom_schedule": false,
-  "is_fetching_classrooms": false,
   "is_fetching_hours": true,
+  "is_fetching_restart_kiosk": false,
   "is_fetching_slides": false,
+  "is_fetching_todays_hours": false,
   "maps": Array [],
   "show_nav": true,
+  "todays_hours": Object {},
 }
 `;
 
 exports[`Reducers::Touch fetchingSlides action matches the snapshot 1`] = `
 Object {
-  "classroom_schedule": Object {},
-  "classrooms": Object {},
   "date": "",
   "hours": Object {},
-  "is_fetching_classroom_schedule": false,
-  "is_fetching_classrooms": false,
   "is_fetching_hours": false,
+  "is_fetching_restart_kiosk": false,
   "is_fetching_slides": true,
+  "is_fetching_todays_hours": false,
   "maps": Array [],
   "show_nav": true,
+  "todays_hours": Object {},
 }
 `;
 
 exports[`Reducers::Touch matches the snapshot 1`] = `[Function]`;
 
-exports[`Reducers::Touch setClassroomSchedule action matches the snapshot 1`] = `
-Object {
-  "classroom_schedule": Object {
-    "description": "",
-    "events": Array [
-      Object {
-        "contact": "Person",
-        "contact_email": "noreply@oregonstate.edu",
-        "contact_phone": "1 541 555 1212",
-        "end_time": "20170110T1130",
-        "link": "http://calendar.oregonstate.edu/event/120763/",
-        "room": "Barnard Classroom",
-        "room_shortname": "lib-barnard",
-        "start_time": "20170110T1000",
-        "subtitle": "Person",
-        "title": "Data Analytics - Jaspersoft",
-      },
-    ],
-    "link": "http://calendar.oregonstate.edu/20170110/day/library/",
-    "published_at": "Tue, 10 Jan 2017 11:09:56 PST",
-    "title": "OSU Libraries",
-  },
-  "classrooms": Object {},
-  "date": "20170110",
-  "hours": Object {},
-  "is_fetching_classroom_schedule": false,
-  "is_fetching_classrooms": false,
-  "is_fetching_hours": false,
-  "is_fetching_slides": false,
-  "maps": Array [],
-  "show_nav": true,
-}
-`;
-
 exports[`Reducers::Touch setHours action matches the snapshot 1`] = `
 Object {
-  "classroom_schedule": Object {},
-  "classrooms": Object {},
   "date": "",
   "hours": Object {
     "2000-01-01": Object {
@@ -167,41 +67,29 @@ Object {
       "string_date": "Jan 01, 2000",
     },
   },
-  "is_fetching_classroom_schedule": false,
-  "is_fetching_classrooms": false,
   "is_fetching_hours": false,
+  "is_fetching_restart_kiosk": false,
   "is_fetching_slides": false,
+  "is_fetching_todays_hours": false,
   "maps": Array [],
   "show_nav": true,
+  "todays_hours": Object {},
 }
 `;
 
 exports[`Reducers::Touch setMaps action matches the snapshot 1`] = `
 Object {
-  "classroom_schedule": Object {},
-  "classrooms": Object {},
   "date": "",
   "hours": Object {},
-  "is_fetching_classroom_schedule": false,
-  "is_fetching_classrooms": false,
   "is_fetching_hours": false,
+  "is_fetching_restart_kiosk": false,
   "is_fetching_slides": false,
+  "is_fetching_todays_hours": false,
   "maps": Object {
     "image_url": "/assets/images/FloorMaps/floor_0.png",
     "title": "Floor 1",
   },
   "show_nav": true,
-}
-`;
-
-exports[`Reducers::Touch toggleClassroomSelected action matches the snapshot 1`] = `
-Object {
-  "classrooms": Object {
-    "test_shortname": Object {
-      "selected": true,
-      "shortname": "test_shortname",
-      "title": "Title",
-    },
-  },
+  "todays_hours": Object {},
 }
 `;
