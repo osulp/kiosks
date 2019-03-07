@@ -13,7 +13,7 @@ json.slides @slides do |slide|
   json.caption slide.caption
   json.slide_type slide.slide_type.name
   json.current_kiosk @kiosk.name
-  json.slide_length @kiosk.slide_length.to_i * 1000 #adjusted to milliseconds
+  json.slide_length @kiosk.slide_length.to_i * 1000 # adjusted to milliseconds
   json.kiosk do
     json.array!(slide.kiosks) do |kiosk|
       json.name kiosk.name
