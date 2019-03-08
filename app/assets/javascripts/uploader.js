@@ -21,7 +21,7 @@
 
   $.fn.extend({
     kiosksUploader: function(options) {
-      let collection_id = $("#collection_id").val()
+      var collection_id = $("#collection_id").val()
 
       // Initialize our jQuery File Upload widget.
       // TODO: get these values from configuration.
@@ -35,7 +35,7 @@
             maxNumberOfFiles: 100,
             maxFileSize: 500000000, // bytes, i.e. 500 MB
             autoUpload: true,
-            url: `/uploads/${collection_id}`,
+            url: "/uploads/" + collection_id,
             type: "POST",
             dropZone: $(this).find(".dropzone"),
             downloadTemplateId: "batch-template-download"
