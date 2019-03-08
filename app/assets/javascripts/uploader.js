@@ -35,7 +35,7 @@
             maxNumberOfFiles: 100,
             maxFileSize: 500000000, // bytes, i.e. 500 MB
             autoUpload: true,
-            url: `/uploads/${collection_id}`,
+            url: "/uploads/" + collection_id,
             type: "POST",
             dropZone: $(this).find(".dropzone"),
             downloadTemplateId: "batch-template-download"
