@@ -14,7 +14,7 @@ import {
   FETCHING_HOURS,
   FETCHED_HOURS,
   SET_HOURS
-} from "../../../../app/assets/javascripts/react/actions/touchActions"
+} from "../../../../app/javascript/react/actions/touchActions"
 import * as actionCreator from "../../../../app/javascript/react/actions/touchActions"
 import * as factories from "../.factories"
 

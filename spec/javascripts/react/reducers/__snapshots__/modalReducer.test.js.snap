@@ -1,8 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
 exports[`Reducers::Modal matches the snapshot 1`] = `[Function]`;
 
 exports[`Reducers::Modal setModalRootComponent action matches the snapshot 1`] = `
 Object {
-  "root_component": [Function],
+  "root_component": [MockFunction],
   "visible": false,
 }
 `;

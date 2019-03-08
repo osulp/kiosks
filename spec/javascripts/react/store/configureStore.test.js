@@ -1,5 +1,4 @@
 import { default as configureStore } from "../../../../app/javascript/react/store/configureStore"
-
 const empty_state = undefined
 
 describe("Store::configureStore", () => {

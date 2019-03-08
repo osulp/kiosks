@@ -28,7 +28,7 @@ jobs:
             - vendor/bundle
       - run: bundle exec rubocop
       - run: bundle exec rake db:create db:schema:load --trace
-      - run: yarn test -- -u
+      - run: yarn test -u spec/javascripts
       - run:
           name: Run Tests
           command: |

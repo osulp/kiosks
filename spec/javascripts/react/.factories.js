@@ -42,9 +42,7 @@ export const kiosk = {
   type: "touch",
   url: "/url/to/action",
   api: {
-    hours: "/api/v1/hours",
-    classroom_schedule: "/api/v1/classrooms/date/{date}",
-    classrooms: "/api/v1/classrooms/rooms"
+    hours: "/api/v1/hours"
   },
   title: "",
   slides: [],
@@ -65,33 +63,6 @@ export const hours = {
 export const map = {
   title: "Floor 1",
   image_url: "/assets/images/FloorMaps/floor_0.png"
-}
-
-export const classroom_schedule = {
-  title: "OSU Libraries",
-  link: "http://calendar.oregonstate.edu/20170110/day/library/",
-  description: "",
-  published_at: "Tue, 10 Jan 2017 11:09:56 PST",
-  events: [
-    {
-      title: "Data Analytics - Jaspersoft",
-      link: "http://calendar.oregonstate.edu/event/120763/",
-      start_time: "20170110T1000",
-      end_time: "20170110T1130",
-      subtitle: "Person",
-      room: "Barnard Classroom",
-      room_shortname: "lib-barnard",
-      contact: "Person",
-      contact_email: "noreply@oregonstate.edu",
-      contact_phone: "1 541 555 1212"
-    }
-  ]
-}
-
-export const classroom = {
-  shortname: "test_shortname",
-  title: "Title",
-  selected: true
 }
 
 export const room = {

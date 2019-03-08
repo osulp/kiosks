@@ -8,7 +8,7 @@ const setup = () => {
     slide_type: "Our Supporters"
   })
   const props = {
-    slides: [...factories.slide, new_slide],
+    slides: [factories.slide, new_slide],
     setModalVisibility: jest.fn(),
     setModalRootComponent: jest.fn(),
     title: factories.slide.slide_type,
