@@ -21,7 +21,7 @@
 
   $.fn.extend({
     kiosksUploader: function(options) {
-      let collection_id = $("#collection_id").val()
+      var collection_id = $("#collection_id").val()
 
       // Initialize our jQuery File Upload widget.
       // TODO: get these values from configuration.
