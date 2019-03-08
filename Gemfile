@@ -47,7 +47,7 @@ gem 'flipclockjs-rails', '~> 0.7.7'
 gem 'rails_admin', '~> 1.3'
 gem 'rails-controller-testing'
 gem 'react-rails'
-gem 'rmagick'
+gem 'rmagick', '~> 2.16.0'
 
 gem 'devise_cas_authenticatable'
 gem 'rubycas-client', git: 'https://github.com/osulp/rubycas-client'
