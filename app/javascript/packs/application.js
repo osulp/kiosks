@@ -1,3 +1,5 @@
+require("jquery-ui/ui/position")
+
 import React from "react"
 import ReactDOM from "react-dom"
 import Root from "../react/components/Root"

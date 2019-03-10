@@ -24,6 +24,8 @@
   "license": "MIT",
   "dependencies": {
     "@rails/webpacker": "^4.0",
+    "jquery": "^3.3.1",
+    "jquery-ui": "^1.12.1",
     "masonry-layout": "^4.2.2",
     "moment": "^2.19.3",
     "prop-types": "^15.7.2",
@@ -52,8 +54,8 @@
     "babel-jest": "^23.4.2",
     "babel-loader": "^8.0.0",
     "cached-path-relative": "^1.0.2",
-    "css-loader": "^0.26.1",
     "cryptiles": "^4.1.2",
+    "css-loader": "^0.26.1",
     "debug": "^2.6.9",
     "deep-extend": "^0.5.1",
     "enzyme": "^3.9.0",

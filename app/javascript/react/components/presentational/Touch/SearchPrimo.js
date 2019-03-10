@@ -58,13 +58,8 @@ class SearchPrimo extends Component {
       },
       acceptValid: true,
       accepted: function(e, k, el) {
-        el.dispatchEvent(new Event("input", { bubbles: true }))
+        $("#primo_search_icon").click()
       }
-    })
-    $("#primo_search_icon").on("click", function(e) {
-      document
-        .getElementById("primo_search")
-        .dispatchEvent(new Event("input", { bubbles: true }))
     })
   }
 
@@ -81,10 +76,10 @@ class SearchPrimo extends Component {
   }
 
   performSearch(e) {
-    this.setState({ search_term: e.target.value })
+    let term = this.primo_search.value
+    this.setState({ search_term: term })
     if (this.state.search_timer === null) {
       let self = this
-      let term = e.target.value
       let search_uri = this.searchUri(term)
       let timer = setTimeout(function() {
         self.setState({ search_uri: search_uri, search_timer: null })
@@ -97,9 +92,12 @@ class SearchPrimo extends Component {
   }
 
   resetSearch(e) {
-    this.setState({ search_term: "" })
-    this.setState({ search_uri: root_dom_element.getAttribute("data-api-uri") })
-    this.setState({ search_iframe_key: Math.random() })
+    this.primo_search.value = ""
+    this.setState({
+      search_term: "",
+      search_uri: root_dom_element.getAttribute("data-api-uri"),
+      search_iframe_key: Math.random()
+    })
   }
 
   /**
@@ -123,13 +121,16 @@ class SearchPrimo extends Component {
             <div className="col-sm-6 col-sm-offset-3">
               <input
                 className="form-control"
-                value={this.state.search_term}
+                ref={input => (this.primo_search = input)}
                 type="text"
                 id="primo_search"
-                onChange={this.performSearch.bind(this)}
                 placeholder="Search Valley Library resources"
               />
-              <i id="primo_search_icon" className="material-icons">
+              <i
+                id="primo_search_icon"
+                className="material-icons"
+                onClick={e => this.performSearch(e)}
+              >
                 search
               </i>
             </div>
