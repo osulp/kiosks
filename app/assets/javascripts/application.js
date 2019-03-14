@@ -24,17 +24,3 @@
 //= require react_ujs
 //= require cable
 //= require virtual-keyboard/dist/js/jquery.keyboard
-// *******************************************************************************************
-// Do not require_tree, include_tree, or any other Sprockets goodness. Javascript within ./components is compiled
-// by webpack as 'dist-app' and required here.
-//
-// How to compile dist-app;
-// $yarn run compile
-//
-// Run production compile in 'watch' mode.
-// $yarn run prod
-//
-// Run development with hotreloading, dependent on webpack_dev directory
-// $yarn run dev
-//= require dist-app
-// *******************************************************************************************

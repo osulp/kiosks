@@ -1,3 +1,5 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
 exports[`Action::Kiosk #addError() matches the snapshot 1`] = `
 Object {
   "error": Object {

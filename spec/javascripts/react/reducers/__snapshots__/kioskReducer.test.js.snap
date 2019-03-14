@@ -1,3 +1,5 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
 exports[`Reducers::Kiosk addError action matches the snapshot 1`] = `
 Object {
   "api": Object {
@@ -57,8 +59,6 @@ Object {
   "title": "",
   "type": Object {
     "api": Object {
-      "classroom_schedule": "/api/v1/classrooms/date/{date}",
-      "classrooms": "/api/v1/classrooms/rooms",
       "hours": "/api/v1/hours",
     },
     "errors": Array [],

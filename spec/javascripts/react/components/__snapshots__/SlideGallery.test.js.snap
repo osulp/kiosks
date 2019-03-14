@@ -1,3 +1,5 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
 exports[`SlideGallery maps dispatch to props 1`] = `
 Object {
   "addError": [Function],

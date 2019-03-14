@@ -1,8 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
 exports[`Action::Modal #setModalRootComponent() matches the snapshot 1`] = `
 Object {
   "root_component": <H1>
     test
-</H1>,
+  </H1>,
   "type": "SET_MODAL_ROOT_COMPONENT",
 }
 `;
