@@ -33,8 +33,6 @@ server "#{config['host']}", user: "#{config['user']}", roles: %w{app db web}
 
 set :deploy_to, config['deploy_to']
 
-before "deploy:compile_assets", "webpack:precompile"
-
 # Custom SSH Options
 # ==================
 # You may pass any option but keep in mind that net/ssh understands a
