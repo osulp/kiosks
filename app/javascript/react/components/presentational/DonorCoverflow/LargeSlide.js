@@ -26,7 +26,7 @@ class LargeSlide extends Component {
     if (this.state.imagesLoaded + 1 >= this.state.imageCount) {
       let msnry = new Masonry(".grid", {
         itemSelector: ".grid-item",
-        gutter: 10
+        gutter: 30
       })
     }
   }
@@ -35,7 +35,7 @@ class LargeSlide extends Component {
     const exiting = () => {
       this.setState({ slideAnimationClass: "slide-exiting" })
     }
-    this.exiting_timeout = setTimeout(exiting, 124650)
+    this.exiting_timeout = setTimeout(exiting, 1224650)
   }
 
   setHideTimeout() {
@@ -43,7 +43,12 @@ class LargeSlide extends Component {
       this.props.setModalVisibility(false)
       this.props.setModalRootComponent(undefined)
     }
-    this.hide_timeout = setTimeout(hide, 125000)
+    this.hide_timeout = setTimeout(hide, 1225000)
+  }
+
+  backClicked() {
+    this.props.setModalVisibility(false)
+    this.props.setModalRootComponent(undefined)
   }
 
   componentWillUnmount() {
@@ -54,32 +59,35 @@ class LargeSlide extends Component {
   render() {
     let slide = this.props.slide
     return (
-      <div
-        className={this.state.slideAnimationClass}
-        style={{ backgroundColor: "#000", height: "90%" }}
-      >
+      <div className={this.state.slideAnimationClass}>
         <div
-          className="col-md-4"
+          className="col-md-5"
           style={{
             height: "100%",
-            backgroundColor: "#eee",
-            borderRadius: "10px",
-            padding: "2px"
+            backgroundColor: "#0d5257",
+            color: "#eee",
+            padding: "20px"
           }}
         >
-          <pre
+          <div
+            className="html-content"
+            dangerouslySetInnerHTML={{ __html: slide.collection.detail }}
+          />
+          <span
+            onClick={this.backClicked.bind(this)}
             style={{
-              whiteSpace: "pre-wrap",
-              wordBreak: "break-word",
-              fontSize: "1.25rem",
-              border: "none",
-              backgroundColor: "transparent"
+              padding: "15px",
+              border: "solid 1px #fff",
+              fontSize: "2rem",
+              position: "absolute",
+              right: "60px",
+              bottom: "60px"
             }}
           >
-            {slide.collection.detail}
-          </pre>
+            BACK
+          </span>
         </div>
-        <div className="col-md-8">
+        <div className="col-md-7" style={{ padding: "8% 3%" }}>
           <div className="grid">
             {slide.collection.slides.map((slide, i) => {
               return (
@@ -88,7 +96,7 @@ class LargeSlide extends Component {
                   key={`slide.${i}`}
                   style={{
                     width: "300px",
-                    marginBottom: "10px"
+                    marginBottom: "30px"
                   }}
                 >
                   <img

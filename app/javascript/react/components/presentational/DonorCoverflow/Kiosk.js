@@ -107,7 +107,7 @@ class Kiosk extends Component {
             </h2>
           </div>
         </div>
-        <div class="component">
+        <div className="component">
           <Coverflow
             displayQuantityOfSide={2}
             navigation={false}
@@ -136,7 +136,7 @@ class Kiosk extends Component {
                       width: "100%"
                     }}
                   />
-                  <span class="caption">{slide.caption}</span>
+                  <span className="caption">{slide.caption}</span>
                 </div>
               )
             })}
