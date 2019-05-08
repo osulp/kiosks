@@ -57,7 +57,8 @@ class Kiosk extends Component {
     this.setState({
       primary_slides: this.props.slides.filter(
         (e, i) => primary_slide_ids.findIndex(a => a === e.id) > -1
-      )
+      ),
+      active: 1
     })
   }
 
@@ -73,39 +74,74 @@ class Kiosk extends Component {
 
   render() {
     return (
-      <div id="donor_coverflow_kiosk">
+      <div id="donor_coverflow_kiosk" style={{ backgroundColor: "#0d5257" }}>
         <ConnectedModalWindow />
-        <Coverflow
-          displayQuantityOfSide={2}
-          navigation={true}
-          infiniteScroll={true}
-          enableScroll={true}
-          clickable={true}
-          enableHeading={true}
-          active={this.state.active}
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            justifyContent: "center",
+            alignItems: "center",
+            alignContent: "center"
+          }}
         >
-          {this.state.primary_slides.map((slide, i) => {
-            return (
-              <div
-                key={`slide.${i}`}
-                data-slide_index={i}
-                onClick={e => this.slideClicked(e, slide, i)}
-                onKeyDown={e => this.slideClicked(e, slide, i)}
-                role="menuitem"
-                tabIndex={i}
-              >
-                <img
-                  src={slide.original}
-                  alt={slide.caption}
-                  style={{
-                    display: "block",
-                    width: "100%"
-                  }}
-                />
-              </div>
-            )
-          })}
-        </Coverflow>
+          <div style={{ flexBasis: "25%" }}>
+            <img
+              src="/images/library1.svg"
+              style={{ width: "100%", boxShadow: "none" }}
+            />
+          </div>
+          <div style={{ textAlign: "center" }}>
+            <h2
+              style={{
+                margin: 0,
+                color: "#eee",
+                fontWeight: "lighter",
+                fontSize: "8rem"
+              }}
+            >
+              VALLEY LIBRARY
+            </h2>
+            <h2 style={{ margin: 0, color: "#eee", fontSize: "4rem" }}>
+              Donor Initiatives
+            </h2>
+          </div>
+        </div>
+        <div class="component">
+          <Coverflow
+            displayQuantityOfSide={2}
+            navigation={false}
+            infiniteScroll={true}
+            enableScroll={true}
+            clickable={true}
+            enableHeading={false}
+            active={this.state.active}
+            currentFigureScale={2}
+            otherFigureScale={1}
+          >
+            {this.state.primary_slides.map((slide, i) => {
+              return (
+                <div
+                  key={`slide.${i}`}
+                  data-slide_index={i}
+                  onClick={e => this.slideClicked(e, slide, i)}
+                  onKeyDown={e => this.slideClicked(e, slide, i)}
+                  role="menuitem"
+                  tabIndex={i}
+                >
+                  <img
+                    src={slide.original}
+                    style={{
+                      display: "block",
+                      width: "100%"
+                    }}
+                  />
+                  <span class="caption">{slide.caption}</span>
+                </div>
+              )
+            })}
+          </Coverflow>
+        </div>
       </div>
     )
   }

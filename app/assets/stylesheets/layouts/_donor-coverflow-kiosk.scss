@@ -1,7 +1,39 @@
 #donor_coverflow_kiosk {
   height: 100%;
-  > div {
+  > #modal {
     height: 100%;
+  }
+  > div {
+    width: 100%;
+    height: 30%;
+  }
+  > .component {
+    height: 70%;
+    width: 100%;
+    background-color: #222;
+    > div {
+      height: 100%;
+      width: 100%;
+    }
+    span.caption {
+      width: 100%;
+      float: left;
+      background-color: transparent;
+      color: #eee;
+      padding-top: 10px;
+      font-size: 1.7rem;
+      text-align: center;
+      font-weight: lighter;
+    }
+  }
+
+  figure,
+  div {
+    box-shadow: none;
+  }
+
+  img {
+    box-shadow: 0 50px 70px rgba(0, 0, 0, 0.5);
   }
 
   .scrollable {
