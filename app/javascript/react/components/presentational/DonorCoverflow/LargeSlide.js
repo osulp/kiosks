@@ -36,7 +36,7 @@ class LargeSlide extends Component {
     const exiting = () => {
       this.setState({ slideAnimationClass: "slide-exiting" })
     }
-    this.exiting_timeout = setTimeout(exiting, 1224650)
+    this.exiting_timeout = setTimeout(exiting, 179650)
   }
 
   setHideTimeout() {
@@ -44,7 +44,7 @@ class LargeSlide extends Component {
       this.props.setModalVisibility(false)
       this.props.setModalRootComponent(undefined)
     }
-    this.hide_timeout = setTimeout(hide, 1225000)
+    this.hide_timeout = setTimeout(hide, 180000)
   }
 
   backClicked() {
