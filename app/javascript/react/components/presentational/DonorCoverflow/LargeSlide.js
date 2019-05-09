@@ -8,7 +8,8 @@ class LargeSlide extends Component {
     this.state = {
       slideAnimationClass: "slide-entering",
       imageCount: 0,
-      imagesLoaded: -1
+      imagesLoaded: -1,
+      slideZoomedIndex: -1
     }
   }
 
@@ -51,9 +52,21 @@ class LargeSlide extends Component {
     this.props.setModalRootComponent(undefined)
   }
 
+  slideClicked(i) {
+    if (this.state.slideZoomedIndex === i) return
+    this.setState({
+      slideZoomedIndex: i
+    })
+    this.zoom_timeout = setTimeout(
+      () => this.setState({ slideZoomedIndex: -1 }),
+      5000
+    )
+  }
+
   componentWillUnmount() {
     clearTimeout(this.hide_timeout)
     clearTimeout(this.exiting_timeout)
+    clearTimeout(this.zoom_timeout)
   }
 
   render() {
@@ -73,17 +86,7 @@ class LargeSlide extends Component {
             className="html-content"
             dangerouslySetInnerHTML={{ __html: slide.collection.detail }}
           />
-          <span
-            onClick={this.backClicked.bind(this)}
-            style={{
-              padding: "15px",
-              border: "solid 1px #fff",
-              fontSize: "2rem",
-              position: "absolute",
-              right: "60px",
-              bottom: "60px"
-            }}
-          >
+          <span className="back-button" onClick={this.backClicked.bind(this)}>
             BACK
           </span>
         </div>
@@ -92,8 +95,12 @@ class LargeSlide extends Component {
             {slide.collection.slides.map((slide, i) => {
               return (
                 <div
-                  className="grid-item"
+                  className={
+                    "grid-item " +
+                    (i === this.state.slideZoomedIndex ? "zoomed" : "")
+                  }
                   key={`slide.${i}`}
+                  onClick={this.slideClicked.bind(this, i)}
                   style={{
                     width: "300px",
                     marginBottom: "30px"

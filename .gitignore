@@ -26,6 +26,7 @@
 *.log
 /coverage
 .idea/
+.vscode
 /webpack_dist
 /config/application_config.yml.erb
 /config/config.yml
