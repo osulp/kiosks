@@ -85,26 +85,26 @@ class Kiosk extends Component {
             alignContent: "center"
           }}
         >
-          <div style={{ flexBasis: "25%" }}>
-            <img
-              src="/images/library1.svg"
-              style={{ width: "100%", boxShadow: "none" }}
-            />
-          </div>
-          <div style={{ textAlign: "center" }}>
+          <div style={{ textAlign: "right" }}>
             <h2
               style={{
                 margin: 0,
                 color: "#eee",
                 fontWeight: "lighter",
-                fontSize: "8rem"
+                fontSize: "5.5rem"
               }}
             >
               VALLEY LIBRARY
             </h2>
-            <h2 style={{ margin: 0, color: "#eee", fontSize: "4rem" }}>
+            <h2 style={{ margin: 0, color: "#eee", fontSize: "7.5rem" }}>
               Donor Initiatives
             </h2>
+          </div>
+          <div style={{ flexBasis: "25%" }}>
+            <img
+              src="/images/library1.svg"
+              style={{ width: "100%", boxShadow: "none" }}
+            />
           </div>
         </div>
         <div className="component">

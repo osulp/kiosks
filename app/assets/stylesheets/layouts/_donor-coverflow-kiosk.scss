@@ -66,6 +66,9 @@
     top: 0 !important;
     background-color: #232323 !important;
     z-index: 1 !important;
+    img {
+      border: solid 2px #eee;
+    }
   }
 
   figure,
