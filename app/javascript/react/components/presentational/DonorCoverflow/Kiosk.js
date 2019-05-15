@@ -24,6 +24,8 @@ class Kiosk extends Component {
    */
   componentWillUnmount() {
     clearInterval(this.restart_kiosk_timeout)
+    clearTimeout(this.restart_active_slide_rotation_timeout)
+    clearInterval(this.rotate_slide_timeout)
   }
 
   shouldComponentUpdate(nextProps, nextState) {
@@ -31,10 +33,40 @@ class Kiosk extends Component {
       this.state.active === nextState.active &&
       nextState.activeSlide !== undefined
     ) {
-      this.props.setModalVisibility(true)
-      this.props.setModalRootComponent(
-        <LargeSlide slide={nextState.activeSlide} {...this.props} />
+      console.log(
+        "DonorCoverflowKiosk shouldComponentUpdate: showing modal, clearing timeouts"
       )
+      clearInterval(this.rotate_slide_timeout)
+      clearTimeout(this.restart_active_slide_rotation_timeout)
+      this.rotate_slide_timeout = undefined
+      this.restart_active_slide_rotation_timeout = undefined
+      this.props.setModalVisibility(true)
+      // give reference to the rotation function so that when the back button is tapped
+      // or the slide is automatically hidden, it can initiate the rotation to resume
+      this.props.setModalRootComponent(
+        <LargeSlide
+          slide={nextState.activeSlide}
+          rotateActiveSlides={this._rotateActiveSlides.bind(this)}
+          {...this.props}
+        />
+      )
+    } else {
+      // Start the slide rotation if it isn't already running and if the user
+      // hadn't tapped a slide to make it active. Otherwise, if a user had tapped
+      // a slide to make it active, then clear all of the rotation timers
+      // and set a long delay to restart the rotation. If a user hadn't interacted with the
+      // UI for many seconds, then restart the automatic rotation.
+      if (!this.rotate_slide_timeout && !nextState.activeSlide) {
+        this._rotateActiveSlides()
+      } else if (nextState.activeSlide) {
+        clearInterval(this.rotate_slide_timeout)
+        clearTimeout(this.restart_active_slide_rotation_timeout)
+        this.rotate_slide_timeout = undefined
+        this.restart_active_slide_rotation_timeout = undefined
+        this.restart_active_slide_rotation_timeout = setTimeout(() => {
+          this._rotateActiveSlides()
+        }, 45000)
+      }
     }
     return true
   }
@@ -62,6 +94,22 @@ class Kiosk extends Component {
     })
   }
 
+  _rotateActiveSlides() {
+    clearInterval(this.rotate_slide_timeout)
+    clearTimeout(this.restart_active_slide_rotation_timeout)
+    this.rotate_slide_timeout = undefined
+    this.restart_active_slide_rotation_timeout = undefined
+    this.rotate_slide_timeout = setInterval(() => {
+      const random_slide = Math.floor(
+        Math.random() * this.state.primary_slides.length
+      )
+      this.setState({
+        activeSlide: undefined,
+        active: random_slide
+      })
+    }, 30000)
+  }
+
   slideClicked(e, slide, index) {
     trackClicked(
       this.props.google_analytics,
@@ -69,6 +117,10 @@ class Kiosk extends Component {
         this.props.kiosk_id
       }:DonorCoverflowKiosk:SlideClicked`
     )
+    clearTimeout(this.restart_active_slide_rotation_timeout)
+    this.restart_active_slide_rotation_timeout = undefined
+    clearInterval(this.rotate_slide_timeout)
+    this.rotate_slide_timeout = undefined
     this.setState({ active: index, activeSlide: slide })
   }
 

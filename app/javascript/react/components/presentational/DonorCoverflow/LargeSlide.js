@@ -34,6 +34,7 @@ class LargeSlide extends Component {
 
   setExitingTimeout() {
     const exiting = () => {
+      this.props.rotateActiveSlides()
       this.setState({ slideAnimationClass: "slide-exiting" })
     }
     this.exiting_timeout = setTimeout(exiting, 179650)
@@ -50,16 +51,21 @@ class LargeSlide extends Component {
   backClicked() {
     this.props.setModalVisibility(false)
     this.props.setModalRootComponent(undefined)
+    this.props.rotateActiveSlides()
   }
 
   slideClicked(i) {
-    if (this.state.slideZoomedIndex === i) return
+    let close_zoom_timeout = 5000
+    if (this.state.slideZoomedIndex === i) {
+      clearTimeout(this.zoom_timeout)
+      close_zoom_timeout = 150
+    }
     this.setState({
       slideZoomedIndex: i
     })
     this.zoom_timeout = setTimeout(
       () => this.setState({ slideZoomedIndex: -1 }),
-      5000
+      close_zoom_timeout
     )
   }
 
@@ -126,7 +132,8 @@ class LargeSlide extends Component {
 LargeSlide.propTypes = {
   slide: PropTypes.object.isRequired,
   setModalVisibility: PropTypes.func.isRequired,
-  setModalRootComponent: PropTypes.func.isRequired
+  setModalRootComponent: PropTypes.func.isRequired,
+  rotateActiveSlides: PropTypes.func.isRequired
 }
 
 export default LargeSlide

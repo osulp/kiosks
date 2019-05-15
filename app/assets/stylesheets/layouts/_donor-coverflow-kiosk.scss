@@ -1,4 +1,8 @@
 #donor_coverflow_kiosk {
+  *:focus {
+    outline: none;
+  }
+
   height: 100%;
   > #modal {
     height: 100%;
@@ -59,12 +63,16 @@
     }
   }
 
+  .grid-item img {
+    box-shadow: none !important;
+  }
+
   .grid-item.zoomed {
     width: 100% !important;
     height: 100% !important;
-    left: 0 !important;
+    left: -1px !important;
     top: 0 !important;
-    background-color: #232323 !important;
+    background-color: #222 !important;
     z-index: 1 !important;
     img {
       border: solid 2px #eee;
