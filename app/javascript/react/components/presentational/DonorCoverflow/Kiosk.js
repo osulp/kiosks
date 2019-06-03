@@ -126,7 +126,7 @@ class Kiosk extends Component {
 
   render() {
     return (
-      <div id="donor_coverflow_kiosk" style={{ backgroundColor: "#0d5257" }}>
+      <div id="donor_coverflow_kiosk" style={{ backgroundColor: "#006A8E" }}>
         <ConnectedModalWindow />
         <div
           style={{
@@ -137,7 +137,7 @@ class Kiosk extends Component {
             alignContent: "center"
           }}
         >
-          <div style={{ textAlign: "right" }}>
+          <div className="kiosk-header" style={{ textAlign: "right" }}>
             <h2
               style={{
                 margin: 0,
@@ -146,9 +146,9 @@ class Kiosk extends Component {
                 fontSize: "5.5rem"
               }}
             >
-              VALLEY LIBRARY
+              OSU Libraries and Press
             </h2>
-            <h2 style={{ margin: 0, color: "#eee", fontSize: "7.5rem" }}>
+            <h2 style={{ margin: 0, color: "#eee", fontSize: "8rem" }}>
               Donor Initiatives
             </h2>
           </div>

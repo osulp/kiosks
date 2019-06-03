@@ -342,3 +342,8 @@ button.ui-keyboard-accept.ui-keyboard-invalid-input:hover {
   font-weight: normal;
   font-style: normal;
 }
+
+@font-face {
+  font-family: "Stratum2WebBold";
+  src: asset_url("/fonts/Stratum2WebBold.woff") format("woff");
+}

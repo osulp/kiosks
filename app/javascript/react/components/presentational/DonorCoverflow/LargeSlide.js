@@ -78,12 +78,19 @@ class LargeSlide extends Component {
   render() {
     let slide = this.props.slide
     return (
-      <div className={this.state.slideAnimationClass}>
+      <div
+        className={this.state.slideAnimationClass}
+        onClick={() => {
+          if (this.state.slideZoomedIndex !== -1) {
+            this.setState({ slideZoomedIndex: -1 })
+          }
+        }}
+      >
         <div
           className="col-md-5"
           style={{
             height: "100%",
-            backgroundColor: "#0d5257",
+            backgroundColor: "#006A8E",
             color: "#eee",
             padding: "20px"
           }}
