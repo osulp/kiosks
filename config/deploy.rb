@@ -19,7 +19,7 @@ set :rbenv_ruby, '2.5.1'
 # The server must have nvm installed at the user level, and to have yarn installed globally as an npm package
 # for the node version specified here.
 set :nvm_type, :user
-set :nvm_node, '10.15.3'
+set :nvm_node, 'v10.15.3'
 set :nvm_map_bins, %w{node npm yarn}
 
 # Default value for :format is :airbrussh.
