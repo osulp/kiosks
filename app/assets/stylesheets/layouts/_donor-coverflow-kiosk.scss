@@ -3,6 +3,18 @@
 }
 
 #donor_coverflow_kiosk {
+  .component button {
+    background-color: #1d1d1d;
+    border-color: #9c9c9c;
+    color: #9c9c9c;
+    margin: 0 15px;
+    font-size: 2rem;
+    &:hover {
+      background-color: #eee;
+      color: #1d1d1d;
+    }
+  }
+
   *:focus {
     outline: none;
   }

@@ -1,53 +1,38 @@
-import React, { Component } from "react"
+import React, { useEffect, useState } from "react"
 import PropTypes from "prop-types"
 import ConnectedModalWindow from "../../ModalWindow"
 import Coverflow from "react-coverflow"
 import LargeSlide from "./LargeSlide"
 import { trackClicked } from "../shared/GoogleAnalytics"
 
-class Kiosk extends Component {
-  constructor(props) {
-    super(props)
-    this.state = { active: 0, primary_slides: [], activeSlide: undefined }
-  }
+const Kiosk = props => {
+  const [active, setActive] = useState(0)
+  const [activeSlide, setActiveSlide] = useState(undefined)
+  const [primary_slides, setPrimarySlides] = useState([])
+  const [restart_kiosk_timeout, setRestartKioskTimeout] = useState(undefined)
+  const [rotate_slide_timeout, setRotateSlideTimeout] = useState(undefined)
+  const [
+    restart_active_slide_rotation_timeout,
+    setRestartActiveSlideRotationTimeout
+  ] = useState(undefined)
 
-  /**
-   * After the component mounts, fetch the restart_kiosk value
-   */
-  componentDidMount() {
-    this._fetchRestartKioskTimeout()
-    this._primarySlides()
-  }
-
-  /**
-   * Before the component unmounts, clear the timeouts.
-   */
-  componentWillUnmount() {
-    clearInterval(this.restart_kiosk_timeout)
-    clearTimeout(this.restart_active_slide_rotation_timeout)
-    clearInterval(this.rotate_slide_timeout)
-  }
-
-  shouldComponentUpdate(nextProps, nextState) {
-    if (
-      this.state.active === nextState.active &&
-      nextState.activeSlide !== undefined
-    ) {
+  useEffect(() => {
+    if (active && activeSlide !== undefined) {
       console.log(
         "DonorCoverflowKiosk shouldComponentUpdate: showing modal, clearing timeouts"
       )
-      clearInterval(this.rotate_slide_timeout)
-      clearTimeout(this.restart_active_slide_rotation_timeout)
-      this.rotate_slide_timeout = undefined
-      this.restart_active_slide_rotation_timeout = undefined
-      this.props.setModalVisibility(true)
+      clearInterval(rotate_slide_timeout)
+      clearTimeout(restart_active_slide_rotation_timeout)
+      setRotateSlideTimeout(undefined)
+      setRestartActiveSlideRotationTimeout(undefined)
+      props.setModalVisibility(true)
       // give reference to the rotation function so that when the back button is tapped
       // or the slide is automatically hidden, it can initiate the rotation to resume
-      this.props.setModalRootComponent(
+      props.setModalRootComponent(
         <LargeSlide
-          slide={nextState.activeSlide}
-          rotateActiveSlides={this._rotateActiveSlides.bind(this)}
-          {...this.props}
+          slide={activeSlide}
+          rotateActiveSlides={_rotateActiveSlides}
+          {...props}
         />
       )
     } else {
@@ -56,147 +41,146 @@ class Kiosk extends Component {
       // a slide to make it active, then clear all of the rotation timers
       // and set a long delay to restart the rotation. If a user hadn't interacted with the
       // UI for many seconds, then restart the automatic rotation.
-      if (!this.rotate_slide_timeout && !nextState.activeSlide) {
-        this._rotateActiveSlides()
-      } else if (nextState.activeSlide) {
-        clearInterval(this.rotate_slide_timeout)
-        clearTimeout(this.restart_active_slide_rotation_timeout)
-        this.rotate_slide_timeout = undefined
-        this.restart_active_slide_rotation_timeout = undefined
-        this.restart_active_slide_rotation_timeout = setTimeout(() => {
-          this._rotateActiveSlides()
-        }, 45000)
+      if (!rotate_slide_timeout && !activeSlide) {
+        _rotateActiveSlides()
+      } else if (activeSlide) {
+        clearInterval(rotate_slide_timeout)
+        clearTimeout(restart_active_slide_rotation_timeout)
+        setRotateSlideTimeout(undefined)
+        setRestartActiveSlideRotationTimeout(
+          setTimeout(() => {
+            _rotateActiveSlides()
+          }, 45000)
+        )
       }
     }
-    return true
-  }
+    return () => {
+      clearInterval(restart_kiosk_timeout)
+      clearTimeout(restart_active_slide_rotation_timeout)
+      clearInterval(rotate_slide_timeout)
+    }
+  }, [active, activeSlide])
 
-  /**
-   * Fetch the restart_kiosk value for donor kiosk every 1 minute in order to restart the kiosk as scheduled
-   * @private
-   */
-  _fetchRestartKioskTimeout() {
-    this.restart_kiosk_timeout = setInterval(() => {
-      this.props.fetchRestartKiosk(this.props.url)
+  useEffect(() => {
+    _fetchRestartKioskTimeout(props)
+    _primarySlides(props)
+  }, [])
+
+  const _fetchRestartKioskTimeout = props => {
+    const interval_id = setInterval(() => {
+      props.fetchRestartKiosk(props.url)
     }, 1 * 60 * 1000)
+    setRestartKioskTimeout(interval_id)
   }
 
-  _primarySlides() {
-    let primary_slide_ids = this.props.slides.map(
+  const _primarySlides = props => {
+    let primary_slide_ids = props.slides.map(
       (s, _i) => s.collection.primary_slide.id
     )
-    // in-line unique filter
-    this.setState({
-      primary_slides: this.props.slides.filter(
+    setPrimarySlides(
+      props.slides.filter(
         (e, i) => primary_slide_ids.findIndex(a => a === e.id) > -1
-      ),
-      active: 1
-    })
-  }
-
-  _rotateActiveSlides() {
-    clearInterval(this.rotate_slide_timeout)
-    clearTimeout(this.restart_active_slide_rotation_timeout)
-    this.rotate_slide_timeout = undefined
-    this.restart_active_slide_rotation_timeout = undefined
-    this.rotate_slide_timeout = setInterval(() => {
-      const random_slide = Math.floor(
-        Math.random() * this.state.primary_slides.length
       )
-      this.setState({
-        activeSlide: undefined,
-        active: random_slide
-      })
-    }, 30000)
-  }
-
-  slideClicked(e, slide, index) {
-    trackClicked(
-      this.props.google_analytics,
-      `${this.props.kiosk_name}:${
-        this.props.kiosk_id
-      }:DonorCoverflowKiosk:SlideClicked`
     )
-    clearTimeout(this.restart_active_slide_rotation_timeout)
-    this.restart_active_slide_rotation_timeout = undefined
-    clearInterval(this.rotate_slide_timeout)
-    this.rotate_slide_timeout = undefined
-    this.setState({ active: index, activeSlide: slide })
+    setActive(1)
   }
 
-  render() {
-    return (
-      <div id="donor_coverflow_kiosk" style={{ backgroundColor: "#006A8E" }}>
-        <ConnectedModalWindow />
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "row",
-            justifyContent: "center",
-            alignItems: "center",
-            alignContent: "center"
-          }}
-        >
-          <div className="kiosk-header" style={{ textAlign: "right" }}>
-            <h2
-              style={{
-                margin: 0,
-                color: "#eee",
-                fontWeight: "lighter",
-                fontSize: "5.5rem"
-              }}
-            >
-              OSU Libraries and Press
-            </h2>
-            <h2 style={{ margin: 0, color: "#eee", fontSize: "8rem" }}>
-              Donor Initiatives
-            </h2>
-          </div>
-          <div style={{ flexBasis: "25%" }}>
-            <img
-              src="/images/library1.svg"
-              style={{ width: "100%", boxShadow: "none" }}
-            />
-          </div>
-        </div>
-        <div className="component">
-          <Coverflow
-            displayQuantityOfSide={2}
-            navigation={false}
-            infiniteScroll={true}
-            enableScroll={true}
-            clickable={true}
-            enableHeading={false}
-            active={this.state.active}
-            currentFigureScale={2}
-            otherFigureScale={1}
+  const _rotateActiveSlides = () => {
+    clearTimeout(restart_active_slide_rotation_timeout)
+    clearInterval(rotate_slide_timeout)
+    setRotateSlideTimeout(undefined)
+    setRestartActiveSlideRotationTimeout(undefined)
+    const interval_id = setInterval(() => {
+      const random_slide = Math.floor(Math.random() * primary_slides.length)
+      setActiveSlide(undefined)
+      setActive(random_slide)
+    }, 30000)
+    setRotateSlideTimeout(interval_id)
+  }
+
+  const slideClicked = (e, slide, index, props) => {
+    trackClicked(
+      props.google_analytics,
+      `${props.kiosk_name}:${props.kiosk_id}:DonorCoverflowKiosk:SlideClicked`
+    )
+    clearTimeout(restart_active_slide_rotation_timeout)
+    clearInterval(rotate_slide_timeout)
+    setRotateSlideTimeout(undefined)
+    setRestartActiveSlideRotationTimeout(undefined)
+    setActive(index)
+    setActiveSlide(slide)
+  }
+  return (
+    <div id="donor_coverflow_kiosk" style={{ backgroundColor: "#006A8E" }}>
+      <ConnectedModalWindow />
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "row",
+          justifyContent: "center",
+          alignItems: "center",
+          alignContent: "center"
+        }}
+      >
+        <div className="kiosk-header" style={{ textAlign: "right" }}>
+          <h2
+            style={{
+              margin: 0,
+              color: "#eee",
+              fontWeight: "lighter",
+              fontSize: "5.5rem"
+            }}
           >
-            {this.state.primary_slides.map((slide, i) => {
-              return (
-                <div
-                  key={`slide.${i}`}
-                  data-slide_index={i}
-                  onClick={e => this.slideClicked(e, slide, i)}
-                  onKeyDown={e => this.slideClicked(e, slide, i)}
-                  role="menuitem"
-                  tabIndex={i}
-                >
-                  <img
-                    src={slide.original}
-                    style={{
-                      display: "block",
-                      width: "100%"
-                    }}
-                  />
-                  <span className="caption">{slide.caption}</span>
-                </div>
-              )
-            })}
-          </Coverflow>
+            OSU Libraries and Press
+          </h2>
+          <h2 style={{ margin: 0, color: "#eee", fontSize: "8rem" }}>
+            Donor Initiatives
+          </h2>
+        </div>
+        <div style={{ flexBasis: "25%" }}>
+          <img
+            src="/images/library1.svg"
+            style={{ width: "100%", boxShadow: "none" }}
+          />
         </div>
       </div>
-    )
-  }
+      <div className="component">
+        <Coverflow
+          displayQuantityOfSide={2}
+          navigation={true}
+          infiniteScroll={true}
+          enableScroll={true}
+          clickable={true}
+          enableHeading={false}
+          active={active}
+          currentFigureScale={2}
+          otherFigureScale={1}
+        >
+          {primary_slides.map((slide, i) => {
+            return (
+              <div
+                key={`slide.${i}`}
+                data-slide_index={i}
+                onClick={e => slideClicked(e, slide, i, props)}
+                onKeyDown={e => slideClicked(e, slide, i, props)}
+                role="menuitem"
+                tabIndex={i}
+              >
+                <img
+                  src={slide.original}
+                  style={{
+                    display: "block",
+                    width: "100%"
+                  }}
+                />
+                <span className="caption">{slide.caption}</span>
+              </div>
+            )
+          })}
+        </Coverflow>
+      </div>
+    </div>
+  )
 }
 
 Kiosk.propTypes = {
