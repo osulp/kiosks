@@ -7,8 +7,7 @@ import { trackClicked } from "../shared/GoogleAnalytics"
 
 const Kiosk = props => {
   // Set local state variables and setter methods
-  const [active, setActive] = useState(0)
-  const [active_slide, setActiveSlide] = useState(undefined)
+  const [active, setActive] = useState({ index: 1, slide: undefined })
   const [primary_slides, setPrimarySlides] = useState([])
   const [restart_kiosk_timeout, setRestartKioskTimeout] = useState(undefined)
   const [rotate_slide_timeout, setRotateSlideTimeout] = useState(undefined)
@@ -21,14 +20,14 @@ const Kiosk = props => {
   // - If the active slide is set, then clear the timers and display the popup modal with the LargeSlide UI
   // - Otherwise, set the active slide rotation timer
   useEffect(() => {
-    if (active && active_slide !== undefined) {
+    if (active.index > 0 && active.slide !== undefined) {
       setTimers(undefined, undefined)
       props.setModalVisibility(true)
       // give reference to the rotation function so that when the back button is tapped
       // or the slide is automatically hidden, it can initiate the rotation to resume
       props.setModalRootComponent(
         <LargeSlide
-          slide={active_slide}
+          slide={active.slide}
           rotateActiveSlides={rotateActiveSlides}
           {...props}
         />
@@ -39,9 +38,9 @@ const Kiosk = props => {
       // a slide to make it active, then clear all of the rotation timers
       // and set a long delay to restart the rotation. If a user hadn't interacted with the
       // UI for many seconds, then restart the automatic rotation.
-      if (!rotate_slide_timeout && !active_slide) {
+      if (!rotate_slide_timeout && !active.slide) {
         rotateActiveSlides()
-      } else if (active_slide) {
+      } else if (active.slide) {
         setTimers(
           undefined,
           setTimeout(() => {
@@ -56,7 +55,7 @@ const Kiosk = props => {
       clearTimeout(restart_active_slide_rotation_timeout)
       clearInterval(rotate_slide_timeout)
     }
-  }, [active, active_slide])
+  }, [active])
 
   // One time, when the Kiosk UI is first mounted, fetch some data and filter the slides.
   // The behavior happens because the trailing empty array `useEffect(fn, [])` causes React
@@ -70,7 +69,7 @@ const Kiosk = props => {
     setPrimarySlides(
       props.slides.filter(e => slide_ids.findIndex(a => a === e.id) > -1)
     )
-    setActive(1)
+    setActive({ index: 1, slide: undefined })
   }, [])
 
   // Randomly select one of the primary slides and set it as active every 30 seconds
@@ -79,8 +78,7 @@ const Kiosk = props => {
     setTimers(undefined, undefined)
     const interval_id = setInterval(() => {
       const random_slide = Math.floor(Math.random() * primary_slides.length)
-      setActiveSlide(undefined)
-      setActive(random_slide)
+      setActive({ index: random_slide, slide: undefined })
     }, 30000)
     setRotateSlideTimeout(interval_id)
   }
@@ -95,8 +93,11 @@ const Kiosk = props => {
       `${props.kiosk_name}:${props.kiosk_id}:DonorCoverflowKiosk:SlideClicked`
     )
     setTimers(undefined, undefined)
-    setActive(index)
-    setActiveSlide(slide)
+    if (active.index == index) {
+      setActive({ index: index, slide: slide })
+    } else {
+      setActive({ index: index, slide: undefined })
+    }
   }
 
   const setTimers = (slide_timeout, restart_active_timeout) => {
@@ -148,7 +149,7 @@ const Kiosk = props => {
           enableScroll={true}
           clickable={true}
           enableHeading={false}
-          active={active}
+          active={active.index}
           currentFigureScale={2}
           otherFigureScale={1}
         >
