@@ -6,8 +6,9 @@ import LargeSlide from "./LargeSlide"
 import { trackClicked } from "../shared/GoogleAnalytics"
 
 const Kiosk = props => {
+  // Set local state variables and setter methods
   const [active, setActive] = useState(0)
-  const [activeSlide, setActiveSlide] = useState(undefined)
+  const [active_slide, setActiveSlide] = useState(undefined)
   const [primary_slides, setPrimarySlides] = useState([])
   const [restart_kiosk_timeout, setRestartKioskTimeout] = useState(undefined)
   const [rotate_slide_timeout, setRotateSlideTimeout] = useState(undefined)
@@ -16,22 +17,19 @@ const Kiosk = props => {
     setRestartActiveSlideRotationTimeout
   ] = useState(undefined)
 
+  // When active or active_slide state changes, determine what to do;
+  // - If the active slide is set, then clear the timers and display the popup modal with the LargeSlide UI
+  // - Otherwise, set the active slide rotation timer
   useEffect(() => {
-    if (active && activeSlide !== undefined) {
-      console.log(
-        "DonorCoverflowKiosk shouldComponentUpdate: showing modal, clearing timeouts"
-      )
-      clearInterval(rotate_slide_timeout)
-      clearTimeout(restart_active_slide_rotation_timeout)
-      setRotateSlideTimeout(undefined)
-      setRestartActiveSlideRotationTimeout(undefined)
+    if (active && active_slide !== undefined) {
+      setTimers(undefined, undefined)
       props.setModalVisibility(true)
       // give reference to the rotation function so that when the back button is tapped
       // or the slide is automatically hidden, it can initiate the rotation to resume
       props.setModalRootComponent(
         <LargeSlide
-          slide={activeSlide}
-          rotateActiveSlides={_rotateActiveSlides}
+          slide={active_slide}
+          rotateActiveSlides={rotateActiveSlides}
           {...props}
         />
       )
@@ -41,55 +39,44 @@ const Kiosk = props => {
       // a slide to make it active, then clear all of the rotation timers
       // and set a long delay to restart the rotation. If a user hadn't interacted with the
       // UI for many seconds, then restart the automatic rotation.
-      if (!rotate_slide_timeout && !activeSlide) {
-        _rotateActiveSlides()
-      } else if (activeSlide) {
-        clearInterval(rotate_slide_timeout)
-        clearTimeout(restart_active_slide_rotation_timeout)
-        setRotateSlideTimeout(undefined)
-        setRestartActiveSlideRotationTimeout(
+      if (!rotate_slide_timeout && !active_slide) {
+        rotateActiveSlides()
+      } else if (active_slide) {
+        setTimers(
+          undefined,
           setTimeout(() => {
-            _rotateActiveSlides()
+            rotateActiveSlides()
           }, 45000)
         )
       }
     }
+    // When the Kiosk component is unmounted, clear out all of the timers beforehand
     return () => {
       clearInterval(restart_kiosk_timeout)
       clearTimeout(restart_active_slide_rotation_timeout)
       clearInterval(rotate_slide_timeout)
     }
-  }, [active, activeSlide])
+  }, [active, active_slide])
 
+  // One time, when the Kiosk UI is first mounted, fetch some data and filter the slides.
+  // The behavior happens because the trailing empty array `useEffect(fn, [])` causes React
+  // hooks to only first this function on component mount.
   useEffect(() => {
-    _fetchRestartKioskTimeout(props)
-    _primarySlides(props)
-  }, [])
-
-  const _fetchRestartKioskTimeout = props => {
     const interval_id = setInterval(() => {
       props.fetchRestartKiosk(props.url)
     }, 1 * 60 * 1000)
     setRestartKioskTimeout(interval_id)
-  }
-
-  const _primarySlides = props => {
-    let primary_slide_ids = props.slides.map(
-      (s, _i) => s.collection.primary_slide.id
-    )
+    const slide_ids = props.slides.map(s => s.collection.primary_slide.id)
     setPrimarySlides(
-      props.slides.filter(
-        (e, i) => primary_slide_ids.findIndex(a => a === e.id) > -1
-      )
+      props.slides.filter(e => slide_ids.findIndex(a => a === e.id) > -1)
     )
     setActive(1)
-  }
+  }, [])
 
-  const _rotateActiveSlides = () => {
-    clearTimeout(restart_active_slide_rotation_timeout)
-    clearInterval(rotate_slide_timeout)
-    setRotateSlideTimeout(undefined)
-    setRestartActiveSlideRotationTimeout(undefined)
+  // Randomly select one of the primary slides and set it as active every 30 seconds
+  // causing the "coverflow" UI to change which slide is in the foreground
+  const rotateActiveSlides = () => {
+    setTimers(undefined, undefined)
     const interval_id = setInterval(() => {
       const random_slide = Math.floor(Math.random() * primary_slides.length)
       setActiveSlide(undefined)
@@ -98,18 +85,27 @@ const Kiosk = props => {
     setRotateSlideTimeout(interval_id)
   }
 
-  const slideClicked = (e, slide, index, props) => {
+  // When a slide is clicked, set local state active and active_slide to change
+  // and the side effect function to operate. On the first click, this causes
+  // the slide to scroll to the foreground. On the second click, if the slide is
+  // currently active (in the foreground) then the LargeSlide UI modal will be displayed
+  const slideClicked = (_e, slide, index, props) => {
     trackClicked(
       props.google_analytics,
       `${props.kiosk_name}:${props.kiosk_id}:DonorCoverflowKiosk:SlideClicked`
     )
-    clearTimeout(restart_active_slide_rotation_timeout)
-    clearInterval(rotate_slide_timeout)
-    setRotateSlideTimeout(undefined)
-    setRestartActiveSlideRotationTimeout(undefined)
+    setTimers(undefined, undefined)
     setActive(index)
     setActiveSlide(slide)
   }
+
+  const setTimers = (slide_timeout, restart_active_timeout) => {
+    clearTimeout(restart_active_slide_rotation_timeout)
+    clearInterval(rotate_slide_timeout)
+    setRotateSlideTimeout(slide_timeout)
+    setRestartActiveSlideRotationTimeout(restart_active_timeout)
+  }
+
   return (
     <div id="donor_coverflow_kiosk" style={{ backgroundColor: "#006A8E" }}>
       <ConnectedModalWindow />
