@@ -1,117 +1,130 @@
-import React, { Component } from "react"
+import React, { useEffect, useState } from "react"
 import PropTypes from "prop-types"
 import Masonry from "masonry-layout"
 
-class LargeSlide extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      slideAnimationClass: "slide-entering",
-      imageCount: 0,
-      imagesLoaded: -1
+const LargeSlide = props => {
+  const [slideAnimationClass, setSlideAnimationClass] = useState(
+    "slide-entering"
+  )
+  const [imageCount, setImageCount] = useState(0)
+  const [imagesLoaded, setImagesLoaded] = useState(-1)
+  const [slideZoomedIndex, setSlideZoomedIndex] = useState(-1)
+  const [exitingTimeout, setExitingTimeout] = useState(undefined)
+  const [hideTimeout, setHideTimeout] = useState(undefined)
+  const [zoomTimeout, setZoomTimeout] = useState(undefined)
+
+  useEffect(() => {
+    const exiting_timeout = setTimeout(() => {
+      props.rotateActiveSlides()
+      setSlideAnimationClass("slide-exiting")
+    }, 179650)
+    setExitingTimeout(exiting_timeout)
+    const hide_timeout = setTimeout(() => {
+      props.setModalVisibility(false)
+      props.setModalRootComponent(undefined)
+    }, 180000)
+    setHideTimeout(hide_timeout)
+    setImageCount(props.slide.collection.slides.length)
+    setImagesLoaded(0)
+    return () => {
+      clearTimeout(hideTimeout)
+      clearTimeout(exitingTimeout)
+      clearTimeout(zoomTimeout)
     }
-  }
+  }, [])
 
-  componentDidMount() {
-    this.setExitingTimeout()
-    this.setHideTimeout()
-    this.setState({
-      imageCount: this.props.slide.collection.slides.length,
-      imagesLoaded: 0
-    })
-  }
-
-  handleImageLoaded() {
-    this.setState({ imagesLoaded: this.state.imagesLoaded + 1 })
-    if (this.state.imagesLoaded + 1 >= this.state.imageCount) {
-      let msnry = new Masonry(".grid", {
+  const handleImageLoaded = () => {
+    setImagesLoaded(imagesLoaded + 1)
+    if (imagesLoaded + 1 >= imageCount) {
+      new Masonry(".grid", {
         itemSelector: ".grid-item",
-        gutter: 10
+        gutter: 30
       })
     }
   }
 
-  setExitingTimeout() {
-    const exiting = () => {
-      this.setState({ slideAnimationClass: "slide-exiting" })
+  const backClicked = () => {
+    props.setModalVisibility(false)
+    props.setModalRootComponent(undefined)
+    props.rotateActiveSlides()
+  }
+
+  const slideClicked = i => {
+    let close_zoom_timeout = 5000
+    if (slideZoomedIndex === i) {
+      clearTimeout(zoomTimeout)
+      close_zoom_timeout = 150
     }
-    this.exiting_timeout = setTimeout(exiting, 124650)
+    setSlideZoomedIndex(i)
+    const zoom_timeout = setTimeout(
+      () => setSlideZoomedIndex(-1),
+      close_zoom_timeout
+    )
+    setZoomTimeout(zoom_timeout)
   }
 
-  setHideTimeout() {
-    const hide = () => {
-      this.props.setModalVisibility(false)
-      this.props.setModalRootComponent(undefined)
-    }
-    this.hide_timeout = setTimeout(hide, 125000)
-  }
-
-  componentWillUnmount() {
-    clearTimeout(this.hide_timeout)
-    clearTimeout(this.exiting_timeout)
-  }
-
-  render() {
-    let slide = this.props.slide
-    return (
+  return (
+    <div
+      className={slideAnimationClass}
+      onClick={() => {
+        if (slideZoomedIndex !== -1) {
+          setSlideZoomedIndex(-1)
+        }
+      }}
+    >
       <div
-        className={this.state.slideAnimationClass}
-        style={{ backgroundColor: "#000", height: "90%" }}
+        className="col-md-5"
+        style={{
+          height: "100%",
+          backgroundColor: "#006A8E",
+          color: "#eee",
+          padding: "20px"
+        }}
       >
         <div
-          className="col-md-4"
-          style={{
-            height: "100%",
-            backgroundColor: "#eee",
-            borderRadius: "10px",
-            padding: "2px"
-          }}
-        >
-          <pre
-            style={{
-              whiteSpace: "pre-wrap",
-              wordBreak: "break-word",
-              fontSize: "1.25rem",
-              border: "none",
-              backgroundColor: "transparent"
-            }}
-          >
-            {slide.collection.detail}
-          </pre>
-        </div>
-        <div className="col-md-8">
-          <div className="grid">
-            {slide.collection.slides.map((slide, i) => {
-              return (
-                <div
-                  className="grid-item"
-                  key={`slide.${i}`}
+          className="html-content"
+          dangerouslySetInnerHTML={{ __html: props.slide.collection.detail }}
+        />
+        <span className="back-button" onClick={backClicked}>
+          BACK
+        </span>
+      </div>
+      <div className="col-md-7" style={{ padding: "8% 3%" }}>
+        <div className="grid">
+          {props.slide.collection.slides.map((s, i) => {
+            return (
+              <div
+                className={
+                  "grid-item " + (i === slideZoomedIndex ? "zoomed" : "")
+                }
+                key={`slide.${i}`}
+                onClick={_e => slideClicked(i)}
+                style={{
+                  width: "300px",
+                  marginBottom: "30px"
+                }}
+              >
+                <img
+                  src={s.original}
                   style={{
-                    width: "300px",
-                    marginBottom: "10px"
+                    width: "100%"
                   }}
-                >
-                  <img
-                    src={slide.original}
-                    style={{
-                      width: "100%"
-                    }}
-                    onLoad={this.handleImageLoaded.bind(this)}
-                  />
-                </div>
-              )
-            })}
-          </div>
+                  onLoad={handleImageLoaded}
+                />
+              </div>
+            )
+          })}
         </div>
       </div>
-    )
-  }
+    </div>
+  )
 }
 
 LargeSlide.propTypes = {
   slide: PropTypes.object.isRequired,
   setModalVisibility: PropTypes.func.isRequired,
-  setModalRootComponent: PropTypes.func.isRequired
+  setModalRootComponent: PropTypes.func.isRequired,
+  rotateActiveSlides: PropTypes.func.isRequired
 }
 
 export default LargeSlide

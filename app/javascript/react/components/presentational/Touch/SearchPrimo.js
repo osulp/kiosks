@@ -1,8 +1,27 @@
 import React, { Component } from "react"
 import PropTypes from "prop-types"
-import keyboard from "virtual-keyboard/dist/js/jquery.keyboard"
+import Keyboard from "react-simple-keyboard"
+import "react-simple-keyboard/build/css/index.css"
 
 const root_dom_element = document.getElementById("application_root")
+const keyboard_layout = {
+  default: [
+    "{clear} {enter} {hide}",
+    "1 2 3 4 5 6 7 8 9 0 - = {bksp}",
+    "q w e r t y u i o p [ ] \\",
+    "a s d f g h j k l ; ' {enter}",
+    "z x c v b n m , . / {shift}",
+    "{space}"
+  ],
+  shift: [
+    "{clear} {enter} {hide}",
+    "! @ # $ % ^ & * ( ) _ + {bksp}",
+    "Q W E R T Y U I O P { } |",
+    'A S D F G H J K L : " {enter}',
+    "Z X C V B N M < > ? {shift}",
+    "{space}"
+  ]
+}
 
 class Iframe extends Component {
   render() {
@@ -35,32 +54,10 @@ class SearchPrimo extends Component {
       search_timer: null,
       search_uri: root_dom_element.getAttribute("data-api-uri"),
       search_iframe_key: Math.random(),
-      search_term: ""
+      search_term: "",
+      keyboardVisible: true,
+      layoutName: "default"
     }
-  }
-
-  componentDidMount() {
-    $("#primo_search").keyboard({
-      autoAccept: true,
-      layout: "custom",
-      customLayout: {
-        normal: [
-          "1 2 3 4 5 6 7 8 9 0 - = {bksp} {clear!!}",
-          "q w e r t y u i o p",
-          "a s d f g h j k l ; '",
-          "z x c v b n m , .",
-          "{cancel} {space} {accept}"
-        ]
-      },
-      display: {
-        clear: "Clear",
-        accept: "Search"
-      },
-      acceptValid: true,
-      accepted: function(e, k, el) {
-        $("#primo_search_icon").click()
-      }
-    })
   }
 
   searchUri(term) {
@@ -100,6 +97,26 @@ class SearchPrimo extends Component {
     })
   }
 
+  onKeyPress = button => {
+    if (button === "{shift}" || button === "{lock}") this.handleShift()
+    if (button === "{enter}") {
+      this.setState({ keyboardVisible: false })
+      this.performSearch()
+    }
+    if (button === "{clear}" || button === "{hide}") {
+      this.primo_search.value = ""
+      this.setState({ keyboardVisible: false })
+      this.keyboardRef.keyboard.clearInput()
+    }
+  }
+
+  handleShift = () => {
+    let layoutName = this.state.layoutName
+    this.setState({
+      layoutName: layoutName === "default" ? "shift" : "default"
+    })
+  }
+
   /**
    * Includes Bootstrap elements for mobile and regular displays using hidden-*  and col-* semantics
    * @returns {JSX} - the rendered UI
@@ -119,12 +136,32 @@ class SearchPrimo extends Component {
               </button>
             </div>
             <div className="col-sm-6 col-sm-offset-3">
+              <div
+                className={`keyboard-container ${
+                  this.state.keyboardVisible ? "" : "hidden"
+                }`}
+              >
+                <Keyboard
+                  ref={r => (this.keyboardRef = r)}
+                  layout={keyboard_layout}
+                  display={{
+                    "{hide}": "Hide Keyboard",
+                    "{enter}": "Search",
+                    "{clear}": "Clear"
+                  }}
+                  mergeDisplay={true}
+                  layoutName={this.state.layoutName}
+                  onChange={input => (this.primo_search.value = input)}
+                  onKeyPress={button => this.onKeyPress(button)}
+                />
+              </div>
               <input
                 className="form-control"
                 ref={input => (this.primo_search = input)}
                 type="text"
                 id="primo_search"
                 placeholder="Search Valley Library resources"
+                onClick={() => this.setState({ keyboardVisible: true })}
               />
               <i
                 id="primo_search_icon"

@@ -17,6 +17,13 @@
     ],
     "setupFiles": [
       "<rootDir>/spec/javascripts/react/.setup.js"
+    ],
+    "moduleNameMapper": {
+      ".+\\.(css|styl|less|sass|scss|png|jpg|ttf|woff|woff2)$": "<rootDir>/spec/javascripts/react/__mocks__/styleMock.js"
+    },
+    "testPathIgnorePatterns": [
+      "/node_modules",
+      "config/"
     ]
   },
   "repository": "https://github.com/osulp/kiosks.git",
@@ -25,35 +32,45 @@
   "dependencies": {
     "@rails/webpacker": "^4.0",
     "fstream": "^1.0.12",
+    "babel-plugin-transform-react-remove-prop-types": "^0.4.24",
+    "handlebars": "^4.1.2",
     "jquery": "^3.4.0",
     "jquery-ui": "^1.12.1",
+    "js-yaml": "^3.13.1",
     "masonry-layout": "^4.2.2",
     "moment": "^2.19.3",
     "prop-types": "^15.7.2",
     "rc-calendar": "^9.10.10",
-    "react": "^16.8.4",
+    "react": "^16.8.6",
     "react-addons-css-transition-group": "^16.0.0-alpha.3",
     "react-coverflow": "osulp/react-coverflow",
-    "react-dom": "^16.8.4",
+    "react-dom": "^16.8.6",
     "react-image-gallery": "^0.8.14",
     "react-redux": "^4.4.6",
-    "react-virtual-keyboard": "^1.0.2",
+    "react-simple-keyboard": "^1.24.0",
     "redux": "^3.6.0",
     "redux-devtools": "^3.3.1",
     "redux-devtools-dock-monitor": "^1.1.1",
     "redux-devtools-log-monitor": "^1.1.1",
     "redux-thunk": "^2.1.0",
     "typescript": "*",
-    "virtual-keyboard": "^1.28.0",
     "webpack": "^4.29"
   },
   "devDependencies": {
     "@babel/core": "^7.0.0",
+    "@babel/plugin-proposal-class-properties": "^7.4.4",
+    "@babel/plugin-proposal-object-rest-spread": "^7.4.4",
+    "@babel/plugin-syntax-dynamic-import": "^7.2.0",
+    "@babel/plugin-transform-destructuring": "^7.4.4",
+    "@babel/plugin-transform-regenerator": "^7.4.5",
+    "@babel/plugin-transform-runtime": "^7.4.4",
     "@babel/polyfill": "^7.0.0",
+    "@babel/preset-env": "^7.4.5",
     "@babel/preset-react": "^7.0.0",
     "babel-core": "^7.0.0-bridge.0",
     "babel-jest": "^23.4.2",
     "babel-loader": "^8.0.0",
+    "babel-plugin-macros": "^2.6.1",
     "cached-path-relative": "^1.0.2",
     "cryptiles": "^4.1.2",
     "css-loader": "^0.26.1",

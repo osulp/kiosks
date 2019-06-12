@@ -1,7 +1,107 @@
+.kiosk-header h2 {
+  font-family: "Stratum2WebBold" !important;
+}
+
 #donor_coverflow_kiosk {
+  .component button {
+    background-color: #1d1d1d;
+    border-color: #9c9c9c;
+    color: #9c9c9c;
+    margin: 0 15px;
+    font-size: 2rem;
+    &:hover {
+      background-color: #eee;
+      color: #1d1d1d;
+    }
+  }
+
+  *:focus {
+    outline: none;
+  }
+
   height: 100%;
-  > div {
+  > #modal {
     height: 100%;
+  }
+  > div {
+    width: 100%;
+    height: 30%;
+  }
+  > .component {
+    height: 70%;
+    width: 100%;
+    background-color: #222;
+    > div {
+      height: 100%;
+      width: 100%;
+    }
+    span.caption {
+      width: 100%;
+      float: left;
+      background-color: transparent;
+      color: #eee;
+      padding-top: 10px;
+      font-size: 1.7rem;
+      text-align: center;
+      font-weight: lighter;
+    }
+  }
+
+  .back-button {
+    padding: 15px;
+    border: solid 1px #fff;
+    font-size: 2rem;
+    position: absolute;
+    right: 60px;
+    bottom: 60px;
+    &:hover {
+      background-color: #eee;
+      color: #0d5257;
+      cursor: pointer;
+    }
+  }
+
+  .html-content {
+    font-size: 2.2rem;
+    padding: 12% 10%;
+    line-height: 2.8rem;
+    font-weight: lighter;
+    h1,
+    h2,
+    h3,
+    h4,
+    h5 {
+      font-size: 5rem;
+      margin-bottom: 7%;
+    }
+    p {
+      margin-bottom: 5%;
+    }
+  }
+
+  .grid-item img {
+    box-shadow: none !important;
+  }
+
+  .grid-item.zoomed {
+    width: 100% !important;
+    height: 100% !important;
+    left: -1px !important;
+    top: 0 !important;
+    background-color: #222 !important;
+    z-index: 1 !important;
+    img {
+      border: solid 2px #eee;
+    }
+  }
+
+  figure,
+  div {
+    box-shadow: none;
+  }
+
+  img {
+    box-shadow: 0 50px 70px rgba(0, 0, 0, 0.5);
   }
 
   .scrollable {
@@ -71,7 +171,19 @@
   }
 
   #modal {
-    background-color: rgba(0, 0, 0, 0.9);
+    background-color: #222;
+    #modal_close {
+      display: none;
+    }
+    > *:not(.glyphicon) {
+      max-width: 100%;
+      max-height: 100%;
+      height: 100% !important;
+      overflow-y: scroll;
+      margin: 0;
+      border-radius: 0;
+      background-color: #222 !important;
+    }
   }
 
   .donor-body-small {

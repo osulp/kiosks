@@ -23,4 +23,3 @@
 //= require react
 //= require react_ujs
 //= require cable
-//= require virtual-keyboard/dist/js/jquery.keyboard

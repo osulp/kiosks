@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-json.cache! ['v1', @kiosk], expires_in: 24.hours do
+json.cache! ['v1', @kiosk], expires_in: Rails.env.development? ? 1.second : 24.hours do
   json.slides @slides do |slide|
     json.id slide.id
     json.original slide.image.url

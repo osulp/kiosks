@@ -26,6 +26,7 @@
 *.log
 /coverage
 .idea/
+.vscode
 /webpack_dist
 /config/application_config.yml.erb
 /config/config.yml
@@ -35,6 +36,7 @@
 /public/uploads/*
 /public/uploaded/*
 /public/system*
+/public/assets*
 /public/packs
 /public/packs-test
 /node_modules
