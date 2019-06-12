@@ -17,6 +17,13 @@
     ],
     "setupFiles": [
       "<rootDir>/spec/javascripts/react/.setup.js"
+    ],
+    "moduleNameMapper": {
+      ".+\\.(css|styl|less|sass|scss|png|jpg|ttf|woff|woff2)$": "<rootDir>/spec/javascripts/react/__mocks__/styleMock.js"
+    },
+    "testPathIgnorePatterns": [
+      "/node_modules",
+      "config/"
     ]
   },
   "repository": "https://github.com/osulp/kiosks.git",

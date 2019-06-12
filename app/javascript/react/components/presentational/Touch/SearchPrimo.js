@@ -1,6 +1,7 @@
 import React, { Component } from "react"
 import PropTypes from "prop-types"
 import Keyboard from "react-simple-keyboard"
+import "react-simple-keyboard/build/css/index.css"
 
 const root_dom_element = document.getElementById("application_root")
 const keyboard_layout = {
