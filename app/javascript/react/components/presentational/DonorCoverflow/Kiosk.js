@@ -20,7 +20,7 @@ const Kiosk = props => {
   // - If the active slide is set, then clear the timers and display the popup modal with the LargeSlide UI
   // - Otherwise, set the active slide rotation timer
   useEffect(() => {
-    if (active.index > 0 && active.slide !== undefined) {
+    if (active.slide !== undefined) {
       setTimers(undefined, undefined)
       props.setModalVisibility(true)
       // give reference to the rotation function so that when the back button is tapped
@@ -38,7 +38,7 @@ const Kiosk = props => {
       // a slide to make it active, then clear all of the rotation timers
       // and set a long delay to restart the rotation. If a user hadn't interacted with the
       // UI for many seconds, then restart the automatic rotation.
-      if (!rotate_slide_timeout && !active.slide) {
+      if (!rotate_slide_timeout) {
         rotateActiveSlides()
       } else if (active.slide) {
         setTimers(
@@ -186,7 +186,7 @@ Kiosk.propTypes = {
   kiosk_id: PropTypes.string,
   restart_kiosk: PropTypes.string.isRequired,
   url: PropTypes.string.isRequired,
-  google_analytics: PropTypes.object.isRequired,
+  google_analytics: PropTypes.func.isRequired,
   setModalVisibility: PropTypes.func.isRequired,
   fetchRestartKiosk: PropTypes.func.isRequired,
   setModalRootComponent: PropTypes.func.isRequired,
