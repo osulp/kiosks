@@ -3,12 +3,14 @@
 
 $willwest: #3d5cff;
 $willeast: #ff3c5c;
-$willeastwest: #A020F0;
+$willeastwest: #a020f0;
 $barnard: #6eff7e;
 $autzen: #ea76ff;
 
 /* Set container elements to 100% height. */
-#touch_kiosk, #slide_gallery, .image-gallery {
+#touch_kiosk,
+#slide_gallery,
+.image-gallery {
   height: 100%;
   width: 100%;
 }
@@ -24,7 +26,7 @@ $autzen: #ea76ff;
 
   .image-gallery-bullet {
     background-color: rgba(200, 54, 54, 0.5) !important;
-    border-color: rgba(255, 255, 255, 0.90) !important;
+    border-color: rgba(255, 255, 255, 0.9) !important;
     -webkit-box-shadow: 2px 1px 0 #1a1a1a !important;
     -moz-box-shadow: 2px 1px 0 #1a1a1a !important;
     padding: 15px;
@@ -178,10 +180,12 @@ $autzen: #ea76ff;
           line-height: 35px;
           height: 35px;
           width: 35px;
-
         }
       }
-      .rc-calendar-prev-month-btn, .rc-calendar-next-month-btn, .rc-calendar-prev-year-btn, .rc-calendar-next-year-btn {
+      .rc-calendar-prev-month-btn,
+      .rc-calendar-next-month-btn,
+      .rc-calendar-prev-year-btn,
+      .rc-calendar-next-year-btn {
         font-size: 30px;
       }
 
@@ -230,9 +234,9 @@ $autzen: #ea76ff;
   }
 
   #search-primo {
-   .search-iframe {
-     padding: 0px;
-   }
+    .search-iframe {
+      padding: 0px;
+    }
   }
 
   #classroom_schedule {
@@ -252,7 +256,6 @@ $autzen: #ea76ff;
       display: inline-block;
     }
     .classroom-schedule-table-container {
-
       h2 {
         text-align: center;
       }
@@ -366,7 +369,10 @@ $autzen: #ea76ff;
           background-color: $willeast;
           border-left: solid 1px darken($willeast, 25%);
         }
-        tbody tr.willamette-combined.willamette-selected td.event-hour span.event-time {
+        tbody
+          tr.willamette-combined.willamette-selected
+          td.event-hour
+          span.event-time {
           background-color: $willeastwest;
           border-left: solid 1px darken($willeast, 25%);
         }
@@ -378,7 +384,6 @@ $autzen: #ea76ff;
           background-color: $autzen;
           border-left: solid 1px darken($autzen, 25%);
         }
-
       }
     }
   }
@@ -405,4 +410,15 @@ $autzen: #ea76ff;
       border-radius: 4px;
     }
   }
+}
+
+.keyboard-container.hidden {
+  display: none;
+}
+
+.react-simple-keyboard {
+  position: absolute;
+  top: 50px;
+  background-color: #ddd !important;
+  z-index: 1000;
 }
