@@ -103,8 +103,11 @@ class SearchPrimo extends Component {
       this.setState({ keyboardVisible: false })
       this.performSearch()
     }
-    if (button == "{clear}") this.primo_search.value = ""
-    if (button == "{hide}") this.setState({ keyboardVisible: false })
+    if (button === "{clear}" || button === "{hide}") {
+      this.primo_search.value = ""
+      this.setState({ keyboardVisible: false })
+      this.keyboardRef.keyboard.clearInput()
+    }
   }
 
   handleShift = () => {
