@@ -20,6 +20,4 @@
 //= require dragscroll
 //= require date_range_actions
 //= require kiosk_restart_actions
-//= require react
-//= require react_ujs
 //= require cable
