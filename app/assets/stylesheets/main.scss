@@ -19,6 +19,6 @@
 @import "flipclock";
 @import "jquery.fileupload-ui";
 
-* {
+*:not(.material-icons) {
   font-family: "Open Sans", sans-serif !important;
 }
