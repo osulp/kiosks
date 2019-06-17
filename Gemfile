@@ -95,3 +95,8 @@ end
 group :staging, :production do
   gem 'ddtrace'
 end
+
+# Honeycomb
+gem 'sequel'
+gem 'honeycomb-beeline'
+gem 'rack-honeycomb', '~> 0.5.0'
