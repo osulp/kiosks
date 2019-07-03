@@ -162,12 +162,18 @@ const Kiosk = props => {
                 onKeyDown={e => slideClicked(e, slide, i, props)}
                 role="menuitem"
                 tabIndex={i}
+                style={{
+                    height: "280px",
+                    padding: "0 0 40px 0"
+                }}
               >
                 <img
                   src={slide.original}
                   style={{
                     display: "block",
-                    width: "100%"
+                    width: "auto",
+                    height: "100%",
+                    margin: "0 auto"
                   }}
                 />
                 <span className="caption">{slide.caption}</span>

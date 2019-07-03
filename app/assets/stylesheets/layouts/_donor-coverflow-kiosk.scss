@@ -25,10 +25,10 @@
   }
   > div {
     width: 100%;
-    height: 30%;
+    height: 25%;
   }
   > .component {
-    height: 70%;
+    height: 75%;
     width: 100%;
     background-color: #222;
     > div {
@@ -63,7 +63,7 @@
 
   .html-content {
     font-size: 2.2rem;
-    padding: 12% 10%;
+    padding: 6% 10%;
     line-height: 2.8rem;
     font-weight: lighter;
     h1,
@@ -81,6 +81,14 @@
 
   .grid-item img {
     box-shadow: none !important;
+  }
+
+  .grid-item.not-zoomed img {
+    max-height: 360px !important;
+  }
+
+  .grid-item.zoomed img {
+    max-height: 860px !important;
   }
 
   .grid-item.zoomed {

@@ -73,7 +73,7 @@ const LargeSlide = props => {
       }}
     >
       <div
-        className="col-md-5"
+        className="col-md-7"
         style={{
           height: "100%",
           backgroundColor: "#006A8E",
@@ -89,13 +89,13 @@ const LargeSlide = props => {
           BACK
         </span>
       </div>
-      <div className="col-md-7" style={{ padding: "8% 3%" }}>
+      <div className="col-md-5" style={{ padding: "8% 3%" }}>
         <div className="grid">
           {props.slide.collection.slides.map((s, i) => {
             return (
               <div
                 className={
-                  "grid-item " + (i === slideZoomedIndex ? "zoomed" : "")
+                  "grid-item " + (i === slideZoomedIndex ? "zoomed" : "not-zoomed")
                 }
                 key={`slide.${i}`}
                 onClick={_e => slideClicked(i)}
