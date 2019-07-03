@@ -6,6 +6,7 @@ json.cache! ['v1', @kiosk], expires_in: Rails.env.development? ? 1.second : 24.h
     json.original slide.image.url
     json.thumbnail slide.image.url(:thumb)
     json.xlarge slide.image.url(:xlarge)
+    json.large slide.image.url(:large)
     json.xtall slide.image.url(:xtall)
     json.av_media slide.video_url
     json.subtitle_en slide.subtitles[0].present? ? slide.subtitles[0].url : ''
@@ -34,6 +35,7 @@ json.cache! ['v1', @kiosk], expires_in: Rails.env.development? ? 1.second : 24.h
         json.original slide.collection.primary_slide&.image&.url
         json.thumbnail slide.collection.primary_slide&.image&.url(:thumb)
         json.xlarge slide.collection.primary_slide&.image&.url(:xlarge)
+        json.large slide.collection.primary_slide&.image&.url(:large)
       end
       json.slides do
         json.array!(slide.collection.slides) do |collection_slide|
@@ -41,6 +43,7 @@ json.cache! ['v1', @kiosk], expires_in: Rails.env.development? ? 1.second : 24.h
           json.original collection_slide.image.url
           json.thumbnail collection_slide.image.url(:thumb)
           json.xlarge collection_slide.image.url(:xlarge)
+          json.large collection_slide.image.url(:large)
         end
       end
     end
