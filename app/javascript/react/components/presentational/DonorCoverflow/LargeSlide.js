@@ -50,7 +50,7 @@ const LargeSlide = props => {
   }
 
   const slideClicked = i => {
-    let close_zoom_timeout = 5000
+    let close_zoom_timeout = 30000
     if (slideZoomedIndex === i) {
       clearTimeout(zoomTimeout)
       close_zoom_timeout = 150

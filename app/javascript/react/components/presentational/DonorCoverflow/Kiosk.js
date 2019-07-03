@@ -168,7 +168,7 @@ const Kiosk = props => {
                 }}
               >
                 <img
-                  src={slide.original}
+                  src={slide.large}
                   style={{
                     display: "block",
                     width: "auto",
