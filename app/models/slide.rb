@@ -43,6 +43,6 @@ class Slide < ApplicationRecord
   end
 
   def touch_kiosks
-    kiosks.each { |k| k.touch }
+    kiosks.each(&:touch)
   end
 end
