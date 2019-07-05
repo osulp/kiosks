@@ -2,6 +2,7 @@
 
 # Slides are the primary representation of the media on display at the various kiosks
 class Slide < ApplicationRecord
+  after_save :touch_kiosks
   include Rails.application.routes.url_helpers
   attr_accessor :image
   attr_accessor :video
@@ -39,5 +40,9 @@ class Slide < ApplicationRecord
 
   def subtitle_filename(index)
     File.basename subtitles[index].url if subtitles[index].present?
+  end
+
+  def touch_kiosks
+    kiosks.each { |k| k.touch }
   end
 end
