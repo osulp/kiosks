@@ -2,7 +2,7 @@
 
 # Kiosk records relate to individual screens
 class Kiosk < ApplicationRecord
-  belongs_to :kiosk_layout
+  belongs_to :kiosk_layout, touch: true
   has_many :kiosk_slides, dependent: :destroy
   has_many :slides, through: :kiosk_slides
   validates :name, presence: true
