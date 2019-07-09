@@ -148,15 +148,15 @@ const Kiosk = props => {
       </div>
       <div className="component coverflow-container">
         <Coverflow
-          displayQuantityOfSide={2}
+          displayQuantityOfSide={3}
           navigation={true}
           infiniteScroll={true}
           enableScroll={true}
           clickable={true}
           enableHeading={false}
           active={active.index}
-          currentFigureScale={2}
-          otherFigureScale={1}
+          currentFigureScale={1.25}
+          otherFigureScale={0.75}
         >
           {primary_slides.map((slide, i) => {
             return (
@@ -169,7 +169,7 @@ const Kiosk = props => {
                 tabIndex={i}
                 style={{
                     height: "280px",
-                    padding: "0 0 10px 0"
+                    padding: "0 0 80px 0"
                 }}
               >
                 <img
