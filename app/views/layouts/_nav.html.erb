@@ -12,10 +12,9 @@
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <% if user_signed_in? %>
-          <li><%= link_to "Home", root_path %></li>
           <li><%= link_to "Collections", collections_path %></li>
           <li><%= link_to "Slides", slides_path %></li>
-          <li><%= link_to "Kiosks", kiosks_path %></li>
+          <li><%= link_to "Manage Kiosks", kiosks_path %></li>
         <% end %>
       </ul>
       <ul class="nav navbar-nav navbar-right">
