@@ -105,7 +105,7 @@ const LargeSlide = props => {
                 }}
               >
                 <img
-                  src={s.original}
+                  src={s.large}
                   style={{
                     width: "100%"
                   }}
