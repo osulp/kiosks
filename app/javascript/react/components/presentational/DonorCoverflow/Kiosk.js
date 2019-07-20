@@ -66,15 +66,10 @@ const Kiosk = props => {
     }, 1 * 60 * 1000)
     setRestartKioskTimeout(interval_id)
     const slide_ids = props.slides.map(s => s.collection.primary_slide.id)
-    const primary_slides_list = props.slides.filter(e => slide_ids.findIndex(a => a === e.id) > -1)
-
-    // Adding a couple of temporary placeholders to fix an issue with second and second to last slide
-    // Related issue: https://github.com/osulp/kiosks/issues/318
-    primary_slides_list.unshift(primary_slides_list[0])
-    primary_slides_list.push(primary_slides_list[0])
-
-    setPrimarySlides(primary_slides_list)
-    setActive({ index: 2, slide: undefined })
+    setPrimarySlides(
+      props.slides.filter(e => slide_ids.findIndex(a => a === e.id) > -1)
+    )
+    setActive({ index: 1, slide: undefined })
   }, [])
 
   // Randomly select one of the primary slides and set it as active every 30 seconds
@@ -82,7 +77,7 @@ const Kiosk = props => {
   const rotateActiveSlides = () => {
     setTimers(undefined, undefined)
     const interval_id = setInterval(() => {
-      const random_slide = Math.floor(Math.random() * (primary_slides.length - 1)) + 1
+      const random_slide = Math.floor(Math.random() * primary_slides.length)
       setActive({ index: random_slide, slide: undefined })
     }, 30000)
     setRotateSlideTimeout(interval_id)
@@ -146,17 +141,17 @@ const Kiosk = props => {
           />
         </div>
       </div>
-      <div className="component coverflow-container">
+      <div className="component">
         <Coverflow
-          displayQuantityOfSide={3}
+          displayQuantityOfSide={2}
           navigation={true}
           infiniteScroll={true}
           enableScroll={true}
           clickable={true}
           enableHeading={false}
           active={active.index}
-          currentFigureScale={1.25}
-          otherFigureScale={0.75}
+          currentFigureScale={2}
+          otherFigureScale={1}
         >
           {primary_slides.map((slide, i) => {
             return (
@@ -169,7 +164,7 @@ const Kiosk = props => {
                 tabIndex={i}
                 style={{
                     height: "280px",
-                    padding: "0 0 80px 0"
+                    padding: "0 0 40px 0"
                 }}
               >
                 <img
