@@ -23,12 +23,10 @@ const LargeSlide = props => {
       props.setModalVisibility(false)
       props.setModalRootComponent(undefined)
     }, 180000)
-    console.log("set hide_timeout")
     setHideTimeout(hide_timeout)
     setImageCount(props.slide.collection.slides.length)
     setImagesLoaded(0)
     return () => {
-      console.log("clear hide_timeout")
       clearTimeout(hide_timeout)
       clearTimeout(exiting_timeout)
       clearTimeout(zoomTimeout)
