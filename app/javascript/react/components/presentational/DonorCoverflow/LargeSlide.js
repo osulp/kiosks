@@ -27,8 +27,8 @@ const LargeSlide = props => {
     setImageCount(props.slide.collection.slides.length)
     setImagesLoaded(0)
     return () => {
-      clearTimeout(hideTimeout)
-      clearTimeout(exitingTimeout)
+      clearTimeout(hide_timeout)
+      clearTimeout(exiting_timeout)
       clearTimeout(zoomTimeout)
     }
   }, [])
