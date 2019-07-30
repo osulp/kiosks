@@ -97,6 +97,6 @@ group :staging, :production do
 end
 
 # Honeycomb
-gem 'sequel'
-gem 'honeycomb-beeline'
-gem 'rack-honeycomb', '~> 0.5.0'
+#gem 'sequel'
+#gem 'rack-honeycomb', '~> 0.5.0'
+gem 'honeycomb-beeline', '>= 1.0.0'
