@@ -56,6 +56,9 @@
     "typescript": "*",
     "webpack": "^4.29"
   },
+  "resolutions": {
+    "**/js-yaml": "3.13.1"
+  },
   "devDependencies": {
     "@babel/core": "^7.0.0",
     "@babel/plugin-proposal-class-properties": "^7.4.4",
