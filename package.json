@@ -56,6 +56,9 @@
     "typescript": "*",
     "webpack": "^4.29"
   },
+  "resolutions": {
+    "**/js-yaml": "3.13.1"
+  },
   "devDependencies": {
     "@babel/core": "^7.0.0",
     "@babel/plugin-proposal-class-properties": "^7.4.4",
@@ -73,7 +76,7 @@
     "babel-plugin-macros": "^2.6.1",
     "cached-path-relative": "^1.0.2",
     "cryptiles": "^4.1.2",
-    "css-loader": "^0.26.1",
+    "css-loader": "^2.1.0",
     "debug": "^2.6.9",
     "deep-extend": "^0.5.1",
     "enzyme": "^3.9.0",
@@ -81,7 +84,7 @@
     "extend": "^3.0.2",
     "file-loader": "^0.9.0",
     "hoek": "^4.2.1",
-    "image-webpack-loader": "^3.0.0",
+    "image-webpack-loader": "^4.0.0",
     "jest": "^24.3.1",
     "jest-haste-map": "^24.0.0",
     "jest-resolve": "^24.1.0",
