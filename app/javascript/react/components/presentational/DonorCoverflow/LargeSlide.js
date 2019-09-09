@@ -21,7 +21,6 @@ const LargeSlide = props => {
     setRotatingTimeout(rotating_timeout)
     const exiting_timeout = setTimeout(() => {
       setSlideAnimationClass("slide-exiting")
-      setRotatingTimeout(rotating_timeout)
     }, 179650)
     setExitingTimeout(exiting_timeout)
     const hide_timeout = setTimeout(() => {
