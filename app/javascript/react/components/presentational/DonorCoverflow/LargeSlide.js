@@ -17,7 +17,7 @@ const LargeSlide = props => {
   useEffect(() => {
     const rotating_timeout = setTimeout(() => {
       props.rotateActiveSlides()
-    }, 3000)
+    }, 31000)
     setRotatingTimeout(rotating_timeout)
     const exiting_timeout = setTimeout(() => {
       setSlideAnimationClass("slide-exiting")
