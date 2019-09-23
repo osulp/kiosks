@@ -19,7 +19,6 @@ class Rooms extends Component {
   setFlipCounter() {
     let rooms_available = this.props.rooms_available_count
     let rooms_count = rooms_available.length ? rooms_available.length : 0
-    this.clock.setValue(rooms_count)
   }
 
   /**
@@ -46,9 +45,6 @@ class Rooms extends Component {
     let rooms_available = this.props.rooms_available_count
     let rooms_count = rooms_available.length ? rooms_available.length : 0
 
-    this.clock = new FlipClock($(".circ-counter"), rooms_count, {
-      clockFace: "Counter"
-    })
     return (
       <div className="navbar-wrapper">
         <div className="circ-sidebar-title">Study Rooms Available</div>
