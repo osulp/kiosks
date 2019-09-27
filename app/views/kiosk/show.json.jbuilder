@@ -11,8 +11,8 @@ json.cache! ['v1', @kiosk], expires_in: Rails.env.development? ? 1.second : 24.h
     json.av_media slide.video_url
     json.subtitle_en slide.subtitles[0].present? ? slide.subtitles[0].url : ''
     json.subtitle_es slide.subtitles[1].present? ? slide.subtitles[1].url : ''
-    json.title slide.title
-    json.caption slide.caption
+    json.title html_escape(slide.title)
+    json.caption html_escape(slide.caption)
     json.slide_type slide.slide_type.name
     json.current_kiosk @kiosk.name
     json.slide_length @kiosk.slide_length_ms
