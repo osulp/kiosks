@@ -111,7 +111,7 @@ RSpec.describe CollectionsController, type: :controller do
           ]
         }
       end
-      let(:kiosk_slide) { create(:kiosk_slide, koisk: test_kiosk, slide: uploaded_slide) }
+      let(:kiosk_slide) { create(:kiosk_slide, kiosk: test_kiosk, slide: uploaded_slide) }
 
       context 'with new attributes' do
         before do
