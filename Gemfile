@@ -92,10 +92,6 @@ group :test do
   gem 'rspec_junit_formatter'
 end
 
-group :staging, :production do
-  gem 'ddtrace'
-end
-
 # Honeycomb
 gem 'sequel'
 gem 'honeycomb-beeline'
