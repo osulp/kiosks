@@ -10,7 +10,7 @@ The application is built as a combination of traditional Ruby on Rails for the b
 
 # Server setup notes
 
-- ** See example files located in `config/**/\*` for the type of configurations needed on the server \*\*
+See example files located in `config/**/\*` for the type of configurations needed on the server 
 - `shared/config` : Contains server configuration files not appropriate for the repository, symlinked by the deploy process.
 - `shared/config/application_config.yml.erb` : Application specific configuration, such as Google Analytics ID.
 - `shared/config/local_env.yml` : Local ENV variables used in files such as database.yml.
@@ -20,13 +20,38 @@ The application is built as a combination of traditional Ruby on Rails for the b
 
 # Development workflow
 
-All of the React app code is found in `app/javascript/react`.
+## Install node modules
 
-- **Install `node_modules`** : Run `yarn install` in the application root directory to install dependencies.
+Run `yarn install` in the application root directory to install dependencies.
 
-### Load Drupal Development/Test database with seed data.
+## Create config files
+
+Copy `config/application_config.example.yml.erb` to `config/application_config.yml.erb`.
+Copy `config/local_env.example.yml` to `config/local_env.yml`
+
+## Configure CAS Login
+
+In `config/local_env.yml` set values for CAS_BASE_URL and CAS_VALIDATE_URL (see production server)
+
+## Set Admin Privileges
+
+First log in, then in Rails Console:
+
+```
+irb(main):001:0> me = User.last
+irb(main):002:0> me.admin = true
+irb(main):003:0> me.save
+```
+
+## Load Drupal Development/Test database with seed data.
 
 Run `bundle exec rake test_drupal_database:setup` to load the development database with some seed data for the "Hours" API.
+
+## Docker
+
+- `docker-compose build`
+- `docker-compose up web`
+- `docker-compose exec web bundle exec rails c`
 
 # React app directory structure
 
