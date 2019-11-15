@@ -10,16 +10,12 @@ const LargeSlide = props => {
   const [imagesLoaded, setImagesLoaded] = useState(-1)
   const [slideZoomedIndex, setSlideZoomedIndex] = useState(-1)
   const [exitingTimeout, setExitingTimeout] = useState(undefined)
-  const [rotatingTimeout, setRotatingTimeout] = useState(undefined)
   const [hideTimeout, setHideTimeout] = useState(undefined)
   const [zoomTimeout, setZoomTimeout] = useState(undefined)
 
   useEffect(() => {
-    const rotating_timeout = setTimeout(() => {
-      props.rotateActiveSlides()
-    }, 31000)
-    setRotatingTimeout(rotating_timeout)
     const exiting_timeout = setTimeout(() => {
+      props.rotateActiveSlides()
       setSlideAnimationClass("slide-exiting")
     }, 179650)
     setExitingTimeout(exiting_timeout)
@@ -31,7 +27,6 @@ const LargeSlide = props => {
     setImageCount(props.slide.collection.slides.length)
     setImagesLoaded(0)
     return () => {
-      clearTimeout(rotating_timeout)
       clearTimeout(hide_timeout)
       clearTimeout(exiting_timeout)
       clearTimeout(zoomTimeout)
