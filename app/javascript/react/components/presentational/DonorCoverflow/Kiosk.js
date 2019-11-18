@@ -10,7 +10,6 @@ const Kiosk = props => {
   const [active, setActive] = useState({ index: 1, slide: undefined })
   const [primary_slides, setPrimarySlides] = useState([])
   const [restart_kiosk_timeout, setRestartKioskTimeout] = useState(undefined)
-  const [rotate_slide_timeout, setRotateSlideTimeout] = useState(undefined)
   const [
     restart_active_slide_rotation_timeout,
     setRestartActiveSlideRotationTimeout
@@ -22,6 +21,7 @@ const Kiosk = props => {
   useEffect(() => {
     if (active.slide !== undefined) {
       setTimers(undefined, undefined)
+      setIsRotating(false)
       props.setModalVisibility(true)
       // give reference to the rotation function so that when the back button is tapped
       // or the slide is automatically hidden, it can initiate the rotation to resume
@@ -38,9 +38,10 @@ const Kiosk = props => {
       // a slide to make it active, then clear all of the rotation timers
       // and set a long delay to restart the rotation. If a user hadn't interacted with the
       // UI for many seconds, then restart the automatic rotation.
-      if (!rotate_slide_timeout) {
+      if (isRotating == false) {
         rotateActiveSlides()
       } else if (active.slide) {
+        setIsRotating(false)
         setTimers(
           undefined,
           setTimeout(() => {
@@ -53,9 +54,8 @@ const Kiosk = props => {
     return () => {
       clearInterval(restart_kiosk_timeout)
       clearTimeout(restart_active_slide_rotation_timeout)
-      clearInterval(rotate_slide_timeout)
     }
-  }, [active])
+  }, [active, isRotating])
 
   // One time, when the Kiosk UI is first mounted, fetch some data and filter the slides.
   // The behavior happens because the trailing empty array `useEffect(fn, [])` causes React
@@ -70,17 +70,30 @@ const Kiosk = props => {
       props.slides.filter(e => slide_ids.findIndex(a => a === e.id) > -1)
     )
     setActive({ index: 1, slide: undefined })
+    setCurrentIndex(1)
   }, [])
 
-  // Randomly select one of the primary slides and set it as active every 30 seconds
-  // causing the "coverflow" UI to change which slide is in the foreground
+
+  // This effect takes care of rotating the primary slides, selecting the next
+  // index and set it as active for 30 seconds. When last index is reached,
+  // it rotates to index 0 to continue the loop.
+  let [currentIndex, setCurrentIndex] = useState(1);
+  let [isRotating, setIsRotating] = useState(true);
+  useEffect(() => {
+    if (isRotating) {
+      let timeout = setTimeout(() => {
+        let test_index = (currentIndex + 1) % primary_slides.length
+        setCurrentIndex(test_index)
+        setActive({ index: test_index, slide: undefined })
+      }, 30000);
+      return () => clearTimeout(timeout)
+    }
+  }, [currentIndex, isRotating, primary_slides]);
+
+  // Clear all timers, and trigger the isRotating flag to start rotating slides
   const rotateActiveSlides = () => {
     setTimers(undefined, undefined)
-    const interval_id = setInterval(() => {
-      const random_slide = Math.floor(Math.random() * primary_slides.length)
-      setActive({ index: random_slide, slide: undefined })
-    }, 30000)
-    setRotateSlideTimeout(interval_id)
+    setIsRotating(true);
   }
 
   // When a slide is clicked, set local state active and active_slide to change
@@ -93,6 +106,7 @@ const Kiosk = props => {
       `${props.kiosk_name}:${props.kiosk_id}:DonorCoverflowKiosk:SlideClicked`
     )
     setTimers(undefined, undefined)
+    setCurrentIndex(index)
     if (active.index == index) {
       setActive({ index: index, slide: slide })
     } else {
@@ -102,8 +116,6 @@ const Kiosk = props => {
 
   const setTimers = (slide_timeout, restart_active_timeout) => {
     clearTimeout(restart_active_slide_rotation_timeout)
-    clearInterval(rotate_slide_timeout)
-    setRotateSlideTimeout(slide_timeout)
     setRestartActiveSlideRotationTimeout(restart_active_timeout)
   }
 
