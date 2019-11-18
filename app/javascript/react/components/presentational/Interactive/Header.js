@@ -22,10 +22,15 @@ class Header extends Component {
       return ""
     } else {
       let today = Object.values(this.props.todays_hours)[0]
-      // I'm replacing html br tag with a comma to keep the component clean or in one line. TODO: I think we should
-      // introduce a non-HTML formatted_hours field in the API, and rended it
-      // here. Related work: https://github.com/osulp/API/pull/89
-      return `${today.formatted_hours.trim().replace('<br>',', ')} on ${today.string_date}`
+      let formatted_hours = today.formatted_hours.trim()
+      if (formatted_hours != undefined) {
+        // I'm replacing html br tag with a comma to keep the component clean or in one line. TODO: I think we should
+        // introduce a non-HTML formatted_hours field in the API, and rended it
+        // here. Related work: https://github.com/osulp/API/pull/89
+        formatted_hours = formatted_hours.replace('<br>',', ')
+      }
+
+      return `${formatted_hours} on ${today.string_date}`
     }
   }
 
