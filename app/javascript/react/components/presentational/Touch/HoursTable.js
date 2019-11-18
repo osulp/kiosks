@@ -15,6 +15,13 @@ class HoursTable extends Component {
         </thead>
         <tbody>
           {Object.values(hours).map((h, i) => {
+            let formatted_hours = h.formatted_hours
+            if (formatted_hours != undefined) {
+              // I'm replacing html br tag with a comma to keep the component clean or in one line. TODO: I think we should
+              // introduce a non-HTML formatted_hours field in the API, and rended it
+              // here. Related work: https://github.com/osulp/API/pull/89
+              formatted_hours = formatted_hours.replace('<br>',', ')
+            }
             return (
               <tr
                 key={`hours.${i}`}
@@ -28,7 +35,7 @@ class HoursTable extends Component {
                 }
               >
                 <td>{h.string_date}</td>
-                <td>{h.formatted_hours}</td>
+                <td>{formatted_hours}</td>
                 <td>{h.event_desc}</td>
               </tr>
             )
