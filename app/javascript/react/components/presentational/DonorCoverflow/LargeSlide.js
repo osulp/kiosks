@@ -63,6 +63,15 @@ const LargeSlide = props => {
     setZoomTimeout(zoom_timeout)
   }
 
+  // htmlDecode gets the html that comes encoded from the server and returns
+  // content that can be safely rendered in a component.
+  // Example input: "hello&lt;br&gt;world""
+  // Example return: htmlDecode(input) = "hello<br>world"
+  const htmlDecode = input => {
+    var doc = new DOMParser().parseFromString(input, "text/html");
+    return doc.documentElement.textContent
+  }
+
   return (
     <div
       className={slideAnimationClass}
@@ -83,7 +92,7 @@ const LargeSlide = props => {
       >
         <div
           className="html-content"
-          dangerouslySetInnerHTML={{ __html: props.slide.collection.detail }}
+          dangerouslySetInnerHTML={{ __html: htmlDecode(props.slide.collection.detail) }}
         />
         <span className="back-button" onClick={backClicked}>
           BACK
