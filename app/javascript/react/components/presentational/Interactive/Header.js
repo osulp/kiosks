@@ -30,7 +30,7 @@ class Header extends Component {
         formatted_hours = formatted_hours.replace('<br>',', ')
       }
 
-      return `${formatted_hours} on ${today.string_date}`
+      return `${formatted_hours}`
     }
   }
 

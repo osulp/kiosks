@@ -158,10 +158,10 @@ class Hours extends Component {
                 }}
               </DatePicker>
             </div>
-            <div className="col-md-5 col-sm-12">
+            <div className="col-md-7 col-sm-12">
               {this._hoursContent(hours)}
             </div>
-            <div className="hidden-sm hidden-xs col-md-7">{calendar}</div>
+            <div className="hidden-sm hidden-xs col-md-5">{calendar}</div>
           </div>
         </div>
       </div>
