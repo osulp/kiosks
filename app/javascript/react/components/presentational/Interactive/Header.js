@@ -22,13 +22,7 @@ class Header extends Component {
       return ""
     } else {
       let today = Object.values(this.props.todays_hours)[0]
-      let formatted_hours = today.formatted_hours.trim()
-      if (formatted_hours != undefined) {
-        // I'm replacing html br tag with a comma to keep the component clean or in one line. TODO: I think we should
-        // introduce a non-HTML formatted_hours field in the API, and rended it
-        // here. Related work: https://github.com/osulp/API/pull/89
-        formatted_hours = formatted_hours.replace('<br>',', ')
-      }
+      let formatted_hours = today.formatted_hours_plain_text.trim()
 
       return `${formatted_hours}`
     }
@@ -62,7 +56,7 @@ class Header extends Component {
               />
             </div>
             <p className="hours navbar-text">
-              Valley Library Hours Today: {this._hoursToday()}
+              Today: {this._hoursToday()}
             </p>
             <div className="nav navbar-nav navbar-right main-menu-header">
               <button
