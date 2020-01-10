@@ -99,7 +99,7 @@ class Header extends Component {
       return ""
     } else {
       let today = Object.values(this.props.hours)[0]
-      return `${today.formatted_hours.trim()} on ${today.string_date}`
+      return `${today.formatted_hours_plain_text.trim()} on ${today.string_date}`
     }
   }
 
