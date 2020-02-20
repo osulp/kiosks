@@ -10,6 +10,7 @@ import DonorCoverflowKiosk from "./DonorCoverflowKiosk"
 import CirculationKiosk from "./CirculationKiosk"
 import MediaKiosk from "./MediaKiosk"
 import InteractiveKiosk from "./InteractiveKiosk"
+import ScarcCoverflowKiosk from "./ScarcCoverflowKiosk"
 import TallKiosk from "./TallKiosk"
 import {
   setKiosk,
@@ -75,6 +76,8 @@ export default class Root extends Component {
         return <MediaKiosk />
       case "interactive":
         return <InteractiveKiosk />
+      case "scarc":
+        return <ScarcCoverflowKiosk />
       case "tall":
         return <TallKiosk />
       default:
