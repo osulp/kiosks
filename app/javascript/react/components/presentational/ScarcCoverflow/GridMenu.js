@@ -31,7 +31,8 @@ class GridMenu extends Component {
               flexDirection: "row",
               justifyContent: "center",
               alignItems: "center",
-              alignContent: "center"
+              alignContent: "center",
+              padding: "2.5em 0"
             }}
         >
           <ul className="nav navbar-nav navbar-expand">

@@ -97,7 +97,7 @@ const GridSlide = props => {
       }}
     >
 
-      <div className="col-md-12" style={{ height: "1000px", padding: "8% 3%" }}>
+      <div className="col-md-12" style={{ height: "950px", padding: "3% 3%" }}>
         <div className="grid">
           {props.slide.collection.slides.map((s, i) => {
             return (
