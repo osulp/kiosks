@@ -1,14 +1,29 @@
 import React, { useEffect, useState } from "react"
 import PropTypes from "prop-types"
 import Masonry from "masonry-layout"
+import GridMenu from "./GridMenu"
 
-const LargeSlide = props => {
+function SectionButton(props) {
+  return (
+    <button {...props} className="section-button" />
+  );
+}
+
+function NavSpacer({ width }) {
+  return (
+    <div
+      style={{ display: "inline-block", width }}
+    />
+  );
+}
+
+const GridSlide = props => {
   const [slideAnimationClass, setSlideAnimationClass] = useState(
     "slide-entering"
   )
   const [imageCount, setImageCount] = useState(0)
   const [imagesLoaded, setImagesLoaded] = useState(-1)
-  const [slideZoomedIndex, setSlideZoomedIndex] = useState(-1)
+  // const [slideZoomedIndex, setSlideZoomedIndex] = useState(-1)
   const [exitingTimeout, setExitingTimeout] = useState(undefined)
   const [hideTimeout, setHideTimeout] = useState(undefined)
   const [zoomTimeout, setZoomTimeout] = useState(undefined)
@@ -50,17 +65,17 @@ const LargeSlide = props => {
   }
 
   const slideClicked = i => {
-    let close_zoom_timeout = 30000
-    if (slideZoomedIndex === i) {
-      clearTimeout(zoomTimeout)
-      close_zoom_timeout = 150
-    }
-    setSlideZoomedIndex(i)
-    const zoom_timeout = setTimeout(
-      () => setSlideZoomedIndex(-1),
-      close_zoom_timeout
-    )
-    setZoomTimeout(zoom_timeout)
+    // let close_zoom_timeout = 30000
+    // if (slideZoomedIndex === i) {
+    //   clearTimeout(zoomTimeout)
+    //   close_zoom_timeout = 150
+    // }
+    // setSlideZoomedIndex(i)
+    // const zoom_timeout = setTimeout(
+    //   () => setSlideZoomedIndex(-1),
+    //   close_zoom_timeout
+    // )
+    // setZoomTimeout(zoom_timeout)
   }
 
   // htmlDecode gets the html that comes encoded from the server and returns
@@ -76,35 +91,20 @@ const LargeSlide = props => {
     <div
       className={slideAnimationClass}
       onClick={() => {
-        if (slideZoomedIndex !== -1) {
-          setSlideZoomedIndex(-1)
-        }
+        // if (slideZoomedIndex !== -1) {
+        //   setSlideZoomedIndex(-1)
+        // }
       }}
     >
-      <div
-        className="col-md-7"
-        style={{
-          height: "100%",
-          backgroundColor: "#006A8E",
-          color: "#eee",
-          padding: "20px"
-        }}
-      >
-        <div
-          className="html-content"
-          dangerouslySetInnerHTML={{ __html: htmlDecode(props.slide.collection.detail) }}
-        />
-        <span className="back-button" onClick={backClicked}>
-          BACK
-        </span>
-      </div>
-      <div className="col-md-5" style={{ padding: "8% 3%" }}>
+
+      <div className="col-md-12" style={{ height: "1000px", padding: "8% 3%" }}>
         <div className="grid">
           {props.slide.collection.slides.map((s, i) => {
             return (
               <div
                 className={
-                  "grid-item " + (i === slideZoomedIndex ? "zoomed" : "not-zoomed")
+                  "grid-item "
+                  // "grid-item " + (i === slideZoomedIndex ? "zoomed" : "not-zoomed")
                 }
                 key={`slide.${i}`}
                 onClick={_e => slideClicked(i)}
@@ -125,15 +125,21 @@ const LargeSlide = props => {
           })}
         </div>
       </div>
+
+      <div className="kiosk-footer" style={{ textAlign: "center" }}>
+        <GridMenu {...props}/>
+      </div>
+
     </div>
   )
 }
 
-LargeSlide.propTypes = {
+GridSlide.propTypes = {
   slide: PropTypes.object.isRequired,
+  primary_slides: PropTypes.array.isRequired,
   setModalVisibility: PropTypes.func.isRequired,
   setModalRootComponent: PropTypes.func.isRequired,
   rotateActiveSlides: PropTypes.func.isRequired
 }
 
-export default LargeSlide
+export default GridSlide

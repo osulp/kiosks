@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react"
 import PropTypes from "prop-types"
 import ConnectedModalWindow from "../../ModalWindow"
 import Coverflow from "react-coverflow"
-import LargeSlide from "./LargeSlide"
+import GridSlide from "./GridSlide"
 import { trackClicked } from "../shared/GoogleAnalytics"
 
 function NavButton(props) {
@@ -30,7 +30,7 @@ const Kiosk = props => {
   ] = useState(undefined)
 
   // When active or active_slide state changes, determine what to do;
-  // - If the active slide is set, then clear the timers and display the popup modal with the LargeSlide UI
+  // - If the active slide is set, then clear the timers and display the popup modal with the GridSlide UI
   // - Otherwise, set the active slide rotation timer
   useEffect(() => {
     if (active.slide !== undefined) {
@@ -40,8 +40,9 @@ const Kiosk = props => {
       // give reference to the rotation function so that when the back button is tapped
       // or the slide is automatically hidden, it can initiate the rotation to resume
       props.setModalRootComponent(
-        <LargeSlide
+        <GridSlide
           slide={active.slide}
+          primary_slides={primary_slides}
           rotateActiveSlides={rotateActiveSlides}
           {...props}
         />
@@ -125,7 +126,7 @@ const Kiosk = props => {
   // When a slide is clicked, set local state active and active_slide to change
   // and the side effect function to operate. On the first click, this causes
   // the slide to scroll to the foreground. On the second click, if the slide is
-  // currently active (in the foreground) then the LargeSlide UI modal will be displayed
+  // currently active (in the foreground) then the GridSlide UI modal will be displayed
   const slideClicked = (_e, slide, index, props) => {
     trackClicked(
       props.google_analytics,
@@ -200,9 +201,9 @@ const Kiosk = props => {
       >
         <div className="kiosk-header" style={{ textAlign: "right" }}>
 
-        <NavButton aria-label="Back" onClick={() => { prevSlide() }}>Back</NavButton>
-        <NavSpacer width="200px" />
-        <NavButton aria-label="Next" onClick={() => { nextSlide() }}>Next</NavButton>
+          <NavButton aria-label="Back" onClick={() => { prevSlide() }}>Back</NavButton>
+          <NavSpacer width="200px" />
+          <NavButton aria-label="Next" onClick={() => { nextSlide() }}>Next</NavButton>
         </div>
       </div>
     </div>

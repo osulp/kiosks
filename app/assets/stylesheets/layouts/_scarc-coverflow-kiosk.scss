@@ -76,6 +76,32 @@
     outline: none;
   }
 
+  .section-button {
+    border: none;
+    background: none;
+    display: inline-block;
+    padding: 20px;
+    width: 4rem;
+    height: 4rem;
+    line-height: 1.8rem;
+    font-size: 4rem;
+    text-align: center;
+    background-color: transparent;
+    color: #eee;
+    outline: none;
+  }
+
+  li.menu-button {
+    padding-right: 2em;
+  }
+
+  .navbar-nav > li > a {
+    background: transparent;
+    color: white;
+    border: none;
+    font-size: 2.5em;
+  }
+
   .html-content {
     font-size: 2.2rem;
     padding: 6% 10%;
