@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react"
+import React from "react"
 import PropTypes from "prop-types"
 
 const MediaModal = props => {
@@ -9,57 +9,26 @@ const MediaModal = props => {
 
   return (
     <div
+      className="media-modal"
       style={{
-        display: props.slideZoomedIndex >= 0 ? "block":"none",
-        position: "absolute",
-        top: 0,
-        left: 0,
-        zIndex: 1000,
-        height: "100%",
-        width: "100%",
-        backgroundColor: "rgba(0, 0, 0, 0.75)",
-        color: "#eee",
+        display: props.slideZoomedIndex >= 0 ? "block":"none"
       }}
       onClick={backClicked}
     >
       <div
-        className=""
-        style={{
-          backgroundColor: "#153b5a",
-          border: "4px solid #4390da",
-          left: "50%",
-          top: "50%",
-          transform: "translate(-50%, -50%)",
-          position: "absolute",
-          height: "85%"
-        }}
+        className="media-modal-box"
         onClick={(e) => {
           e.stopPropagation()
         }}
       >
-        <div
-          style={{
-            textAlign: "center",
-            margin: "30px"
-          }}
-        >
-          <img
-            src={props.slide.large}
-          />
+        <div style={{ textAlign: "center", margin: "30px" }}>
+          <img src={props.slide.large} />
         </div>
-        <div
-          style={{
-            margin: "5%"
-          }}
-        >
+        <div style={{ margin: "20px 40px" }}>
           <div>
             <h1> {props.slide.title} </h1>
           </div>
-          <div
-            style={{
-              color: "#eeeeeeee"
-            }}
-          >
+          <div style={{ color: "rgba(238, 238, 238, 0.7)" }}>
             {props.slide.caption}
           </div>
         </div>
