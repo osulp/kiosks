@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react"
 import PropTypes from "prop-types"
 import Masonry from "masonry-layout"
 import GridMenu from "./GridMenu"
+import MediaModal from "./MediaModal"
 
 const GridSlide = props => {
   const [slideAnimationClass, setSlideAnimationClass] = useState(
@@ -9,6 +10,7 @@ const GridSlide = props => {
   )
   const [imageCount, setImageCount] = useState(0)
   const [imagesLoaded, setImagesLoaded] = useState(-1)
+  const [slideZoomedIndex, setSlideZoomedIndex] = useState(-1)
   const [exitingTimeout, setExitingTimeout] = useState(undefined)
   const [hideTimeout, setHideTimeout] = useState(undefined)
   const [zoomTimeout, setZoomTimeout] = useState(undefined)
@@ -25,7 +27,7 @@ const GridSlide = props => {
       props.setModalRootComponent(undefined)
     }, 180000)
     setHideTimeout(hide_timeout)
-    setImageCount(props.slide.collection.slides.length)
+    setImageCount(props.collection.slides.length)
     setImagesLoaded(0)
     return () => {
       clearTimeout(hide_timeout)
@@ -34,7 +36,7 @@ const GridSlide = props => {
     }
   }, [])
 
-  const selected_primary_slide_index = props.primary_slides.findIndex(slide => slide.id === props.slide.collection.primary_slide.id)
+  const selected_primary_slide_index = props.primary_slides.findIndex(slide => slide.id === props.collection.primary_slide.id)
 
   const handleImageLoaded = () => {
     setImagesLoaded(imagesLoaded + 1)
@@ -54,6 +56,17 @@ const GridSlide = props => {
 
   const slideClicked = i => {
     // TODO: handler for selected slide (detail)
+    let close_zoom_timeout = 30000
+    if (slideZoomedIndex === i) {
+      clearTimeout(zoomTimeout)
+      close_zoom_timeout = 150
+    }
+    setSlideZoomedIndex(i)
+    const zoom_timeout = setTimeout(
+      () => setSlideZoomedIndex(-1),
+      close_zoom_timeout
+    )
+    setZoomTimeout(zoom_timeout)
   }
 
   // htmlDecode gets the html that comes encoded from the server and returns
@@ -72,10 +85,16 @@ const GridSlide = props => {
         // TODO: handler for detail view
       }}
     >
+    <MediaModal
+      slideClicked={slideClicked}
+      slideZoomedIndex={slideZoomedIndex}
+      slide={slideZoomedIndex >= 0 ? props.slides.find(e => e.id == props.collection.slides[slideZoomedIndex].id) : {} }
+      {...props}
+    />
 
       <div className="col-md-12" style={{ height: "950px", padding: "3% 3%" }}>
         <div className="grid">
-          {props.slide.collection.slides.map((s, i) => {
+          {props.collection.slides.map((s, i) => {
             return (
               <div
                 className={
@@ -112,7 +131,7 @@ const GridSlide = props => {
 }
 
 GridSlide.propTypes = {
-  slide: PropTypes.object.isRequired,
+  collection: PropTypes.object.isRequired,
   primary_slides: PropTypes.array.isRequired,
   setModalVisibility: PropTypes.func.isRequired,
   setModalRootComponent: PropTypes.func.isRequired,

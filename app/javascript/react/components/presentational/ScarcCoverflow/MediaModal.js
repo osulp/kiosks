@@ -10,7 +10,7 @@ const MediaModal = props => {
   return (
     <div
       style={{
-        display: props.visibility ? "block":"none",
+        display: props.slideZoomedIndex >= 0 ? "block":"none",
         position: "absolute",
         top: 0,
         left: 0,
@@ -35,7 +35,6 @@ const MediaModal = props => {
         }}
         onClick={(e) => {
           e.stopPropagation()
-          e.stopImmediatePropagation()
         }}
       >
         <div
@@ -61,14 +60,7 @@ const MediaModal = props => {
               color: "#eeeeeeee"
             }}
           >
-          I'm baby asymmetrical intelligentsia migas pabst pickled fanny pack paleo fingerstache, vape cloud bread VHS photo booth dreamcatcher heirloom affogato. Meggings bicycle rights pickled vice normcore lumbersexual salvia raw denim vinyl shabby chic scenester. VHS hot chicken kitsch craft beer art party wayfarers mustache shoreditch post-ironic. Shabby chic before they sold out jean shorts cronut jianbing messenger bag keffiyeh crucifix cray paleo.
-          </div>
-          <div
-            style={{
-              color: "#eeeeee90"
-            }}
-          >
-          Vexillologist try-hard direct trade tilde, single-origin coffee vaporware brooklyn distillery ethical paleo whatever drinking vinegar heirloom hammock franzen.
+            {props.slide.caption}
           </div>
         </div>
       </div>
@@ -81,11 +73,7 @@ const MediaModal = props => {
 
 MediaModal.propTypes = {
   slide: PropTypes.object.isRequired,
-  slideClicked: PropTypes.func.isRequired,
-  setModalVisibility: PropTypes.func.isRequired,
-  setModalRootComponent: PropTypes.func.isRequired,
-  rotateActiveSlides: PropTypes.func.isRequired,
-  visibility: PropTypes.bool.isRequired
+  slideClicked: PropTypes.func.isRequired
 }
 
 export default MediaModal

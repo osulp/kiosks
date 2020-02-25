@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react"
 import PropTypes from "prop-types"
 import Masonry from "masonry-layout"
-import MediaModal from "./MediaModal"
 
 const LargeSlide = props => {
   const [slideAnimationClass, setSlideAnimationClass] = useState(
@@ -76,13 +75,12 @@ const LargeSlide = props => {
   return (
     <div
       className={slideAnimationClass}
+      onClick={() => {
+        if (slideZoomedIndex !== -1) {
+          setSlideZoomedIndex(-1)
+        }
+      }}
     >
-      <MediaModal
-        slideClicked={slideClicked}
-        slideZoomedIndex={slideZoomedIndex}
-        visibility={slideZoomedIndex >= 0}
-        {...props}
-      />
       <div
         className="col-md-7"
         style={{

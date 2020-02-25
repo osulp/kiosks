@@ -57,7 +57,7 @@ class GridMenu extends Component {
 }
 
 GridMenu.propTypes = {
-  slide: PropTypes.object.isRequired,
+  collection: PropTypes.object.isRequired,
   primary_slides: PropTypes.array.isRequired,
   setModalVisibility: PropTypes.func.isRequired,
   setModalRootComponent: PropTypes.func.isRequired,
