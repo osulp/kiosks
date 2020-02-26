@@ -3,30 +3,16 @@ import PropTypes from "prop-types"
 import Masonry from "masonry-layout"
 import GridMenu from "./GridMenu"
 
-function SectionButton(props) {
-  return (
-    <button {...props} className="section-button" />
-  );
-}
-
-function NavSpacer({ width }) {
-  return (
-    <div
-      style={{ display: "inline-block", width }}
-    />
-  );
-}
-
 const GridSlide = props => {
   const [slideAnimationClass, setSlideAnimationClass] = useState(
     "slide-entering"
   )
   const [imageCount, setImageCount] = useState(0)
   const [imagesLoaded, setImagesLoaded] = useState(-1)
-  // const [slideZoomedIndex, setSlideZoomedIndex] = useState(-1)
   const [exitingTimeout, setExitingTimeout] = useState(undefined)
   const [hideTimeout, setHideTimeout] = useState(undefined)
   const [zoomTimeout, setZoomTimeout] = useState(undefined)
+
 
   useEffect(() => {
     const exiting_timeout = setTimeout(() => {
@@ -48,6 +34,8 @@ const GridSlide = props => {
     }
   }, [])
 
+  const selected_primary_slide_index = props.primary_slides.findIndex(slide => slide.id === props.slide.collection.primary_slide.id)
+
   const handleImageLoaded = () => {
     setImagesLoaded(imagesLoaded + 1)
     if (imagesLoaded + 1 >= imageCount) {
@@ -65,17 +53,7 @@ const GridSlide = props => {
   }
 
   const slideClicked = i => {
-    // let close_zoom_timeout = 30000
-    // if (slideZoomedIndex === i) {
-    //   clearTimeout(zoomTimeout)
-    //   close_zoom_timeout = 150
-    // }
-    // setSlideZoomedIndex(i)
-    // const zoom_timeout = setTimeout(
-    //   () => setSlideZoomedIndex(-1),
-    //   close_zoom_timeout
-    // )
-    // setZoomTimeout(zoom_timeout)
+    // TODO: handler for selected slide (detail)
   }
 
   // htmlDecode gets the html that comes encoded from the server and returns
@@ -91,9 +69,7 @@ const GridSlide = props => {
     <div
       className={slideAnimationClass}
       onClick={() => {
-        // if (slideZoomedIndex !== -1) {
-        //   setSlideZoomedIndex(-1)
-        // }
+        // TODO: handler for detail view
       }}
     >
 
@@ -104,7 +80,6 @@ const GridSlide = props => {
               <div
                 className={
                   "grid-item "
-                  // "grid-item " + (i === slideZoomedIndex ? "zoomed" : "not-zoomed")
                 }
                 key={`slide.${i}`}
                 onClick={_e => slideClicked(i)}
@@ -127,7 +102,9 @@ const GridSlide = props => {
       </div>
 
       <div className="kiosk-footer" style={{ textAlign: "center" }}>
-        <GridMenu {...props}/>
+        <GridMenu
+          selectedIndex={selected_primary_slide_index}
+          {...props} />
       </div>
 
     </div>
