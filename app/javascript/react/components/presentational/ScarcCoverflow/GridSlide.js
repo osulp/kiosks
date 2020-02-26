@@ -10,7 +10,7 @@ const GridSlide = props => {
   )
   const [imageCount, setImageCount] = useState(0)
   const [imagesLoaded, setImagesLoaded] = useState(-1)
-  const [slideZoomedIndex, setSlideZoomedIndex] = useState(-1)
+  const [activeSlide, setActiveSlide] = useState(undefined)
   const [exitingTimeout, setExitingTimeout] = useState(undefined)
   const [hideTimeout, setHideTimeout] = useState(undefined)
   const [zoomTimeout, setZoomTimeout] = useState(undefined)
@@ -56,17 +56,7 @@ const GridSlide = props => {
 
   const slideClicked = i => {
     // TODO: handler for selected slide (detail)
-    let close_zoom_timeout = 30000
-    if (slideZoomedIndex === i) {
-      clearTimeout(zoomTimeout)
-      close_zoom_timeout = 150
-    }
-    setSlideZoomedIndex(i)
-    const zoom_timeout = setTimeout(
-      () => setSlideZoomedIndex(-1),
-      close_zoom_timeout
-    )
-    setZoomTimeout(zoom_timeout)
+    setActiveSlide(i >= 0 ? props.slides.find(e => e.id == props.collection.slides[i].id) : undefined)
   }
 
   // htmlDecode gets the html that comes encoded from the server and returns
@@ -87,8 +77,7 @@ const GridSlide = props => {
     >
     <MediaModal
       slideClicked={slideClicked}
-      slideZoomedIndex={slideZoomedIndex}
-      slide={slideZoomedIndex >= 0 ? props.slides.find(e => e.id == props.collection.slides[slideZoomedIndex].id) : {} }
+      slide={activeSlide}
       {...props}
     />
 
