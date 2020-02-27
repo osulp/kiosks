@@ -4,6 +4,7 @@ import Masonry from "masonry-layout"
 import GridMenu from "./GridMenu"
 
 const GridSlide = props => {
+  const [selectedCollection, setSelectedCollection] = useState(0)
   const [slideAnimationClass, setSlideAnimationClass] = useState(
     "slide-entering"
   )
@@ -12,7 +13,6 @@ const GridSlide = props => {
   const [exitingTimeout, setExitingTimeout] = useState(undefined)
   const [hideTimeout, setHideTimeout] = useState(undefined)
   const [zoomTimeout, setZoomTimeout] = useState(undefined)
-
 
   useEffect(() => {
     const exiting_timeout = setTimeout(() => {
@@ -25,6 +25,7 @@ const GridSlide = props => {
       props.setModalRootComponent(undefined)
     }, 180000)
     setHideTimeout(hide_timeout)
+    setSelectedCollection(selected_primary_slide_index)
     setImageCount(props.slide.collection.slides.length)
     setImagesLoaded(0)
     return () => {
@@ -65,6 +66,23 @@ const GridSlide = props => {
     return doc.documentElement.textContent
   }
 
+  const setSlide = () => {
+    // alert(JSON.stringify(props.primary_slides[0].collection.slides[0]))
+    // alert(JSON.stringify(props.slide.collection.slides[0]))
+  }
+
+  const setCollection = i => {
+    setSelectedCollection(i)
+  }
+
+  const selectedClassName = i => {
+    return i == selectedCollection ? "selected" : ""
+  }
+
+  const selectedButtonClassName = i => {
+    return i == selectedCollection ? "btn-primary" : ""
+  }
+
   return (
     <div
       className={slideAnimationClass}
@@ -73,40 +91,63 @@ const GridSlide = props => {
       }}
     >
 
-      <div className="col-md-12" style={{ height: "950px", padding: "3% 3%" }}>
-        <div className="grid">
-          {props.slide.collection.slides.map((s, i) => {
-            return (
-              <div
-                className={
-                  "grid-item "
-                }
-                key={`slide.${i}`}
-                onClick={_e => slideClicked(i)}
-                style={{
-                  width: "300px",
-                  marginBottom: "30px"
-                }}
-              >
-                <img
-                  src={s.large}
-                  style={{
-                    width: "100%"
-                  }}
-                  onLoad={handleImageLoaded}
-                />
+      <div className="col-md-12" style={{ padding: "3% 3%" }}>
+        <div id="grid_tabbed_panel" className="panel panel-default tabbed-panel">
+          <div className="col-md-12 col-lg-12">
+            <div className="row">
+              <div className="panel-body container-fluid">
+                <ul className="grid-menu">
+                  {props.primary_slides.map((slide, i) => {
+                    return (
+                      <li className={ selectedClassName(i) } data-index={i}>
+                        <div><h1 style={{ color: "red" }}>{slide.caption}</h1></div>
+
+                        <div className="grid-content" style={{ height: "730px" }}>
+                          {slide.collection.slides.map((s, i) => {
+                            return (
+                              <div
+                                className={
+                                  "grid-item "
+                                }
+                                key={`slide.${i}`}
+                                onClick={_e => slideClicked(i)}
+                                style={{
+                                  width: "300px",
+                                  marginBottom: "30px"
+                                }}
+                              >
+                                <img
+                                  src={s.large}
+                                  style={{
+                                    width: "100%"
+                                  }}
+                                  onLoad={handleImageLoaded}
+                                />
+                              </div>
+                            )
+                          })}
+                        </div>
+
+                      </li>
+                    )
+                  })}
+                </ul>
               </div>
-            )
-          })}
+            </div>
+          </div>
+          <div className="col-md-12 col-lg-12 menu-buttons">
+            <div className="btn-group-horizontal kiosk-footer" style={{ textAlign: "center" }}>
+              {props.primary_slides.map((slide, i) => {
+                // alert(JSON.stringify(slide.collection.slides))
+                return (
+                  <button data-index={i} onClick={() => { setCollection(i) }} type="button" className={`${selectedButtonClassName(i)} btn btn-default`}>{slide.caption}</button>
+                )
+              })}
+            </div>
+          </div>
         </div>
-      </div>
 
-      <div className="kiosk-footer" style={{ textAlign: "center" }}>
-        <GridMenu
-          selectedIndex={selected_primary_slide_index}
-          {...props} />
       </div>
-
     </div>
   )
 }
