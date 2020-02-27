@@ -42,6 +42,34 @@ const MediaModal = props => {
     }
   }, [props.slide])
 
+  // Default to displaying slide as an image. Render as video or audio of file allows it
+  const renderMedia = () => {
+    let avFile = props.slide.av_media
+    let elem = (
+      <MyImage
+        src={props.slide.xlarge}
+      />
+    )
+    if (avFile && (avFile.endsWith("m4v") || avFile.endsWith("mp4"))) {
+      elem = (
+        <MyVideo
+          src={props.slide.av_media}
+          en_src={props.slide.subtitle_en}
+          es_src={props.slide.subtitle_es}
+        />
+      )
+    } else if (avFile && avFile.endsWith("mp3")) {
+      elem = (
+        <MyAudio
+          src={props.slide.av_media}
+          thumb={props.slide.xlarge}
+          alt={props.slide.caption}
+        />
+      )
+    }
+    return elem
+  }
+
   // Display modal if slide is active in GridSlide
   return (
     <div
@@ -63,7 +91,7 @@ const MediaModal = props => {
         >
           {props.slide !== undefined &&
             <div style={{ textAlign: "center", margin: "30px" }}>
-              <img src={props.slide.large} />
+              {renderMedia()}
             </div>
           }
           {props.slide !== undefined &&
@@ -88,6 +116,45 @@ const MediaModal = props => {
 MediaModal.propTypes = {
   slide: PropTypes.object,
   slideClicked: PropTypes.func.isRequired
+}
+
+const MyVideo = props => {
+  return (
+    <video controls autoPlay src={props.src}>
+      {props.en_src.length > 0 &&
+      <track
+        kind="subtitles"
+        label="English subtitles"
+        src={props.en_src}
+        srcLang="en"
+        default
+      />
+      }
+      {props.es_src.length > 0 &&
+      <track
+        kind="subtitles"
+        label="Spanish subtitles"
+        src={props.es_src}
+        srcLang="es"
+      />
+      }
+    </video>
+  )
+}
+
+const MyAudio = props => {
+  return (
+    <div>
+      <img src={props.thumb} alt={props.alt} />
+      <audio controls autoPlay src={props.src} />
+    </div>
+  )
+}
+
+const MyImage = props => {
+  return (
+    <img src={props.src} />
+  )
 }
 
 export default MediaModal
