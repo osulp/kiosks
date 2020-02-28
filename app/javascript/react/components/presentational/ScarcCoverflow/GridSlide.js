@@ -99,36 +99,39 @@ const GridSlide = props => {
                 <ul className="grid-menu">
                   {props.primary_slides.map((slide, i) => {
                     return (
-                      <li className={ selectedClassName(i) } data-index={i}>
-                        <div><h1 style={{ color: "red" }}>{slide.caption}</h1></div>
-
-                        <div className="grid-content" style={{ height: "730px" }}>
-                          {slide.collection.slides.map((s, i) => {
-                            return (
-                              <div
-                                className={
-                                  "grid-item "
-                                }
-                                key={`slide.${i}`}
-                                onClick={_e => slideClicked(i)}
-                                style={{
-                                  width: "300px",
-                                  marginBottom: "30px"
-                                }}
-                              >
-                                <img
-                                  src={s.large}
+                      <div>
+                        <li className={ `${selectedClassName(i)}` } data-index={i}>
+                          <div>
+                          </div>
+                          <h1 style={{ color: "white" }}>{slide.collection.name}</h1>
+                          <p style={{ color: "white", background: "blue", height: "100px" }}>{slide.collection.detail}</p>
+                          <div className="grid-content grid" style={{ height: "730px" }}>
+                            {slide.collection.slides.map((s, i) => {
+                              return (
+                                <div
+                                  className={
+                                    "grid-item "
+                                  }
+                                  key={`slide.${i}`}
+                                  onClick={_e => slideClicked(i)}
                                   style={{
-                                    width: "100%"
+                                    width: "300px",
+                                    marginBottom: "30px"
                                   }}
-                                  onLoad={handleImageLoaded}
-                                />
-                              </div>
-                            )
-                          })}
-                        </div>
-
-                      </li>
+                                >
+                                  <img
+                                    src={s.large}
+                                    style={{
+                                      width: "100%"
+                                    }}
+                                    onLoad={handleImageLoaded}
+                                  />
+                                </div>
+                              )
+                            })}
+                          </div>
+                        </li>
+                      </div>
                     )
                   })}
                 </ul>

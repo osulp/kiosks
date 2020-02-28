@@ -30,6 +30,7 @@ json.cache! ['v1', @kiosk], expires_in: Rails.env.development? ? 1.second : 24.h
     end
     json.collection do
       json.detail html_escape(slide.collection.detail)
+      json.name html_escape(slide.collection.name)
       json.primary_slide do
         json.id slide.collection.primary_slide&.id
         json.original slide.collection.primary_slide&.image&.url
