@@ -217,3 +217,31 @@ body > #application_root {
   font-family: "Stratum2WebBold";
   src: asset_url("/fonts/Stratum2WebBold.woff") format("woff");
 }
+
+// This is for animating modal windows
+.slide-entering {
+  animation: grow 350ms;
+}
+
+// The time 350ms is exactly related to the timeout duration found in components that attach display:none 350ms after attaching .slide-exiting.
+// A new animation is necessary because reversing the animation will not play unless played infinitely, resulting in odd behavior
+.slide-exiting {
+  animation: shrink 350ms;
+}
+
+@keyframes shrink {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(0);
+  }
+}
+@keyframes grow {
+  0% {
+    transform: scale(0);
+  }
+  100% {
+    transform: scale(1);
+  }
+}

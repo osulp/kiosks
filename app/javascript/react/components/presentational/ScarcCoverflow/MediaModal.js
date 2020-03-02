@@ -18,7 +18,7 @@ const MediaModal = props => {
       // Close modal and reset to entering animation
       props.slideClicked(-1)
       setSlideAnimationClass("slide-entering")
-    }, 150)
+    }, 350)
     setHideTimeout(hide_timeout)
   }
 
@@ -37,7 +37,7 @@ const MediaModal = props => {
       clearTimeout(hideTimeout)
       const exiting_timeout = setTimeout(() => {
         backClicked();
-      }, 29650)
+      }, 599650)
       setExitingTimeout(exiting_timeout)
     }
   }, [props.slide])
