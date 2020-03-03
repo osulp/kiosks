@@ -25,7 +25,7 @@ const GridSlide = props => {
       props.setModalRootComponent(undefined)
     }, 180000)
     setHideTimeout(hide_timeout)
-    setSelectedCollection(selected_primary_slide_index)
+    setSelectedCollection(selected_collection_index)
 
     return () => {
       clearTimeout(hide_timeout)
@@ -51,7 +51,7 @@ const GridSlide = props => {
     msnry.destroy()
   }
 
-  const selected_primary_slide_index = props.primary_slides.findIndex(slide => slide.id === props.slide.collection.primary_slide.id)
+  const selected_collection_index = props.primary_slides.findIndex(slide => slide.id === props.slide.collection.primary_slide.id)
   const all_slides_count = props.primary_slides.map(s => s.collection.slides.length).reduce((a,b) => a+b)
 
   const backClicked = () => {
@@ -74,7 +74,9 @@ const GridSlide = props => {
   }
 
   const setCollection = i => {
-    destroyGrid(selectedCollection)
+    if (i != selectedCollection) {
+      destroyGrid(selectedCollection)
+    }
     setSelectedCollection(i)
   }
 
