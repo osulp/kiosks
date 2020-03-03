@@ -40,11 +40,14 @@ const GridSlide = props => {
   }, [selectedCollection])
 
   const setupGrid = (i) => {
-    let msnry = new Masonry(document.querySelector(`.grid-${i}`) , {
-      // options
-      itemSelector: '.grid-item',
-      gutter: 30
-    });
+    let msnry = Masonry.data(`.grid-${i}`)
+    if (msnry == undefined) {
+      msnry = new Masonry(document.querySelector(`.grid-${i}`) , {
+        // options
+        itemSelector: '.grid-item',
+        gutter: 30
+      });
+    }
     msnry.layout()
   }
 
