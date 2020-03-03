@@ -45,6 +45,25 @@ class TabbedPanel extends Component {
     let id = this.props.id || ""
     return (
       <div id={id} className="panel panel-default tabbed-panel">
+        <div className="col-md-2 col-lg-2 floor-buttons">
+          <div className={"btn-group-vertical"}>
+            {tabs.map((t, i) => {
+              return (
+                <button
+                  key={`tab_button.${i}`}
+                  data-index={i}
+                  type="button"
+                  className={`${this._tabSelectedButtonClassName(
+                    i
+                  )} btn btn-default`}
+                  onClick={this._tabClicked.bind(this)}
+                >
+                  {t.button_text}
+                </button>
+              )
+            })}
+          </div>
+        </div>
         <div className="col-md-10 col-lg-10">
           <div className="row">
             <div className="panel-body container-fluid">
@@ -64,27 +83,6 @@ class TabbedPanel extends Component {
             </div>
           </div>
         </div>
-
-        <div className="col-md-10 col-lg-10 floor-buttons">
-          <div className={"btn-group-horizontal"}>
-            {tabs.map((t, i) => {
-              return (
-                <button
-                  key={`tab_button.${i}`}
-                  data-index={i}
-                  type="button"
-                  className={`${this._tabSelectedButtonClassName(
-                    i
-                  )} btn btn-default`}
-                  onClick={this._tabClicked.bind(this)}
-                >
-                  {t.button_text}
-                </button>
-              )
-            })}
-          </div>
-        </div>
-
       </div>
     )
   }
