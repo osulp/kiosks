@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react"
+import React, { useEffect, useState } from "react"
 import PropTypes from "prop-types"
 import Masonry from "masonry-layout"
 import GridMenu from "./GridMenu"
@@ -13,7 +13,6 @@ const GridSlide = props => {
   const [exitingTimeout, setExitingTimeout] = useState(undefined)
   const [hideTimeout, setHideTimeout] = useState(undefined)
   const [zoomTimeout, setZoomTimeout] = useState(undefined)
-  const didMountRef = useRef(false)
 
   useEffect(() => {
     const exiting_timeout = setTimeout(() => {
@@ -27,12 +26,6 @@ const GridSlide = props => {
     }, 180000)
     setHideTimeout(hide_timeout)
     setSelectedCollection(selected_collection_index)
-
-    if (didMountRef.current == false) {
-      // setupGrid(selected_collection_index)
-      didMountRef.current = true
-    }
-
 
     return () => {
       clearTimeout(hide_timeout)
