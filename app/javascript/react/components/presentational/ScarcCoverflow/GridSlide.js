@@ -3,7 +3,6 @@ import PropTypes from "prop-types"
 import Masonry from "masonry-layout"
 import GridMenu from "./GridMenu"
 
-
 const GridSlide = props => {
   const [selectedCollection, setSelectedCollection] = useState(0)
   const [slideAnimationClass, setSlideAnimationClass] = useState(
@@ -12,7 +11,6 @@ const GridSlide = props => {
   const [imagesLoaded, setImagesLoaded] = useState(1)
   const [exitingTimeout, setExitingTimeout] = useState(undefined)
   const [hideTimeout, setHideTimeout] = useState(undefined)
-  const [zoomTimeout, setZoomTimeout] = useState(undefined)
 
   useEffect(() => {
     const exiting_timeout = setTimeout(() => {
@@ -30,7 +28,6 @@ const GridSlide = props => {
     return () => {
       clearTimeout(hide_timeout)
       clearTimeout(exiting_timeout)
-      clearTimeout(zoomTimeout)
     }
   }, [])
 
@@ -61,23 +58,8 @@ const GridSlide = props => {
   const selected_collection_index = props.primary_slides.findIndex(slide => slide.id === props.slide.collection.primary_slide.id)
   const all_slides_count = props.primary_slides.map(s => s.collection.slides.length).reduce((a,b) => a+b)
 
-  const backClicked = () => {
-    props.setModalVisibility(false)
-    props.setModalRootComponent(undefined)
-    props.rotateActiveSlides()
-  }
-
   const slideClicked = i => {
     // TODO: handler for selected slide (detail)
-  }
-
-  // htmlDecode gets the html that comes encoded from the server and returns
-  // content that can be safely rendered in a component.
-  // Example input: "hello&lt;br&gt;world""
-  // Example return: htmlDecode(input) = "hello<br>world"
-  const htmlDecode = input => {
-    var doc = new DOMParser().parseFromString(input, "text/html");
-    return doc.documentElement.textContent
   }
 
   const setCollection = i => {
