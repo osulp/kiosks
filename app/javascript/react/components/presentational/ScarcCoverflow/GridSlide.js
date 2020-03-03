@@ -13,6 +13,7 @@ const GridSlide = props => {
   const [exitingTimeout, setExitingTimeout] = useState(undefined)
   const [hideTimeout, setHideTimeout] = useState(undefined)
   const [zoomTimeout, setZoomTimeout] = useState(undefined)
+  const didMountRef = useRef(false)
 
   useEffect(() => {
     const exiting_timeout = setTimeout(() => {
@@ -27,6 +28,12 @@ const GridSlide = props => {
     setHideTimeout(hide_timeout)
     setSelectedCollection(selected_collection_index)
 
+    if (didMountRef.current == false) {
+      // setupGrid(selected_collection_index)
+      didMountRef.current = true
+    }
+
+
     return () => {
       clearTimeout(hide_timeout)
       clearTimeout(exiting_timeout)
@@ -35,6 +42,7 @@ const GridSlide = props => {
   }, [])
 
   useEffect(() => {
+    destroyGrid(selectedCollection)
     setupGrid(selectedCollection)
   }, [selectedCollection])
 
@@ -44,11 +52,14 @@ const GridSlide = props => {
       itemSelector: '.grid-item',
       gutter: 30
     });
+    msnry.layout()
   }
 
   const destroyGrid = (i) => {
     var msnry = Masonry.data(`.grid-${i}`)
-    msnry.destroy()
+    if (msnry != undefined) {
+      msnry.destroy()
+    }
   }
 
   const selected_collection_index = props.primary_slides.findIndex(slide => slide.id === props.slide.collection.primary_slide.id)
@@ -136,7 +147,7 @@ const GridSlide = props => {
           </ul>
         </div>
         <div className="col-md-12 col-lg-12 menu-buttons">
-          <div className="btn-group-horizontal grid-menu">
+          <div className="grid-menu">
             {props.primary_slides.map((slide, i) => {
               return (
                 <button key={`collection.button.${i}`} data-index={i} onClick={() => { setCollection(i) }} type="button" className={`${selectedButtonClassName(i)} btn btn-default`}>{slide.caption}</button>
