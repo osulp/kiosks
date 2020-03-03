@@ -89,73 +89,61 @@ const GridSlide = props => {
   }
 
   return (
-    <div
-      className={slideAnimationClass}
-      onClick={() => {
-        // TODO: handler for detail view
-      }}
-    >
-
-      <div className="col-md-12" style={{ padding: "3% 3%" }}>
-        <div id="grid_tabbed_panel" className="panel panel-default tabbed-panel">
-          <div className="col-md-12 col-lg-12">
-            <div className="row">
-              <div className="panel-body container-fluid">
-                <ul className="grid-menu">
-                  {props.primary_slides.map((slide, i) => {
-                    return (
-                      <li key={`collection.${i}`} className={ `${selectedClassName(i)}` } data-index={i}>
-                        <h1 style={{ color: "white" }}>{slide.collection.name}</h1>
-                        <p style={{ color: "white", background: "blue", height: "100px" }}>{slide.collection.detail}</p>
-                        <div className={`grid-content grid-content grid-${i}`} style={{ height: "730px !important" }}>
-                          {slide.collection.slides.map((s, j) => {
-                            return (
-                              <div
-                                className={
-                                  "grid-item "
-                                }
-                                key={`slide.${i}.${j}`}
-                                onClick={_e => slideClicked(j)}
-                                style={{
-                                  width: "300px",
-                                  marginBottom: "30px"
-                                }}
-                              >
-                                <img
-                                  src={s.large}
-                                  style={{
-                                    width: "100%"
-                                  }}
-                                  onLoad={() => {
-                                    setImagesLoaded(imagesLoaded + 1)
-                                    if (imagesLoaded == all_slides_count) {
-                                      setupGrid(i)
-                                    }
-                                  }}
-                                />
-                              </div>
-                            )
-                          })}
+    <div className={slideAnimationClass}>
+      <div id="grid_tabbed_panel" className="panel panel-default tabbed-panel col-md-12 col-lg-12">
+        <div className="panel-body">
+          <ul>
+            {props.primary_slides.map((slide, i) => {
+              return (
+                <li key={`collection.${i}`} className={ `${selectedClassName(i)}` } data-index={i}>
+                  <div className="selected-collection-header">
+                    <h1 className="collection-name">{slide.collection.name}</h1>
+                    <p className="collection-description">{slide.collection.detail}</p>
+                  </div>
+                  <div className={`grid-content grid-${i}`}>
+                    {slide.collection.slides.map((s, j) => {
+                      return (
+                        <div
+                          className={
+                            "grid-item "
+                          }
+                          key={`slide.${i}.${j}`}
+                          onClick={_e => slideClicked(j)}
+                          style={{
+                            width: "300px",
+                            marginBottom: "30px"
+                          }}
+                        >
+                          <img
+                            src={s.large}
+                            style={{
+                              width: "100%"
+                            }}
+                            onLoad={() => {
+                              setImagesLoaded(imagesLoaded + 1)
+                              if (imagesLoaded == all_slides_count) {
+                                setupGrid(i)
+                              }
+                            }}
+                          />
                         </div>
-                      </li>
-                    )
-                  })}
-                </ul>
-              </div>
-            </div>
-          </div>
-          <div className="col-md-12 col-lg-12 menu-buttons">
-            <div className="btn-group-horizontal kiosk-footer" style={{ textAlign: "center" }}>
-              {props.primary_slides.map((slide, i) => {
-                // alert(JSON.stringify(slide.collection.slides))
-                return (
-                  <button key={`collection.button.${i}`} data-index={i} onClick={() => { setCollection(i) }} type="button" className={`${selectedButtonClassName(i)} btn btn-default`}>{slide.caption}</button>
-                )
-              })}
-            </div>
+                      )
+                    })}
+                  </div>
+                </li>
+              )
+            })}
+          </ul>
+        </div>
+        <div className="col-md-12 col-lg-12 menu-buttons">
+          <div className="btn-group-horizontal grid-menu">
+            {props.primary_slides.map((slide, i) => {
+              return (
+                <button key={`collection.button.${i}`} data-index={i} onClick={() => { setCollection(i) }} type="button" className={`${selectedButtonClassName(i)} btn btn-default`}>{slide.caption}</button>
+              )
+            })}
           </div>
         </div>
-
       </div>
     </div>
   )

@@ -3,6 +3,8 @@
 }
 
 #scarc_coverflow_kiosk {
+  background-color: $scarc_blue;
+
   .component button {
     background-color: #1d1d1d;
     border-color: #9c9c9c;
@@ -76,21 +78,6 @@
     outline: none;
   }
 
-  .section-button {
-    border: none;
-    background: none;
-    display: inline-block;
-    padding: 20px;
-    width: 4rem;
-    height: 4rem;
-    line-height: 1.8rem;
-    font-size: 4rem;
-    text-align: center;
-    background-color: transparent;
-    color: #eee;
-    outline: none;
-  }
-
   li.menu-button {
     padding-right: 2em;
   }
@@ -125,7 +112,11 @@
   }
 
   .grid-content {
-    height: 630px !important;
+    height: 620px !important;
+  }
+
+  .grid-menu {
+    text-align: center;
   }
 
   .grid-item img {
@@ -150,6 +141,28 @@
     img {
       border: solid 2px #eee;
     }
+  }
+
+  .selected-collection-header {
+    background: $scarc_blue;
+    padding: 1em 2em 0 2em;
+    width: 50%;
+    margin: 3em 0 3em -4em;
+  }
+  .selected-collection-header h1.collection-name {
+    color: white;
+  }
+
+  .selected-collection-header p.collection-description {
+    color: white;
+    background: transparent;
+    height: 100px;
+    font-size: 20px;
+  }
+
+  .tabbed-panel {
+    border: none;
+    background-color: #222;
   }
 
   figure,
