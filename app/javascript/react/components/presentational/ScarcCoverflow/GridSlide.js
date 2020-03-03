@@ -1,15 +1,15 @@
-import React, { useEffect, useState } from "react"
+import React, { useEffect, useState, useRef } from "react"
 import PropTypes from "prop-types"
 import Masonry from "masonry-layout"
 import GridMenu from "./GridMenu"
+
 
 const GridSlide = props => {
   const [selectedCollection, setSelectedCollection] = useState(0)
   const [slideAnimationClass, setSlideAnimationClass] = useState(
     "slide-entering"
   )
-  const [imageCount, setImageCount] = useState(0)
-  const [imagesLoaded, setImagesLoaded] = useState(-1)
+  const [imagesLoaded, setImagesLoaded] = useState(1)
   const [exitingTimeout, setExitingTimeout] = useState(undefined)
   const [hideTimeout, setHideTimeout] = useState(undefined)
   const [zoomTimeout, setZoomTimeout] = useState(undefined)
@@ -26,8 +26,7 @@ const GridSlide = props => {
     }, 180000)
     setHideTimeout(hide_timeout)
     setSelectedCollection(selected_primary_slide_index)
-    setImageCount(props.slide.collection.slides.length)
-    setImagesLoaded(0)
+
     return () => {
       clearTimeout(hide_timeout)
       clearTimeout(exiting_timeout)
@@ -35,17 +34,25 @@ const GridSlide = props => {
     }
   }, [])
 
-  const selected_primary_slide_index = props.primary_slides.findIndex(slide => slide.id === props.slide.collection.primary_slide.id)
+  useEffect(() => {
+    setupGrid(selectedCollection)
+  }, [selectedCollection])
 
-  const handleImageLoaded = () => {
-    setImagesLoaded(imagesLoaded + 1)
-    if (imagesLoaded + 1 >= imageCount) {
-      new Masonry(".grid", {
-        itemSelector: ".grid-item",
-        gutter: 30
-      })
-    }
+  const setupGrid = (i) => {
+    let msnry = new Masonry(document.querySelector(`.grid-${i}`) , {
+      // options
+      itemSelector: '.grid-item',
+      gutter: 30
+    });
   }
+
+  const destroyGrid = (i) => {
+    var msnry = Masonry.data(`.grid-${i}`)
+    msnry.destroy()
+  }
+
+  const selected_primary_slide_index = props.primary_slides.findIndex(slide => slide.id === props.slide.collection.primary_slide.id)
+  const all_slides_count = props.primary_slides.map(s => s.collection.slides.length).reduce((a,b) => a+b)
 
   const backClicked = () => {
     props.setModalVisibility(false)
@@ -66,12 +73,8 @@ const GridSlide = props => {
     return doc.documentElement.textContent
   }
 
-  const setSlide = () => {
-    // alert(JSON.stringify(props.primary_slides[0].collection.slides[0]))
-    // alert(JSON.stringify(props.slide.collection.slides[0]))
-  }
-
   const setCollection = i => {
+    destroyGrid(selectedCollection)
     setSelectedCollection(i)
   }
 
@@ -99,39 +102,40 @@ const GridSlide = props => {
                 <ul className="grid-menu">
                   {props.primary_slides.map((slide, i) => {
                     return (
-                      <div>
-                        <li className={ `${selectedClassName(i)}` } data-index={i}>
-                          <div>
-                          </div>
-                          <h1 style={{ color: "white" }}>{slide.collection.name}</h1>
-                          <p style={{ color: "white", background: "blue", height: "100px" }}>{slide.collection.detail}</p>
-                          <div className="grid-content grid" style={{ height: "730px" }}>
-                            {slide.collection.slides.map((s, i) => {
-                              return (
-                                <div
-                                  className={
-                                    "grid-item "
-                                  }
-                                  key={`slide.${i}`}
-                                  onClick={_e => slideClicked(i)}
+                      <li key={`collection.${i}`} className={ `${selectedClassName(i)}` } data-index={i}>
+                        <h1 style={{ color: "white" }}>{slide.collection.name}</h1>
+                        <p style={{ color: "white", background: "blue", height: "100px" }}>{slide.collection.detail}</p>
+                        <div className={`grid-content grid-content grid-${i}`} style={{ height: "730px !important" }}>
+                          {slide.collection.slides.map((s, j) => {
+                            return (
+                              <div
+                                className={
+                                  "grid-item "
+                                }
+                                key={`slide.${i}.${j}`}
+                                onClick={_e => slideClicked(j)}
+                                style={{
+                                  width: "300px",
+                                  marginBottom: "30px"
+                                }}
+                              >
+                                <img
+                                  src={s.large}
                                   style={{
-                                    width: "300px",
-                                    marginBottom: "30px"
+                                    width: "100%"
                                   }}
-                                >
-                                  <img
-                                    src={s.large}
-                                    style={{
-                                      width: "100%"
-                                    }}
-                                    onLoad={handleImageLoaded}
-                                  />
-                                </div>
-                              )
-                            })}
-                          </div>
-                        </li>
-                      </div>
+                                  onLoad={() => {
+                                    setImagesLoaded(imagesLoaded + 1)
+                                    if (imagesLoaded == all_slides_count) {
+                                      setupGrid(i)
+                                    }
+                                  }}
+                                />
+                              </div>
+                            )
+                          })}
+                        </div>
+                      </li>
                     )
                   })}
                 </ul>
@@ -143,7 +147,7 @@ const GridSlide = props => {
               {props.primary_slides.map((slide, i) => {
                 // alert(JSON.stringify(slide.collection.slides))
                 return (
-                  <button data-index={i} onClick={() => { setCollection(i) }} type="button" className={`${selectedButtonClassName(i)} btn btn-default`}>{slide.caption}</button>
+                  <button key={`collection.button.${i}`} data-index={i} onClick={() => { setCollection(i) }} type="button" className={`${selectedButtonClassName(i)} btn btn-default`}>{slide.caption}</button>
                 )
               })}
             </div>
