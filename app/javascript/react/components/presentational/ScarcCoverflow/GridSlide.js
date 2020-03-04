@@ -69,7 +69,7 @@ const GridSlide = props => {
   const all_slides_count = props.primary_slides.map(s => s.collection.slides.length).reduce((a,b) => a+b)
 
   const slideClicked = i => {
-    setActiveSlide(i >= 0 ? props.slides.find(e => e.id == props.collection.slides[i].id) : undefined)
+    setActiveSlide(i >= 0 ? props.slides.find(e => e.id == props.primary_slides[selectedCollection].collection.slides[i].id) : undefined)
   }
 
   const setCollection = i => {
