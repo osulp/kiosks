@@ -3,6 +3,8 @@
 }
 
 #scarc_coverflow_kiosk {
+  background-color: $scarc_blue;
+
   .component button {
     background-color: #1d1d1d;
     border-color: #9c9c9c;
@@ -76,37 +78,16 @@
     outline: none;
   }
 
-  .section-button {
-    border: none;
-    background: none;
-    display: inline-block;
-    padding: 20px;
-    width: 4rem;
-    height: 4rem;
-    line-height: 1.8rem;
-    font-size: 4rem;
-    text-align: center;
-    background-color: transparent;
-    color: #eee;
-    outline: none;
-  }
-
   li.menu-button {
     padding-right: 2em;
   }
 
-  .navbar-nav > li > a {
-    background: transparent;
-    color: white;
-    border: none;
-    font-size: 2.5em;
-  }
-
   .html-content {
     font-size: 2.2rem;
-    padding: 6% 10%;
     line-height: 2.8rem;
     font-weight: lighter;
+    color: white;
+    background: transparent;
     h1,
     h2,
     h3,
@@ -115,9 +96,30 @@
       font-size: 5rem;
       margin-bottom: 7%;
     }
+
     p {
       margin-bottom: 5%;
     }
+  }
+
+  .grid-content {
+    height: 620px !important;
+  }
+
+  .grid-menu {
+    text-align: center;
+  }
+
+  .grid-menu button {
+    background: transparent;
+    color: #646363;
+    border: none;
+    font-size: 2.8em;
+  }
+
+  .grid-menu button.btn-primary {
+    color: #F4F4F4;
+    text-decoration: underline;
   }
 
   .grid-item img {
@@ -142,6 +144,25 @@
     img {
       border: solid 2px #eee;
     }
+  }
+
+  .selected-collection-header {
+    background: $scarc_blue;
+    padding: 0.5em 2em 0.5em 2em;
+    width: 50%;
+    margin: 3em 0 3em -4em;
+  }
+  .selected-collection-header h1.collection-name {
+    color: white;
+  }
+
+  .collection-description {
+    height: 100px;
+  }
+
+  .tabbed-panel {
+    border: none;
+    background-color: #222;
   }
 
   figure,

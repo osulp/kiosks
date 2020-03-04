@@ -147,7 +147,7 @@ const Kiosk = props => {
   }
 
   return (
-    <div id="scarc_coverflow_kiosk" style={{ backgroundColor: "#003B5C" }}>
+    <div id="scarc_coverflow_kiosk">
       <ConnectedModalWindow />
       <div className="component">
         <Coverflow
