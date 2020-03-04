@@ -11,35 +11,44 @@ function GridList({collections, selected_class, slide_clicked, on_load_all_image
               <h1 className="collection-name">{slide.collection.name}</h1>
               <p className="collection-description">{slide.collection.detail}</p>
             </div>
-            <div className={`grid-content grid-${i}`}>
-              {slide.collection.slides.map((s, j) => {
-                return (
-                  <div
-                    className={"grid-item"}
-                    key={`slide.${i}.${j}`}
-                    onClick={_e => slide_clicked(j)}
-                    style={{
-                      width: "300px",
-                      marginBottom: "30px"
-                    }}
-                  >
-                    <img
-                      src={s.large}
-                      style={{
-                        width: "100%"
-                      }}
-                      onLoad={() => {
-                        on_load_all_images(i)
-                      }}
-                    />
-                  </div>
-                )
-              })}
-            </div>
+            <GridItem
+              slides={slide.collection.slides}
+              slide_clicked={slide_clicked}
+              on_load_all_images={on_load_all_images}
+              index={i}
+            />
           </li>
         )
       })}
     </ul>
+  );
+}
+
+function GridItem({slides, slide_clicked, on_load_all_images, index}) {
+  return(
+    <div className={`grid-content grid-${index}`}>
+      {slides.map((s, j) => {
+        return (
+          <div
+            className={"grid-item"}
+            key={`slide.${index}.${j}`}
+            onClick={_e => slide_clicked(j)}
+            style={{
+              width: "300px",
+              marginBottom: "30px"
+            }}
+          >
+            <img
+              src={s.large}
+              style={{
+                width: "100%"
+              }}
+              onLoad={() => { on_load_all_images(index) }}
+            />
+          </div>
+        )
+      })}
+    </div>
   );
 }
 
