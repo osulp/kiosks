@@ -1,19 +1,18 @@
 import React, { useEffect, useState } from "react"
 import PropTypes from "prop-types"
 import Masonry from "masonry-layout"
-import GridMenu from "./GridMenu"
+import MediaGrid from "./MediaGrid"
 import MediaModal from "./MediaModal"
 
 const GridSlide = props => {
+  const [selectedCollection, setSelectedCollection] = useState(0)
   const [slideAnimationClass, setSlideAnimationClass] = useState(
     "slide-entering"
   )
-  const [imageCount, setImageCount] = useState(0)
-  const [imagesLoaded, setImagesLoaded] = useState(-1)
+  const [imagesLoaded, setImagesLoaded] = useState(1)
   const [activeSlide, setActiveSlide] = useState(undefined)
   const [exitingTimeout, setExitingTimeout] = useState(undefined)
   const [hideTimeout, setHideTimeout] = useState(undefined)
-  const [zoomTimeout, setZoomTimeout] = useState(undefined)
 
 
   useEffect(() => {
@@ -27,94 +26,82 @@ const GridSlide = props => {
       props.setModalRootComponent(undefined)
     }, 180000)
     setHideTimeout(hide_timeout)
-    setImageCount(props.collection.slides.length)
-    setImagesLoaded(0)
+    setSelectedCollection(selected_collection_index)
+
     return () => {
-      clearTimeout(hide_timeout)
-      clearTimeout(exiting_timeout)
-      clearTimeout(zoomTimeout)
+      clearTimeout(hideTimeout)
+      clearTimeout(exitingTimeout)
     }
   }, [])
 
-  const selected_primary_slide_index = props.primary_slides.findIndex(slide => slide.id === props.collection.primary_slide.id)
+  useEffect(() => {
+    destroyGrid(selectedCollection)
+    setupGrid(selectedCollection)
+  }, [selectedCollection])
 
-  const handleImageLoaded = () => {
-    setImagesLoaded(imagesLoaded + 1)
-    if (imagesLoaded + 1 >= imageCount) {
-      new Masonry(".grid", {
-        itemSelector: ".grid-item",
+  const setupGrid = (i) => {
+    let msnry = Masonry.data(`.grid-${i}`)
+    if (msnry == undefined) {
+      msnry = new Masonry(document.querySelector(`.grid-${i}`) , {
+        // options
+        itemSelector: '.grid-item',
         gutter: 30
-      })
+      });
+    }
+    msnry.layout()
+  }
+
+  const onLoadAllImages = (i) => {
+    setImagesLoaded(imagesLoaded + 1)
+    if (imagesLoaded == all_slides_count) {
+      setupGrid(i)
     }
   }
 
-  const backClicked = () => {
-    props.setModalVisibility(false)
-    props.setModalRootComponent(undefined)
-    props.rotateActiveSlides()
+  const destroyGrid = (i) => {
+    var msnry = Masonry.data(`.grid-${i}`)
+    if (msnry != undefined) {
+      msnry.destroy()
+    }
   }
 
+  const selected_collection_index = props.primary_slides.findIndex(slide => slide.id === props.collection.primary_slide.id)
+  const all_slides_count = props.primary_slides.map(s => s.collection.slides.length).reduce((a,b) => a+b)
+
   const slideClicked = i => {
-    // TODO: handler for selected slide (detail)
     setActiveSlide(i >= 0 ? props.slides.find(e => e.id == props.collection.slides[i].id) : undefined)
   }
 
-  // htmlDecode gets the html that comes encoded from the server and returns
-  // content that can be safely rendered in a component.
-  // Example input: "hello&lt;br&gt;world""
-  // Example return: htmlDecode(input) = "hello<br>world"
-  const htmlDecode = input => {
-    var doc = new DOMParser().parseFromString(input, "text/html");
-    return doc.documentElement.textContent
+  const setCollection = i => {
+    if (i != selectedCollection) {
+      destroyGrid(selectedCollection)
+    }
+    setSelectedCollection(i)
+  }
+
+  const selectedClassName = i => {
+    return i == selectedCollection ? "selected" : ""
+  }
+
+  const selectedButtonClassName = i => {
+    return i == selectedCollection ? "btn-primary" : ""
   }
 
   return (
-    <div
-      className={slideAnimationClass}
-      onClick={() => {
-        // TODO: handler for detail view
-      }}
-    >
-    <MediaModal
-      slideClicked={slideClicked}
-      slide={activeSlide}
-      {...props}
-    />
-
-      <div className="col-md-12" style={{ height: "950px", padding: "3% 3%" }}>
-        <div className="grid">
-          {props.collection.slides.map((s, i) => {
-            return (
-              <div
-                className={
-                  "grid-item "
-                }
-                key={`slide.${i}`}
-                onClick={_e => slideClicked(i)}
-                style={{
-                  width: "300px",
-                  marginBottom: "30px"
-                }}
-              >
-                <img
-                  src={s.large}
-                  style={{
-                    width: "100%"
-                  }}
-                  onLoad={handleImageLoaded}
-                />
-              </div>
-            )
-          })}
-        </div>
-      </div>
-
-      <div className="kiosk-footer" style={{ textAlign: "center" }}>
-        <GridMenu
-          selectedIndex={selected_primary_slide_index}
-          {...props} />
-      </div>
-
+    <div className={slideAnimationClass}>
+      <MediaModal
+        slideClicked={slideClicked}
+        slide={activeSlide}
+        {...props}
+      />
+      <MediaGrid
+        selectedButtonClassName={selectedButtonClassName}
+        slideClicked={slideClicked}
+        onLoadAllImages={onLoadAllImages}
+        selectedClassName={selectedClassName}
+        setCollection={setCollection}
+        primary_slides={props.primary_slides}
+      />
     </div>
   )
 }

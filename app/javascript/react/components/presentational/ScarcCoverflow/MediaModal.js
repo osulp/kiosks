@@ -8,20 +8,6 @@ const MediaModal = props => {
   const [exitingTimeout, setExitingTimeout] = useState(undefined)
   const [hideTimeout, setHideTimeout] = useState(undefined)
 
-  const backClicked = () => {
-    // Remove previous timeouts
-    clearTimeout(exitingTimeout)
-    clearTimeout(hideTimeout)
-    // Start exiting animation
-    setSlideAnimationClass("slide-exiting")
-    const hide_timeout = setTimeout(() => {
-      // Close modal and reset to entering animation
-      props.slideClicked(-1)
-      setSlideAnimationClass("slide-entering")
-    }, 350)
-    setHideTimeout(hide_timeout)
-  }
-
   // Clean up timeouts on unmount
   useEffect(() => {
     return () => {
@@ -41,6 +27,29 @@ const MediaModal = props => {
       setExitingTimeout(exiting_timeout)
     }
   }, [props.slide])
+
+  const backClicked = () => {
+    // Remove previous timeouts
+    clearTimeout(exitingTimeout)
+    clearTimeout(hideTimeout)
+    // Start exiting animation
+    setSlideAnimationClass("slide-exiting")
+    const hide_timeout = setTimeout(() => {
+      // Close modal and reset to entering animation
+      props.slideClicked(-1)
+      setSlideAnimationClass("slide-entering")
+    }, 350)
+    setHideTimeout(hide_timeout)
+  }
+
+  // htmlDecode gets the html that comes encoded from the server and returns
+  // content that can be safely rendered in a component.
+  // Example input: "hello&lt;br&gt;world""
+  // Example return: htmlDecode(input) = "hello<br>world"
+  const htmlDecode = input => {
+    var doc = new DOMParser().parseFromString(input, "text/html");
+    return doc.documentElement.textContent
+  }
 
   // Default to displaying slide as an image. Render as video or audio of file allows it
   const renderMedia = () => {
@@ -80,8 +89,7 @@ const MediaModal = props => {
       onClick={backClicked}
     >
       <div
-        className={slideAnimationClass}
-        style={{ height: "100%" }}
+        className={`${slideAnimationClass} slide`}
       >
         <div
           className="media-modal-box"
@@ -90,19 +98,21 @@ const MediaModal = props => {
           }}
         >
           {props.slide !== undefined &&
-            <div style={{ textAlign: "center", margin: "30px" }}>
+            <div className='media-modal-image'>
               {renderMedia()}
             </div>
           }
           {props.slide !== undefined &&
-            <div style={{ margin: "20px 40px" }}>
+            <div className='media-modal-text'>
               <div>
                 <h1> {props.slide.title} </h1>
               </div>
-              <div style={{ color: "rgba(238, 238, 238, 0.7)" }}>
-                {props.slide.caption}
+              <div
+                className='media-modal-caption'
+                dangerouslySetInnerHTML={{ __html: htmlDecode(props.slide.caption) }}
+              >
               </div>
-            </div> 
+            </div>
           }
         </div>
       </div>
