@@ -1,38 +1,86 @@
 import React, { Component } from "react"
 import PropTypes from "prop-types"
 
-function GridList({collections, selected_class, slide_clicked, on_load_all_images}) {
+const MediaGrid = props => {
+
+    // load all grids available for display using a tabbed-panel structure
+    return (
+      <div id="grid_tabbed_panel" className="panel panel-default tabbed-panel col-md-12 col-lg-12">
+        <div className="panel-body">
+          <GridList
+            collections={props.primary_slides}
+            selected_class={props.selectedClassName}
+            slide_clicked={props.slideClicked}
+            on_load_all_images={props.onLoadAllImages}
+          />
+        </div>
+        <div className="col-md-12 col-lg-12 menu-buttons">
+          <div className="grid-menu">
+            {props.primary_slides.map((slide, i) => {
+              return (
+                <button 
+                  key={`collection.button.${i}`} 
+                  data-index={i} 
+                  onClick={() => { props.setCollection(i) }} 
+                  type="button" 
+                  className={`${props.selectedButtonClassName(i)} btn btn-default`}
+                >
+                  {slide.caption}
+                </button>
+              )
+            })}
+          </div>
+        </div>
+      </div>
+    )
+}
+
+MediaGrid.propTypes = {
+  primary_slides: PropTypes.array.isRequired,
+  selectedButtonClassName: PropTypes.func.isRequired,
+  slideClicked: PropTypes.func.isRequired,
+  onLoadAllImages: PropTypes.func.isRequired,
+  selectedClassName: PropTypes.func.isRequired,
+  setCollection: PropTypes.func.isRequired
+}
+
+const GridList = props => {
+
+  // load all grids (one for each collection) with header and content
   return(
     <ul>
-      {collections.map((slide, i) => {
+      {props.collections.map((slide, i) => {
         return (
-          <li key={`collection.${i}`} className={ `${selected_class(i)}` } data-index={i}>
+          <li key={`collection.${i}`} className={ `${props.selected_class(i)}` } data-index={i}>
             <div className="selected-collection-header">
               <h1 className="collection-name">{slide.collection.name}</h1>
               <p className="collection-description">{slide.collection.detail}</p>
             </div>
             <GridItem
               slides={slide.collection.slides}
-              slide_clicked={slide_clicked}
-              on_load_all_images={on_load_all_images}
+              slide_clicked={props.slide_clicked}
+              on_load_all_images={props.on_load_all_images}
               index={i}
             />
           </li>
         )
       })}
     </ul>
-  );
+  )
 }
 
-function GridItem({slides, slide_clicked, on_load_all_images, index}) {
+const GridItem = props => {
+
+  // load one grid (for one collection) and render all image slides for that
+  // collection
   return(
-    <div className={`grid-content grid-${index}`}>
-      {slides.map((s, j) => {
+    <div className={`grid-content grid-${props.index}`}>
+      {props.slides.map((s, j) => {
         return (
           <div
             className={"grid-item"}
-            key={`slide.${index}.${j}`}
-            onClick={_e => slide_clicked(j)}
+            key={`slide.${props.index}.${j}`}
+            onClick={_e => props.slide_clicked(j)}
             style={{
               width: "300px",
               marginBottom: "30px"
@@ -43,49 +91,13 @@ function GridItem({slides, slide_clicked, on_load_all_images, index}) {
               style={{
                 width: "100%"
               }}
-              onLoad={() => { on_load_all_images(index) }}
+              onLoad={() => { props.on_load_all_images(props.index) }}
             />
           </div>
         )
       })}
     </div>
-  );
-}
-
-class MediaGrid extends Component {
-
-  render() {
-    return (
-      <div id="grid_tabbed_panel" className="panel panel-default tabbed-panel col-md-12 col-lg-12">
-        <div className="panel-body">
-          <GridList
-            collections={this.props.primary_slides}
-            selected_class={this.props.selectedClassName}
-            slide_clicked={this.props.slideClicked}
-            on_load_all_images={this.props.onLoadAllImages}
-          />
-        </div>
-        <div className="col-md-12 col-lg-12 menu-buttons">
-          <div className="grid-menu">
-            {this.props.primary_slides.map((slide, i) => {
-              return (
-                <button key={`collection.button.${i}`} data-index={i} onClick={() => { this.props.setCollection(i) }} type="button" className={`${this.props.selectedButtonClassName(i)} btn btn-default`}>{slide.caption}</button>
-              )
-            })}
-          </div>
-        </div>
-      </div>
-    )
-  }
-}
-
-MediaGrid.propTypes = {
-  primary_slides: PropTypes.array.isRequired,
-  selectedButtonClassName: PropTypes.func.isRequired,
-  slideClicked: PropTypes.func.isRequired,
-  onLoadAllImages: PropTypes.func.isRequired,
-  selectedClassName: PropTypes.func.isRequired,
-  setCollection: PropTypes.func.isRequired
+  )
 }
 
 export default MediaGrid
