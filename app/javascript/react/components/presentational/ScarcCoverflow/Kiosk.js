@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react"
 import PropTypes from "prop-types"
 import ConnectedModalWindow from "../../ModalWindow"
 import Coverflow from "react-coverflow"
-import LargeSlide from "./LargeSlide"
+import GridSlide from "./GridSlide"
 import { trackClicked } from "../shared/GoogleAnalytics"
 
 function NavButton(props) {
@@ -21,7 +21,7 @@ function NavSpacer({ width }) {
 
 const Kiosk = props => {
   // Set local state variables and setter methods
-  const [active, setActive] = useState({ index: 1, slide: undefined })
+  const [active, setActive] = useState({ index: 1, collection: undefined })
   const [primary_slides, setPrimarySlides] = useState([])
   const [restart_kiosk_timeout, setRestartKioskTimeout] = useState(undefined)
   const [
@@ -30,18 +30,19 @@ const Kiosk = props => {
   ] = useState(undefined)
 
   // When active or active_slide state changes, determine what to do;
-  // - If the active slide is set, then clear the timers and display the popup modal with the LargeSlide UI
+  // - If the active slide is set, then clear the timers and display the popup modal with the GridSlide UI
   // - Otherwise, set the active slide rotation timer
   useEffect(() => {
-    if (active.slide !== undefined) {
+    if (active.collection !== undefined) {
       setTimers(undefined, undefined)
       setIsRotating(false)
       props.setModalVisibility(true)
       // give reference to the rotation function so that when the back button is tapped
       // or the slide is automatically hidden, it can initiate the rotation to resume
       props.setModalRootComponent(
-        <LargeSlide
-          slide={active.slide}
+        <GridSlide
+          collection={active.collection}
+          primary_slides={primary_slides}
           rotateActiveSlides={rotateActiveSlides}
           {...props}
         />
@@ -54,7 +55,7 @@ const Kiosk = props => {
       // UI for many seconds, then restart the automatic rotation.
       if (isRotating == false) {
         rotateActiveSlides()
-      } else if (active.slide) {
+      } else if (active.collection) {
         setIsRotating(false)
         setTimers(
           undefined,
@@ -83,7 +84,7 @@ const Kiosk = props => {
     setPrimarySlides(
       props.slides.filter(e => slide_ids.findIndex(a => a === e.id) > -1)
     )
-    setActive({ index: 1, slide: undefined })
+    setActive({ index: 1, collection: undefined })
     setCurrentIndex(1)
   }, [])
 
@@ -98,7 +99,7 @@ const Kiosk = props => {
       let timeout = setTimeout(() => {
         let test_index = (currentIndex + 1) % primary_slides.length
         setCurrentIndex(test_index)
-        setActive({ index: test_index, slide: undefined })
+        setActive({ index: test_index, collection: undefined })
       }, 30000);
       return () => clearTimeout(timeout)
     }
@@ -112,20 +113,20 @@ const Kiosk = props => {
 
   const nextSlide = () => {
     let next_index = (currentIndex + 1) % primary_slides.length
-    setActive({ index: next_index, slide: undefined })
+    setActive({ index: next_index, collection: undefined })
     setCurrentIndex(next_index);
   }
 
   const prevSlide = () => {
     let prev_index = (currentIndex - 1 + primary_slides.length) % primary_slides.length
-    setActive({ index: prev_index, slide: undefined })
+    setActive({ index: prev_index, collection: undefined })
     setCurrentIndex(prev_index);
   }
 
   // When a slide is clicked, set local state active and active_slide to change
   // and the side effect function to operate. On the first click, this causes
   // the slide to scroll to the foreground. On the second click, if the slide is
-  // currently active (in the foreground) then the LargeSlide UI modal will be displayed
+  // currently active (in the foreground) then the GridSlide UI modal will be displayed
   const slideClicked = (_e, slide, index, props) => {
     trackClicked(
       props.google_analytics,
@@ -134,9 +135,9 @@ const Kiosk = props => {
     setTimers(undefined, undefined)
     setCurrentIndex(index)
     if (active.index == index) {
-      setActive({ index: index, slide: slide })
+      setActive({ index: index, collection: slide })
     } else {
-      setActive({ index: index, slide: undefined })
+      setActive({ index: index, collection: undefined })
     }
   }
 
@@ -146,7 +147,7 @@ const Kiosk = props => {
   }
 
   return (
-    <div id="scarc_coverflow_kiosk" style={{ backgroundColor: "#003B5C" }}>
+    <div id="scarc_coverflow_kiosk">
       <ConnectedModalWindow />
       <div className="component">
         <Coverflow
@@ -165,8 +166,8 @@ const Kiosk = props => {
               <div
                 key={`slide.${i}`}
                 data-slide_index={i}
-                onClick={e => slideClicked(e, slide, i, props)}
-                onKeyDown={e => slideClicked(e, slide, i, props)}
+                onClick={e => slideClicked(e, slide.collection, i, props)}
+                onKeyDown={e => slideClicked(e, slide.collection, i, props)}
                 role="menuitem"
                 tabIndex={i}
                 style={{
@@ -200,9 +201,9 @@ const Kiosk = props => {
       >
         <div className="kiosk-header" style={{ textAlign: "right" }}>
 
-        <NavButton aria-label="Back" onClick={() => { prevSlide() }}>Back</NavButton>
-        <NavSpacer width="200px" />
-        <NavButton aria-label="Next" onClick={() => { nextSlide() }}>Next</NavButton>
+          <NavButton aria-label="Back" onClick={() => { prevSlide() }}>Back</NavButton>
+          <NavSpacer width="200px" />
+          <NavButton aria-label="Next" onClick={() => { nextSlide() }}>Next</NavButton>
         </div>
       </div>
     </div>
