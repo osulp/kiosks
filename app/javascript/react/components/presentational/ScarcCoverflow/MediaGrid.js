@@ -45,6 +45,14 @@ MediaGrid.propTypes = {
 }
 
 const GridList = props => {
+  // htmlDecode gets the html that comes encoded from the server and returns
+  // content that can be safely rendered in a component.
+  // Example input: "hello&lt;br&gt;world""
+  // Example return: htmlDecode(input) = "hello<br>world"
+  const htmlDecode = input => {
+    var doc = new DOMParser().parseFromString(input, "text/html");
+    return doc.documentElement.textContent
+  }
 
   // load all grids (one for each collection) with header and content
   return(
@@ -54,7 +62,10 @@ const GridList = props => {
           <li key={`collection.${i}`} className={ `${props.selected_class(i)}` } data-index={i}>
             <div className="selected-collection-header">
               <h1 className="collection-name">{slide.collection.name}</h1>
-              <p className="collection-description">{slide.collection.detail}</p>
+              <div
+                className="html-content collection-description"
+                dangerouslySetInnerHTML={{ __html: htmlDecode(slide.collection.detail) }}
+              />
             </div>
             <GridItem
               slides={slide.collection.slides}

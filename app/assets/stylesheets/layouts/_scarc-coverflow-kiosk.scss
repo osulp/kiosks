@@ -84,9 +84,10 @@
 
   .html-content {
     font-size: 2.2rem;
-    padding: 6% 10%;
     line-height: 2.8rem;
     font-weight: lighter;
+    color: white;
+    background: transparent;
     h1,
     h2,
     h3,
@@ -95,6 +96,7 @@
       font-size: 5rem;
       margin-bottom: 7%;
     }
+
     p {
       margin-bottom: 5%;
     }
@@ -146,7 +148,7 @@
 
   .selected-collection-header {
     background: $scarc_blue;
-    padding: 1em 2em 0 2em;
+    padding: 0.5em 2em 0.5em 2em;
     width: 50%;
     margin: 3em 0 3em -4em;
   }
@@ -154,11 +156,8 @@
     color: white;
   }
 
-  .selected-collection-header p.collection-description {
-    color: white;
-    background: transparent;
+  .collection-description {
     height: 100px;
-    font-size: 20px;
   }
 
   .tabbed-panel {
