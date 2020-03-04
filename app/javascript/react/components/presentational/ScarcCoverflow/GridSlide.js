@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react"
 import PropTypes from "prop-types"
 import Masonry from "masonry-layout"
 import MediaGrid from "./MediaGrid"
+import MediaModal from "./MediaModal"
 
 const GridSlide = props => {
   const [selectedCollection, setSelectedCollection] = useState(0)
@@ -9,8 +10,10 @@ const GridSlide = props => {
     "slide-entering"
   )
   const [imagesLoaded, setImagesLoaded] = useState(1)
+  const [activeSlide, setActiveSlide] = useState(undefined)
   const [exitingTimeout, setExitingTimeout] = useState(undefined)
   const [hideTimeout, setHideTimeout] = useState(undefined)
+
 
   useEffect(() => {
     const exiting_timeout = setTimeout(() => {
@@ -26,8 +29,8 @@ const GridSlide = props => {
     setSelectedCollection(selected_collection_index)
 
     return () => {
-      clearTimeout(hide_timeout)
-      clearTimeout(exiting_timeout)
+      clearTimeout(hideTimeout)
+      clearTimeout(exitingTimeout)
     }
   }, [])
 
@@ -66,7 +69,7 @@ const GridSlide = props => {
   const all_slides_count = props.primary_slides.map(s => s.collection.slides.length).reduce((a,b) => a+b)
 
   const slideClicked = i => {
-    // TODO: handler for selected slide (detail)
+    setActiveSlide(i >= 0 ? props.slides.find(e => e.id == props.primary_slides[selectedCollection].collection.slides[i].id) : undefined)
   }
 
   const setCollection = i => {
@@ -86,6 +89,11 @@ const GridSlide = props => {
 
   return (
     <div className={slideAnimationClass}>
+      <MediaModal
+        slideClicked={slideClicked}
+        slide={activeSlide}
+        {...props}
+      />
       <MediaGrid
         selectedButtonClassName={selectedButtonClassName}
         slideClicked={slideClicked}

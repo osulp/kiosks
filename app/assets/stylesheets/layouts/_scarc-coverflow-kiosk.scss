@@ -329,6 +329,50 @@
       margin-top: 5px;
     }
   }
+
+  .media-modal {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.75);
+    color: #eee;
+
+    .slide {
+      height: 100%;
+    }
+
+    .media-modal-image {
+      margin: 30px;
+      text-align: center;
+    }
+
+    .media-modal-text {
+      margin: 20px 40px;
+    }
+
+    .media-modal-caption {
+      color: rgba(238, 238, 238, 0.7);
+    }
+
+    .media-modal-box {
+      background-color: $scarc_blue;
+      border: 4px solid $scarc_blue_light;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      position: absolute;
+      max-width: 80%;
+
+      img,
+      video {
+        max-width: 100%;
+        max-height: 400px;
+      }
+    }
+  }
 }
 
 html,
@@ -337,46 +381,4 @@ body,
 #scarc_coverflow_kiosk,
 .container-fluid {
   height: 100%;
-}
-
-// This is for animating the scarc kiosk modal window
-.slide-entering {
-  -webkit-animation: grow 250ms forwards linear;
-  -moz-animation: grow 250ms forwards linear;
-  -ms-animation: grow 250ms forwards linear;
-}
-
-// The time 350ms is exactly related to the timeout duration found in LargeSlide (14650ms).
-// It runs infinitely but only has time to run once.
-.slide-exiting {
-  -webkit-animation: grow 350ms linear infinite reverse;
-  -moz-animation: grow 350ms linear infinite reverse;
-  -ms-animation: grow 350ms linear infinite reverse;
-}
-
-@-moz-keyframes grow {
-  from {
-    -moz-transform: scale(0);
-  }
-  to {
-    -moz-transform: scale(1);
-  }
-}
-
-@-webkit-keyframes grow {
-  from {
-    -webkit-transform: scale(0);
-  }
-  to {
-    -webkit-transform: scale(1);
-  }
-}
-
-@keyframes grow {
-  from {
-    transform: scale(0);
-  }
-  to {
-    transform: scale(1);
-  }
 }
