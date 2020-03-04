@@ -21,7 +21,7 @@ function NavSpacer({ width }) {
 
 const Kiosk = props => {
   // Set local state variables and setter methods
-  const [active, setActive] = useState({ index: 1, slide: undefined })
+  const [active, setActive] = useState({ index: 1, collection: undefined })
   const [primary_slides, setPrimarySlides] = useState([])
   const [restart_kiosk_timeout, setRestartKioskTimeout] = useState(undefined)
   const [
@@ -33,7 +33,7 @@ const Kiosk = props => {
   // - If the active slide is set, then clear the timers and display the popup modal with the GridSlide UI
   // - Otherwise, set the active slide rotation timer
   useEffect(() => {
-    if (active.slide !== undefined) {
+    if (active.collection !== undefined) {
       setTimers(undefined, undefined)
       setIsRotating(false)
       props.setModalVisibility(true)
@@ -41,7 +41,7 @@ const Kiosk = props => {
       // or the slide is automatically hidden, it can initiate the rotation to resume
       props.setModalRootComponent(
         <GridSlide
-          slide={active.slide}
+          collection={active.collection}
           primary_slides={primary_slides}
           rotateActiveSlides={rotateActiveSlides}
           {...props}
@@ -55,7 +55,7 @@ const Kiosk = props => {
       // UI for many seconds, then restart the automatic rotation.
       if (isRotating == false) {
         rotateActiveSlides()
-      } else if (active.slide) {
+      } else if (active.collection) {
         setIsRotating(false)
         setTimers(
           undefined,
@@ -84,7 +84,7 @@ const Kiosk = props => {
     setPrimarySlides(
       props.slides.filter(e => slide_ids.findIndex(a => a === e.id) > -1)
     )
-    setActive({ index: 1, slide: undefined })
+    setActive({ index: 1, collection: undefined })
     setCurrentIndex(1)
   }, [])
 
@@ -99,7 +99,7 @@ const Kiosk = props => {
       let timeout = setTimeout(() => {
         let test_index = (currentIndex + 1) % primary_slides.length
         setCurrentIndex(test_index)
-        setActive({ index: test_index, slide: undefined })
+        setActive({ index: test_index, collection: undefined })
       }, 30000);
       return () => clearTimeout(timeout)
     }
@@ -113,13 +113,13 @@ const Kiosk = props => {
 
   const nextSlide = () => {
     let next_index = (currentIndex + 1) % primary_slides.length
-    setActive({ index: next_index, slide: undefined })
+    setActive({ index: next_index, collection: undefined })
     setCurrentIndex(next_index);
   }
 
   const prevSlide = () => {
     let prev_index = (currentIndex - 1 + primary_slides.length) % primary_slides.length
-    setActive({ index: prev_index, slide: undefined })
+    setActive({ index: prev_index, collection: undefined })
     setCurrentIndex(prev_index);
   }
 
@@ -135,9 +135,9 @@ const Kiosk = props => {
     setTimers(undefined, undefined)
     setCurrentIndex(index)
     if (active.index == index) {
-      setActive({ index: index, slide: slide })
+      setActive({ index: index, collection: slide })
     } else {
-      setActive({ index: index, slide: undefined })
+      setActive({ index: index, collection: undefined })
     }
   }
 
@@ -166,8 +166,8 @@ const Kiosk = props => {
               <div
                 key={`slide.${i}`}
                 data-slide_index={i}
-                onClick={e => slideClicked(e, slide, i, props)}
-                onKeyDown={e => slideClicked(e, slide, i, props)}
+                onClick={e => slideClicked(e, slide.collection, i, props)}
+                onKeyDown={e => slideClicked(e, slide.collection, i, props)}
                 role="menuitem"
                 tabIndex={i}
                 style={{
