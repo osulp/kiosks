@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react"
 import PropTypes from "prop-types"
 import Masonry from "masonry-layout"
-import GridMenu from "./GridMenu"
+import MediaGrid from "./MediaGrid"
 
 const GridSlide = props => {
   const [selectedCollection, setSelectedCollection] = useState(0)
@@ -48,6 +48,13 @@ const GridSlide = props => {
     msnry.layout()
   }
 
+  const onLoadAllImages = (i) => {
+    setImagesLoaded(imagesLoaded + 1)
+    if (imagesLoaded == all_slides_count) {
+      setupGrid(i)
+    }
+  }
+
   const destroyGrid = (i) => {
     var msnry = Masonry.data(`.grid-${i}`)
     if (msnry != undefined) {
@@ -55,7 +62,7 @@ const GridSlide = props => {
     }
   }
 
-  const selected_collection_index = props.primary_slides.findIndex(slide => slide.id === props.slide.collection.primary_slide.id)
+  const selected_collection_index = props.primary_slides.findIndex(slide => slide.id === props.collection.primary_slide.id)
   const all_slides_count = props.primary_slides.map(s => s.collection.slides.length).reduce((a,b) => a+b)
 
   const slideClicked = i => {
@@ -79,67 +86,20 @@ const GridSlide = props => {
 
   return (
     <div className={slideAnimationClass}>
-      <div id="grid_tabbed_panel" className="panel panel-default tabbed-panel col-md-12 col-lg-12">
-        <div className="panel-body">
-          <ul>
-            {props.primary_slides.map((slide, i) => {
-              return (
-                <li key={`collection.${i}`} className={ `${selectedClassName(i)}` } data-index={i}>
-                  <div className="selected-collection-header">
-                    <h1 className="collection-name">{slide.collection.name}</h1>
-                    <p className="collection-description">{slide.collection.detail}</p>
-                  </div>
-                  <div className={`grid-content grid-${i}`}>
-                    {slide.collection.slides.map((s, j) => {
-                      return (
-                        <div
-                          className={
-                            "grid-item "
-                          }
-                          key={`slide.${i}.${j}`}
-                          onClick={_e => slideClicked(j)}
-                          style={{
-                            width: "300px",
-                            marginBottom: "30px"
-                          }}
-                        >
-                          <img
-                            src={s.large}
-                            style={{
-                              width: "100%"
-                            }}
-                            onLoad={() => {
-                              setImagesLoaded(imagesLoaded + 1)
-                              if (imagesLoaded == all_slides_count) {
-                                setupGrid(i)
-                              }
-                            }}
-                          />
-                        </div>
-                      )
-                    })}
-                  </div>
-                </li>
-              )
-            })}
-          </ul>
-        </div>
-        <div className="col-md-12 col-lg-12 menu-buttons">
-          <div className="grid-menu">
-            {props.primary_slides.map((slide, i) => {
-              return (
-                <button key={`collection.button.${i}`} data-index={i} onClick={() => { setCollection(i) }} type="button" className={`${selectedButtonClassName(i)} btn btn-default`}>{slide.caption}</button>
-              )
-            })}
-          </div>
-        </div>
-      </div>
+      <MediaGrid
+        selectedButtonClassName={selectedButtonClassName}
+        slideClicked={slideClicked}
+        onLoadAllImages={onLoadAllImages}
+        selectedClassName={selectedClassName}
+        setCollection={setCollection}
+        primary_slides={props.primary_slides}
+      />
     </div>
   )
 }
 
 GridSlide.propTypes = {
-  slide: PropTypes.object.isRequired,
+  collection: PropTypes.object.isRequired,
   primary_slides: PropTypes.array.isRequired,
   setModalVisibility: PropTypes.func.isRequired,
   setModalRootComponent: PropTypes.func.isRequired,
