@@ -45,6 +45,7 @@ const GridSlide = props => {
       msnry = new Masonry(document.querySelector(`.grid-${i}`) , {
         // options
         itemSelector: '.grid-item',
+        columnWidth: 55,
         gutter: 30
       });
     }

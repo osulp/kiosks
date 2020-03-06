@@ -103,11 +103,12 @@
   }
 
   .grid-content {
-    height: 620px !important;
+    height: 550px !important;
   }
 
   .grid-menu {
     text-align: center;
+    padding-top: 2em;
   }
 
   .grid-menu button {
@@ -122,28 +123,12 @@
     text-decoration: underline;
   }
 
+  .grid-item {
+    max-width: 240px;
+  }
+
   .grid-item img {
     box-shadow: none !important;
-  }
-
-  .grid-item.not-zoomed img {
-    max-height: 360px !important;
-  }
-
-  .grid-item.zoomed img {
-    max-height: 860px !important;
-  }
-
-  .grid-item.zoomed {
-    width: 100% !important;
-    height: 100% !important;
-    left: -1px !important;
-    top: 0 !important;
-    background-color: #222 !important;
-    z-index: 1 !important;
-    img {
-      border: solid 2px #eee;
-    }
   }
 
   .selected-collection-header {
@@ -152,12 +137,13 @@
     width: 50%;
     margin: 3em 0 3em -4em;
   }
+
   .selected-collection-header h1.collection-name {
     color: white;
   }
 
   .collection-description {
-    height: 100px;
+    height: 145px;
   }
 
   .tabbed-panel {
