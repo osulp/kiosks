@@ -102,7 +102,7 @@ const GridItem = props => {
               style={{
                 width: "100%"
               }}
-              onLoad={() => { props.on_load_all_images(props.index) }}
+              onLoad={() => { props.on_load_all_images() }}
             />
           </div>
         )
