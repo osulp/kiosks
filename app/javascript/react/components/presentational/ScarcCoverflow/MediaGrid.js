@@ -25,7 +25,7 @@ const MediaGrid = props => {
                   type="button" 
                   className={`${props.selectedButtonClassName(i)} btn btn-default`}
                 >
-                  {slide.caption}
+                  {slide.collection.name}
                 </button>
               )
             })}

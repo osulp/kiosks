@@ -184,7 +184,7 @@ const Kiosk = props => {
                     margin: "0 auto"
                   }}
                 />
-                <span className="caption">{slide.caption}</span>
+                <span className="caption">{slide.collection.name}</span>
               </div>
             )
           })}
