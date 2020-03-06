@@ -26,7 +26,7 @@ const GridSlide = props => {
       props.setModalRootComponent(undefined)
     }, 180000)
     setHideTimeout(hide_timeout)
-    setSelectedCollection(selected_collection_index)
+    setSelectedCollection(selected_coverflow_collection_index)
 
     return () => {
       clearTimeout(hideTimeout)
@@ -35,14 +35,14 @@ const GridSlide = props => {
   }, [])
 
   useEffect(() => {
-    destroyGrid(selectedCollection)
     setupGrid(selectedCollection)
+    reloadGrid(selectedCollection)
   }, [selectedCollection])
 
   const setupGrid = (i) => {
     let msnry = Masonry.data(`.grid-${i}`)
     if (msnry == undefined) {
-      msnry = new Masonry(document.querySelector(`.grid-${i}`) , {
+      msnry = new Masonry(`.grid-${i}`, {
         // options
         itemSelector: '.grid-item',
         columnWidth: 55,
@@ -52,21 +52,21 @@ const GridSlide = props => {
     msnry.layout()
   }
 
-  const onLoadAllImages = (i) => {
+  const onLoadAllImages = () => {
     setImagesLoaded(imagesLoaded + 1)
     if (imagesLoaded == all_slides_count) {
-      setupGrid(i)
+      setupGrid(selected_coverflow_collection_index)
     }
   }
 
-  const destroyGrid = (i) => {
+  const reloadGrid = (i) => {
     var msnry = Masonry.data(`.grid-${i}`)
     if (msnry != undefined) {
-      msnry.destroy()
+      msnry.reloadItems()
     }
   }
 
-  const selected_collection_index = props.primary_slides.findIndex(slide => slide.id === props.collection.primary_slide.id)
+  const selected_coverflow_collection_index = props.primary_slides.findIndex(slide => slide.id === props.collection.primary_slide.id)
   const all_slides_count = props.primary_slides.map(s => s.collection.slides.length).reduce((a,b) => a+b)
 
   const slideClicked = i => {
@@ -74,10 +74,8 @@ const GridSlide = props => {
   }
 
   const setCollection = i => {
-    if (i != selectedCollection) {
-      destroyGrid(selectedCollection)
-    }
     setSelectedCollection(i)
+    reloadGrid(i)
   }
 
   const selectedClassName = i => {
