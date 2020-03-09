@@ -13,6 +13,7 @@ json.cache! ['v1', @kiosk], expires_in: Rails.env.development? ? 1.second : 24.h
     json.subtitle_es slide.subtitles[1].present? ? slide.subtitles[1].url : ''
     json.title html_escape(slide.title)
     json.caption html_escape(slide.caption)
+    json.description html_escape(slide.description)
     json.slide_type slide.slide_type.name
     json.current_kiosk @kiosk.name
     json.slide_length @kiosk.slide_length_ms
