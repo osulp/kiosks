@@ -63,6 +63,7 @@ const GridSlide = props => {
     var msnry = Masonry.data(`.grid-${i}`)
     if (msnry != undefined) {
       msnry.reloadItems()
+      msnry.layout()
     }
   }
 
