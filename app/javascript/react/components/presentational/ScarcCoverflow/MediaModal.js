@@ -112,6 +112,11 @@ const MediaModal = props => {
                 dangerouslySetInnerHTML={{ __html: htmlDecode(props.slide.caption) }}
               >
               </div>
+              <div
+                className='media-modal-description'
+                dangerouslySetInnerHTML={{ __html: htmlDecode(props.slide.description) }}
+              >
+              </div>
             </div>
           }
         </div>
