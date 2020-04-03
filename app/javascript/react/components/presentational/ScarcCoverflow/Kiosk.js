@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react"
 import PropTypes from "prop-types"
 import ConnectedModalWindow from "../../ModalWindow"
 import Coverflow from "react-coverflow"
+import CoverFlow from "coverflow-react"
 import GridSlide from "./GridSlide"
 import { trackClicked } from "../shared/GoogleAnalytics"
 
@@ -146,49 +147,24 @@ const Kiosk = props => {
     setRestartActiveSlideRotationTimeout(restart_active_timeout)
   }
 
+  const imagesArr = primary_slides.map(s => s.large)
+  const labelsArr = primary_slides.map(s => s.collection.name)
+  const selectedSlide = (i) => {
+  }
+
   return (
     <div id="scarc_coverflow_kiosk">
       <ConnectedModalWindow />
       <div className="component">
-        <Coverflow
-          displayQuantityOfSide={2}
-          navigation={false}
-          infiniteScroll={true}
-          enableScroll={true}
-          clickable={true}
-          enableHeading={false}
-          active={active.index}
-          currentFigureScale={2}
-          otherFigureScale={1}
-        >
-          {primary_slides.map((slide, i) => {
-            return (
-              <div
-                key={`slide.${i}`}
-                data-slide_index={i}
-                onClick={e => slideClicked(e, slide.collection, i, props)}
-                onKeyDown={e => slideClicked(e, slide.collection, i, props)}
-                role="menuitem"
-                tabIndex={i}
-                style={{
-                    height: "280px",
-                    padding: "0 0 40px 0"
-                }}
-              >
-                <img
-                  src={slide.large}
-                  style={{
-                    display: "block",
-                    width: "auto",
-                    height: "100%",
-                    margin: "0 auto"
-                  }}
-                />
-                <span className="caption">{slide.collection.name}</span>
-              </div>
-            )
-          })}
-        </Coverflow>
+        <CoverFlow
+          // handleSelect={(index)=>{alert(JSON.stringify(primary_slides.map(s => s.large)))}}
+          imagesArr={imagesArr}
+          direction="horizontal"
+          width={1913}
+          height={500}
+          itemRatio="8:5"
+          background="#222222"
+          labelsArr={labelsArr} />
       </div>
       <div
         style={{

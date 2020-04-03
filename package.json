@@ -32,6 +32,7 @@
   "dependencies": {
     "@rails/webpacker": "^4.0",
     "babel-plugin-transform-react-remove-prop-types": "^0.4.24",
+    "coverflow-react": "^0.1.28",
     "fstream": "^1.0.12",
     "handlebars": "^4.1.2",
     "jquery": "^3.4.0",
