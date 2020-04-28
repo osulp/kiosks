@@ -3,6 +3,7 @@ import { render } from "react-dom"
 import { Provider } from "react-redux"
 import configureStore from "../store/configureStore"
 
+import AdminKiosk from "./AdminKiosk"
 import App from "./App"
 import TouchKiosk from "./TouchKiosk"
 import DonorKiosk from "./DonorKiosk"
@@ -80,6 +81,8 @@ export default class Root extends Component {
         return <ScarcCoverflowKiosk />
       case "tall":
         return <TallKiosk />
+      case "admin":
+        return <AdminKiosk />
       default:
         return <App />
     }
