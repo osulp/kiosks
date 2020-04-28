@@ -27,6 +27,11 @@ Rails.application.routes.draw do
   get '/kiosk', :to => 'kiosk#index', :as => 'kiosk_index'
   get '/kiosk/:id', :to => 'kiosk#show', :as => 'kiosk_show'
 
+  # Directory Paths
+  get '/directory/csv_page', :to => 'directory#csv_page', :as => 'csv_page'
+  get '/directory/iframe_page', :to => 'directory#iframe_page', :as => 'iframe_page'
+  get '/directory/editor_page', :to => 'directory#editor_page', :as => 'editor_page'
+
   post '/uploads/:collection_id', to: 'slides#create'
   # This is a hack that is required because the rails form the uploader is on
   # sets the _method parameter to patch when the work already exists.
