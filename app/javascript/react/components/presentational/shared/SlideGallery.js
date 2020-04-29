@@ -40,14 +40,38 @@ class SlideGallery extends Component {
 
     return (
       <div className="image-gallery-image">
-        <img
-          src={this.itemPath(item)}
-          alt={`Image:${item.id} : ${item.original}`}
-          srcSet={item.srcSet}
-          sizes={item.sizes}
-          onLoad={onImageLoad.bind(this)}
-          onError={onImageError.bind(this)}
-        />
+        { 
+          item.av_media == undefined ?
+            <img
+              src={this.itemPath(item)}
+              alt={`Image:${item.id} : ${item.original}`}
+              srcSet={item.srcSet}
+              sizes={item.sizes}
+              onLoad={onImageLoad.bind(this)}
+              onError={onImageError.bind(this)}
+            />
+          :
+            <video height="900" preload="auto" controlsList="nodownload" controls autoPlay src={item.av_media}>
+              {item.subtitle_en.length > 0 &&
+                <track
+                  kind="subtitles"
+                  label="English subtitles"
+                  src={item.subtitle_en}
+                  srcLang="en"
+                  default
+                />
+              }
+              {item.subtitle_en.length > 0 &&
+                <track
+                  kind="subtitles"
+                  label="Spanish subtitles"
+                  src={item.subtitle_es}
+                  srcLang="es"
+                />
+              }
+            </video>
+        }
+
       </div>
     )
   }
@@ -60,13 +84,15 @@ class SlideGallery extends Component {
     let slides = this.props.slides
     // Set the slide length and if no value exists then use the minimum of 5 seconds
     let slide_length = this.props.slides[0].slide_length
+    // TODO: make a new component or customize ImageGallery for AdminKiosk. 
+    // autoPlay: default should be true, but on AdminKiosk, it's expected to be false.
     return (
       <ImageGallery
         ref={i => (this._imageGallery = i)}
         items={slides}
         showThumbnails={false}
         showNav={this.props.show_nav}
-        autoPlay={true}
+        autoPlay={false}
         showFullscreenButton={false}
         showPlayButton={false}
         showBullets={true}
