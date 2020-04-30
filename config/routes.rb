@@ -1,8 +1,11 @@
 Rails.application.routes.draw do
 
+  mount Ckeditor::Engine => '/ckeditor'
+  # mount Ckeditor::Engine => '/ckeditor'
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   resources :kiosk_layouts
   resources :date_ranges
+  resources :directory
   # Api namespaced routes and modules
   # ie: /api/v1/hours => Api::V1::HoursController#show
   namespace :api, defaults: { format: :json } do

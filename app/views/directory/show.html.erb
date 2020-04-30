@@ -1,0 +1,4 @@
+<%= javascript_include_tag Ckeditor.cdn_url %>
+<%= form_for @directory, :url => directory_path do |form| %>
+  <%= form.cktext_area :content, cols: 50, ckeditor: { toolbar: 'Full' } %>
+<% end %>
