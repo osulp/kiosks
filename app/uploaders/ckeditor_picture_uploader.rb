@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# Picture uploader class
 class CkeditorPictureUploader < CarrierWave::Uploader::Base
   include Ckeditor::Backend::CarrierWave
 

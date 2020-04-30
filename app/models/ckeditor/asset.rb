@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# A modle for CKEditor
 class Ckeditor::Asset < ActiveRecord::Base
   include Ckeditor::Orm::ActiveRecord::AssetBase
 

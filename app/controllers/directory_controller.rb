@@ -6,11 +6,11 @@ class DirectoryController < ApplicationController
 
   def iframe_page; end
 
-  def editor_page; 
+  def editor_page
     @directory = Directory.new
   end
 
-  def show 
+  def show
     @directory = Directory.new
   end
 end
