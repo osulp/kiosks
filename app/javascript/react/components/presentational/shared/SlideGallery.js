@@ -4,7 +4,26 @@ import PropTypes from "prop-types"
 import ImageGallery from "react-image-gallery"
 
 class SlideGallery extends Component {
-  onSlide() {}
+  onSlide(index) {
+    // stop all videos
+    document.querySelectorAll('video').forEach(vid => {
+      vid.pause()
+      vid.currentTime = 0
+    })
+
+    // play if next slide is a video
+    let next_item = this.props.slides[index]
+    
+    if (next_item != undefined) {
+      let myNextVideo = document.querySelector(`video.video-${next_item.id}`)
+      if (myNextVideo != undefined) {
+        this._imageGallery.pause()
+        myNextVideo.play()
+      } else {
+        this._imageGallery.play()
+      }
+    }
+  }
 
   onClick(e) {
     console.log("onClick", e.target.src)
@@ -18,6 +37,22 @@ class SlideGallery extends Component {
 
   onImageLoad(e) {
     console.log(`Image Loaded:${e.target.src})`)
+  }
+
+  prevSlide(e) {
+    let currentIndex = this._imageGallery.getCurrentIndex()
+    let prev_index = (currentIndex - 1 + this.props.slides.length) % this.props.slides.length
+    this._imageGallery.slideToIndex(prev_index)
+  }
+
+  nextSlide(e) {
+    let currentIndex = this._imageGallery.getCurrentIndex()
+    let next_index = (currentIndex + 1) % this.props.slides.length
+    this._imageGallery.slideToIndex(next_index)
+  }
+
+  onVideoEnded(e) {
+    this.nextSlide()
   }
 
   itemPath(item) {
@@ -37,6 +72,7 @@ class SlideGallery extends Component {
   _renderItem(item) {
     const onImageError = this.onImageError
     const onImageLoad = this.onImageLoad
+    const onVideoEnded = this.onVideoEnded
 
     return (
       <div className="image-gallery-image">
@@ -51,7 +87,7 @@ class SlideGallery extends Component {
               onError={onImageError.bind(this)}
             />
           :
-            <video height="900" preload="auto" controlsList="nodownload" controls autoPlay src={item.av_media}>
+            <video muted className={`video-${item.id}`} onEnded={onVideoEnded.bind(this)} height="900" preload="auto" src={item.av_media}>
               {item.subtitle_en.length > 0 &&
                 <track
                   kind="subtitles"
@@ -71,6 +107,14 @@ class SlideGallery extends Component {
               }
             </video>
         }
+        <div>
+          <button aria-label="Back" onClick={() => { this.prevSlide() }} className="nav-button" >
+            Previous
+          </button>
+          <button aria-label="Next" onClick={() => { this.nextSlide() }} className="nav-button" >
+            Next
+          </button>
+        </div>
 
       </div>
     )
@@ -92,11 +136,11 @@ class SlideGallery extends Component {
         items={slides}
         showThumbnails={false}
         showNav={this.props.show_nav}
-        autoPlay={false}
+        autoPlay={true}
         showFullscreenButton={false}
         showPlayButton={false}
         showBullets={true}
-        onSlide={this.onSlide}
+        onSlide={this.onSlide.bind(this)}
         onClick={this.onClick}
         onImageError={this.onImageError}
         onImageLoad={this.onImageLoad}
