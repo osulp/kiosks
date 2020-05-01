@@ -1,0 +1,62 @@
+@import "../../../node_modules/react-image-gallery/styles/scss/image-gallery.scss";
+
+/* Set container elements to 100% height. */
+#interactive_kiosk,
+#slide_gallery,
+.image-gallery {
+  height: 100%;
+  width: 100%;
+  padding: 1.5em 1.5em 0 1.5em;
+}
+
+#admin_kiosk {
+  background-color: #1d1d1d;
+
+  .kiosk-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    padding-top: 1.5em;
+    h1.main-header {
+      margin-left: 1em;
+      font-family: "Stratum2WebBold" !important;
+      color:#eee;
+    }
+    img.logo {
+      max-height: 70px;
+      padding: 5px;
+    }
+  }
+
+  .kiosk-footer {
+    text-align: right;
+    flex-direction: row;
+    justify-content: left;
+    padding-top: 1em;
+    h2 {
+      color:#eee;
+    }
+
+    .navigation-menu button {
+      border: none;
+      background: none;
+      color: #eee;
+      font-size: xx-large;
+      align-content: left;
+    }
+  }
+
+    /* CUSTOMIZE GALLERY
+  --------------------------------------------------------*/
+  .image-gallery-image {
+    background: black;
+    text-align: center;
+    height: 890px;
+    img {
+      max-height: 890px;
+    }
+    video {
+      height: 900px;
+    }
+  } 
+}
