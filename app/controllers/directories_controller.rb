@@ -24,7 +24,7 @@ class DirectoriesController < ApplicationController
 
   def create
     Directory.import(params[:directory][:file])
-    flash[:notice] = "Directory uploaded successfully"
+    flash[:notice] = 'Directory uploaded successfully'
     redirect_to directories_path #=> or where you want
   end
 end

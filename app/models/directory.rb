@@ -2,7 +2,7 @@
 
 # Directory Model
 class Directory < ApplicationRecord
-  
+
   def self.import(file)
     CSV.foreach(file.path, headers: true) do |row|
       directory_hash = Directory.new
