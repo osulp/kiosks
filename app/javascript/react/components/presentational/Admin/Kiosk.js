@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react"
 import PropTypes from "prop-types"
 import ConnectedSlideGallery from "../../SlideGallery"
+import Menu from "./Menu"
 import { trackClicked } from "../shared/GoogleAnalytics"
 
 const Kiosk = props => {
@@ -8,35 +9,16 @@ const Kiosk = props => {
   // TODO: add navigation (main menu) component inside kiosk-footer
   return (
     <div id="admin_kiosk">
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "row",
-          justifyContent: "center",
-          alignItems: "center",
-          alignContent: "center"
-        }}
-      >
-        <div className="kiosk-header" style={{ textAlign: "right" }}>
-          <h1 style={{color: "#eee"}}>Library Admin and Ecampus</h1>
-        </div>
+      <div className="kiosk-header">
+        <img className="logo" src="/images/osulogo.svg"/>
+        <h1 className="main-header">Library Admin | Ecampus</h1>
       </div>
       <div className="component">
         <ConnectedSlideGallery {...props} />
       </div>
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "row",
-          justifyContent: "center",
-          alignItems: "center",
-          alignContent: "center"
-        }}
-      >
-        <div className="kiosk-footer" style={{ textAlign: "right" }}>
-          <h2 style={{color: "#eee"}}>Home</h2>
+        <div className="kiosk-footer">
+          <Menu />
         </div>
-      </div>
     </div>
   )
 }

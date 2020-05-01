@@ -87,7 +87,7 @@ class SlideGallery extends Component {
               onError={onImageError.bind(this)}
             />
           :
-            <video muted className={`video-${item.id}`} onEnded={onVideoEnded.bind(this)} height="900" preload="auto" src={item.av_media}>
+            <video muted className={`video-${item.id}`} onEnded={onVideoEnded.bind(this)} preload="auto" src={item.av_media}>
               {item.subtitle_en.length > 0 &&
                 <track
                   kind="subtitles"
@@ -107,15 +107,6 @@ class SlideGallery extends Component {
               }
             </video>
         }
-        <div>
-          <button aria-label="Back" onClick={() => { this.prevSlide() }} className="nav-button" >
-            Previous
-          </button>
-          <button aria-label="Next" onClick={() => { this.nextSlide() }} className="nav-button" >
-            Next
-          </button>
-        </div>
-
       </div>
     )
   }
