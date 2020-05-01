@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   resources :kiosk_layouts
   resources :date_ranges
-  resources :directory
+  resources :directories
   # Api namespaced routes and modules
   # ie: /api/v1/hours => Api::V1::HoursController#show
   namespace :api, defaults: { format: :json } do
@@ -30,9 +30,9 @@ Rails.application.routes.draw do
   get '/kiosk/:id', :to => 'kiosk#show', :as => 'kiosk_show'
 
   # Directory Paths
-  get '/directory/csv_page', :to => 'directory#csv_page', :as => 'csv_page'
-  get '/directory/iframe_page', :to => 'directory#iframe_page', :as => 'iframe_page'
-  get '/directory/editor_page', :to => 'directory#editor_page', :as => 'editor_page'
+  get '/directories/csv_page', :to => 'directories#csv_page', :as => 'csv_page'
+  get '/directory/iframe_page', :to => 'directories#iframe_page', :as => 'iframe_page'
+  get '/directories/editor_page', :to => 'directories#editor_page', :as => 'editor_page'
 
   post '/uploads/:collection_id', to: 'slides#create'
   # This is a hack that is required because the rails form the uploader is on
