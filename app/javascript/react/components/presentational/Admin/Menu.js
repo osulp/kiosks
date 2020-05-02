@@ -18,18 +18,27 @@ function NavSpacer({ width }) {
 const Menu = props => {
     return (
       <div className="navigation-menu">
-        <NavButton aria-label="Home" onClick={() => { console.log("Home", "TODO: add menu handler") }}>Home</NavButton>
-        <NavSpacer width="40px" />
-        <NavButton aria-label="Map" onClick={() => { console.log("Map", "TODO: add menu handler") }}>Map</NavButton>
-        <NavSpacer width="40px" />
-        <NavButton aria-label="Libraries and Press Directory" onClick={() => { console.log("Directory", "TODO: add menu handler") }}>Libraries &amp; Press Directory</NavButton>
-        <NavSpacer width="40px" />
-        <NavButton aria-label="Ecampus Leadership Directory" onClick={() => { console.log("Ecampus", "TODO: add menu handler") }}>Ecampus Leadership Directory</NavButton>
-        <NavSpacer width="40px" />
-        <NavButton aria-label="Libraries and Press Leadership Directory" onClick={() => { console.log("Leadership", "TODO: add menu handler") }}>Libraries &amp; Press Leadership Directory</NavButton>
-        <NavSpacer width="40px" />
+        <NavButton aria-label="Home" onClick={props.homeMenuItemClicked}>Home</NavButton>
+        <NavSpacer width="35px" />
+        <NavButton aria-label="Map" onClick={props.mapMenuItemClicked}>Map</NavButton>
+        <NavSpacer width="35px" />
+        <NavButton aria-label="Libraries and Press Directory" onClick={props.libraryDirectoryMenuItemClicked}>Libraries &amp; Press Directory</NavButton>
+        <NavSpacer width="35px" />
+        <NavButton aria-label="Libraries and Press Leadership Directory" onClick={props.libraryLeadershipDirectoryMenuItemClicked}>Libraries &amp; Press Leadership Directory</NavButton>
+        <NavSpacer width="35px" />
+        <NavButton aria-label="Ecampus Leadership Directory" onClick={props.ecampusDirectoryMenuItemClicked}>Ecampus Leadership Directory</NavButton>
+        <NavSpacer width="35px" />
       </div>
     )
+}
+
+Menu.propTypes = {
+  homeMenuItemClicked: PropTypes.func.isRequired,
+  mapMenuItemClicked: PropTypes.func.isRequired,
+  libraryDirectoryMenuItemClicked: PropTypes.func.isRequired,
+  libraryLeadershipDirectoryMenuItemClicked: PropTypes.func.isRequired,
+  ecampusDirectoryMenuItemClicked: PropTypes.func.isRequired,
+  selectedMenuItem: PropTypes.number.isRequired
 }
 
 export default Menu
