@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react"
 import PropTypes from "prop-types"
 import ConnectedSlideGallery from "../../SlideGallery"
 import Menu from "./Menu"
-import MapContent from "./MapContent"
+import MenuContent from "./MenuContent"
 import ConnectedMainContent from "../../MainContent"
 import { trackClicked } from "../shared/GoogleAnalytics"
 
@@ -38,7 +38,9 @@ const Kiosk = props => {
       `${props.kiosk_name}:${props.kiosk_id}:AdminKiosk:Menu:Map`
     )
     setCurrentMenuIndex(1)
-    props.setContentRootComponent(<MapContent />)
+    props.setContentRootComponent(<MenuContent
+      selectedMenuItem={1}
+    />)
   }
 
   const libraryDirectoryMenuItemClicked = () => {
@@ -47,8 +49,9 @@ const Kiosk = props => {
       `${props.kiosk_name}:${props.kiosk_id}:AdminKiosk:Menu:LibraryDirectory`
     )
     setCurrentMenuIndex(2)
-    // TODO: implement DirectoryContent
-    // props.setContentRootComponent(<DirectoryContent />)
+    props.setContentRootComponent(<MenuContent
+      selectedMenuItem={2}
+    />)
   }
 
   const libraryLeadershipDirectoryMenuItemClicked = () => {
@@ -57,8 +60,9 @@ const Kiosk = props => {
       `${props.kiosk_name}:${props.kiosk_id}:AdminKiosk:Menu:LibraryLeadershipDirectory`
     )
     setCurrentMenuIndex(3)
-    // TODO: implement DirectoryContent
-    // props.setContentRootComponent(<DirectoryContent />)
+    props.setContentRootComponent(<MenuContent
+      selectedMenuItem={3}
+    />)
   }
 
   const ecampusDirectoryMenuItemClicked = () => {
@@ -67,8 +71,9 @@ const Kiosk = props => {
       `${props.kiosk_name}:${props.kiosk_id}:AdminKiosk:Menu:EcampusDirectory`
     )
     setCurrentMenuIndex(4)
-    // TODO: implement DirectoryContent
-    // props.setContentRootComponent(<DirectoryContent />)
+    props.setContentRootComponent(<MenuContent
+      selectedMenuItem={4}
+    />)
   }
 
   return (
