@@ -71,14 +71,13 @@ const Kiosk = props => {
     // props.setContentRootComponent(<DirectoryContent />)
   }
 
-
   return (
     <div id="admin_kiosk">
       <div className="kiosk-header">
         <img className="logo" src="/images/osulogo.svg"/>
         <h1 className="main-header">Library Admin | Ecampus</h1>
       </div>
-      <div className="component">
+      <div className="main-component">
         <ConnectedMainContent />
       </div>
       <div className="kiosk-footer">
