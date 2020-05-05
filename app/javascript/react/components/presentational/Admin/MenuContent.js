@@ -25,6 +25,7 @@ const MenuContent = props => {
   )
 }
 
+// TODO: We could refactor functions below and extract menu properties (content title, tab title, etc) from a yml file instead of loading from const variables
 const MapContent = props => {
   return (
     <h1>Map Content</h1>

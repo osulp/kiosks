@@ -29,16 +29,22 @@
     }
 
     .navigation-menu {
-      padding-top: 1em;
+      margin-top: -3em;
       padding-left: 2em;
+      padding-top: 1.5em;
     }
 
     .navigation-menu button {
       border: none;
+      outline: none;
       background: none;
       color: #eee;
       font-size: xx-large;
       align-content: left;
+    }
+
+    .navigation-menu button.btn-primary {
+      text-decoration: underline;
     }
   }
 
@@ -50,7 +56,7 @@
     .content-component {
       background: #eee;
       padding: 25px;
-      height: 890px;
+      height: 870px;
     }
   }
 
@@ -63,12 +69,12 @@
   .image-gallery-image {
     background: black;
     text-align: center;
-    height: 890px;
+    height: 870px;
     img {
-      max-height: 890px;
+      max-height: 870px;
     }
     video {
-      height: 900px;
+      height: 880px;
     }
   } 
 }
