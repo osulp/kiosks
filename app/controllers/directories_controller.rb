@@ -30,7 +30,7 @@ class DirectoriesController < ApplicationController
 
   def editor_page_submit
     @directory = Directory.find_or_create_by(name: 'ckeditor')
-    @directory.name = "ckeditor"
+    @directory.name = 'ckeditor'
     @directory.content = params[:directory][:content]
     @directory.save
     redirect_to show_editor_info_path #=> or where you want
