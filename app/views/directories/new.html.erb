@@ -2,6 +2,8 @@
    <div class="form-group">
       <%= f.label :file, "Upload CSV File" %>
       <%= f.file_field :file, class: 'form-control-file', required: true %>
+      <%= f.label :name, "Choose a directory" %>
+      <%= f.select :name, ['OSULP Leadership', 'Ecampus Leadership'], class: 'form-control-file', required: true %>
    </div>
    <%= f.button :submit, class: 'btn btn-primary' %>
 <% end %>

@@ -2,8 +2,6 @@
 
 # Controller for routing the Directory Pages
 class DirectoriesController < ApplicationController
-  def csv_page; end
-
   def iframe_page; end
 
   def new
@@ -11,11 +9,12 @@ class DirectoriesController < ApplicationController
   end
 
   def index
-    @directories = Directory.all
+    @osulp = Directory.where(content: 'OSULP Leadership')
+    @ecampus = Directory.where(content: 'Ecampus Leadership')
   end
 
   def create
-    Directory.import(params[:directory][:file])
+    Directory.import(params[:directory][:file], params[:directory][:name])
     flash[:notice] = 'Directory uploaded successfully'
     redirect_to directories_path #=> or where you want
   end

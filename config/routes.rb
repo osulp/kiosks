@@ -29,7 +29,6 @@ Rails.application.routes.draw do
   get '/kiosk/:id', :to => 'kiosk#show', :as => 'kiosk_show'
 
   # Directory Paths
-  get '/directories/csv_page', :to => 'directories#csv_page', :as => 'csv_page'
   get '/directory/iframe_page', :to => 'directories#iframe_page', :as => 'iframe_page'
 
   post '/uploads/:collection_id', to: 'slides#create'
