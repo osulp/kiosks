@@ -11,6 +11,8 @@ class KioskController < ApplicationController
   def show
     @kiosk = Kiosk.find_by(name: params[:id])
     @restart_kiosk = false.to_s
+    @directory_ecampus = Directory.where(content:"Ecampus Leadership").to_json
+    @directory_osulp = Directory.where(content:"OSULP Leadership").to_json
     if reload_kiosk?(@kiosk)
       @restart_kiosk = true.to_s
       Rails.logger.info "restarting #{@kiosk.name} kiosk"

@@ -63,6 +63,7 @@ const Kiosk = props => {
     setCurrentMenuIndex(3)
     props.setContentRootComponent(<MenuContent
       selectedMenuItem={3}
+      slides={props.slides}
     />)
   }
 
@@ -74,6 +75,7 @@ const Kiosk = props => {
     setCurrentMenuIndex(4)
     props.setContentRootComponent(<MenuContent
       selectedMenuItem={4}
+      slides={props.slides}
     />)
   }
 

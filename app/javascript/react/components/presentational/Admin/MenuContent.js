@@ -10,9 +10,9 @@ const renderMenuContent = (props) => {
     case 2:
       return <LibraryDirectoryContent />
     case 3:
-      return <Libraryleadershipdirectorycontent />
+      return <Libraryleadershipdirectorycontent {...props} />
     case 4:
-      return <EcampusDirectoryContent />
+      return <EcampusDirectoryContent {...props} />
     default:
       return <div></div>
   }
@@ -42,20 +42,31 @@ const LibraryDirectoryContent = props => {
 }
 
 const Libraryleadershipdirectorycontent = props => {
+  console.log('props.slides.osulp_directory', props.slides.osulp_directory)
+  // TODO: parse json object and render html table
   return (
-    <h1>Libraries &amp; Press Leadership Directory</h1>
+    <div>
+      <h1>Libraries &amp; Press Leadership Directory</h1>
+      {JSON.stringify(props.slides[0].osulp_directory)}
+    </div>
   )
 }
 
 const EcampusDirectoryContent = props => {
+  console.log('props.slides.ecampus_directory', props.slides.ecampus_directory)
+  // TODO: parse json object and render html table
   return (
-    <h1>Ecampus Leadership Directory</h1>
+    <div>
+      <h1>Ecampus Leadership Directory</h1>
+      {JSON.stringify(props.slides[0].ecampus_directory)}
+    </div>
   )
 }
 
 MenuContent.propTypes = {
   selectedMenuItem: PropTypes.number.isRequired,
-  maps: PropTypes.array
+  maps: PropTypes.array,
+  slides: PropTypes.array
 }
 
 export default MenuContent
