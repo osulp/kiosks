@@ -49,6 +49,8 @@ json.cache! ['v1', @kiosk], expires_in: Rails.env.development? ? 1.second : 24.h
         end
       end
     end
+    json.osulp_directory @directory_osulp
+    json.ecampus_directory @directory_ecampus
   end
   json.restart_kiosk @restart_kiosk
 end
