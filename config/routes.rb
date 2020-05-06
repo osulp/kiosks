@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
 
-  mount Ckeditor::Engine => '/ckeditor'
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   resources :kiosk_layouts
   resources :date_ranges
@@ -32,10 +31,6 @@ Rails.application.routes.draw do
   # Directory Paths
   get '/directories/csv_page', :to => 'directories#csv_page', :as => 'csv_page'
   get '/directory/iframe_page', :to => 'directories#iframe_page', :as => 'iframe_page'
-  get '/directories/editor_page', :to => 'directories#editor_page', :as => 'editor_page'
-  post '/directories/edit_page', :to => 'directories#editor_page_submit', :as => 'editor_page_submit'
-  post '/directories/editor_show_page', :to => 'directories#editor_show_page', :as => 'directories_editor'
-  get '/directory/editor_show_page', :to => 'directories#editor_show_page', :as => 'show_editor_info'
 
   post '/uploads/:collection_id', to: 'slides#create'
   # This is a hack that is required because the rails form the uploader is on
