@@ -40,6 +40,7 @@ const Kiosk = props => {
     setCurrentMenuIndex(1)
     props.setContentRootComponent(<MenuContent
       selectedMenuItem={1}
+      maps={props.maps}
     />)
   }
 
@@ -106,7 +107,8 @@ Kiosk.propTypes = {
   restart_kiosk: PropTypes.string.isRequired,
   url: PropTypes.string.isRequired,
   google_analytics: PropTypes.func.isRequired,
-  setContentRootComponent: PropTypes.func.isRequired
+  setContentRootComponent: PropTypes.func.isRequired,
+  maps: PropTypes.array,
 }
 
 export default Kiosk

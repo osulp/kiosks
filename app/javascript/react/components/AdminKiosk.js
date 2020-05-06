@@ -13,7 +13,8 @@ export const mapStateToProps = state => {
     kiosk_id: state.kiosk.kid,
     restart_kiosk: state.kiosk.restart_kiosk,
     url: state.kiosk.url,
-    google_analytics: state.kiosk.google_analytics
+    google_analytics: state.kiosk.google_analytics,
+    maps: state.touch.maps
   }
 }
 

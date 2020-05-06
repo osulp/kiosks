@@ -58,6 +58,12 @@
       padding: 25px;
       height: 870px;
     }
+    .map-content>div {
+      height: 800px;
+      background-size: contain;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
   }
 
   // customize gallery
