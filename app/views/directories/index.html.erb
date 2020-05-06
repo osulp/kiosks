@@ -4,7 +4,22 @@
     <th>title</th>
     <th>phone number</th>
   </tr>
-<% @directories.each do |d| %>
+<% @osulp.each do |d| %>
+  <tr>
+    <td><%= d.name %></td>
+    <td><%= d.title %></td>
+    <td><%= d.phone_number %></td>
+  </tr>
+<% end %>
+</table>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>title</th>
+    <th>phone number</th>
+  </tr>
+<% @ecampus.each do |d| %>
   <tr>
     <td><%= d.name %></td>
     <td><%= d.title %></td>
