@@ -42,24 +42,61 @@ const LibraryDirectoryContent = props => {
 }
 
 const Libraryleadershipdirectorycontent = props => {
-  console.log('props.slides.osulp_directory', props.slides.osulp_directory)
-  // TODO: parse json object and render html table
+  let names = JSON.parse(props.slides[0].osulp_directory).map((item, key) =>
+    <td>{item.name}</td>
+  );
+  let titles = JSON.parse(props.slides[0].osulp_directory).map((item, key) =>
+    <td>{item.title}</td>
+  );
+  let phone_numbers = JSON.parse(props.slides[0].osulp_directory).map((item, key) =>
+    <td>{item.phone_number}</td>
+  );
   return (
-    <div>
-      <h1>Libraries &amp; Press Leadership Directory</h1>
-      {JSON.stringify(props.slides[0].osulp_directory)}
-    </div>
+    <table>
+      <tr>
+        <th>Name</th>
+        <th>title</th>
+        <th>phone number</th>
+      </tr>
+        {titles.map((thing, index) => 
+          {
+            return <tr>
+              <td>{names[index]}</td>
+              <td>{titles[index]}</td>
+              <td>{phone_numbers[index]}</td>
+            </tr>
+          }
+        )}
+    </table>
   )
 }
 
 const EcampusDirectoryContent = props => {
-  console.log('props.slides.ecampus_directory', props.slides.ecampus_directory)
+  let names = JSON.parse(props.slides[0].ecampus_directory).map((item, key) =>
+    <td>{item.name}</td>
+  );
+  let titles = JSON.parse(props.slides[0].ecampus_directory).map((item, key) =>
+    <td>{item.title}</td>
+  );
+  let phone_numbers = JSON.parse(props.slides[0].ecampus_directory).map((item, key) =>
+    <td>{item.phone_number}</td>
+  );
   // TODO: parse json object and render html table
   return (
-    <div>
-      <h1>Ecampus Leadership Directory</h1>
-      {JSON.stringify(props.slides[0].ecampus_directory)}
-    </div>
+    <table>
+      <tr>
+        <th>Name</th>
+        <th>title</th>
+      </tr>
+        {titles.map((thing, index) => 
+          {
+            return <tr>
+              <td>{names[index]}</td>
+              <td>{titles[index]}</td>
+            </tr>
+          }
+        )}
+    </table>
   )
 }
 
