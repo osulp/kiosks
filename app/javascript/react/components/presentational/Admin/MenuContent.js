@@ -43,59 +43,64 @@ const LibraryDirectoryContent = props => {
 
 const Libraryleadershipdirectorycontent = props => {
   let names = JSON.parse(props.slides[0].osulp_directory).map((item, key) =>
-    <td>{item.name}</td>
+    item.name
   );
   let titles = JSON.parse(props.slides[0].osulp_directory).map((item, key) =>
-    <td>{item.title}</td>
+    item.title
   );
   let phone_numbers = JSON.parse(props.slides[0].osulp_directory).map((item, key) =>
-    <td>{item.phone_number}</td>
+    item.phone_number
   );
   return (
-    <table>
-      <tr>
-        <th>Name</th>
-        <th>title</th>
-        <th>phone number</th>
-      </tr>
+    <table className='osulp-table'>
+      <thead>
+        <tr key='osulp-table-header' className='osulp-table-header'>
+          <th>Name</th>
+          <th>Title</th>
+          <th>Phone Number</th>
+        </tr>
+      </thead>
+      <tbody>
         {titles.map((thing, index) => 
           {
-            return <tr>
-              <td>{names[index]}</td>
-              <td>{titles[index]}</td>
-              <td>{phone_numbers[index]}</td>
+            return <tr key={'osulp-table'+index} className='osulp-table-row'>
+              <td key={'names-osulp' + index}>{names[index]}</td>
+              <td key={'titles-osulp' + index}>{titles[index]}</td>
+              <td key={'phone-numbers' + index}>{phone_numbers[index]}</td>
             </tr>
           }
         )}
+      </tbody>
     </table>
   )
 }
 
 const EcampusDirectoryContent = props => {
   let names = JSON.parse(props.slides[0].ecampus_directory).map((item, key) =>
-    <td>{item.name}</td>
+    item.name
   );
   let titles = JSON.parse(props.slides[0].ecampus_directory).map((item, key) =>
-    <td>{item.title}</td>
-  );
-  let phone_numbers = JSON.parse(props.slides[0].ecampus_directory).map((item, key) =>
-    <td>{item.phone_number}</td>
+    item.title
   );
   // TODO: parse json object and render html table
   return (
-    <table>
-      <tr>
-        <th>Name</th>
-        <th>title</th>
-      </tr>
+    <table className='ecampus-table'>
+      <thead>
+        <tr key='ecampus-table' className='ecampus-table-header'>
+          <th >Name</th>
+          <th>Title</th>
+        </tr>
+      </thead>
+      <tbody>
         {titles.map((thing, index) => 
           {
-            return <tr>
-              <td>{names[index]}</td>
-              <td>{titles[index]}</td>
+            return <tr key={'ecampus-table'+index} className='ecampus-table-row'>
+              <td key={'names-ecampus' + index}>{names[index]}</td>
+              <td key={'titles-ecampus' + index}>{titles[index]}</td>
             </tr>
           }
         )}
+      </tbody>
     </table>
   )
 }
