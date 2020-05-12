@@ -37,7 +37,7 @@ const MapContent = props => {
 }
 const LibraryDirectoryContent = props => {
   return (
-    <h1>Libraries &amp; Press Directory</h1>
+    <iframe src="https://en.wikipedia.org/wiki/Library" height="100%" width="100%"></iframe>
   )
 }
 
