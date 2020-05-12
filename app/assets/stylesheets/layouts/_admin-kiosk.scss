@@ -21,30 +21,45 @@
   }
 
   .kiosk-footer {
-    text-align: left;
+    text-align: center;
     flex-direction: row;
-    justify-content: left;
+    justify-content: center;
     h2 {
       color:#eee;
     }
 
     .navigation-menu {
+      vertical-align: top;
       margin-top: -3em;
       padding-left: 2em;
       padding-top: 1.5em;
     }
 
     .navigation-menu button {
-      border: none;
+      vertical-align: bottom;
+      border: 1px solid white;
+      border-radius: 10px;
       outline: none;
-      background: none;
+      background-color: #dc4406;
+      border-color: #aa3505;
       color: #eee;
       font-size: xx-large;
       align-content: left;
+      height: 140px;
+    }
+
+    .map-button {
+      margin-top: 50px;
+    }
+
+    .home-button {
+      margin-top: 50px;
     }
 
     .navigation-menu button.btn-primary {
       text-decoration: underline;
+      margin-top: 0px;
+      margin-bottom: 0px;
     }
   }
 
