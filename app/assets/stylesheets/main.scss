@@ -24,3 +24,11 @@
 *:not(.material-icons) {
   font-family: "Open Sans", sans-serif !important;
 }
+
+// datatables style
+.dataTables_length,
+.dataTables_filter,
+.dataTables_info,
+.dataTables_paginate {
+  padding: 7px;
+}
