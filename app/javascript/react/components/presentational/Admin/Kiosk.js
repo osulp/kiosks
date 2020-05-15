@@ -9,13 +9,23 @@ import { trackClicked } from "../shared/GoogleAnalytics"
 const Kiosk = props => {
   // Set local state variables and setter methods
   let [currentMenuIndex, setCurrentMenuIndex] = useState(0);
+  // reset screen in ms
+  let RESET_SCREEN_PERIOD = 600000;
+
   useEffect(() => {
     if (currentMenuIndex == 0) {
+      // if index is 0 set the slide gallery to be the main screen component
       props.setContentRootComponent(
         <ConnectedSlideGallery {...props} />
       )
+    } else {
+      // if the index is other than 0, set up a timer to return to the main screen after a long period of time defined by RESET_SCREEN_PERIOD
+      let timeout = setTimeout(() => {
+        homeMenuItemClicked()
+      }, RESET_SCREEN_PERIOD);
+      return () => clearTimeout(timeout);
     }
-  },[currentMenuIndex])
+  }, [currentMenuIndex])
 
   const homeMenuItemClicked = () => {
     trackClicked(
