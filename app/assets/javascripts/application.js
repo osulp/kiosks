@@ -14,10 +14,12 @@
 //= require jquery
 //= require jquery-ui
 //= require jquery_ujs
+//= require dataTables/jquery.dataTables
 //= require bootstrap
 //= require flipclock.min
 //= require fileupload
 //= require dragscroll
 //= require date_range_actions
+//= require slides
 //= require kiosk_restart_actions
 //= require cable
