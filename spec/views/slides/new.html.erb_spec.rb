@@ -1,5 +1,4 @@
 # frozen_string_literal: true
-require 'byebug'
 
 RSpec.describe 'slides/new', type: :view do
   let(:slide_type) { build(:slide_type) }
