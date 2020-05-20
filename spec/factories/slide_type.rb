@@ -3,6 +3,5 @@
 FactoryBot.define do
   factory :slide_type do
     name { 'Basic' }
-    id { 0 }
   end
 end

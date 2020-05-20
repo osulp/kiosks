@@ -1,11 +1,17 @@
 # frozen_string_literal: true
+require 'byebug'
 
 RSpec.describe 'slides/new', type: :view do
+  let(:slide_type) { build(:slide_type) }
+  let(:collection) { build(:collection) }
+
   before do
     assign(:slide, build(:slide))
-    assign(:slide_types, SlideType.all)
+    assign(:slide_types, [slide_type])
     assign(:kiosks, Kiosk.all)
-    assign(:collections, Collection.all)
+    assign(:collections, [collection])
+    assign(:default_collection, collection)
+    assign(:default_slide_type, slide_type)
     render
   end
 
