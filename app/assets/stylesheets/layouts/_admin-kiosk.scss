@@ -24,6 +24,7 @@
     text-align: center;
     flex-direction: row;
     justify-content: center;
+    padding-bottom: 86px;
     h2 {
       color:#eee;
     }
@@ -64,7 +65,7 @@
   }
 
   .main-component {
-    min-height: calc(100vh - 200px);
+    min-height: calc(100vh - 366px);
     padding-bottom: 10px;
     padding-left: 1.5em;
     padding-right: 1.5em;
@@ -102,13 +103,13 @@
 
 .osulp-table {
   border: 1px solid #d1cccc;
-  width: 75%;
-  font-size: 18px;
+  width: 100%;
+  font-size: 43px;
 }
 .ecampus-table {
   border: 1px solid #d1cccc;
-  width: 75%;
-  font-size: 18px;
+  width: 100%;
+  font-size: 43px;
 }
 .osulp-table-row > td{
  padding: 5px 5px 5px 10px;
