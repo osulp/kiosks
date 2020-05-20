@@ -1,4 +1,4 @@
-<%= form_for slide , html: { multipart: true } do |f| %>
+<%= simple_form_for slide , html: { multipart: true } do |f| %>
   <% if slide.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(slide.errors.count, "error") %> prohibited this slide from being saved:</h2>
@@ -20,42 +20,12 @@
           </h3>
         </div>
         <div class="panel-body">
-          <div class="field">
-            <%= f.label :title %>
-            <%= f.text_field :title, required: true, class: "form-control" %>
-          </div>
-
-          <div class="field">
-            <%= f.label :caption %>
-            <%= f.text_area :caption, required: true,class: "form-control" %>
-          </div>
-
-          <div class="field">
-            <%= f.label :image, 'Image (jpg, jpeg, gif, png)' %>
-            <%= f.file_field :image, required: false, class: "form-control" %>
-          </div>
-
-          <div class="field">
-            <%= f.label :collection_id %>
-            <%= f.select('collection_id', options_from_collection_for_select(@collections, :id, :name, slide.collection_id), { :include_blank => '-- Select One --' }, :required => false, class: "form-control") %>
-          </div>
-
-          <div class="field">
-            <%= f.label :slide_type_id %>
-            <%= f.select('slide_type_id', options_from_collection_for_select(@slide_types, :id, :name, slide.slide_type_id), { :include_blank => '-- Select One --' }, :required => true, class: "form-control") %>
-          </div>
-
-          <%= f.label :kiosks %>
-          <div class="field">
-            <ul class="list-group">
-              <span class="ul">
-                <% @kiosks.each do |kiosk| %>
-                  <label class="li"><%= check_box_tag :kiosks, kiosk.id, slide.kiosks.include?(kiosk), :name => 'slide[kiosk_ids][]' %> <u><%= kiosk.name %></u></label><br />
-                <% end %>
-              </span>
-            </ul>
-          </div>
-
+          <%= f.input :title, required: true %>
+          <%= f.input :caption, required: true %>
+          <%= f.input :image, as: :file %>
+          <%= f.input :collection_id, collection: @collections, as: :select, selected: slide.collection_id ? slide.collection_id : @default_collection.id %>
+          <%= f.input :slide_type_id, collection: @slide_types, as: :select, selected: slide.slide_type_id ? slide.slide_type_id : @default_slide_type.id %>
+          <%= f.association :kiosks, as: :check_boxes, collection: @kiosks, selected: slide.kiosks %>
         </div>
       </div>
     </div>
@@ -70,22 +40,10 @@
           </h3>
         </div>
         <div class="panel-body">
-          <div class="field">
-            <%= f.label :description %>
-            <%= f.text_area :description, required: false,class: "form-control" %>
-          </div>
-
-          <div class="field">
-            <%= f.label :video, 'Audio/Video (mp3, m4v, mp4)'  %>
-            <%= f.file_field :video, required: false, class: "form-control" %>
-          </div>
-
-          <div class="field">
-            <%= f.label :subtitles, 'English Subtitles (vtt)' %>
-            <input class="form-control" type="file" name="slide[subtitles][]" id="slide_subtitles">
-            <%= f.label :subtitles, 'Spanish Subtitles (vtt)' %>
-            <input class="form-control" type="file" name="slide[subtitles][]" id="slide_subtitles">
-          </div>
+          <%= f.input :description %>
+          <%= f.input :video, as: :file %>
+          <%= f.input :subtitles, as: :file, label: 'English Subtitles (vtt)', input_html: { name: 'slide[subtitles][]'} %>
+          <%= f.input :subtitles, as: :file, label: 'Spanish Subtitles (vtt)', input_html: { name: 'slide[subtitles][]'} %>
 
         </div>
       </div>
@@ -116,7 +74,7 @@
   </div>
 
   <div class="actions">
-    <%= f.submit class: "btn btn-primary" %>
+    <%= f.button :submit, class: "btn btn-primary" %>
   </div>
 
 <% end %>

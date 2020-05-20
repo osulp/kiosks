@@ -19,7 +19,6 @@
         <th>Caption</th>
         <th>Collection</th>
         <th>Display Dates</th>
-        <th>Slide type</th>
         <th>Kiosks</th>
         <th></th>
         <th></th>
@@ -41,7 +40,6 @@
               <% end %>
             </ul>
           </td>
-          <td><%= slide.slide_type.name if slide.slide_type %></td>
           <td>
             <ul>
               <% for kiosk in slide.kiosks %>

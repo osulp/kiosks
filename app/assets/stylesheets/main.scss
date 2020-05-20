@@ -32,3 +32,19 @@
 .dataTables_paginate {
   padding: 7px;
 }
+
+// client side validation
+.was-validated .form-control:invalid,
+.form-control.is-invalid {
+  border-color: #dc3545;
+}
+.invalid-feedback {
+  color: #dc3545;
+}
+
+// simple form
+fieldset.form-group {
+  legend {
+    font-size: inherit;
+  }
+}
