@@ -3,5 +3,6 @@
 FactoryBot.define do
   factory :collection do
     name { 'Impact' }
+    id { 0 }
   end
 end

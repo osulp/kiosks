@@ -86,7 +86,7 @@ class SlidesController < ApplicationController
   end
 
   def build_kiosks(params)
-    kiosk_ids = params.dig('slide', 'kiosk_ids').reject(&:empty?)
+    kiosk_ids = params.dig('slide', 'kiosk_ids').try(:reject, &:empty?)
     @slide.kiosks = kiosk_ids ? Kiosk.find(kiosk_ids) : []
   end
 
