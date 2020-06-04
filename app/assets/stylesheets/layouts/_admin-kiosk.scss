@@ -31,34 +31,38 @@
 
     .navigation-menu {
       vertical-align: top;
-      margin-top: -3em;
+      margin-top: 1em;
       padding-left: 2em;
       padding-top: 1.5em;
     }
 
     .navigation-menu button {
       vertical-align: bottom;
-      border: 1px solid white;
-      border-radius: 10px;
+      border: 10px solid #00475F;
       outline: none;
-      background-color: #dc4406;
-      border-color: #aa3505;
+      background-color: #006A8E;
       color: #eee;
-      font-size: x-large;
+      font-size: 17px;
       align-content: left;
-      height: 100px;
+      height: 75px;
+      width: 200px;
     }
 
     .map-button {
       margin-top: 50px;
+      font-size: 30px !important;
     }
 
     .home-button {
       margin-top: 50px;
+      font-size: 30px !important;
     }
 
     .navigation-menu button.btn-primary {
       text-decoration: underline;
+      background-color: #D6DAE7;
+      border: 10px solid #00859B;
+      color: black;
       margin-top: 0px;
       margin-bottom: 0px;
     }
