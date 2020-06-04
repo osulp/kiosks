@@ -22,6 +22,23 @@ const Menu = props => {
 
     return (
       <div className="navigation-menu">
+        <NavButton 
+          aria-label="Libraries and Press Leadership Directory" 
+          onClick={props.libraryLeadershipDirectoryMenuItemClicked}
+          className={`nav-button ${selectedButtonClassName(3)}`}
+        >Libraries &amp; Press <br></br> Leadership Directory</NavButton>
+        <NavSpacer width="35px" />
+        <NavButton 
+          aria-label="Libraries and Press Directory" 
+          onClick={props.libraryDirectoryMenuItemClicked}
+          className={`nav-button ${selectedButtonClassName(2)}`}
+        >Libraries &amp; Press <br></br> Employee Directory</NavButton>
+        <NavSpacer width="35px" />
+       <NavButton 
+          aria-label="Home" 
+          onClick={props.homeMenuItemClicked}
+          className={`nav-button home-button ${selectedButtonClassName(0)}`}
+        >Home</NavButton> 
         <NavSpacer width="35px" />
         <NavButton 
           aria-label="Map" 
@@ -30,28 +47,10 @@ const Menu = props => {
         >Map</NavButton>
         <NavSpacer width="35px" />
         <NavButton 
-          aria-label="Libraries and Press Directory" 
-          onClick={props.libraryDirectoryMenuItemClicked}
-          className={`nav-button ${selectedButtonClassName(2)}`}
-        >Libraries &amp; Press <br></br> Employee Directory</NavButton>
-        <NavSpacer width="35px" />
-        <NavButton 
-          aria-label="Libraries and Press Leadership Directory" 
-          onClick={props.libraryLeadershipDirectoryMenuItemClicked}
-          className={`nav-button ${selectedButtonClassName(3)}`}
-        >Libraries &amp; Press <br></br> Leadership Directory</NavButton>
-        <NavSpacer width="35px" />
-        <NavButton 
           aria-label="Ecampus Leadership Directory" 
           onClick={props.ecampusDirectoryMenuItemClicked}
           className={`nav-button ${selectedButtonClassName(4)}`}
         >Ecampus <br></br> Leadership Directory</NavButton>
-        <NavSpacer width="35px" />
-        <NavButton 
-          aria-label="Home" 
-          onClick={props.homeMenuItemClicked}
-          className={`nav-button home-button ${selectedButtonClassName(0)}`}
-        >Home</NavButton>
         <NavSpacer width="35px" />
       </div>
     )
