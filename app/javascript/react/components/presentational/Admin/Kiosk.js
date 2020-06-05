@@ -10,7 +10,7 @@ const Kiosk = props => {
   // Set local state variables and setter methods
   let [currentMenuIndex, setCurrentMenuIndex] = useState(0);
   // reset screen in ms
-  let RESET_SCREEN_PERIOD = 600000;
+  let RESET_SCREEN_PERIOD = 45000;
 
   useEffect(() => {
     if (currentMenuIndex == 0) {
