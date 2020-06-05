@@ -94,6 +94,6 @@ group :test do
 end
 
 # Honeycomb
-gem 'sequel'
-gem 'honeycomb-beeline'
+gem 'honeycomb-beeline', '>= 2.0.0'
+gem 'libhoney', '>= 1.14.2'
 gem 'rack-honeycomb', '~> 0.5.0'
