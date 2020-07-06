@@ -23,10 +23,10 @@ const Menu = props => {
     return (
       <div className="navigation-menu">
         <NavButton 
-          aria-label="Libraries and Press Leadership Directory" 
-          onClick={props.libraryLeadershipDirectoryMenuItemClicked}
-          className={`nav-button ${selectedButtonClassName(3)}`}
-        >Libraries &amp; Press <br></br> Leadership Directory</NavButton>
+          aria-label="Map" 
+          onClick={props.mapMenuItemClicked}
+          className={`nav-button map-button ${selectedButtonClassName(1)}`}
+        >Map</NavButton>
         <NavSpacer width="35px" />
         <NavButton 
           aria-label="Libraries and Press Directory" 
@@ -34,17 +34,11 @@ const Menu = props => {
           className={`nav-button ${selectedButtonClassName(2)}`}
         >Libraries &amp; Press <br></br> Employee Directory</NavButton>
         <NavSpacer width="35px" />
-       <NavButton 
-          aria-label="Home" 
-          onClick={props.homeMenuItemClicked}
-          className={`nav-button home-button ${selectedButtonClassName(0)}`}
-        >Home</NavButton> 
-        <NavSpacer width="35px" />
         <NavButton 
-          aria-label="Map" 
-          onClick={props.mapMenuItemClicked}
-          className={`nav-button map-button ${selectedButtonClassName(1)}`}
-        >Map</NavButton>
+          aria-label="Libraries and Press Leadership Directory" 
+          onClick={props.libraryLeadershipDirectoryMenuItemClicked}
+          className={`nav-button ${selectedButtonClassName(3)}`}
+        >Libraries &amp; Press <br></br> Leadership Directory</NavButton>
         <NavSpacer width="35px" />
         <NavButton 
           aria-label="Ecampus Leadership Directory" 
@@ -52,6 +46,11 @@ const Menu = props => {
           className={`nav-button ${selectedButtonClassName(4)}`}
         >Ecampus <br></br> Leadership Directory</NavButton>
         <NavSpacer width="35px" />
+        <NavButton 
+          aria-label="Home" 
+          onClick={props.homeMenuItemClicked}
+          className={`nav-button home-button ${selectedButtonClassName(0)}`}
+        >Home</NavButton>
       </div>
     )
 }
