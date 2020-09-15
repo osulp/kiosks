@@ -65,6 +65,8 @@ gem "ffi", ">= 1.9.24"
 
 gem 'webpacker', '~> 4.0'
 
+gem "actionview", ">= 5.2.4.4"
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platform: :mri
