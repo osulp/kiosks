@@ -21,6 +21,7 @@ class SlideGallery extends Component {
         myNextVideo.click
         myNextVideo.play()
       } else {
+        this.click()
         this._imageGallery.play()
       }
     }
