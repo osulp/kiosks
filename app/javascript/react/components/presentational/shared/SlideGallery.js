@@ -14,14 +14,14 @@ class SlideGallery extends Component {
     // play if next slide is a video
     let next_item = this.props.slides[index]
 
-    webviewSettings.setMediaPlaybackRequiresUserGesture(false);  
-
     if (next_item != undefined) {
       let myNextVideo = document.querySelector(`video.video-${next_item.id}`)
       if (myNextVideo != undefined) {
         this._imageGallery.pause()
+        myNextVideo.click()
         myNextVideo.play()
       } else {
+        this.click()
         this._imageGallery.play()
       }
     }
