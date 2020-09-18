@@ -18,7 +18,7 @@ class SlideGallery extends Component {
       let myNextVideo = document.querySelector(`video.video-${next_item.id}`)
       if (myNextVideo != undefined) {
         this._imageGallery.pause()
-        myNextVideo.click()
+        myNextVideo.click
         myNextVideo.play()
       } else {
         this.click()
