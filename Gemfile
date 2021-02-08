@@ -42,7 +42,7 @@ gem 'capistrano-passenger'
 gem 'capistrano-rails'
 gem 'capistrano-rbenv'
 
-gem 'carrierwave', '~> 1.0'
+gem 'carrierwave', '~> 1.3'
 gem 'devise'
 gem 'flipclockjs-rails', '~> 0.7.7'
 gem 'rails_admin', '~> 1.4'
