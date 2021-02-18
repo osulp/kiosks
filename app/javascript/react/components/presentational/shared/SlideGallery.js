@@ -13,11 +13,12 @@ class SlideGallery extends Component {
 
     // play if next slide is a video
     let next_item = this.props.slides[index]
-    
+
     if (next_item != undefined) {
       let myNextVideo = document.querySelector(`video.video-${next_item.id}`)
       if (myNextVideo != undefined) {
         this._imageGallery.pause()
+        myNextVideo.load()
         myNextVideo.play()
       } else {
         this._imageGallery.play()
@@ -87,7 +88,8 @@ class SlideGallery extends Component {
               onError={onImageError.bind(this)}
             />
           :
-            <video muted className={`video-${item.id}`} onEnded={onVideoEnded.bind(this)} preload="auto" src={item.av_media}>
+            <video muted className={`video-${item.id}`} onEnded={onVideoEnded.bind(this)} preload="auto">
+              <source src={item.av_media} type='video/mp4'></source>
               {item.subtitle_en.length > 0 &&
                 <track
                   kind="subtitles"
