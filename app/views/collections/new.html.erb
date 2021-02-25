@@ -5,7 +5,6 @@
       <% if @collection.errors.any? %>
         <div id="error_explanation">
           <h2><%= pluralize(@collection.errors.count, "error") %> prohibited this collection from being saved:</h2>
-
           <ul>
             <% @collection.errors.full_messages.each do |message| %>
               <li><%= message %></li>
@@ -13,26 +12,20 @@
           </ul>
         </div>
       <% end %>
-
-
-      <div class="panel panel-primary">
-        <div class="panel-heading">
-          <h3 class="panel-title">Create new collection</h3>
+        <h3>Create new collection</h3>
         </div>
-        <div class="panel-body">
+        <div>
           <div class="field">
             <%= f.label :name %>
             <%= f.text_field :name, class: "form-control" %>
           </div>
         </div>
       </div>
-
       <div class="actions">
         <%= f.submit class: "btn btn-primary" %>
         <%= link_to 'All Collections', collections_path, class: "btn btn-default" %>
       </div>
     <% end %>
-
   </div>
 </div>
 

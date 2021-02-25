@@ -1,11 +1,7 @@
 <h1><%= @collection.name %></h1>
 <label>Detail</label>
-<pre style="white-space: pre-wrap; word-break: break-word;"><%= @collection.detail %></pre>
-
-<div class="panel panel-primary">
-  <div class="panel-heading">
-    <h2 class="panel-title">Primary Slide</h2>
-  </div>
+<%= @collection.detail %>
+<h2>Primary Slide</h2>
   <!-- Table -->
   <table class="table table-striped">
     <thead>
@@ -53,10 +49,7 @@
 </div>
 
 
-<div class="panel panel-primary">
-  <div class="panel-heading">
-    <h2 class="panel-title">Slides in collection</h2>
-  </div>
+<h2>Slides in collection</h2>
   <!-- Table -->
   <table class="table table-striped">
     <thead>
