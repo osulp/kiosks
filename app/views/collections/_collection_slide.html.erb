@@ -1,0 +1,21 @@
+<td><%= image_tag(slide.image_url(:thumb)) if slide.image_url(:thumb) %> <%= "Primary Slide" if primary_slide %></td>
+<td><%= link_to slide.title, slide %></td>
+<td>
+  <ul>
+    <% for date_range in slide.date_ranges %>
+      <li><%= date_range.start_date.strftime("%m/%d/%y") %> - <%= date_range.end_date.strftime("%m/%d/%y") %></li>
+    <% end %>
+  </ul>
+</td>
+<td>
+  <ul>
+    <% for kiosk in slide.kiosks %>
+      <li>
+        <%= link_to kiosk.name, kiosk_show_path(id: kiosk.name) %>
+      </li>
+    <% end %>
+  </ul>
+</td>
+<td><%= link_to 'View', slide %></td>
+<td><%= link_to 'Edit', edit_slide_path(slide) %></td>
+<td><%= link_to 'Destroy', slide, method: :delete, data: { confirm: 'Are you sure?' } %></td>

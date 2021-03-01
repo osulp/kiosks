@@ -11,12 +11,12 @@
     </div>
   <% end %>
 
+  <h2>Edit collection</h2>
+  <%= link_to 'View Collection', @collection, class: "btn btn-default pull-right collection-show-buttons collection-button-move-left" %>
+  <%= link_to 'All Collections', collections_path, class: "btn btn-default pull-right collection-show-buttons" %>
 
-<div class="panel panel-primary">
-  <div class="panel-heading">
-    <h3 class="panel-title">Edit collection</h3>
-  </div>
-  <div class="panel-body">
+  <hr style="border: 1px solid darkgrey;">
+  <div>
     <div class="field">
       <%= f.label :name %>
       <%= f.text_field :name, class: "form-control" %>
@@ -27,16 +27,20 @@
     </div>
     <div class="field">
       <%= f.label :primary_slide %>
-      <%= f.select('primary_slide_id', options_from_collection_for_select(collection.slides, :id, :caption, f.object.primary_slide_id), { :include_blank => '-- Select One --' }, :required => false, class: "form-control") %>
+      <%= f.select('primary_slide_id', options_from_collection_for_select(collection.slides, :id, :title, f.object.primary_slide_id), { :include_blank => '-- Select One --' }, :required => false, class: "form-control") %>
     </div>
   </div>
-</div>
 
-<% if !collection.slides.blank? %>
-  <%= render :partial => "edit_slides_in_collection", :locals => {f:f, slide_types:@slide_types, kiosks:@kiosks } %>
-<% end %>
+  <div class="actions">
+    <%= f.submit class: "btn btn-primary" %>
+  </div>
 
-<div class="actions">
-  <%= f.submit class: "btn btn-primary" %>
-</div>
+  &nbsp;
+  &nbsp;
+
+  <% if !collection.slides.blank? %>
+    <%= render :partial => "edit_slides_in_collection", :locals => {f:f, slide_types:@slide_types, kiosks:@kiosks } %>
+  <% end %>
+
+   
 <% end %>
