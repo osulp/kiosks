@@ -19,11 +19,13 @@
       </tr>
     </thead>
     <tbody>
-      <tr>
-        <%= render 'collection_slide', slide: @collection.primary_slide, primary_slide: true %>
-      </tr>
+      <% unless @collection.primary_slide.nil? %>
+        <tr>
+          <%= render 'collection_slide', slide: @collection.primary_slide, primary_slide: true %>
+        </tr>
+      <% end %>
       <% @collection.slides.each do |slide| %>
-        <% next if slide.title == @collection.primary_slide.title %>
+        <% next if slide.title == @collection.primary_slide&.title %>
         <tr>
           <%= render 'collection_slide', slide: slide, primary_slide: false %>
         </tr>
