@@ -21,6 +21,15 @@
 @import "flipclock";
 @import "jquery.fileupload-ui";
 
+.collection-show-buttons {
+  margin-top: -45px;
+  margin-right: 5px;
+}
+
+.collection-button-move-left {
+  margin-right: 130px;
+}
+
 *:not(.material-icons) {
   font-family: "Open Sans", sans-serif !important;
 }

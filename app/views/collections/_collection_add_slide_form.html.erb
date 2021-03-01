@@ -1,0 +1,50 @@
+<%= form_for collection, :html => { :multipart => true, :id => "fileupload"  } do |f| %>
+  <!-- <div id="fileupload"> -->
+
+  <!-- Redirect browsers with JavaScript disabled to the origin page -->
+  <noscript><input type="hidden" name="redirect" value="<%= main_app.root_path %>"></noscript>
+  <!-- The table listing the files available for upload/download -->
+  <table role="presentation" class="table table-striped"><tbody class="files"></tbody></table>
+
+  <h2>Upload Local Slides</h2>
+  <!-- The fileupload-buttonbar contains buttons to add/delete files and start/cancel the upload -->
+
+    <!-- The collection ID to pass to the upload controller -->
+    <input id="collection_id" type="hidden" value="<%= collection.id %>">
+    <div class="row fileupload-buttonbar">
+      <div class="col-xs-7">
+        <!-- The fileinput-button span is used to style the file input field as button -->
+        <span class="btn btn-success fileinput-button">
+          <span class="glyphicon glyphicon-plus"></span>
+          <span>Add files...</span>
+          <input type="file" name="files[]" multiple>
+        </span>
+         <button type="reset" class="btn btn-warning cancel hidden">
+          <span class="glyphicon glyphicon-ban-circle"></span>
+          <span>Cancel upload</span>
+        </button>
+
+        <div class="actions">
+          <input type="submit" name="commit" value="Upload Slides" class="btn btn-primary upload-slides hidden" data-disable-with="Update Collection">
+        </div>
+
+        <!-- The global file processing state -->
+        <span class="fileupload-process"></span>
+      </div>
+      <!-- The global progress state -->
+      <div class="col-xs-5 fileupload-progress fade">
+        <!-- The global progress bar -->
+        <div class="progress progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100">
+          <div class="progress-bar progress-bar-success" style="width:0%;"></div>
+        </div>
+        <!-- The extended global progress state -->
+        <div class="progress-extended">&nbsp;</div>
+      </div>
+    </div>
+
+  <div class="dropzone">
+
+  </div>
+<!-- </div> -->
+
+<% end %>

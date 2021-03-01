@@ -1,53 +1,10 @@
 <h1><%= @collection.name %></h1>
 <label>Detail</label>
 <%= @collection.detail %>
-<h2>Primary Slide</h2>
-  <!-- Table -->
-  <table class="table table-striped">
-    <thead>
-      <tr>
-        <th>Slide</th>
-        <th>Title</th>
-        <th>Caption</th>
-        <th>Display Dates</th>
-        <th>Slide type</th>
-        <th>Kiosk</th>
-      </tr>
-    </thead>
+<%= link_to 'Edit Collection', edit_collection_path(@collection), class: "btn btn-primary pull-right collection-show-buttons" %>
+<%= link_to 'All Collections', collections_path, class: "btn btn-default pull-right collection-show-buttons" %>
 
-    <tbody>
-      <% unless @collection.primary_slide %>
-        <tr>
-          <td colspan='6'>No primary slide selected. This feature is only necessary for the Donor Kiosk.</td>
-        </tr>
-      <% else %>
-        <tr>
-          <td><%= image_tag(@collection.primary_slide.image_url(:thumb)) if @collection.primary_slide.image_url(:thumb) %></td>
-          <td><%= link_to @collection.primary_slide.title, @collection.primary_slide %></td>
-          <td><%= @collection.primary_slide.caption %></td>
-          <td>
-            <ul>
-              <% for date_range in @collection.primary_slide.date_ranges %>
-                <li><%= date_range.start_date.strftime("%m/%d/%y") %> - <%= date_range.end_date.strftime("%m/%d/%y") %></li>
-              <% end %>
-            </ul>
-          </td>
-          <td><%= @collection.primary_slide.slide_type.name if @collection.primary_slide.slide_type %></td>
-          <td>
-            <ul>
-              <% for kiosk in @collection.primary_slide.kiosks %>
-                <li>
-                  <%= link_to kiosk.name, kiosk_show_path(id: kiosk.name) %>
-                </li>
-              <% end %>
-            </ul>
-          </td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
-</div>
-
+<hr style="border: 1px solid darkgrey;">
 
 <h2>Slides in collection</h2>
   <!-- Table -->
@@ -56,99 +13,26 @@
       <tr>
         <th>Slide</th>
         <th>Title</th>
-        <th>Caption</th>
         <th>Display Dates</th>
-        <th>Slide type</th>
         <th>Kiosk</th>
         <th colspan="3"></th>
       </tr>
     </thead>
-
     <tbody>
-      <% for slide in @collection.slides %>
+      <tr>
+        <%= render 'collection_slide', slide: @collection.primary_slide, primary_slide: true %>
+      </tr>
+      <% @collection.slides.each do |slide| %>
+        <% next if slide.title == @collection.primary_slide.title %>
         <tr>
-          <td><%= image_tag(slide.image_url(:thumb)) if slide.image_url(:thumb) %></td>
-          <td><%= link_to slide.title, slide %></td>
-          <td><%= slide.caption %></td>
-          <td>
-            <ul>
-              <% for date_range in slide.date_ranges %>
-                <li><%= date_range.start_date.strftime("%m/%d/%y") %> - <%= date_range.end_date.strftime("%m/%d/%y") %></li>
-              <% end %>
-            </ul>
-          </td>
-          <td><%= slide.slide_type.name if slide.slide_type %></td>
-          <td>
-            <ul>
-              <% for kiosk in slide.kiosks %>
-                <li>
-                  <%= link_to kiosk.name, kiosk_show_path(id: kiosk.name) %>
-                </li>
-              <% end %>
-            </ul>
-          </td>
-          <td><%= link_to 'View', slide %></td>
-          <td><%= link_to 'Edit', edit_slide_path(slide) %></td>
-          <td><%= link_to 'Destroy', slide, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          <%= render 'collection_slide', slide: slide, primary_slide: false %>
         </tr>
       <% end %>
     </tbody>
   </table>
+  <%= render 'collection_add_slide_form', collection: @collection %>
 </div>
 
-<%= link_to 'Edit Collection', edit_collection_path(@collection), class: "btn btn-primary" %>
-<%= link_to 'All Collections', collections_path, class: "btn btn-default" %>
-
-<%= form_for @collection, :html => { :multipart => true, :id => "fileupload"  } do |f| %>
-  <!-- <div id="fileupload"> -->
-
-  <!-- Redirect browsers with JavaScript disabled to the origin page -->
-  <noscript><input type="hidden" name="redirect" value="<%= main_app.root_path %>"></noscript>
-  <!-- The table listing the files available for upload/download -->
-  <table role="presentation" class="table table-striped"><tbody class="files"></tbody></table>
-
-  <h2>Upload Local Slides</h2>
-  <!-- The fileupload-buttonbar contains buttons to add/delete files and start/cancel the upload -->
-
-    <!-- The collection ID to pass to the upload controller -->
-    <input id="collection_id" type="hidden" value="<%= @collection.id %>">
-    <div class="row fileupload-buttonbar">
-      <div class="col-xs-7">
-        <!-- The fileinput-button span is used to style the file input field as button -->
-        <span class="btn btn-success fileinput-button">
-          <span class="glyphicon glyphicon-plus"></span>
-          <span>Add files...</span>
-          <input type="file" name="files[]" multiple>
-        </span>
-         <button type="reset" class="btn btn-warning cancel hidden">
-          <span class="glyphicon glyphicon-ban-circle"></span>
-          <span>Cancel upload</span>
-        </button>
-
-        <div class="actions">
-          <input type="submit" name="commit" value="Upload Slides" class="btn btn-primary upload-slides hidden" data-disable-with="Update Collection">
-        </div>
-
-        <!-- The global file processing state -->
-        <span class="fileupload-process"></span>
-      </div>
-      <!-- The global progress state -->
-      <div class="col-xs-5 fileupload-progress fade">
-        <!-- The global progress bar -->
-        <div class="progress progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100">
-          <div class="progress-bar progress-bar-success" style="width:0%;"></div>
-        </div>
-        <!-- The extended global progress state -->
-        <div class="progress-extended">&nbsp;</div>
-      </div>
-    </div>
-
-  <div class="dropzone">
-
-  </div>
-<!-- </div> -->
-
-<% end %>
 <%= render partial: 'collections/js_templates', :locals => {
   :collection_id => @collection.id,
   :collection => @collection,
