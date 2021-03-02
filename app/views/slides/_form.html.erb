@@ -2,7 +2,6 @@
   <% if slide.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(slide.errors.count, "error") %> prohibited this slide from being saved:</h2>
-
       <ul>
         <% slide.errors.full_messages.each do |message| %>
           <li><%= message %></li>
@@ -11,56 +10,38 @@
     </div>
   <% end %>
 
+  <hr style="border: 1px solid darkgrey">
+
   <div class="row">
     <div class="col-xs-12 col-md-12">
-      <div class="panel panel-default">
-        <div class="panel-heading">
-          <h3 class="panel-title">
-            Enter Slide Values
-          </h3>
-        </div>
-        <div class="panel-body">
-          <%= f.input :title, required: true %>
-          <%= f.input :caption, required: true %>
-          <%= f.input :image, as: :file %>
-          <%= f.input :collection_id, collection: @collections, as: :select, selected: slide.collection_id ? slide.collection_id : @default_collection.id %>
-          <%= f.input :slide_type_id, collection: @slide_types, as: :select, selected: slide.slide_type_id ? slide.slide_type_id : @default_slide_type.id %>
-          <%= f.association :kiosks, as: :check_boxes, collection: @kiosks, selected: slide.kiosks %>
-        </div>
-      </div>
+      <h2>Enter Slide Values</h2>
+      <%= f.input :title, required: true %>
+      <%= f.input :caption, required: true %>
+      <%= f.input :image, as: :file %>
+      <%= f.input :collection_id, collection: @collections, as: :select, selected: slide.collection_id ? slide.collection_id : @default_collection.id %>
+      <%= f.input :slide_type_id, collection: @slide_types, as: :select, selected: slide.slide_type_id ? slide.slide_type_id : @default_slide_type.id %>
+      <%= f.association :kiosks, as: :check_boxes, collection: @kiosks, selected: slide.kiosks %>
     </div>
   </div>
 
+  <hr style="border: 1px solid darkgrey">
+
   <div class="row">
     <div class="col-xs-12 col-md-12">
-      <div class="panel panel-default">
-        <div class="panel-heading">
-          <h3 class="panel-title">
-            Audio/Video Values
-          </h3>
-        </div>
-        <div class="panel-body">
-          <%= f.input :description %>
-          <%= f.input :video, as: :file %>
-          <%= f.input :subtitles, as: :file, label: 'English Subtitles (vtt)', input_html: { name: 'slide[subtitles][]'} %>
-          <%= f.input :subtitles, as: :file, label: 'Spanish Subtitles (vtt)', input_html: { name: 'slide[subtitles][]'} %>
-
-        </div>
-      </div>
+      <h2>Audio/Video Values</h2>
+      <%= f.input :description %>
+      <%= f.input :video, as: :file %>
+      <%= f.input :subtitles, as: :file, label: 'English Subtitles (vtt)', input_html: { name: 'slide[subtitles][]'} %>
+      <%= f.input :subtitles, as: :file, label: 'Spanish Subtitles (vtt)', input_html: { name: 'slide[subtitles][]'} %>
     </div>
   </div>
 
+  <hr style="border: 1px solid darkgrey">
 
   <div class="row">
     <div class="col-xs-12 col-md-12">
-      <div class="panel panel-default panel-display-dates">
-        <!-- Default panel contents -->
-        <div class="panel-heading">
-          <h3 class="panel-title">
-            <%= f.label :date_ranges, "Display dates and times" %>
-          </h3>
-        </div>
-        <!-- List group -->
+      <div class="panel-display-dates">
+        <h2><%= f.label :date_ranges, "Display dates and times" %></h2>
         <div class="field">
           <ul class="list-group" id="list-group-date-ranges">
             <%= f.fields_for :date_ranges do |builder| %>

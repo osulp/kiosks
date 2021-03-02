@@ -1,64 +1,52 @@
 <p id="notice"><%= notice %></p>
-
+<%= link_to 'New Slide', new_slide_path, class: "btn btn-primary pull-right" %>
 <h1>Slides</h1>
+<hr style="border: 1px solid darkgrey;">
 
-<%= link_to 'New Slide', new_slide_path, class: "btn btn-primary" %>
-
-<div class="panel panel-primary">
-  <div class="panel-heading">
-    <h3 class="panel-title">
-      All Slides
-    </h3>
-  </div>
-
-  <table id="slides" class="table table-striped">
-    <thead>
-      <tr>
-        <th>Slide</th>
-        <th>Title</th>
-        <th>Caption</th>
-        <th>Collection</th>
-        <th>Display Dates</th>
-        <th>Kiosks</th>
-        <th></th>
-        <th></th>
-        <th></th>
-      </tr>
-    </thead>
-
-    <tbody>
-      <% @slides.each do |slide| %>
-        <tr>
-          <td><%= image_tag(slide.image_url(:thumb)) if slide.image_url(:thumb) %></td>
-          <td><%= link_to slide.title, slide %></td>
-          <td><%= slide.caption %></td>
-          <td><%= link_to(slide.collection.name, collection_path(slide.collection.id)) if slide && slide.collection %></td>
-          <td>
-            <ul>
-              <% for date_range in slide.date_ranges %>
-                <li><%= date_range.start_date.strftime("%m/%d/%y") %> - <%= date_range.end_date.strftime("%m/%d/%y") %></li>
-              <% end %>
-            </ul>
-          </td>
-          <td>
-            <ul>
-              <% for kiosk in slide.kiosks %>
-                <li>
-                  <%= link_to kiosk.name, kiosk_show_path(id: kiosk.name) %>
-                </li>
-              <% end %>
-            </ul>
-          </td>
-          <td><%= link_to 'View', slide %></td>
-          <td><%= link_to 'Edit', edit_slide_path(slide) %></td>
-          <td><%= link_to 'Delete', slide, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
-
-</div>
-
-<br>
-
-<%= link_to 'Admin Panel', rails_admin_path, class: "btn btn-default" %>
+<h2>All Slides</h2>
+<table id="slides" class="table table-striped">
+  <thead>
+    <tr>
+      <th>Slide</th>
+      <th>Title</th>
+      <th>Caption</th>
+      <th>Collection</th>
+      <th>Display Dates</th>
+      <th>Kiosks</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+  <% @slides.each do |slide| %>
+    <tr>
+      <td><%= image_tag(slide.image_url(:thumb)) if slide.image_url(:thumb) %></td>
+      <td><%= link_to slide.title, slide %></td>
+      <td><%= slide.caption %></td>
+      <td><%= link_to(slide.collection.name, collection_path(slide.collection.id)) if slide && slide.collection %></td>
+      <td>
+        <ul>
+          <% for date_range in slide.date_ranges %>
+            <li><%= date_range.start_date.strftime("%m/%d/%y") %> - <%= date_range.end_date.strftime("%m/%d/%y") %></li>
+          <% end %>
+        </ul>
+      </td>
+      <td>
+        <ul>
+          <% for kiosk in slide.kiosks %>
+            <li>
+              <%= link_to kiosk.name, kiosk_show_path(id: kiosk.name) %>
+            </li>
+          <% end %>
+        </ul>
+      </td>
+      <td>
+        <ul>
+          <li><%= link_to 'View', slide %></li>
+          <li><%= link_to 'Edit', edit_slide_path(slide) %></li>
+          <li><%= link_to 'Delete', slide, method: :delete, data: { confirm: 'Are you sure?' } %></li>
+        </ul>
+      </td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>

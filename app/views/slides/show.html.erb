@@ -1,136 +1,70 @@
 <p id="notice"><%= notice %></p>
-
-<div class="panel panel-default">
-  <div class="panel-heading">
-    <h2 class="panel-title">Slide Info</h2>
-  </div>
-
-  <table class="table table-striped">
-    <thead>
-      <tr>
-        <th>Field Name</th>
-        <th>Value</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <th scope="row">
-          <strong>Caption:</strong>
-        </th>
-        <td>
-          <p>
-          <%= @slide.caption %>
-          </p>
-        </td>
-      </tr>
-      <tr>
-        <th scope="row">
-          <strong>Description:</strong>
-        </th>
-        <td>
-          <p>
-          <%= @slide.description %>
-          </p>
-        </td>
-      </tr>
-      <tr>
-        <th scope="row">
-          <strong>English Subtitles:</strong>
-        </th>
-        <td>
-          <p>
-            <% @slide.subtitles.each_with_index do |subtitle, index| %>
-              <li>
-                <%= link_to(@slide.subtitle_filename(index), subtitle.url) %>
-              </li>
-            <% end %>
-          </p>
-        </td>
-      </tr>
-      <tr>
-        <th scope="row">
-          <strong>Display dates:</strong>
-        </th>
-        <td>
-          <ul>
-            <% for date_range in @slide.date_ranges %>
-              <li>
-                <%= date_range.start_date.strftime("%m/%d/%Y %I:%M:%S %p") %> - <%= date_range.end_date.strftime("%m/%d/%Y %I:%M:%S %p") %>
-              </li>
-            <% end %>
-          </ul>
-        </td>
-      </tr>
-      <tr>
-        <th scope="row">
-          <strong>Title:</strong>
-        </th>
-        <td>
-          <p>
-          <%= @slide.title %>
-          </p>
-        </td>
-      </tr>
-      <tr>
-        <th scope="row">
-          <strong>Slide type:</strong>
-        </th>
-        <td>
-          <p>
-          <%= @slide.slide_type.name %>
-          </p>
-        </td>
-      </tr>
-      <tr>
-        <th scope="row">
-          <strong>Slide Collection:</strong>
-        </th>
-        <td>
-          <p>
-          <%= link_to(@slide.collection.name, collection_path(@slide.collection.id)) if @slide && @slide.collection %>
-          </p>
-        </td>
-      </tr>
-      <tr>
-        <th scope="row">
-          <strong>Kiosks:</strong>
-        </th>
-        <td>
-          <ul>
-            <% for kiosk in @slide.kiosks %>
-              <li>
-                <%= link_to kiosk.name, kiosk_show_path(id: kiosk.name) %>
-              </li>
-            <% end %>
-          </ul>
-        </td>
-      </tr>
-      <tr>
-        <th scope="row">
-          <strong>Image:</strong><br>
-        </th>
-        <td>
-          <p>
-          <%= image_tag @slide.image_url(:large).to_s %>
-          </p>
-        </td>
-      </tr>
-      <tr>
-        <th scope="row">
-          <strong>Image Sizes</strong><br>
-        </th>
-        <td>
-          <p>
-          <%= link_to "x-large", @slide.image_url(:xlarge).to_s %> | 
-          <%= link_to "large", @slide.image_url(:large).to_s %> | 
-          <%= link_to "medium", @slide.image_url(:medium).to_s %> | 
-          <%= link_to "original", @slide.image_url.to_s %>
-          </p>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-</div>
-
-<%= link_to 'Edit', edit_slide_path(@slide), class: "btn btn-primary" %>
-<%= link_to 'All Slides', slides_path, class: "btn btn-default" %>
+<%= link_to 'Edit', edit_slide_path(@slide), class: "btn btn-primary pull-right" %>
+<h2>Slide Info</h2>
+<hr style="border: 1px solid darkgrey">
+<h3><%= @slide.title%></h3>
+<table class="table table-striped">
+  <thead>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Caption:</th>
+      <td><%= @slide.caption %></td>
+    </tr>
+    <tr>
+      <th>Description:</th>
+      <td><%= @slide.description %></td>
+    </tr>
+    <tr>
+      <th>English Subtitles:</th>
+      <td>
+        <ul>
+          <% @slide.subtitles.each_with_index do |subtitle, index| %>
+            <li><%= link_to(@slide.subtitle_filename(index), subtitle.url) %></li>
+          <% end %>
+        </ul>
+      </td>
+    </tr>
+    <tr>
+      <th>Display dates:</th>
+      <td>
+        <ul>
+          <% for date_range in @slide.date_ranges %>
+            <li><%= date_range.start_date.strftime("%m/%d/%Y %I:%M:%S %p") %> - <%= date_range.end_date.strftime("%m/%d/%Y %I:%M:%S %p") %></li>
+          <% end %>
+        </ul>
+      </td>
+    </tr>
+    <tr>
+      <th>Slide type:</th>
+      <td><%= @slide.slide_type.name %></td>
+    </tr>
+    <tr>
+      <th>Slide Collection:</th>
+      <td><%= link_to(@slide.collection.name, collection_path(@slide.collection.id)) if @slide && @slide.collection %></td>
+    </tr>
+    <tr>
+      <th>Kiosks:</th>
+      <td>
+        <ul>
+          <% for kiosk in @slide.kiosks %>
+            <li><%= link_to kiosk.name, kiosk_show_path(id: kiosk.name) %></li>
+          <% end %>
+        </ul>
+      </td>
+    </tr>
+    <tr>
+      <th>Image:</th>
+      <td><%= image_tag @slide.image_url(:large).to_s %></td>
+    </tr>
+    <tr>
+      <th><strong>Image Sizes</strong><br></th>
+      <td>
+        <%= link_to "x-large", @slide.image_url(:xlarge).to_s %> | 
+        <%= link_to "large", @slide.image_url(:large).to_s %> | 
+        <%= link_to "medium", @slide.image_url(:medium).to_s %> | 
+        <%= link_to "original", @slide.image_url.to_s %>
+      </td>
+    </tr>
+  </tbody>
+</table>
