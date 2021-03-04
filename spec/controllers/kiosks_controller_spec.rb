@@ -109,26 +109,6 @@ RSpec.describe KiosksController, type: :controller do
     end
   end
 
-  describe 'GET #edit_multiple' do
-    let(:restart_kiosk_at) do
-      Time.now
-    end
-    let(:new_attributes) do
-      {
-        restart_at: restart_kiosk_at,
-        restart_at_active: true
-      }
-    end
-    let(:kiosks) do
-      [kiosk1, kiosk2]
-    end
-
-    it 'assigns the requested kiosks as @kiosks' do
-      get :edit_multiple, params: { kiosk_ids: kiosk_ids, kiosk: new_attributes }
-      expect(assigns(:kiosks)).to eq(kiosks)
-    end
-  end
-
   describe 'POST #create' do
     context 'with valid params' do
       it 'creates a new Kiosk' do
@@ -200,74 +180,6 @@ RSpec.describe KiosksController, type: :controller do
         kiosk = Kiosk.create! valid_attributes
         put :update, params: { id: kiosk.to_param, kiosk: invalid_attributes }
         expect(response).to render_template('edit')
-      end
-    end
-  end
-
-  describe 'PUT #update_multiple' do
-    context 'with valid params' do
-      let(:restart_kiosk_at) do
-        Date.tomorrow
-      end
-      let(:new_attributes) do
-        {
-          restart_at: restart_kiosk_at,
-          restart_at_active: true
-        }
-      end
-
-      it 'updates the requested kiosks' do
-        put :update_multiple, params: { kiosk_ids: kiosk_ids, kiosk: new_attributes }
-        kiosk1.reload
-        kiosk2.reload
-        # check kiosk1
-        expect(kiosk1.restart_at_active).to eq(true)
-        expect(Time.zone.local(kiosk1.restart_at.to_s)).to eq(Time.zone.local(restart_kiosk_at.to_s))
-        # check kiosk2
-        expect(kiosk2.restart_at_active).to eq(true)
-        expect(Time.zone.local(kiosk2.restart_at.to_s)).to eq(Time.zone.local(restart_kiosk_at.to_s))
-      end
-
-      it 'redirects to the kiosks page' do
-        put :update_multiple, params: { kiosk_ids: kiosk_ids, kiosk: new_attributes }
-        expect(response).to redirect_to(kiosks_url)
-      end
-    end
-
-    context 'with invalid params' do
-      let(:restart_kiosk_at) do
-        Date.yesterday
-      end
-      let(:new_attributes) do
-        {
-          restart_at: restart_kiosk_at,
-          restart_at_active: true
-        }
-      end
-
-      let(:kiosk1_valid_attributes) do
-        { name: 'kiosk1', kiosk_layout_id: test_layout.id }
-      end
-
-      let(:kiosk2_valid_attributes) do
-        { name: 'kiosk2', kiosk_layout_id: test_layout.id }
-      end
-
-      let(:kiosk1) do
-        Kiosk.create! kiosk1_valid_attributes
-      end
-
-      let(:kiosk2) do
-        Kiosk.create! kiosk2_valid_attributes
-      end
-
-      let(:kiosk_ids) do
-        [kiosk1.id, kiosk2.id]
-      end
-
-      it "re-renders the 'edit' template" do
-        put :update_multiple, params: { kiosk_ids: kiosk_ids, kiosk: new_attributes }
-        expect(response).to render_template('edit_multiple')
       end
     end
   end
