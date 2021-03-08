@@ -22,4 +22,5 @@
 //= require date_range_actions
 //= require slides
 //= require kiosk_restart_actions
+//= require moment
 //= require cable
