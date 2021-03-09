@@ -21,12 +21,24 @@ test:
   database: db/test.sqlite3
 
 staging:
-  <<: *default
-  database: db/staging.sqlite3
+  pool: 5
+  timeout: 5000
+  adapter: mysql2
+  username: <%= ENV['KIOSKS_DB_USERNAME'] %>
+  password: <%= ENV['KIOSKS_DB_PASSWORD'] %>
+  host: <%= ENV['KIOSKS_DB_HOST'] %>
+  port: <%= ENV['KIOSKS_DB_PORT'] %>
+  database: <%= ENV['KIOSKS_DB_NAME'] %>
 
 production:
-  <<: *default
-  database: db/production.sqlite3
+  pool: 5
+  timeout: 5000
+  adapter: mysql2
+  username: <%= ENV['KIOSKS_DB_USERNAME'] %>
+  password: <%= ENV['KIOSKS_DB_PASSWORD'] %>
+  host: <%= ENV['KIOSKS_DB_HOST'] %>
+  port: <%= ENV['KIOSKS_DB_PORT'] %>
+  database: <%= ENV['KIOSKS_DB_NAME'] %>
 
 # -----------------------------------------------------------------------
 # API RoomRes Connection
