@@ -11,7 +11,8 @@
       <th>Title</th>
       <th>Caption</th>
       <th>Collection</th>
-      <th>Display Dates</th>
+      <th>Start Display Date</th>
+      <th>End Display Date</th>
       <th>Kiosks</th>
       <th>Actions</th>
     </tr>
@@ -23,13 +24,8 @@
       <td><%= link_to slide.title, slide %></td>
       <td><%= slide.caption %></td>
       <td><%= link_to(slide.collection.name, collection_path(slide.collection.id)) if slide && slide.collection %></td>
-      <td>
-        <ul>
-          <% for date_range in slide.date_ranges %>
-            <li><%= date_range.start_date.strftime("%m/%d/%y") %> - <%= date_range.end_date.strftime("%m/%d/%y") %></li>
-          <% end %>
-        </ul>
-      </td>
+      <td><%= slide.date_ranges.last.start_date.strftime("%m/%d/%y") unless slide.date_ranges.empty? %></td>
+      <td><%= slide.date_ranges.last.end_date.strftime("%m/%d/%y") unless slide.date_ranges.empty? %></td>
       <td>
         <ul>
           <% for kiosk in slide.kiosks %>

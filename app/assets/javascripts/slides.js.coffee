@@ -1,5 +1,5 @@
+
 jQuery ->
-  $('#slides').dataTable()
   $(window).load ->
     $('#new_slide, form.edit_slide').on 'submit', (event) ->
       if this.checkValidity() == false

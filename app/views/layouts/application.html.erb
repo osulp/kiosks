@@ -15,6 +15,10 @@
     </div>
   </body>
   <%# Include the javascript at the bottom to ensure it loads last when the page is ready %>
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.1/jquery.min.js"></script>
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js"></script>
+  <script src="http://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
+  <script src="http://cdn.datatables.net/plug-ins/1.10.12/sorting/datetime-moment.js"></script>
   <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   <%= render partial: "layouts/ga" %>
 </html>
