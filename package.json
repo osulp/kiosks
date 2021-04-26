@@ -34,6 +34,7 @@
     "babel-plugin-transform-react-remove-prop-types": "^0.4.24",
     "fstream": "^1.0.12",
     "handlebars": "^4.1.2",
+    "is-svg": "4.2.2",
     "jquery": "^3.5.0",
     "jquery-ui": "^1.12.1",
     "js-yaml": "^3.13.1",
@@ -55,8 +56,10 @@
     "redux-devtools-dock-monitor": "^1.1.1",
     "redux-devtools-log-monitor": "^1.1.1",
     "redux-thunk": "^2.1.0",
+    "ssri": "6.0.2",
     "typescript": "*",
-    "webpack": "^4.29"
+    "webpack": "^4.29",
+    "y18n": "4.0.1"
   },
   "resolutions": {
     "**/js-yaml": "3.13.1"
