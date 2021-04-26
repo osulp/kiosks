@@ -135,7 +135,7 @@ class CollectionsController < ApplicationController
         :slide_type_id,
         :image,
         :_destroy,
-        date_ranges_attributes: %i[id start_date end_date slide_id _destroy]
+        { date_ranges_attributes: %i[id start_date end_date slide_id _destroy] }
       ]
     )
   end

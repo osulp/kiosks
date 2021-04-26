@@ -4,9 +4,7 @@
 class Slide < ApplicationRecord
   after_save :touch_kiosks
   include Rails.application.routes.url_helpers
-  attr_accessor :image
-  attr_accessor :video
-  attr_accessor :subtitles
+  attr_accessor :image, :video, :subtitles
   belongs_to :slide_type
 
   has_many :kiosk_slides, dependent: :destroy
