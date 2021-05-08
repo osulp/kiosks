@@ -93,7 +93,7 @@
     "jest": "^24.3.1",
     "jest-haste-map": "^24.0.0",
     "jest-resolve": "^24.1.0",
-    "lodash": "^4.17.19",
+    "lodash": "^4.17.21",
     "macaddress": "^0.2.9",
     "marked": "^0.3.9",
     "merge": "^1.2.1",
