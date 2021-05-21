@@ -42,6 +42,7 @@
     "moment": "^2.19.3",
     "node-fetch": "2.6.1",
     "node-notifier": "8.0.1",
+    "postcss": "7.0.35",
     "prop-types": "^15.7.2",
     "rc-calendar": "^9.10.10",
     "react": "^16.8.6",
