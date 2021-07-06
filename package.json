@@ -32,7 +32,9 @@
   "dependencies": {
     "@rails/webpacker": "^4.0",
     "babel-plugin-transform-react-remove-prop-types": "^0.4.24",
+    "braces": "2.3.1",
     "fstream": "^1.0.12",
+    "glob-parent": "5.1.2",
     "handlebars": "^4.7.7",
     "is-svg": "4.2.2",
     "jquery": "^3.5.0",
@@ -58,6 +60,7 @@
     "redux-devtools-log-monitor": "^1.1.1",
     "redux-thunk": "^2.1.0",
     "ssri": "6.0.2",
+    "trim-newlines": "3.0.1",
     "typescript": "*",
     "webpack": "^4.29",
     "y18n": "4.0.1"
