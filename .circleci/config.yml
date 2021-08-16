@@ -113,6 +113,9 @@ jobs:
           name: Wait for DB
           command: dockerize -wait tcp://localhost:3306 -timeout 1m
       - run:
+          name: Set example application config
+          command: cp config/application_config.example.yml.erb config/application_config.yml.erb
+      - run:
           name: Update bundler srsly again
           command: gem install --force bundler
       - run:
