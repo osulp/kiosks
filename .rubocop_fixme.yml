@@ -67,3 +67,18 @@ RSpec/MultipleExpectations:
     - spec/features/admin_management_spec.rb
     - spec/models/api/v1/classroom_calendar_spec.rb
     - spec/models/api/v1/classroom_event_spec.rb
+
+Naming/VariableNumber:
+  Exclude:
+    - 'lib/tasks/api/v1/test_drupal_database.rake'
+
+RSpec/MultipleMemoizedHelpers:
+  Exclude:
+    - 'spec/controllers/collections_controller_spec.rb'
+    - 'spec/controllers/date_ranges_controller_spec.rb'
+    - 'spec/controllers/kiosk_controller_spec.rb'
+    - 'spec/controllers/kiosks_controller_spec.rb'
+    - 'spec/controllers/slides_controller_spec.rb'
+    - 'spec/models/date_range_spec.rb'
+    - 'spec/models/kiosk_slide_spec.rb'
+    - 'spec/models/slide_spec.rb'

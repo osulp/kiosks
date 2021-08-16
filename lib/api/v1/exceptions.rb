@@ -5,6 +5,7 @@ module Api
     class Exceptions
       class BadRequest < RuntimeError
       end
+
       class RecordNotFound < RuntimeError
       end
     end
