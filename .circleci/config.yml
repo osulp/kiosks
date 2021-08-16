@@ -81,7 +81,7 @@ jobs:
           KIOSKS_ROOMRES_PASSWORD: 'password'
           KIOSKS_ROOMRES_HOST: 'localhost'
           #KIOSKS_REDIS_URL:
-          #KIOSKS_SECRET_KEY_BASE:
+          KIOSKS_SECRET_KEY_BASE: 'ae6bb20634af48a5f24dd5a379a192be9d6ab7f9bfd38306e721b603efa5bd4df716240ce5b2be77b910d71ff41b0598733aeddc68d612677a250b8c96a7fc25'
           API_URI: 'http://uri.to.example-api'
           API_ROUTE: '/example-route.json'
           CAS_BASE_URL: 'https://example/cas'
@@ -108,7 +108,7 @@ jobs:
           command: |
             sudo apt-get update -qq
             sudo apt-get upgrade -qq
-            sudo apt-get install -y -f software-properties-common build-essential default-libmysqlclient-dev nodejs make apt-utils
+            sudo apt-get install -y -f software-properties-common build-essential default-libmysqlclient-dev nodejs make apt-utils yarn
       - run:
           name: Wait for DB
           command: dockerize -wait tcp://localhost:3306 -timeout 1m
@@ -126,6 +126,12 @@ jobs:
       - run:
           name: Create and load MySQL data
           command: bundle exec rake db:create db:schema:load --trace
+      - run:
+          name: Yarn
+          command: |
+            yarn add node-sass
+            yarn install --force
+            yarn test -u spec/javascripts
       - run:
           name: Run Tests
           command: |
