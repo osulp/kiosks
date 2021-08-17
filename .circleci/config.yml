@@ -1,34 +1,137 @@
-version: 2
+version: 2.1
+orbs:
+  docker: circleci/docker@1.5.0
 jobs:
-  build:
+  checkout_code:
     docker:
-      - image: circleci/ruby:2.5-node
-      - image: buildpack-deps:trusty
-        environment:
-          RAILS_ENV: test
+      - image: circleci/ruby:2.5
     working_directory: ~/app
     steps:
-      - checkout
       - restore_cache:
-          key: gemfile-{{ checksum "Gemfile.lock" }}
-      - run:
-          name: Setup configs
-          command: |
-            cp config/application_config.example.yml.erb config/application_config.yml.erb
-            cp config/local_env.example.yml config/local_env.yml
-      - run: yarn add node-sass
-      - run: yarn install --force
+          name: Restore code from cache
+          keys:
+            - v1-source-{{ .Branch }}-{{ .Revision }}
+      - checkout
       - save_cache:
-          key: yarn-cache-{{ .Branch }}-{{ checksum "yarn.lock" }}
-          paths: node_modules
-      - run: bundle check --path=vendor/bundle || bundle install --path=vendor/bundle --jobs=4 --retry=3
-      - save_cache:
-          key: gemfile-{{ checksum "Gemfile.lock" }}
+          name: Save code cache
+          key: v1-source-{{ .Branch }}-{{ .Revision }}
           paths:
-            - vendor/bundle
-      - run: bundle exec rubocop
-      - run: bundle exec rake db:create db:schema:load --trace
-      - run: yarn test -u spec/javascripts
+            - '.git'
+      - persist_to_workspace:
+          root: ~/
+          paths:
+            - app/*
+            - app/**/*
+  bundle:
+    docker:
+      - image: circleci/ruby:2.5-stretch-node-browsers
+    environment:
+      BUNDLE_PATH: vendor/bundle
+    working_directory: ~/app
+    steps:
+      - attach_workspace:
+          at: ~/
+      - run:
+          name: Update Debian Packages for Building
+          command: |
+            sudo apt-get install -y software-properties-common build-essential make apt-utils
+      - restore_cache:
+          name: Restore bundle from cache
+          keys:
+            - v2-bundle-{{ checksum "Gemfile.lock" }}
+      - run:
+          name: Update bundler
+          command: gem install bundler -v 2.1.4
+      - run:
+          name: Install dependencies
+          command: bundle check --path=vendor/bundle || bundle install --path=vendor/bundle --jobs=4 --retry=3 --binstubs
+      - save_cache:
+          name: Save bundle cache
+          key: v2-bundle-{{ checksum "Gemfile.lock" }}
+          paths:
+            - ~/app/vendor/bundle
+      - persist_to_workspace:
+          root: ~/
+          paths:
+            - app/*
+            - app/**/*
+  lint:
+    docker:
+      - image: circleci/ruby:2.5-stretch-node-browsers
+    environment:
+      BUNDLE_PATH: vendor/bundle
+    working_directory: ~/app
+    steps:
+      - attach_workspace:
+          at: ~/
+      - run:
+          name: Update bundler
+          command: gem install bundler -v 2.1.4 && bundle install --binstubs
+      - run:
+          name: Run Rubocop
+          command: bundle exec rubocop
+  test:
+    docker:
+      - image: circleci/ruby:2.5-stretch-node-browsers
+        environment:
+          KIOSKS_DB_USERNAME: 'username'
+          KIOSKS_DB_PASSWORD: 'password'
+          KIOSKS_DB_HOST: 'localhost'
+          KIOSKS_ROOMRES_USERNAME: 'username'
+          KIOSKS_ROOMRES_PASSWORD: 'password'
+          KIOSKS_ROOMRES_HOST: 'localhost'
+          #KIOSKS_REDIS_URL:
+          KIOSKS_SECRET_KEY_BASE: 'ae6bb20634af48a5f24dd5a379a192be9d6ab7f9bfd38306e721b603efa5bd4df716240ce5b2be77b910d71ff41b0598733aeddc68d612677a250b8c96a7fc25'
+          API_URI: 'http://uri.to.example-api'
+          API_ROUTE: '/example-route.json'
+          CAS_BASE_URL: 'https://example/cas'
+          CAS_VALIDATE_URL: 'https://example/cas/samlValidate'
+          HONEYCOMB_DATASET: 'kiosks-test'
+          HONEYCOMB_DEBUG: 'true'
+          HONEYCOMB_WRITEKEY: 'buzzzzzzzzzzzzzzzz'
+          HONEYCOMB_SERVICE: 'kiosks-test'
+          MAPS_BASE_URL: 'http://example/maps'
+          PRIMO_API_URI: 'http://api.example.com'
+          RAILS_ENV: 'test'
+      - image: circleci/mysql:5.7.22
+        environment:
+          MYSQL_ROOT_PASSWORD: 'monkeys'
+          MYSQL_USER: 'username'
+          MYSQL_PASSWORD: 'password'
+          MYSQL_DATABASE: 'kiosks_test'
+    working_directory: ~/app
+    steps:
+      - attach_workspace:
+          at: ~/
+      - run:
+          name: Update Debian Packages
+          command: |
+            sudo apt-get update -qq
+            sudo apt-get upgrade -qq
+            sudo apt-get install -y -f software-properties-common build-essential default-libmysqlclient-dev nodejs make apt-utils yarn
+      - run:
+          name: Wait for DB
+          command: dockerize -wait tcp://localhost:3306 -timeout 1m
+      - run:
+          name: Set example application config
+          command: cp config/application_config.example.yml.erb config/application_config.yml.erb
+      - run:
+          name: Update bundler srsly again
+          command: gem install --force bundler
+      - run:
+          name: Bundle update srsly again
+          command: bundle check --without production staging --path=vendor/bundle || bundle install --without production staging --path=vendor/bundle --jobs=4 --retry=3 --binstubs
+      - run:
+          command: bundle check --without production staging --path=vendor/bundle || bundle install --without production staging --path=vendor/bundle --jobs=4 --retry=3 --binstubs
+      - run:
+          name: Create and load MySQL data
+          command: bundle exec rake db:create db:schema:load --trace
+      - run:
+          name: Yarn
+          command: |
+            yarn add node-sass
+            yarn install --force
+            yarn test -u spec/javascripts
       - run:
           name: Run Tests
           command: |
@@ -37,8 +140,70 @@ jobs:
                               --out /tmp/test-results/rspec.xml \
                               --format progress \
                               $(circleci tests glob "spec/**/*_spec.rb" | circleci tests split --split-by=timings)
-      - store_artifacts:
-          path: coverage
-          destination: coverage
       - store_test_results:
-          path: /tmp/circle-junit
+          path: /tmp/test-results
+      - store_artifacts:
+          path: /tmp/test-results
+          destination: test-results
+      - store_artifacts:
+          path: ./tmp/screenshots
+      - store_artifacts:
+          path: ./tmp/capybara
+  build_and_push_beavernetes:
+    parameters:
+      repo:
+        type: string
+        default: ''
+      environment:
+        type: string
+        default: 'production'
+    executor:
+      name: 'docker/docker'
+    environment:
+      DOCKER_LOGIN: admin
+      DOCKER_PASSWORD: admin
+    working_directory: ~/app
+    steps:
+      - attach_workspace:
+          at: ~/
+      - run:
+          name: Generate deployed version
+          command: |
+            export GIT_SHORT_HASH=$(git rev-parse --short HEAD)
+            export DATETIME=$(date "+%Y%m%d%H%M%S")
+            echo export TAG="$DATETIME-$GIT_SHORT_HASH" >> $BASH_ENV
+            echo export DEPLOYED_VERSION="$DATETIME-$GIT_SHORT_HASH" >> $BASH_ENV
+      - setup_remote_docker
+      - docker/check:
+          registry: registry.library.oregonstate.edu
+      - docker/build:
+          registry: registry.library.oregonstate.edu
+          image: kiosks_web
+          tag: $TAG
+          extra_build_args: --build-arg RAILS_ENV=<< parameters.environment >> --build-arg DEPLOYED_VERSION=$DEPLOYED_VERSION
+      - docker/push:
+          registry: registry.library.oregonstate.edu
+          image: kiosks_web
+          tag: $TAG
+workflows:
+  ci:
+    jobs:
+      - checkout_code
+      - bundle:
+          requires:
+            - checkout_code
+      - lint:
+          requires:
+            - bundle
+      - test:
+          requires:
+#            - bundle
+            - lint
+      - build_and_push_beavernetes:
+          name: build_and_push_beavernetes
+          requires:
+            - test
+          filters:
+            branches:
+              only: master
+          repo: kiosks_web
