@@ -60,6 +60,7 @@
     "redux-devtools-log-monitor": "^1.1.1",
     "redux-thunk": "^2.1.0",
     "ssri": "6.0.2",
+    "tar": "6.1.9",
     "trim-newlines": "3.0.1",
     "typescript": "*",
     "webpack": "^4.29",
