@@ -147,8 +147,39 @@ const Kiosk = props => {
   }
 
   return (
-    <div id="scarc_coverflow_kiosk">
+    <div id="scarc_coverflow_kiosk" style={{ backgroundColor: "#006A8E" }}>
       <ConnectedModalWindow />
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "row",
+          justifyContent: "center",
+          alignItems: "center",
+          alignContent: "center"
+        }}
+      >
+        <div className="kiosk-header" style={{ textAlign: "right" }}>
+          <h2
+            style={{
+              margin: 0,
+              color: "#eee",
+              fontWeight: "lighter",
+              fontSize: "5.5rem"
+            }}
+          >
+            Special Collections and Archives Research Center
+          </h2>
+          <h2 style={{ margin: 0, color: "#eee", fontSize: "8rem" }}>
+            Currated Collections
+          </h2>
+        </div>
+        <div style={{ flexBasis: "25%" }}>
+          <img
+            src="/images/library1.svg"
+            style={{ width: "100%", boxShadow: "none" }}
+          />
+        </div>
+      </div>
       <div className="component">
         <Coverflow
           displayQuantityOfSide={2}
@@ -189,22 +220,6 @@ const Kiosk = props => {
             )
           })}
         </Coverflow>
-      </div>
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "row",
-          justifyContent: "center",
-          alignItems: "center",
-          alignContent: "center"
-        }}
-      >
-        <div className="kiosk-header" style={{ textAlign: "right" }}>
-
-          <NavButton aria-label="Back" onClick={() => { prevSlide() }}>Back</NavButton>
-          <NavSpacer width="200px" />
-          <NavButton aria-label="Next" onClick={() => { nextSlide() }}>Next</NavButton>
-        </div>
       </div>
     </div>
   )
