@@ -16,6 +16,7 @@ const MediaGrid = props => {
         </div>
         <div className="col-md-12 col-lg-12 menu-buttons">
           <div className="grid-menu">
+          <a className='grid-menu-link' href="http://test.library.oregonstate.edu:3000/kiosk/scarc">OSU History</a>
             {props.primary_slides.map((slide, i) => {
               return (
                 <button 
@@ -23,12 +24,14 @@ const MediaGrid = props => {
                   data-index={i} 
                   onClick={() => { props.setCollection(i) }} 
                   type="button" 
-                  className={`${props.selectedButtonClassName(i)} btn btn-default`}
+                  className={'grid-menu-link'}
                 >
                   {slide.collection.name}
                 </button>
               )
             })}
+            <a className='grid-menu-link' href="http://test.library.oregonstate.edu:3000/kiosk/scarc">SCARC Favorites</a>
+            <a className='grid-menu-link' href="http://test.library.oregonstate.edu:3000/kiosk/scarc">BACK</a>
           </div>
         </div>
       </div>
