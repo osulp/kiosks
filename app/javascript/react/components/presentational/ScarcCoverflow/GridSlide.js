@@ -101,6 +101,8 @@ const GridSlide = props => {
         selectedClassName={selectedClassName}
         setCollection={setCollection}
         primary_slides={props.primary_slides}
+        set_modal_visibility={props.setModalVisibility}
+        set_modal_root_component={props.setModalRootComponent}
       />
     </div>
   )
@@ -108,6 +110,8 @@ const GridSlide = props => {
 
 GridSlide.propTypes = {
   collection: PropTypes.object.isRequired,
+  url: PropTypes.string.isRequired,
+  restart_kiosk_timeout: PropTypes.func.isRequired,
   primary_slides: PropTypes.array.isRequired,
   setModalVisibility: PropTypes.func.isRequired,
   setModalRootComponent: PropTypes.func.isRequired,
