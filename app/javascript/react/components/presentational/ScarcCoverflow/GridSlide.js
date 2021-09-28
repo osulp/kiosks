@@ -101,6 +101,8 @@ const GridSlide = props => {
         selectedClassName={selectedClassName}
         setCollection={setCollection}
         primary_slides={props.primary_slides}
+        set_modal_visibility={props.setModalVisibility}
+        set_modal_root_component={props.setModalRootComponent}
       />
     </div>
   )

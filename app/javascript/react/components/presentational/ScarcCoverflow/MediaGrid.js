@@ -2,7 +2,10 @@ import React, { Component } from "react"
 import PropTypes from "prop-types"
 
 const MediaGrid = props => {
-
+  const backClicked = () => {
+    props.set_modal_visibility(false)
+    props.set_modal_root_component(undefined)
+  }
     // load all grids available for display using a tabbed-panel structure
     return (
       <div id="grid_tabbed_panel" className="panel panel-default tabbed-panel col-md-12 col-lg-12">
@@ -31,7 +34,9 @@ const MediaGrid = props => {
               )
             })}
             <a className='grid-menu-link' href="http://test.library.oregonstate.edu:3000/kiosk/scarc">SCARC Favorites</a>
-            <a className='grid-menu-link' href="http://test.library.oregonstate.edu:3000/kiosk/scarc">BACK</a>
+            <span className="back-button" onClick={backClicked}>
+              BACK
+            </span> 
           </div>
         </div>
       </div>
@@ -40,6 +45,8 @@ const MediaGrid = props => {
 
 MediaGrid.propTypes = {
   primary_slides: PropTypes.array.isRequired,
+  set_modal_visibility: PropTypes.func.isRequired,
+  set_modal_root_component: PropTypes.func.isRequired,
   selectedButtonClassName: PropTypes.func.isRequired,
   slideClicked: PropTypes.func.isRequired,
   onLoadAllImages: PropTypes.func.isRequired,
