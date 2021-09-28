@@ -118,12 +118,12 @@ const MediaModal = props => {
               >
               </div>
             </div>
-          }
+          }          
+          <span className="back-button" onClick={backClicked}>
+            BACK
+          </span>
         </div>
       </div>
-      <span className="back-button" onClick={backClicked}>
-        BACK
-      </span>
     </div>
   )
 }

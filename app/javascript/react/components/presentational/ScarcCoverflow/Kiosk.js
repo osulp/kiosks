@@ -170,7 +170,7 @@ const Kiosk = props => {
             Special Collections and Archives Research Center
           </h2>
           <h2 style={{ margin: 0, color: "#eee", fontSize: "8rem" }}>
-            Currated Collections
+            Curated Collections
           </h2>
         </div>
         <div style={{ flexBasis: "25%" }}>
