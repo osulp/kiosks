@@ -4,9 +4,10 @@
 
 #scarc_coverflow_kiosk {
   background-color: $scarc_blue;
-
+  overflow: hidden;
+  
   .component button {
-    background-color: #1d1d1d;
+    background-color: #dad5d5;
     border-color: #9c9c9c;
     color: #9c9c9c;
     margin: 0 15px;
@@ -30,7 +31,7 @@
     height: 25%;
   }
   > .component {
-    height: 90%;
+    height: 100%;
     width: 100%;
     background-color: #222;
     > div {
@@ -51,11 +52,13 @@
 
   .back-button {
     padding: 15px;
-    border: solid 1px #fff;
+    text-decoration: underline;
     font-size: 2rem;
     position: absolute;
-    right: 60px;
-    bottom: 60px;
+    right: 5px;
+    bottom: 5px;
+    padding: 2px;
+
     &:hover {
       background-color: #eee;
       color: #0d5257;
