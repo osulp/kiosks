@@ -1,9 +1,7 @@
-import React, { Component, useEffect, useState } from "react"
+import React, { Component } from "react"
 import PropTypes from "prop-types"
 
 const MediaGrid = props => {
-  const [hideTimeout, setHideTimeout] = useState(undefined)
-
   const backClicked = () => {
     props.set_modal_visibility(false)
     props.set_modal_root_component(undefined)
