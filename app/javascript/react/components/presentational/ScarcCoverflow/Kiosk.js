@@ -183,7 +183,7 @@ const Kiosk = props => {
       <div className="component">
         <Coverflow
           displayQuantityOfSide={2}
-          navigation={false}
+          navigation={true}
           infiniteScroll={true}
           enableScroll={true}
           clickable={true}
