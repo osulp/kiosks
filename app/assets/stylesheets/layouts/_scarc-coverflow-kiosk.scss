@@ -5,9 +5,8 @@
 #scarc_coverflow_kiosk {
   background-color: $scarc_blue;
   overflow: hidden;
-  
   .component button {
-    background-color: #dad5d5;
+    background-color: #1d1d1d;
     border-color: #9c9c9c;
     color: #9c9c9c;
     margin: 0 15px;
@@ -16,7 +15,7 @@
       background-color: #eee;
       color: #1d1d1d;
     }
-  }
+  } 
 
   *:focus {
     outline: none;

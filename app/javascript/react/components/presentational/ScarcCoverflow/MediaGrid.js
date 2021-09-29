@@ -34,7 +34,7 @@ const MediaGrid = props => {
               )
             })}
             <a className='grid-menu-link' href="http://test.library.oregonstate.edu:3000/kiosk/scarc">SCARC Favorites</a>
-            <span className="back-button" onClick={backClicked}>
+            <span className="grid-menu-link" onClick={backClicked}>
               BACK
             </span> 
           </div>
