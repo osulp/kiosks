@@ -13,7 +13,7 @@ RUN apk --no-cache update && apk --no-cache upgrade && \
   apk add --no-cache alpine-sdk nodejs unzip vim yarn \
   git sqlite sqlite-dev mysql mysql-client mysql-dev \
   curl build-base tzdata zip shared-mime-info imagemagick graphicsmagick \
-  bash bash-completion 
+  imagemagick-dev graphicsmagick-dev bash bash-completion 
 
 # Set the timezone to America/Los_Angeles (Pacific) then get rid of tzdata
 RUN cp -f /usr/share/zoneinfo/America/Los_Angeles /etc/localtime && \
