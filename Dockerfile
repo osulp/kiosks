@@ -12,8 +12,8 @@ ENV LC_ALL C.UTF-8
 RUN apk --no-cache update && apk --no-cache upgrade && \
   apk add --no-cache alpine-sdk nodejs unzip vim yarn \
   git sqlite sqlite-dev mysql mysql-client mysql-dev \
-  curl build-base tzdata zip shared-mime-info imagemagick graphicsmagick \
-  imagemagick-dev graphicsmagick-dev bash bash-completion 
+  curl build-base tzdata zip shared-mime-info imagemagick6 graphicsmagick \
+  imagemagick6-dev graphicsmagick-dev bash bash-completion 
 
 # Set the timezone to America/Los_Angeles (Pacific) then get rid of tzdata
 RUN cp -f /usr/share/zoneinfo/America/Los_Angeles /etc/localtime && \
@@ -27,7 +27,7 @@ WORKDIR /data
 
 ADD Gemfile /data/Gemfile
 ADD Gemfile.lock /data/Gemfile.lock
-RUN bundle install -j 4
+RUN bundle install -j $(nproc)
 
 ADD package.json /data/package.json
 ADD yarn.lock /data/yarn.lock
