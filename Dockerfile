@@ -12,7 +12,7 @@ ENV LC_ALL C.UTF-8
 RUN apk --no-cache update && apk --no-cache upgrade && \
   apk add --no-cache alpine-sdk nodejs unzip vim yarn \
   git sqlite sqlite-dev mysql mysql-client mysql-dev \
-  curl build-base tzdata zip \
+  curl build-base tzdata zip shared-mime-info \
   bash bash-completion 
 
 # Set the timezone to America/Los_Angeles (Pacific) then get rid of tzdata
@@ -27,7 +27,7 @@ WORKDIR /data
 
 ADD Gemfile /data/Gemfile
 ADD Gemfile.lock /data/Gemfile.lock
-RUN bundle install -j $(nproc)
+RUN bundle install -j 4
 
 ADD package.json /data/package.json
 ADD yarn.lock /data/yarn.lock
