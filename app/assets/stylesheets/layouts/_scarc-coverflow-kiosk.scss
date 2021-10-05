@@ -119,7 +119,9 @@
     background: transparent;
     color: #646363;
     border: none;
-    font-size: 2.8em;
+    font-size: 2.3em;
+    display: inline-flex; 
+    align-items: flex-start; 
   }
 
   .grid-menu button.btn-primary {
@@ -131,6 +133,8 @@
     color:rgba(255, 255, 255, 0.3);
     font-size: 2.3em;
     padding: 1em;
+    display: inline-flex; 
+    align-items: flex-start;
   }
 
   .grid-menu-link:hover{
@@ -140,6 +144,9 @@
 
   .grid-item {
     max-width: 240px;
+    color: pink;
+    display: inline-flex; /* keep the inline nature of buttons */
+    align-items: flex-start; /* this is default */
   }
 
   .grid-item img {
