@@ -16,6 +16,7 @@ RUN apk --no-cache update && apk --no-cache upgrade && \
   imagemagick6-dev graphicsmagick-dev bash bash-completion autoconf libtool \
   automake python2
 
+
 # Set the timezone to America/Los_Angeles (Pacific) then get rid of tzdata
 RUN cp -f /usr/share/zoneinfo/America/Los_Angeles /etc/localtime && \
   echo 'America/Los_Angeles' > /etc/timezone
