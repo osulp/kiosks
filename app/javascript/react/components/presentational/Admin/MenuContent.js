@@ -37,7 +37,7 @@ const MapContent = props => {
 }
 const LibraryDirectoryContent = props => {
   return (
-    <iframe src="https://library.oregonstate.edu/admin-kiosk-directory" height="100%" width="100%"></iframe>
+    <iframe src="https://library.oregonstate.edu/staff/directory" height="100%" width="100%"></iframe>
   )
 }
 
