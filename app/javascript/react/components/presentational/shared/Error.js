@@ -6,9 +6,6 @@ class Error extends Component {
   render() {
     return (
       <div id="error">
-        {this.props.errors.map((e, i, a) => {
-          return <span key={`error.${i}`}>{e.message}</span>
-        })}
       </div>
     )
   }

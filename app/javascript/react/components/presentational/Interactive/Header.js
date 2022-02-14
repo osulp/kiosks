@@ -16,7 +16,6 @@ class Header extends Component {
    */
   _hoursToday() {
     if (
-      this.props.todays_hours.error ||
       Object.values(this.props.todays_hours).length == 0
     ) {
       return ""

@@ -1,4 +1,4 @@
-FROM ruby:2.5.1-alpine
+FROM ruby:2.5-alpine
 
 # add nodejs and yarn dependencies for the frontend
 #RUN curl -sL https://deb.nodesource.com/setup_10.x | bash - && \
@@ -13,7 +13,9 @@ RUN apk --no-cache update && apk --no-cache upgrade && \
   apk add --no-cache alpine-sdk nodejs-current unzip vim yarn \
   git sqlite sqlite-dev mysql mysql-client mysql-dev \
   curl build-base tzdata zip shared-mime-info imagemagick6 graphicsmagick \
-  imagemagick6-dev graphicsmagick-dev bash bash-completion 
+  imagemagick6-dev graphicsmagick-dev bash bash-completion autoconf libtool \
+  automake python2
+
 
 # Set the timezone to America/Los_Angeles (Pacific) then get rid of tzdata
 RUN cp -f /usr/share/zoneinfo/America/Los_Angeles /etc/localtime && \
@@ -31,7 +33,7 @@ RUN bundle install -j $(nproc)
 
 ADD package.json /data/package.json
 ADD yarn.lock /data/yarn.lock
-RUN yarn upgrade && yarn
+RUN yarn install --ignore-engines
 
 ADD . /data
 RUN rm -f /data/*.sh /data/docker-compose.* && \
