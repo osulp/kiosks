@@ -21,7 +21,7 @@ class Header extends Component {
       return ""
     } else {
       let today = Object.values(this.props.todays_hours)[0]
-      let formatted_hours = today.formatted_hours_plain_text.trim()
+      let formatted_hours = today.formatted_hours_plain_text
 
       return `${formatted_hours}`
     }
