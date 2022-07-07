@@ -100,7 +100,7 @@
     "jest-resolve": "^24.1.0",
     "lodash": "^4.17.21",
     "macaddress": "^0.2.9",
-    "marked": "^0.3.9",
+    "marked": "^4.0.10",
     "merge": "^2.1.1",
     "nock": "^9.0.2",
     "node-sass": "^4.11.0",
