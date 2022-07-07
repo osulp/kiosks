@@ -38,7 +38,7 @@
     "handlebars": "^4.7.7",
     "is-svg": "4.2.2",
     "jquery": "^3.5.0",
-    "jquery-ui": "^1.12.1",
+    "jquery-ui": "^1.13.0",
     "js-yaml": "^3.13.1",
     "masonry-layout": "^4.2.2",
     "moment": "^2.19.3",
