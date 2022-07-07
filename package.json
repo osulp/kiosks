@@ -42,7 +42,7 @@
     "js-yaml": "^3.13.1",
     "masonry-layout": "^4.2.2",
     "moment": "^2.19.3",
-    "node-fetch": "2.6.1",
+    "node-fetch": "2.6.7",
     "node-notifier": "8.0.1",
     "postcss": "8.2.10",
     "prop-types": "^15.7.2",
