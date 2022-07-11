@@ -113,6 +113,6 @@
     "sshpk": "^1.16.1",
     "style-loader": "^0.13.1",
     "tough-cookie": "^2.3.3",
-    "webpack-dev-server": "^3.1"
+    "webpack-dev-server": "3.11.0"
   }
 }

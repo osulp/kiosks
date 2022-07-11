@@ -14,7 +14,7 @@ RUN apk --no-cache update && apk --no-cache upgrade && \
   git sqlite sqlite-dev mysql mysql-client mysql-dev \
   curl build-base tzdata zip shared-mime-info imagemagick6 graphicsmagick \
   imagemagick6-dev graphicsmagick-dev bash bash-completion autoconf libtool \
-  automake python2
+  automake python2 libpng-dev
 
 
 # Set the timezone to America/Los_Angeles (Pacific) then get rid of tzdata
