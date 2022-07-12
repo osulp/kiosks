@@ -36,7 +36,7 @@
     "braces": "2.3.1",
     "fstream": "^1.0.12",
     "glob-parent": "5.1.2",
-    "got": "^8.3.1",
+    "got": "^11.8.5",
     "handlebars": "^4.7.7",
     "is-svg": "4.3.0",
     "jquery": "^3.5.0",
