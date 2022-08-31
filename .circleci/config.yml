@@ -4,7 +4,7 @@ orbs:
 jobs:
   checkout_code:
     docker:
-      - image: circleci/ruby:2.5
+      - image: circleci/ruby:2.6
     working_directory: ~/app
     steps:
       - restore_cache:
@@ -24,7 +24,7 @@ jobs:
             - app/**/*
   bundle:
     docker:
-      - image: circleci/ruby:2.5-stretch-node-browsers
+      - image: circleci/ruby:2.6-stretch-node-browsers
     environment:
       BUNDLE_PATH: vendor/bundle
     working_directory: ~/app
@@ -34,7 +34,7 @@ jobs:
       - run:
           name: Update Debian Packages for Building
           command: |
-            sudo apt-get install -y software-properties-common build-essential make apt-utils
+            sudo apt-get update && sudo apt-get install -y software-properties-common build-essential make apt-utils
       - restore_cache:
           name: Restore bundle from cache
           keys:
@@ -57,7 +57,7 @@ jobs:
             - app/**/*
   lint:
     docker:
-      - image: circleci/ruby:2.5-stretch-node-browsers
+      - image: circleci/ruby:2.6-stretch-node-browsers
     environment:
       BUNDLE_PATH: vendor/bundle
     working_directory: ~/app
