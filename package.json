@@ -30,7 +30,7 @@
   "author": "Josh Gum <josh.gum@oregonstate.edu>",
   "license": "MIT",
   "dependencies": {
-    "@rails/webpacker": "^4.0",
+    "@rails/webpacker": "5.4.3",
     "ansi-html": "0.0.8",
     "babel-plugin-transform-react-remove-prop-types": "^0.4.24",
     "braces": "2.3.1",
