@@ -72,7 +72,7 @@ jobs:
           command: bundle exec rubocop
   test:
     docker:
-      - image: circleci/ruby:2.5-stretch-node-browsers
+      - image: circleci/ruby:2.6-stretch-node-browsers
         environment:
           KIOSKS_DB_USERNAME: 'username'
           KIOSKS_DB_PASSWORD: 'password'
