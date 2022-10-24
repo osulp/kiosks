@@ -4,7 +4,7 @@ source 'https://rubygems.org'
 
 gem "activejob", ">= 5.1.6.1"
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 5.2.4.6'
+gem 'rails', '~> 5.2.8.1'
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3', '~> 1.3.6'
 # Use Puma as the app server
@@ -54,7 +54,7 @@ gem 'devise_cas_authenticatable'
 gem 'rubycas-client', git: 'https://github.com/osulp/rubycas-client'
 gem 'rubycas-client-rails', git: 'https://github.com/osulp/rubycas-client-rails'
 
-gem 'mysql2', '~> 0.4.10'
+gem 'mysql2', '0.5.4'
 gem 'nokogiri'
 
 gem 'faraday'
