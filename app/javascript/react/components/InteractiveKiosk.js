@@ -15,8 +15,6 @@ const mapStateToProps = state => {
     map_default_floor_number: state.kiosk.map_default_floor_number,
     kiosk_name: state.kiosk.name,
     kiosk_id: state.kiosk.kid,
-    hours: state.touch.hours,
-    todays_hours: state.touch.todays_hours,
     url: state.kiosk.url,
     google_analytics: state.kiosk.google_analytics,
     api: state.kiosk.api,
