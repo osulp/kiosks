@@ -22,8 +22,9 @@ RUN apk --no-cache update && apk --no-cache upgrade && \
 # Set the timezone to America/Los_Angeles (Pacific) then get rid of tzdata
 RUN cp -f /usr/share/zoneinfo/America/Los_Angeles /etc/localtime && \
   echo 'America/Los_Angeles' > /etc/timezone
-RUN ls -ld /usr/local/bundle && \
-  find /usr/local/bundle -exec ls -l {} \;
+
+RUN rm -rf /usr/local/bundle && mkdir -p /usr/local/bundle && chmod 755 /usr/local/bundle
+
 RUN gem install bundler
 
 COPY kiosks-entrypoint.sh /kiosks-entrypoint.sh
