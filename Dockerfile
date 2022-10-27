@@ -24,6 +24,8 @@ RUN cp -f /usr/share/zoneinfo/America/Los_Angeles /etc/localtime && \
   echo 'America/Los_Angeles' > /etc/timezone
 
 RUN gem install bundler
+RUN ls -ld /usr/local/bundle && \
+  find /usr/local/bundle -exec ls -l {} \;
 COPY kiosks-entrypoint.sh /kiosks-entrypoint.sh
 
 RUN mkdir /data /kiosks && chmod 755 /data /kiosks /kiosks-entrypoint.sh
