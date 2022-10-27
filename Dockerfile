@@ -9,6 +9,8 @@ FROM ruby:2.6-alpine
 ENV LANG C.UTF-8
 ENV LC_ALL C.UTF-8
 
+USER root
+
 RUN apk --no-cache update && apk --no-cache upgrade && \
   apk add --no-cache alpine-sdk nodejs-current unzip vim yarn \
   git sqlite sqlite-dev mysql mysql-client mysql-dev \
