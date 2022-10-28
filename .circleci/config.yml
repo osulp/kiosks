@@ -117,7 +117,7 @@ jobs:
           command: cp config/application_config.example.yml.erb config/application_config.yml.erb
       - run:
           name: Update bundler srsly again
-          command: gem install --force bundler
+          command: gem install --force bundler -v 1.17.3
       - run:
           name: Bundle update srsly again
           command: bundle check --without production staging --path=vendor/bundle || bundle install --without production staging --path=vendor/bundle --jobs=4 --retry=3 --binstubs
