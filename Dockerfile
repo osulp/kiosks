@@ -8,7 +8,7 @@ FROM ruby:2.7-alpine
 # Necessary for bundler to properly install some gems
 ENV LANG C.UTF-8
 ENV LC_ALL C.UTF-8
-RUN gem install bundler
+RUN gem install bundler:1.17.3
 
 RUN apk --no-cache update && apk --no-cache upgrade && \
   apk add --no-cache alpine-sdk nodejs-current unzip vim yarn \
