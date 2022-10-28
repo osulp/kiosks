@@ -8,8 +8,8 @@ FROM ruby:2.6-alpine
 # Necessary for bundler to properly install some gems
 ENV LANG C.UTF-8
 ENV LC_ALL C.UTF-8
+RUN gem install bundler
 
-USER root
 
 RUN apk --no-cache update && apk --no-cache upgrade && \
   apk add --no-cache alpine-sdk nodejs-current unzip vim yarn \
@@ -22,10 +22,6 @@ RUN apk --no-cache update && apk --no-cache upgrade && \
 # Set the timezone to America/Los_Angeles (Pacific) then get rid of tzdata
 RUN cp -f /usr/share/zoneinfo/America/Los_Angeles /etc/localtime && \
   echo 'America/Los_Angeles' > /etc/timezone
-
-RUN rm -rf /usr/local/bundle && mkdir -p /usr/local/bundle && chmod 755 /usr/local/bundle
-
-RUN gem install bundler
 
 COPY kiosks-entrypoint.sh /kiosks-entrypoint.sh
 
