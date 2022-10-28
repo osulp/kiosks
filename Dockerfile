@@ -1,4 +1,4 @@
-FROM ruby:2.6-alpine
+FROM ruby:2.7-alpine
 
 # add nodejs and yarn dependencies for the frontend
 #RUN curl -sL https://deb.nodesource.com/setup_10.x | bash - && \
