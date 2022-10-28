@@ -41,7 +41,7 @@ jobs:
             - v2-bundle-{{ checksum "Gemfile.lock" }}
       - run:
           name: Update bundler
-          command: gem install bundler -v 2.1.4
+          command: gem install bundler -v 1.17.3
       - run:
           name: Install dependencies
           command: bundle check --path=vendor/bundle || bundle install --path=vendor/bundle --jobs=4 --retry=3 --binstubs
@@ -66,7 +66,7 @@ jobs:
           at: ~/
       - run:
           name: Update bundler
-          command: gem install bundler -v 2.1.4 && bundle install --binstubs
+          command: gem install bundler -v 1.17.3 && bundle install --binstubs
       - run:
           name: Run Rubocop
           command: bundle exec rubocop
