@@ -1,4 +1,4 @@
-FROM ruby:2.6-alpine
+FROM ruby:2.7-alpine
 
 # add nodejs and yarn dependencies for the frontend
 #RUN curl -sL https://deb.nodesource.com/setup_10.x | bash - && \
@@ -9,7 +9,6 @@ FROM ruby:2.6-alpine
 ENV LANG C.UTF-8
 ENV LC_ALL C.UTF-8
 RUN gem install bundler
-
 
 RUN apk --no-cache update && apk --no-cache upgrade && \
   apk add --no-cache alpine-sdk nodejs-current unzip vim yarn \
