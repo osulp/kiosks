@@ -8,6 +8,7 @@ FROM ruby:2.6-alpine
 # Necessary for bundler to properly install some gems
 ENV LANG C.UTF-8
 ENV LC_ALL C.UTF-8
+RUN gem install bundler
 
 RUN apk --no-cache update && apk --no-cache upgrade && \
   apk add --no-cache alpine-sdk nodejs-current unzip vim yarn \
@@ -21,7 +22,6 @@ RUN apk --no-cache update && apk --no-cache upgrade && \
 RUN cp -f /usr/share/zoneinfo/America/Los_Angeles /etc/localtime && \
   echo 'America/Los_Angeles' > /etc/timezone
 
-RUN gem install bundler
 COPY kiosks-entrypoint.sh /kiosks-entrypoint.sh
 
 RUN mkdir /data /kiosks && chmod 755 /data /kiosks /kiosks-entrypoint.sh
