@@ -95,7 +95,7 @@ class Header extends Component {
    * @private
    */
   _hoursToday() {
-    if (Object.values(this.props.hours).length == 0 || Object.values(this.props.hours) == undefined) {
+    if (this.props.todays_hours == null || Object.values(this.props.hours).length == 0 || Object.values(this.props.hours) == undefined) {
       return ""
     } else {
       let today = Object.values(this.props.hours)[0]
