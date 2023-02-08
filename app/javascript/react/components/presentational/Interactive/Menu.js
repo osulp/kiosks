@@ -60,7 +60,7 @@ class Menu extends Component {
             }`}
           >
             <img className={"menu-item-icon"} src={"/images/search.svg"} />
-            <span className={"menu-item-text"}>1Search</span>
+            <span className={"menu-item-text"}>Catalog</span>
           </a>
         </li>
       </ul>
