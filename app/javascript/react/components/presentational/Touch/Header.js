@@ -149,7 +149,7 @@ class Header extends Component {
                     className="show-search-primo"
                     onClick={this.searchPrimoClicked.bind(this)}
                   >
-                    <a className="btn btn-navbar btn-default">1Search</a>
+                    <a className="btn btn-navbar btn-default">Catalog</a>
                   </li>
                 </ul>
                 <ul className="nav navbar-nav navbar-right">
