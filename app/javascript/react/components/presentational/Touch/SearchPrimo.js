@@ -30,7 +30,7 @@ class Iframe extends Component {
         <iframe
           key={this.props.search_iframe_key}
           src={this.props.src}
-          height={"80%"}
+          height={"100%"}
           width={this.props.width}
           frameBorder={0}
         />
