@@ -537,6 +537,28 @@ $niceblue: #00859b;
       }
     }
   }
+
+  .container-kiosk-full {
+    height: 100%;
+    .container-content {
+      height: 100%;
+      .col-md-12 {
+        height: 100%;
+        #content {
+          height: 100%;
+          .search-primo-table-container {
+            height: 80%;
+            .row > .search-iframe {
+              height: 80%;
+              div {
+                height: 80%;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
   /* RESPONSIVE CSS
   -------------------------------------------------- */
 
