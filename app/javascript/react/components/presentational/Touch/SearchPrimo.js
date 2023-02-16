@@ -50,7 +50,7 @@ class SearchPrimo extends Component {
       uri: root_dom_element.getAttribute("data-api-uri"),
       search_delay: 1000,
       search_querystring:
-        "query=any,contains,[TERM]&tab=default_tab&search_scope=osu_print",
+        "query=any,contains,[TERM]&tab=Everything&search_scope=MyInstitution",
       search_timer: null,
       search_uri: root_dom_element.getAttribute("data-api-uri"),
       search_iframe_key: Math.random(),
