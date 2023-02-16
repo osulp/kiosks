@@ -172,7 +172,7 @@ class SearchPrimo extends Component {
               </i>
             </div>
           </div>
-          <div className="row">
+          <div className="row search-window">
             <div className="col-sm-12 search-iframe">
               <Iframe
                 search_iframe_key={this.state.search_iframe_key}
