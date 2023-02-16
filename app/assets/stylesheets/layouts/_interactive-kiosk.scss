@@ -365,9 +365,6 @@ $niceblue: #00859b;
     .search-iframe {
       padding: 0px;
     }
-    .search-iframe iframe {
-      max-height: 555px;
-    }
     .search-bar {
       .start_new_search {
         position: fixed;
@@ -546,12 +543,18 @@ $niceblue: #00859b;
         height: 100%;
         #content {
           height: 100%;
-          .search-primo-table-container {
-            height: 80%;
-            .row > .search-iframe {
+          #search-primo {
+            height: 90%;
+            .search-primo-table-container {
               height: 80%;
-              div {
+              .search-window {
+                height: 100%;
+                .search-iframe {
                 height: 80%;
+                  div {
+                    height: 80%;
+                  }
+                }
               }
             }
           }
