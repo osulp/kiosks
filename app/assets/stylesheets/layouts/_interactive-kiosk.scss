@@ -38,7 +38,7 @@ $niceblue: #00859b;
   }
 
   .image-gallery-bullets {
-    bottom: -50px;
+    bottom: -95px;
   }
 
   .image-gallery-bullet.active {
@@ -530,6 +530,25 @@ $niceblue: #00859b;
         tbody tr.lib-autzen td.event-hour span.event-time {
           background-color: $autzen;
           border-left: solid 1px darken($autzen, 25%);
+        }
+      }
+    }
+  }
+
+  .image-gallery-content {
+    height: 95%;
+    .image-gallery-slide-wrapper {
+      height: 95%;
+      .image-gallery-slides {
+        height: 106%;
+        .image-gallery-slide {
+          height: 218%;
+          .image-gallery-image {
+            height: 74%;
+            img {
+              height: 62%
+            }
+          }
         }
       }
     }
