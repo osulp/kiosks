@@ -63,6 +63,10 @@ class SlideGallery extends Component {
       case "tall":
         path = item.xtall
         break
+      // NEW CASE: Add in a new case for the kiosk slide
+      case "interactive-touch":
+        path = item.image_slide
+        break
       default:
         path = item.original
         break
@@ -88,7 +92,7 @@ class SlideGallery extends Component {
               onError={onImageError.bind(this)}
             />
           :
-            <video muted className={`video-${item.id}`} onEnded={onVideoEnded.bind(this)} preload="auto">
+            <video muted className={`video-${item.id}`} onEnded={onVideoEnded.bind(this)} preload="auto" object-fit="contain" width="100%">
               <source src={item.av_media} type='video/mp4'></source>
               {item.subtitle_en.length > 0 &&
                 <track

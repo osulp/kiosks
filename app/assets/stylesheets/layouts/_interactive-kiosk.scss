@@ -540,7 +540,7 @@ $niceblue: #00859b;
     .image-gallery-slide-wrapper {
       height: 95%;
       .image-gallery-slides {
-        height: 106%;
+        height: 570px;
         .image-gallery-slide {
           height: 218%;
           .image-gallery-image {
@@ -551,6 +551,11 @@ $niceblue: #00859b;
           }
         }
       }
+    }
+
+    // BULLET: Fixed the height of the bullet from the image
+    .image-gallery-bullets {
+      height: 140px;
     }
   }
 
