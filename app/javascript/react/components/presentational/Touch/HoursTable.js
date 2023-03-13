@@ -14,7 +14,9 @@ class HoursTable extends Component {
           </tr>
         </thead>
         <tbody>
-          {Object.values(hours).map((h, i) => {
+          { if (hours == null) {
+            } else {
+            Object.values(hours).map((h, i) => {
             let formatted_hours = h.formatted_hours_plain_text
             return (
               <tr
@@ -33,7 +35,9 @@ class HoursTable extends Component {
                 <td>{h.event_desc}</td>
               </tr>
             )
-          })}
+          })
+          }
+          }
         </tbody>
       </table>
     )
