@@ -92,7 +92,7 @@ class SlideGallery extends Component {
               onError={onImageError.bind(this)}
             />
           :
-            <video muted className={`video-${item.id}`} onEnded={onVideoEnded.bind(this)} preload="auto" object-fit="contain" width="100%">
+            <video muted className={`video-${item.id}`} onEnded={onVideoEnded.bind(this)} preload="auto">
               <source src={item.av_media} type='video/mp4'></source>
               {item.subtitle_en.length > 0 &&
                 <track

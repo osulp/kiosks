@@ -548,6 +548,10 @@ $niceblue: #00859b;
             img {
               height: 62%;
             }
+            video {
+              object-fit: contain;
+              width: 100%;
+            }
           }
         }
       }
