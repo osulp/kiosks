@@ -546,7 +546,11 @@ $niceblue: #00859b;
           .image-gallery-image {
             height: 74%;
             img {
-              height: 62%
+              height: 62%;
+            }
+            video {
+              object-fit: contain;
+              width: 100%;
             }
           }
         }
