@@ -15,14 +15,6 @@ class Header extends Component {
    * @private
    */
   _hoursToday() {
-    if ( this.props.todays_hours == null || Object.values(this.props.todays_hours) == undefined || Object.values(this.props.todays_hours).length == 0 ) {
-      return ""
-    } else {
-      let today = Object.values(this.props.todays_hours)[0]
-      let formatted_hours = today.formatted_hours_plain_text
-
-      return `${formatted_hours}`
-    }
   }
 
   render() {
@@ -53,7 +45,7 @@ class Header extends Component {
               />
             </div>
             <p className="hours navbar-text">
-              Today: {this._hoursToday()}
+              Today: 7:30am - Midnight
             </p>
             <div className="nav navbar-nav navbar-right main-menu-header">
               <button
