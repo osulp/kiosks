@@ -8,11 +8,15 @@ class HoursTable extends Component {
       <table className="table hours-table">
         <thead>
           <tr>
+            <th />
             <th>Hours</th>
-            <td></td>
           </tr>
         </thead>
         <tbody>
+        <tr>
+        <td>
+        </td>
+        </tr>
         </tbody>
       </table>
     )
