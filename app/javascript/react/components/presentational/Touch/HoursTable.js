@@ -9,6 +9,9 @@ class HoursTable extends Component {
         <thead>
           <tr>
             <th />
+            <tr>
+            <td></td>
+            </tr
             <th>Hours</th>
           </tr>
         </thead>
