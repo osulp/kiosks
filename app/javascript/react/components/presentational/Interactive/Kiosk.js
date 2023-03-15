@@ -113,7 +113,7 @@ class Kiosk extends Component {
     )
     this.setState({ menuCollapsed: true })
     this.setState({ selectedMenuItem: "hours" })
-    this.props.setContentRootComponent(<TouchHours />)
+    //this.props.setContentRootComponent(<TouchHours />)
     clearInterval(this.show_slides_timeout)
     this._showSlidesTimeout()
   }
@@ -192,7 +192,7 @@ class Kiosk extends Component {
     this._fetchTodaysHoursTimeout()
     this._fetchSlidesTimeout()
     this._fetchRestartKioskTimeout()
-    this.props.fetchTodaysHours(this.props.api.hours)
+    //this.props.fetchTodaysHours(this.props.api.hours)
     this.props.fetchSlides(this.props.url)
   }
 
