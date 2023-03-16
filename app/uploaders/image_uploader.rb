@@ -56,7 +56,7 @@ class ImageUploader < CarrierWave::Uploader::Base
 
   # NEW: Add in new resizing method to image uploader to fit kiosk
   version :image_slide do
-    process resize_to_limit: [2500, 1200]
+    process resize_to_geometry_string: ['2500x1200!']
   end
 
   # version :original do
