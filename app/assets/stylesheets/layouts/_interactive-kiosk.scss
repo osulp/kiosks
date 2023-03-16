@@ -572,8 +572,13 @@ $niceblue: #00859b;
             video {
               z-index: -100;
               width: 100%; 
-              height: 737px;
+              height: 1050px;
               object-fit: fill;
+            }
+            img {
+              height:1050px;
+              width: 100%;
+              z-index: -100;
             }
           }
         }
@@ -582,7 +587,7 @@ $niceblue: #00859b;
 
     // CUSTOM: Add in new layout for buttons
     .image-gallery-bullets {
-      height: 12%;
+      height: 8%;
     }
   }
 
