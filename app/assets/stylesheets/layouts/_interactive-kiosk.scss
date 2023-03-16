@@ -535,50 +535,22 @@ $niceblue: #00859b;
     }
   }
 
-  .image-gallery-content {
-    height: 95%;
-    .image-gallery-slide-wrapper {
-      height: 95%;
-      .image-gallery-slides {
-        height: 570px;
-        .image-gallery-slide {
-          height: 218%;
-          .image-gallery-image {
-            height: 74%;
-            img {
-              height: 62%;
-            }
-            video {
-              object-fit: contain;
-              width: 100%;
-            }
-          }
-        }
-      }
-    }
-
-    // BULLET: Fixed the height of the bullet from the image
-    .image-gallery-bullets {
-      height: 140px;
-    }
-  }
-
   .container-kiosk-full {
     height: 100%;
     .container-content {
       height: 100%;
       .col-md-12 {
-        height: 100%;
+        height: 75%;
         #content {
           height: 100%;
           #search-primo {
-            height: 90%;
+            height: 100%;
             .search-primo-table-container {
-              height: 115%;
+              height: 111%;
               .search-window {
                 height: 100%;
                 .search-iframe {
-                height: 100%;
+                  height: 100%;
                   div {
                     height: 80%;
                   }
@@ -590,6 +562,30 @@ $niceblue: #00859b;
       }
     }
   }
+
+  // CUSTOM: Made changes to the video layout
+  .image-gallery-content {
+    .image-gallery-swipe {
+      .image-gallery-slides {
+        .image-gallery-slide {
+          .image-gallery-image {
+            video {
+              z-index: -100;
+              width: 100%; 
+              height: 737px;
+              object-fit: fill;
+            }
+          }
+        }
+      }
+    }
+
+    // CUSTOM: Add in new layout for buttons
+    .image-gallery-bullets {
+      height: 12%;
+    }
+  }
+
   /* RESPONSIVE CSS
   -------------------------------------------------- */
 
