@@ -30,12 +30,16 @@ namespace :kiosks do
         f.write("Title: #{i.title}\n")
         f.write("Caption: #{i.caption}\n")
         f.write("ID: #{i.id}\n")
+        f.write("Created Timestamp: #{i.created_at}\n")
+        f.write("Updated Timestamp: #{i.updated_at}\n")
 
         # CHECK: Check to see if file has image or video format
-        if i.image.blank?
-          f.write("Video File Name: #{i.video}")
+        if i.image.present?
+          f.write("Image File Path: #{i.image}")
+        elsif i.video.present?
+          f.write("Video File Path: #{i.video}")
         else
-          f.write("Image File Name: #{i.image}")
+          f.write("File Path: N/A")
         end
       }
       # rubocop:enable Style/BlockDelimiters
