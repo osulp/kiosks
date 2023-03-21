@@ -39,7 +39,7 @@ namespace :kiosks do
         elsif i.video.present?
           f.write("Video File Path: #{i.video}")
         else
-          f.write("File Path: N/A")
+          f.write('File Path: N/A')
         end
       }
       # rubocop:enable Style/BlockDelimiters
