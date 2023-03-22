@@ -61,7 +61,8 @@ class SlideGallery extends Component {
 
     switch (item.current_kiosk) {
       case "tall":
-        path = item.xtall
+        // NEW PATH: Add in the new dimension for tall kiosk
+        path = item.tall_slide
         break
       // NEW CASE: Add in a new case for the kiosk slide
       case "interactive-touch":
