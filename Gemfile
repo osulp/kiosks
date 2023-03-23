@@ -67,6 +67,9 @@ gem 'webpacker'
 
 gem "actionview", ">= 5.2.4.5"
 
+# Use FileUtils to copy and move file
+gem "fileutils", ">= 1.7"
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platform: :mri

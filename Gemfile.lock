@@ -161,6 +161,7 @@ GEM
     ffi-compiler (1.0.1)
       ffi (>= 1.0.0)
       rake
+    fileutils (1.7.0)
     flipclockjs-rails (0.7.7)
       jquery-rails (>= 1.0.17)
     font-awesome-rails (4.7.0.7)
@@ -479,6 +480,7 @@ DEPENDENCIES
   factory_bot_rails
   faraday
   ffi (>= 1.9.24)
+  fileutils (>= 1.7)
   flipclockjs-rails (~> 0.7.7)
   honeycomb-beeline (>= 2.0.0)
   jbuilder (~> 2.5)
