@@ -252,6 +252,7 @@ GEM
     parallel (1.20.1)
     parser (3.0.1.0)
       ast (~> 2.4.1)
+    pkg-config (1.5.1)
     poltergeist (1.18.1)
       capybara (>= 2.1, < 4)
       cliver (~> 0.3.1)
@@ -342,7 +343,8 @@ GEM
       mime-types (>= 1.16, < 4.0)
       netrc (~> 0.8)
     rexml (3.2.5)
-    rmagick (2.16.0)
+    rmagick (5.2.0)
+      pkg-config (~> 1.4)
     rspec-console (0.6.1)
       bond
     rspec-core (3.10.1)
@@ -501,7 +503,7 @@ DEPENDENCIES
   rails_admin (~> 1.4)
   react-rails
   redis (~> 3.0)
-  rmagick (~> 2.16.0)
+  rmagick (~> 5.2)
   rspec-console
   rspec-mocks
   rspec-rails
