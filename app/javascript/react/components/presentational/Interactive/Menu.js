@@ -57,7 +57,7 @@ class Menu extends Component {
             }`}
           >
             <img className={"menu-item-icon"} src={"/images/map-marker.svg"} />
-            <span className={"menu-item-text"}>Campus Map</span>
+            <span className={"menu-item-text"}>Campus</span>
           </a>
         </li>
         <li
