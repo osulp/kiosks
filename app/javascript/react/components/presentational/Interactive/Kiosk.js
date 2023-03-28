@@ -5,6 +5,7 @@ import Header from "./Header"
 import Menu from "./Menu"
 import ConnectedSlideGallery from "../../SlideGallery"
 import ConnectedTabbedPanel from "../../SidebarPanel"
+import CampusMaps from "./CampusMap"
 import ConnectedMainContent from "../../MainContent"
 import TouchHours from "../../TouchHours"
 import ConnectedMaps from "../../TouchMaps"
@@ -23,8 +24,8 @@ class Kiosk extends Component {
 
     this.mainMenuClicked = this.mainMenuClicked.bind(this)
     this.homeClicked = this.homeClicked.bind(this)
-    this.hoursClicked = this.hoursClicked.bind(this)
     this.mapsClicked = this.mapsClicked.bind(this)
+    this.campusMapsClicked = this.campusMapsClicked.bind(this)
     this.staticMapsClicked = this.staticMapsClicked.bind(this)
     this.searchPrimoClicked = this.searchPrimoClicked.bind(this)
     this._didTap = this._didTap.bind(this)
@@ -112,7 +113,6 @@ class Kiosk extends Component {
       }:InteractiveKiosk:Menu:Hours`
     )
     this.setState({ menuCollapsed: true })
-    this.setState({ selectedMenuItem: "hours" })
     //this.props.setContentRootComponent(<TouchHours />)
     clearInterval(this.show_slides_timeout)
     this._showSlidesTimeout()
@@ -135,6 +135,19 @@ class Kiosk extends Component {
     this._showSlidesTimeout()
   }
 
+  campusMapsClicked() {
+    trackClicked(
+      this.props.google_analytics,
+      `${this.props.kiosk_name}:${
+        this.props.kiosk_id
+      }:InteractiveKiosk:Menu:Maps`
+    )
+    this.setState({ menuCollapsed: true })
+    this.setState({ selectedMenuItem: "campus-maps" })
+    this.props.setContentRootComponent(<CampusMaps />)
+    clearInterval(this.show_slides_timeout)
+    this._showSlidesTimeout()
+  } 
   /**
    * Static Maps button was clicked (temporary component to use while libnav gets released)
    */
@@ -283,9 +296,9 @@ class Kiosk extends Component {
               } `}
             >
               <Menu
-                hoursClicked={this.hoursClicked}
                 homeClicked={this.homeClicked}
                 mapsClicked={this.mapsClicked}
+                campusMapsClicked={this.campusMapsClicked}
                 staticMapsClicked={this.staticMapsClicked}
                 searchPrimoClicked={this.searchPrimoClicked}
                 selectedMenuItem={this.state.selectedMenuItem}
