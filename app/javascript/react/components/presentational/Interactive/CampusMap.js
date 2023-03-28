@@ -1,6 +1,7 @@
 import React, { Component } from "react"
 import PropTypes from "prop-types"
 import moment from "moment"
+import MyImage from 'images/osu_campus_map.png'
 
 class CampusMap extends Component {
   constructor(props) {
@@ -13,7 +14,7 @@ class CampusMap extends Component {
 
   render() {
     return (
-      <iframe src="https://map.oregonstate.edu" height="100%" width="100%"></iframe>
+      <img src={MyImage} alt="Test" height="120%" width="53%" />
     )
   }
 }
