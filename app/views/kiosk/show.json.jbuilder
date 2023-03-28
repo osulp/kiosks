@@ -9,6 +9,7 @@ json.cache! ['v1', @kiosk], expires_in: Rails.env.development? ? 1.second : 24.h
     json.large slide.image.url(:large)
     json.xtall slide.image.url(:xtall)
     json.image_slide slide.image.url(:image_slide)
+    json.tall_slide slide.image.url(:tall_slide)
     json.av_media slide.video_url
     json.subtitle_en slide.subtitles[0].present? ? slide.subtitles[0].url : ''
     json.subtitle_es slide.subtitles[1].present? ? slide.subtitles[1].url : ''
