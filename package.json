@@ -34,6 +34,7 @@
     "ansi-html": "0.0.8",
     "babel-plugin-transform-react-remove-prop-types": "^0.4.24",
     "braces": "2.3.1",
+    "cacheable-request": "^2.1.4",
     "css-select": "2.1.0",
     "fstream": "^1.0.12",
     "glob-parent": "5.1.2",
