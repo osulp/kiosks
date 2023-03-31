@@ -61,7 +61,7 @@ class ImageUploader < CarrierWave::Uploader::Base
 
   # NEW: Add in new resizing method to image uploader to fit tall kiosk
   version :tall_slide do
-    process resize_to_geometry_string: ['3840x2160!']
+    process resize_to_geometry_string: ['2160x3840!']
   end
 
   # version :original do
