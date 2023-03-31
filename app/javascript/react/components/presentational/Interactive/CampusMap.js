@@ -14,6 +14,7 @@ class CampusMap extends Component {
 
   render() {
     return (
+      <div></div>
     )
   }
 }
