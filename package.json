@@ -37,6 +37,7 @@
     "cacheable-request": "^10.2.9",
     "css-select": "2.1.0",
     "fstream": "^1.0.12",
+    "gifsicle": "^7.0.1",
     "glob-parent": "5.1.2",
     "got": "^12.6.0",
     "handlebars": "^4.7.7",
