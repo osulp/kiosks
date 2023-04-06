@@ -65,9 +65,9 @@ class SlideGallery extends Component {
         path = item.tall_slide
         break
       // NEW CASE: Add in a new case for the kiosk slide
-      case "interactive-touch":
-        path = item.image_slide
-        break
+      //case "touch-floor-2":
+        //path = item.image_slide
+        //break
       default:
         path = item.original
         break
