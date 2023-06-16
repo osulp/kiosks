@@ -591,6 +591,37 @@ $niceblue: #00859b;
     }
   }
 
+  // CUSTOM: Add in custom layout of the tab view
+  ul.NavSlide {
+    list-style: none;
+    padding: 0;
+    background-color: #d73f09;
+  }
+
+  ul.NavSlide li {
+    display: inline-block;
+    padding: 10px 12px;
+
+    text-align: center;
+    color: #ffffff;
+    font-size: 18px;
+  }
+
+  ul.NavSlide li:hover {
+    cursor: pointer;
+    background-color: #000000;
+    color: #ffffff;
+    transition: 1.0s;
+  }
+
+  ul.NavSlide li.active {
+    background-color: #000000;
+  }
+
+  .secondTab {
+    color: white;
+  }
+
   /* RESPONSIVE CSS
   -------------------------------------------------- */
 

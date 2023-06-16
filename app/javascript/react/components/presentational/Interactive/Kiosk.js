@@ -12,6 +12,7 @@ import ConnectedMaps from "../../TouchMaps"
 import ConnectedSearchPrimo from "../../TouchSearchPrimo"
 import { trackClicked } from "../shared/GoogleAnalytics"
 import moment from "moment"
+import Tabs from "./SlideTabs/Tabs";
 
 class Kiosk extends Component {
   constructor(props) {
@@ -258,6 +259,20 @@ class Kiosk extends Component {
     }, 1 * 60 * 1000)
   }
 
+  tabClick() {
+    $('#tabs li a').click(function(){
+      var t = $(this).attr('id');
+    
+      if($(this).hasClass('inactive')){ //this is the start of our condition 
+        $('#tabs li a').addClass('inactive');           
+        $(this).removeClass('inactive');
+    
+        $('.container').hide();
+        $('#'+ t + 'C').fadeIn('slow');
+     }
+    });
+  }
+
   /**
    * Render the kiosk with a hidden content window for popup UIs driven by buttons in the header, with a rotating
    * slide gallery at the bottom of the view.
@@ -288,8 +303,10 @@ class Kiosk extends Component {
                 this.state.menuCollapsed ? "col-md-12" : "col-md-11"
               }`}
             >
-              <ConnectedMainContent />
+              {/* TAB: Add in the new render of the tabs for the slides */}
+              <Tabs />
             </div>
+            
             <div
               className={`${
                 this.state.menuCollapsed ? "icons-only" : "menu-text"
