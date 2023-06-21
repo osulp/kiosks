@@ -45,7 +45,6 @@ class Header extends Component {
               />
             </div>
             <p className="hours navbar-text">
-              Today: 7:30am - Midnight
             </p>
             <div className="nav navbar-nav navbar-right main-menu-header">
               <button

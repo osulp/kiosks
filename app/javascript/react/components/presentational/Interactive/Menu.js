@@ -30,16 +30,6 @@ class Menu extends Component {
             <span className={"menu-item-text"}>Home</span>
           </a>
         </li>
-        <li className="show-hours" onClick={this.props.hoursClicked}>
-          <a
-            className={`btn btn-navbar btn-default ${
-              this.props.selectedMenuItem == "hours" ? "menu-item-selected" : ""
-            }`}
-          >
-            <img className={"menu-item-icon"} src={"/images/clock.svg"} />
-            <span className={"menu-item-text"}>Hours</span>
-          </a>
-        </li>
         <li className="show-maps" onClick={maps_click_handler}>
           <a
             className={`btn btn-navbar btn-default ${
