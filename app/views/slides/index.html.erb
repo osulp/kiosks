@@ -3,46 +3,35 @@
 <h1>Slides</h1>
 <hr style="border: 1px solid darkgrey;">
 
-<h2>All Slides</h2>
-<table id="slides" class="table table-striped">
-  <thead>
-    <tr>
-      <th>Slide</th>
-      <th>Title</th>
-      <th>Caption</th>
-      <th>Collection</th>
-      <th>Start Display Date</th>
-      <th>End Display Date</th>
-      <th>Kiosks</th>
-      <th>Actions</th>
-    </tr>
-  </thead>
-  <tbody>
-  <% @slides.each do |slide| %>
-    <tr>
-      <td><%= image_tag(slide.image_url(:thumb)) if slide.image_url(:thumb) %></td>
-      <td><%= link_to slide.title, slide %></td>
-      <td><%= slide.caption %></td>
-      <td><%= link_to(slide.collection.name, collection_path(slide.collection.id)) if slide && slide.collection %></td>
-      <td><%= slide.date_ranges.last.start_date.strftime("%m/%d/%y") unless slide.date_ranges.empty? %></td>
-      <td><%= slide.date_ranges.last.end_date.strftime("%m/%d/%y") unless slide.date_ranges.empty? %></td>
-      <td>
-        <ul>
-          <% for kiosk in slide.kiosks %>
-            <li>
-              <%= link_to kiosk.name, kiosk_show_path(id: kiosk.name) %>
-            </li>
-          <% end %>
-        </ul>
-      </td>
-      <td>
-        <ul>
-          <li><%= link_to 'View', slide %></li>
-          <li><%= link_to 'Edit', edit_slide_path(slide) %></li>
-          <li><%= link_to 'Delete', slide, method: :delete, data: { confirm: 'Are you sure?' } %></li>
-        </ul>
-      </td>
-    </tr>
-  <% end %>
-  </tbody>
-</table>
+<%# TAB: Setup the tab layout to have filter content for slides %>
+<div class="tabs" role="main">
+  <%# UL: Create an unordered list to setup the filter %>
+  <ul class="nav nav-tabs" role="tablist">
+    <li role="presentation" class="nav-item">
+      <a class="nav-link" href="#active_slides" aria-controls="active_slides" role="tab" data-toggle="tab">
+        <%= 'Active Slides' %>
+      </a>
+    </li>
+
+    <li role="presentation" class="nav-item">
+      <a class="nav-link" href="#all_slides" aria-controls="all_slides" role="tab" data-toggle="tab">
+        <%= 'All Slides' %>
+      </a>
+    </li>
+  </ul>
+
+  <%# SUB-CONTENT: Create the tab content card to display and render the form %>
+  <div class="tab-content card">
+    <div role="tabpanel" class="tab-pane" id="active_slides">
+      <div class="form-tab-content">
+        <%= render "active_slides_form" %>
+      </div>
+    </div>
+
+    <div role="tabpanel" class="tab-pane" id="all_slides">
+      <div class="form-tab-content">
+        <%= render "all_slides_form" %>
+      </div>
+    </div>
+  </div>
+</div>
