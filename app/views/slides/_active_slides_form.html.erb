@@ -18,7 +18,7 @@
   </thead>
   <tbody>
   <% @slides.each do |slide| %>
-    <% if (!slide.date_ranges.empty?) && (Time.now.to_i <= slide.date_ranges.last.end_date.to_i) %>
+    <% if (!slide.date_ranges.empty?) && (Time.now.to_i <= slide.date_ranges.last.end_date.to_i) && (Time.now.to_i >= slide.date_ranges.last.start_date.to_i) %>
       <tr>
         <td><%= image_tag(slide.image_url(:thumb)) if slide.image_url(:thumb) %></td>
         <td><%= link_to slide.title, slide %></td>
