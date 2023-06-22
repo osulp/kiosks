@@ -24,3 +24,4 @@
 //= require kiosk_restart_actions
 //= require moment
 //= require cable
+//= require navigation

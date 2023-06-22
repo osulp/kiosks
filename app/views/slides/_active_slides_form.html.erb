@@ -1,0 +1,49 @@
+<%# NEW FORM: Create a form displaying all the active slides %>
+<h2>Active Slides</h2>
+
+<br/>
+
+<table id="active_slides" class="table table-striped">
+  <thead>
+    <tr>
+      <th>Slide</th>
+      <th>Title</th>
+      <th>Caption</th>
+      <th>Collection</th>
+      <th>Start Display Date</th>
+      <th>End Display Date</th>
+      <th>Kiosks</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+  <% @slides.each do |slide| %>
+    <% if (!slide.date_ranges.empty?) && (Time.now.to_i <= slide.date_ranges.last.end_date.to_i) && (Time.now.to_i >= slide.date_ranges.last.start_date.to_i) %>
+      <tr>
+        <td><%= image_tag(slide.image_url(:thumb)) if slide.image_url(:thumb) %></td>
+        <td><%= link_to slide.title, slide %></td>
+        <td><%= slide.caption %></td>
+        <td><%= link_to(slide.collection.name, collection_path(slide.collection.id)) if slide && slide.collection %></td>
+        <td><%= slide.date_ranges.last.start_date.strftime("%m/%d/%y") unless slide.date_ranges.empty? %></td>
+        <td><%= slide.date_ranges.last.end_date.strftime("%m/%d/%y") unless slide.date_ranges.empty? %></td>
+        <td>
+          <ul>
+            <% for kiosk in slide.kiosks %>
+              <li>
+                <%= link_to kiosk.name, kiosk_show_path(id: kiosk.name) %>
+              </li>
+            <% end %>
+          </ul>
+        </td>
+        <td>
+          <ul>
+            <li><%= link_to 'View', slide %></li>
+            <li><%= link_to 'Edit', edit_slide_path(slide) %></li>
+            <li><%= link_to 'Delete', slide, method: :delete, data: { confirm: 'Are you sure?' } %></li>
+          </ul>
+        </td>
+      </tr>
+    <% end %>
+  <% end %>
+  </tbody>
+</table>
