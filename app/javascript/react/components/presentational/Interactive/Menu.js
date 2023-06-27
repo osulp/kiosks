@@ -40,16 +40,6 @@ class Menu extends Component {
             <span className={"menu-item-text"}>Maps</span>
           </a>
         </li>
-        <li className="show-campus-maps" onClick={this.props.campusMapsClicked}>
-          <a
-            className={`btn btn-navbar btn-default ${
-              this.props.selectedMenuItem == "campus-maps" ? "menu-item-selected" : ""
-            }`}
-          >
-            <img className={"menu-item-icon"} src={"/images/map-marker.svg"} />
-            <span className={"menu-item-text"}>Campus</span>
-          </a>
-        </li>
         <li
           className="show-search-primo"
           onClick={this.props.searchPrimoClicked}
