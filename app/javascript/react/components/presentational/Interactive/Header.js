@@ -15,10 +15,14 @@ class Header extends Component {
    * @private
    */
   _hoursToday() {
-    let today = Object.values(this.props.todays_hours)[0]
-    let formatted_hours = today.formatted_hours_plain_text
+		if ( this.props.todays_hours == null || Object.values(this.props.todays_hours) == undefined || Object.values(this.props.todays_hours).length == 0 ) {
+      return ""
+    } else {
+      let today = Object.values(this.props.todays_hours)[0]
+      let formatted_hours = today.formatted_hours_plain_text
 
-    return `${formatted_hours}`
+      return `${formatted_hours}`
+    }
   }
 
   render() {
