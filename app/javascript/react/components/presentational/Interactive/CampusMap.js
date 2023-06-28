@@ -14,7 +14,7 @@ class CampusMap extends Component {
 
   render() {
     return (
-      <img src={MyImage} alt="Test" height="120%" width="53%" />
+      <img src={MyImage} alt="Test" />
     )
   }
 }
