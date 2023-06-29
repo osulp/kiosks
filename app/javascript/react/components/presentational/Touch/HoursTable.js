@@ -4,7 +4,12 @@ import moment from "moment"
 
 class HoursTable extends Component {
   render() {
-		let hours = ""
+		let hours = {"2000-01-01": {
+			open: "error",
+    	close: "error",
+    	string_date: "error",
+    	sortable_date: "2000-01-01"	
+		}}
 		if (this.props.hours != null) {
 			hours = this.props.hours
 		}
