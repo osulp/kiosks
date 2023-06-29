@@ -14,6 +14,16 @@ const setup = () => {
   return { props, enzyme_wrapper }
 }
 
+const null_setup = () => {
+  const now = moment()
+  const props = {
+    hours: null,
+    selected_date: now
+  }
+  const enzyme_wrapper = shallow(<HoursTable {...props} />)
+  return { props, enzyme_wrapper }
+}
+
 describe("HoursTable", () => {
   it("has all required props", () => {
     const { enzyme_wrapper, props } = setup()
@@ -29,4 +39,8 @@ describe("HoursTable", () => {
     let { enzyme_wrapper, props } = setup()
     expect(enzyme_wrapper.find(".hours-table tbody tr")).toHaveLength(1)
   })
+	it("handles a null value", () => {
+    let { enzyme_wrapper, props } = null_setup()
+		expect(enzyme_wrapper.find(".hours-table tbody tr")).toHaveLength(1)
+	})
 })
