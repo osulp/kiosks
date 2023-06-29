@@ -4,7 +4,10 @@ import moment from "moment"
 
 class HoursTable extends Component {
   render() {
-		let hours = this.props.hours
+		let hours = ""
+		if (this.props.hours != null) {
+			hours = this.props.hours
+		}
     return (
       <table className="table hours-table">
         <thead>
