@@ -4,6 +4,17 @@ import moment from "moment"
 
 class HoursTable extends Component {
   render() {
+		let hours = {"2000-01-01": {
+			open: "error",
+    	close: "error",
+    	string_date: "error",
+    	sortable_date: "2000-01-01",
+			event_desc: "error",
+			formatted_hours: "error"	
+		}}
+		if (this.props.hours != null) {
+			hours = this.props.hours
+		}
     return (
       <table className="table hours-table">
         <thead>
@@ -13,10 +24,26 @@ class HoursTable extends Component {
           </tr>
         </thead>
         <tbody>
-        <tr>
-        <td>
-        </td>
-        </tr>
+				{ Object.values(hours).map((h, i) => {
+            let formatted_hours = h.formatted_hours_plain_text
+            return (
+              <tr
+                key={`hours.${i}`}
+                className={
+                  moment(h.sortable_date).isSame(
+                    this.props.selected_date,
+                    "day"
+                  )
+                    ? "alert alert-info"
+                    : ""
+                }
+              >
+                <td>{h.string_date}</td>
+                <td>{formatted_hours}</td>
+                <td>{h.event_desc}</td>
+              </tr>
+            )
+          })}
         </tbody>
       </table>
     )

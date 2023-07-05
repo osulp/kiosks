@@ -113,7 +113,7 @@ class Kiosk extends Component {
       }:InteractiveKiosk:Menu:Hours`
     )
     this.setState({ menuCollapsed: true })
-    //this.props.setContentRootComponent(<TouchHours />)
+    this.props.setContentRootComponent(<TouchHours />)
     clearInterval(this.show_slides_timeout)
     this._showSlidesTimeout()
   }
