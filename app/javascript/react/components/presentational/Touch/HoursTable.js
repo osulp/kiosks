@@ -8,7 +8,9 @@ class HoursTable extends Component {
 			open: "error",
     	close: "error",
     	string_date: "error",
-    	sortable_date: "2000-01-01"	
+    	sortable_date: "2000-01-01",
+			event_desc: "error",
+			formatted_hours: "error"	
 		}}
 		if (this.props.hours != null) {
 			hours = this.props.hours
