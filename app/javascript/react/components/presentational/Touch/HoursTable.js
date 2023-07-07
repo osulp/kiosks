@@ -12,7 +12,7 @@ class HoursTable extends Component {
 			event_desc: "error",
 			formatted_hours: "error"	
 		}}
-		if (this.props.hours != null) {
+		if (this.props.hours != null || this.props.hours != "") {
 			hours = this.props.hours
 		}
     return (

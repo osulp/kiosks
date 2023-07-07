@@ -53,10 +53,22 @@ export const kiosk = {
 
 export const hours = {
   "2000-01-01": {
-    open: "1am",
-    close: "2am",
-    string_date: "Jan 01, 2000",
-    sortable_date: "2000-01-01"
+		all_open_hours: [
+			{
+				close: "21:00",
+				open: "07:30"
+			}
+	  ],
+	  close: "9:00pm",
+	  closes_at_night: true,
+	  event_desc: "",
+	  event_status: "",
+	  formatted_hours: "7:30am - 9:00pm",
+	  formatted_hours_plain_text: "7:30am - 9:00pm",
+	  open: "7:30am",
+	  open_all_day: false,
+	  sortable_date: "2023-06-29",
+	  string_date: "Thu, Jun 29, 2023"
   }
 }
 
