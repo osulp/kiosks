@@ -4,7 +4,7 @@ source 'https://rubygems.org'
 
 gem "activejob", ">= 5.1.6.1"
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 5.2.8.1'
+gem 'rails', '~> 7.0.7.2'
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3', '~> 1.3.6'
 # Use Puma as the app server
@@ -29,7 +29,7 @@ gem 'jquery-ui-rails'
 # Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
 gem 'turbolinks', '~> 5'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
-gem 'jbuilder', '~> 2.5'
+gem 'jbuilder', '~> 2.11'
 # Use Redis adapter to run Action Cable in production
 gem 'redis', '~> 3.0'
 # Use ActiveModel has_secure_password
@@ -42,10 +42,10 @@ gem 'capistrano-passenger'
 gem 'capistrano-rails'
 gem 'capistrano-rbenv'
 
-gem 'carrierwave', '~> 1.3'
+gem 'carrierwave', '~> 3.0'
 gem 'devise'
 gem 'flipclockjs-rails', '~> 0.7.7'
-gem 'rails_admin', '~> 1.4'
+gem 'rails_admin', '~> 3.1'
 gem 'rails-controller-testing'
 gem 'react-rails'
 gem 'rmagick', '~> 5.3'
