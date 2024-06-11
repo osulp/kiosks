@@ -33,7 +33,7 @@
     "@rails/webpacker": "5.4.3",
     "ansi-html": "0.0.8",
     "babel-plugin-transform-react-remove-prop-types": "^0.4.24",
-    "braces": "2.3.1",
+    "braces": "3.0.3",
     "cacheable-request": "^10.2.9",
     "css-select": "2.1.0",
     "fstream": "^1.0.12",
